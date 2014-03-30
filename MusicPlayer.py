@@ -262,6 +262,7 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
     bl_label = "Music Player"
+    bl_options = {'DEFAULT_CLOSED'}
     bl_category = 'NT'
     
     def draw(self, context):
@@ -302,8 +303,9 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
         row.label(text=plaingindex)
         row.prop(bpy.context.window_manager, 'show_names', text='show playlist')
         row = layout.row(align=False)
-        row.label(text=bpy.context.window_manager.playlist_names[ context.window_manager.index])
-        row.label(text = str(round(context.window_manager.playsound.position))+' seconds')
+        if len(bpy.context.window_manager.playlist_names) > 0:
+            row.label(text=bpy.context.window_manager.playlist_names[context.window_manager.index])
+            row.label(text = str(round(context.window_manager.playsound.position))+' seconds')
         
         if bpy.context.window_manager.playlist_names:
             playlist_print=context.window_manager.playlist_names

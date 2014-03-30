@@ -36,6 +36,7 @@ class RssPanel(bpy.types.Panel):
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = 'world'
+    bl_options = {'DEFAULT_CLOSED'}
     
     
     #adress = bpy.context.window_manager.RSSadress[1]['default']
