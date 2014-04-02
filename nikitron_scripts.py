@@ -274,7 +274,7 @@ class CurvesTo2D (bpy.types.Operator):
                     bpy.ops.curve.handle_type_set(type=self.handle)
                     bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
         return {'FINISHED'}
-
+ #breakpoint
 class ObjectNames (bpy.types.Operator):
     """Make all objects show names in 3d"""      
     bl_idname = "object.nt_name_objects" 
@@ -586,12 +586,17 @@ class NT_ClearNodesLayouts (bpy.types.Operator):
             if area.type == 'NODE_EDITOR':
                 self.do_clear = False
         for T in trees:
-            if (trees[T.name].users == 1) and self.do_clear:
+            if T.bl_rna.name in ['Shader Node Tree']:
+                continue
+            if trees[T.name].users > 1 and T.use_fake_user == True:
+                print ('Layout '+str(T.name)+' protected by fake user.')
+            if trees[T.name].users == 1 and self.do_clear and T.use_fake_user == False:
+                print ('cleaning user: '+str(T.name))
                 trees[T.name].user_clear()
             if trees[T.name].users == 0:
+                print ('removing layout: '+str(T.name)+' | '+str(T.bl_rna.name))
                 bpy.data.node_groups.remove(T)
-                print ('cleaning: '+str(T))
-        print ('haha!', 'Yours nodes groups are clean')
+                
         return {'FINISHED'}
 
 
