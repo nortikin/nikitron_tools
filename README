@@ -22,13 +22,13 @@ Install as usual addon.
     n. Counts Area of object's polygons.
     o. Separate objects with defined number of vertices.
     p. Boolean many objects at once by three ways.
+    q. http://blenderaddonlist.blogspot.com/2013/11/addon-nikitron-tools.html
 
 1. Music player - made by edddy and some developed by nikitron. Situated in 3D toolshelf in NT tab.
     a. play music and sound from videofiles.
     b. jump to defined seconds (no current sound position).
     c. you see now playlist and choose sound to play.
     d. http://blenderaddonlist.blogspot.com/2013/12/addon-music-player.html
-    <img src='http://i.imgur.com/JFnxhcX.gif' />
 
 2. RSS feed reader - made by Nikolay Fomichev. It is 2.5 blender addon, old one. Situated in World properties
     a. Blendernation site RSS by default. 
