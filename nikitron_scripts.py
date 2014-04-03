@@ -376,7 +376,7 @@ class Connect2Meshes (bpy.types.Operator):
     bl_label = "CONNECT2"
     bl_options = {'REGISTER', 'UNDO'}
     
-    shift_verts = bpy.props.IntProperty(name="смещение вершин", description="shift vertices of smaller object, it can reach     maximum (look right), to make patterns", default=0, min=0, max=1000)
+    nt_shift_verts = bpy.props.IntProperty(name="смещение вершин", description="shift vertices of smaller object, it can reach     maximum (look right), to make patterns", default=0, min=0, max=1000)
     
     def dis(self, x,y):
         vec = mathutils.Vector((x[0]-y[0], x[1]-y[1], x[2]-y[2]))
@@ -448,11 +448,11 @@ class Connect2Meshes (bpy.types.Operator):
         return ob
     
     def def_me(self, mesh, ver1, ver2, mw1, mw2, obj1, obj2, nam):
-        ver = self.points(ver1, ver2, mw1, mw2, bpy.context.scene.shift_verts)
+        ver = self.points(ver1, ver2, mw1, mw2, bpy.context.scene.nt_shift_verts)
         edg = self.edges(ver)
         mesh.from_pydata(ver, edg, [])
         mesh.update(calc_edges=True)
-        if bpy.context.scene.hook_or_not:
+        if bpy.context.scene.nt_hook_or_not:
             self.hook_verts(ver, obj1, obj2, nam, ver1, ver2, mw1, mw2)
         return
     
@@ -519,7 +519,7 @@ class Connect2Meshes (bpy.types.Operator):
     
     def execute(self, context):
         
-        bpy.types.Scene.shift_verts = self.shift_verts
+        bpy.types.Scene.nt_shift_verts = self.nt_shift_verts
         context.scene.update()
         obj1 = context.selected_objects[0]
         obj2 = context.selected_objects[1]
@@ -578,9 +578,10 @@ class NT_ClearNodesLayouts (bpy.types.Operator):
     bl_label = "NodeLay_X"
     bl_options = {'REGISTER', 'UNDO'} 
     
-    do_clear = bpy.props.BoolProperty(default=False,name='do_clear', description='clear used layouts')
+    do_clear = bpy.props.BoolProperty(default=False, name='even used', description='remove even if layout has one user (not fake user)')
     
     def execute(self, context):
+        self.do_clear = context.scene.nt_clean_layout_used
         trees = bpy.data.node_groups
         for area in bpy.context.window.screen.areas:
             if area.type == 'NODE_EDITOR':
@@ -618,7 +619,7 @@ class DeleteOrientation (bpy.types.Operator):
 class BooleratorRandom (bpy.types.Operator):
     """Boolen union Randomly
     Булен объединение
-    hook_or_not, Случайном порядке
+    nt_hook_or_not, Случайном порядке
     если нет - Обычном порядке поимённо"""      
     bl_idname = "object.nt_boolerator_random"
     bl_label = "Bool R"
@@ -626,7 +627,7 @@ class BooleratorRandom (bpy.types.Operator):
     
     def execute(self, context):
         objects = bpy.context.selected_objects
-        if bpy.context.scene.hook_or_not:
+        if bpy.context.scene.nt_hook_or_not:
             random.shuffle(objects)
         lenth = len(objects) - 1
         while lenth:
@@ -876,12 +877,12 @@ class SeparatorM (bpy.types.Operator):
             bpy.ops.mesh.select_all(action='DESELECT')
             bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
             if lenth == vert_limit1:
-                print ('объект ' + str(name) + ' куб')
+                print ('объект ' + str(name) + ' готов')
             elif lenth == 0:
                 print ('объект ' + str(name) + ' удаляется')
                 bpy.ops.object.delete()
             else:
-                print ('объект ' + str(name) + ' пока ещё НЕ куб :-( ' + str(lenth))
+                print ('объект ' + str(name) + ' пока ещё НЕ разделан :-( ' + str(lenth))
             if lenth > vert_limit4:
                 i = 3
                 goon = True
@@ -917,7 +918,7 @@ class SeparatorM (bpy.types.Operator):
                 pass
         if goon:
             self.separate()
-        print ('---- Разделка кубов окончена. ----  \n')
+        print ('---- Разделка объектов окончена. ----  \n')
 
 
 class BoundingBox (bpy.types.Operator):
@@ -1006,15 +1007,14 @@ def maxim():
             len2 = len(bpy.context.selected_objects[1].data.vertices)
             maxim = min(len1, len2)
             return maxim
-
-
-bpy.types.Scene.shift_verts = IntProperty(name="shift_verts", description="shift vertices of smaller object. смещает вершины для соединения",  min=0, max=1000,  default = 0, options={'ANIMATABLE', 'LIBRARY_EDITABLE'})
+bpy.types.Scene.nt_shift_verts = IntProperty(name="nt_shift_verts", description="shift vertices of smaller object. смещает вершины для соединения",  min=0, max=1000,  default = 0, options={'ANIMATABLE', 'LIBRARY_EDITABLE'})
 bpy.types.Scene.NS_vertices_separator = IntProperty(name="separate", description="how many vertices in one object",  min=3, max=1000,  default = 8)
+bpy.types.Scene.nt_clean_layout_used = BoolProperty(name="clean_layout_used", description="remove even if layout has one user (not fake user)", default = False)
 
     
 # this flag for connetc2objects, hook or not?
-bpy.types.Scene.hook_or_not = BoolProperty(
-    name="hook_or_not",
+bpy.types.Scene.nt_hook_or_not = BoolProperty(
+    name="nt_hook_or_not",
     description="зацепить вершины к изначальным объектам.",
     default = True)
 
@@ -1083,6 +1083,9 @@ class NikitronPanel(bpy.types.Panel):
         row = box.row(align=True)
         row.operator("object.nt_bounding_boxers",icon="SNAP_VOLUME")
         row.operator("object.nt_delete_orientation",icon="MANIPUL")
+        
+        row = box.row(align=True)
+        row.prop(bpy.context.scene, "nt_clean_layout_used", text='used too')
         row.operator("object.nt_delete_nodelayouts",icon="NODE")
         
         
@@ -1111,8 +1114,8 @@ class NikitronPanel(bpy.types.Panel):
                 row = box.row()
                 row.operator("object.nt_connect2objects",icon="LINKED")
                 row = box.row(align=True)
-                row.prop(bpy.context.scene, "shift_verts", text="shift")
-                row.prop(bpy.context.scene, "hook_or_not", text="hook?")
+                row.prop(bpy.context.scene, "nt_shift_verts", text="shift")
+                row.prop(bpy.context.scene, "nt_hook_or_not", text="hook?")
                 row.label(text="max " + str(maxim()))
                 
         
