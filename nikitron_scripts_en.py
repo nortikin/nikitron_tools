@@ -27,9 +27,9 @@ import bmesh
 from bpy_extras.object_utils import object_data_add
 
 class EdgeLength(bpy.types.Operator):
-    """Длина рёбер объектов"""
+    """EdgeLength"""
     bl_idname = "object.nt_edgelength"
-    bl_label = "ДЛИНА_РЁБ"
+    bl_label = "EDG_LEN"
     bl_options = {'REGISTER', 'UNDO'}
     
     length = bpy.props.StringProperty(name='длина', default='')
@@ -52,9 +52,9 @@ class EdgeLength(bpy.types.Operator):
         return round(summa, 4)
 
 class AreaOfLenin(bpy.types.Operator):
-    """площадь объектов"""
+    """Area of any object"""
     bl_idname = "object.nt_areaoflenin"
-    bl_label = "ПЛОЩ_ОБ"
+    bl_label = "OB_AREA"
     bl_options = {'REGISTER', 'UNDO'}
     
     area = bpy.props.StringProperty(name='площадь', default='')
@@ -73,9 +73,9 @@ class AreaOfLenin(bpy.types.Operator):
         return round(summa, 4)
 
 class CliffordAttractors(bpy.types.Operator):
-    """ клиффорда точки притяжения в кривые """
+    """ Clifford Attractors with curves """
     bl_idname = "object.nt_cliffordattractors"
-    bl_label = "СУПЕР_КРИВЫЕ"
+    bl_label = "CLIF_CURVES"
     bl_options = {'REGISTER', 'UNDO'}
     
     # Code adapted by Eduardo Maldonado (Elbrujodelatribu)
@@ -191,9 +191,9 @@ class ComplimentWoman(bpy.types.Operator):
         #return wm.invoke_props_dialog(self)
     
 class CurvesTo3D (bpy.types.Operator):
-    """превращает кривые в 3М кривые скопом"""
+    """Put curves to ground and turn to 3d mode (wiring them) for farthere spread to layout sheet"""
     bl_idname = "object.nt_curv_to_3d"
-    bl_label = "КРИВ_3М"
+    bl_label = "CURV_3D"
     bl_options = {'REGISTER', 'UNDO'} 
     
     thikns = bpy.props.FloatProperty(name='толщина', default=0.0)
@@ -233,9 +233,9 @@ class CurvesTo3D (bpy.types.Operator):
         return {'FINISHED'}
 
 class CurvesTo2D (bpy.types.Operator):
-    """Превращает кривые в 2М кривые скопом (толщина по умолчанию 0.03)"""
+    """Curves turn to 2d mode (and thicken 0.03 mm)"""
     bl_idname = "object.nt_curv_to_2d"
-    bl_label = "КРИВ_2М"
+    bl_label = "CURV_2D"
     bl_options = {'REGISTER', 'UNDO'} 
     
     thikns = bpy.props.FloatProperty(name='толщина', default=0.0016)
@@ -276,9 +276,9 @@ class CurvesTo2D (bpy.types.Operator):
         return {'FINISHED'}
  #breakpoint
 class ObjectNames (bpy.types.Operator):
-    """Имена объектов в 3М текст"""      
+    """Make all objects show names in 3d"""      
     bl_idname = "object.nt_name_objects" 
-    bl_label = "ИМЕНА_ОБ"        
+    bl_label = "OB_NAMES"        
     bl_options = {'REGISTER', 'UNDO'} 
     
     size = bpy.props.FloatProperty(name='размер', default=1.0)
@@ -322,9 +322,9 @@ class ObjectNames (bpy.types.Operator):
         
         
 class VerticesNumbers3D (bpy.types.Operator):
-    """Номера вершин в 3М текст"""      
+    """make all vertices show numbers in 3D"""      
     bl_idname = "object.nt_vertices_numbers3d"
-    bl_label = "НОМ_ВЕР"
+    bl_label = "VERT_NUM"
     bl_options = {'REGISTER', 'UNDO'}
     
     size = bpy.props.FloatProperty(name='размер', default=0.1)
@@ -371,9 +371,9 @@ class VerticesNumbers3D (bpy.types.Operator):
 vert_max = 0
 
 class Connect2Meshes (bpy.types.Operator):
-    """Соединить два объекта"""      
+    """connect two objects by mesh edges with vertices shift and hooks to initial objects. Соединить два объекта"""      
     bl_idname = "object.nt_connect2objects"
-    bl_label = "СОЕДИНИТЬ_2_ОБ"
+    bl_label = "CONNECT_2_OB"
     bl_options = {'REGISTER', 'UNDO'}
     
     nt_shift_verts = bpy.props.IntProperty(name="смещение вершин", description="shift vertices of smaller object, it can reach     maximum (look right), to make patterns", default=0, min=0, max=1000)
@@ -540,9 +540,9 @@ class Connect2Meshes (bpy.types.Operator):
 
 
 class MaterialToObjectAll (bpy.types.Operator):
-    """Материалы в объект"""      
+    """all materials turned to object mode"""      
     bl_idname = "object.nt_materials_to_object"
-    bl_label = "МАТ_ОБ"
+    bl_label = "MAT_OB"
     bl_options = {'REGISTER', 'UNDO'} 
     
     def execute(self, context):
@@ -556,9 +556,9 @@ class MaterialToObjectAll (bpy.types.Operator):
         return {'FINISHED'}
     
 class MaterialToDataAll (bpy.types.Operator):
-    """Материалы в данные"""      
+    """all materials turned to data mode"""      
     bl_idname = "object.nt_materials_to_data"
-    bl_label = "МАТ_ДАТ"
+    bl_label = "MAT_DAT"
     bl_options = {'REGISTER', 'UNDO'} 
     
     def execute(self, context):
@@ -573,9 +573,9 @@ class MaterialToDataAll (bpy.types.Operator):
 
 
 class NT_ClearNodesLayouts (bpy.types.Operator):
-    """Очистить раскладки узлов (сверчок, узлы Атома)"""      
+    """Delete nodes layouts, not active if node area presented in current screen layout. Change screen layout first"""      
     bl_idname = "object.nt_delete_nodelayouts"
-    bl_label = "УД_РАСКЛ"
+    bl_label = "DEL_LAYOUTS"
     bl_options = {'REGISTER', 'UNDO'} 
     
     do_clear = bpy.props.BoolProperty(default=False, name='even used', description='remove even if layout has one user (not fake user)')
@@ -602,9 +602,9 @@ class NT_ClearNodesLayouts (bpy.types.Operator):
 
 
 class DeleteOrientation (bpy.types.Operator):
-    """Удалить ориентации (alt+space)"""      
+    """Delete local Orientations (alt+space) for all objects you created"""      
     bl_idname = "object.nt_delete_orientation"
-    bl_label = "УД_ОРИЕНТ"
+    bl_label = "DEL_ORIENT"
     bl_options = {'REGISTER', 'UNDO'} 
     
     def execute(self, context):
@@ -617,9 +617,12 @@ class DeleteOrientation (bpy.types.Operator):
         return {'FINISHED'}
 
 class BooleratorRandom (bpy.types.Operator):
-    """Булен объединение nt_hook_or_not, Случайном порядке если нет - Обычном порядке поимённо"""      
+    """Boolen union Randomly
+    Булен объединение
+    nt_hook_or_not, Случайном порядке
+    если нет - Обычном порядке поимённо"""      
     bl_idname = "object.nt_boolerator_random"
-    bl_label = "БУЛ_СЛ"
+    bl_label = "BOOL_R"
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
@@ -654,9 +657,10 @@ class BooleratorRandom (bpy.types.Operator):
 
 
 class BooleratorIntersection (bpy.types.Operator):
-    """ Булен единство Пересечения"""      
+    """Boolen union by Intersection
+    Булен единство Пересечения"""      
     bl_idname = "object.nt_boolerator_intersection"
-    bl_label = "БУЛ_ПЕР"
+    bl_label = "BOOL_X"
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
@@ -800,9 +804,10 @@ class BooleratorIntersection (bpy.types.Operator):
         bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 
 class BooleratorTranslation (bpy.types.Operator):
-    """ Булен единство от Перемещения"""      
+    """Boolen union by Translation
+    Булен единство от Перемещения"""      
     bl_idname = "object.nt_boolerator_translation"
-    bl_label = "БУЛ_ПОЛОЖ"
+    bl_label = "BOOL_T"
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
@@ -846,9 +851,9 @@ class BooleratorTranslation (bpy.types.Operator):
         return {'FINISHED'}
 
 class SeparatorM (bpy.types.Operator):
-    """Разделитель объектов по количеству вершин"""      
+    """Objects separator on vert number count. разделитель объектов по количеству вершин"""      
     bl_idname = "object.nt_separator_multi"
-    bl_label = "РАЗДЕЛИТЬ"
+    bl_label = "SEPARATE_OB"
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
@@ -917,9 +922,9 @@ class SeparatorM (bpy.types.Operator):
 
 
 class BoundingBox (bpy.types.Operator):
-    """Делает габаритный куб"""      
+    """Make bound boxes for selected objects in mesh. Делает габаритный куб"""      
     bl_idname = "object.nt_bounding_boxers"
-    bl_label = "ГАБАРИТ"
+    bl_label = "BOUND_BOX"
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
@@ -949,9 +954,9 @@ class BoundingBox (bpy.types.Operator):
         return
 
 class SpreadObjects (bpy.types.Operator):
-    """Раскладывает объекты по полу."""
+    """spread all objects on sheet for farthere use in dxf layout export. Раскладывает объекты по полу."""
     bl_idname = "object.nt_spread_objects"
-    bl_label = "РАЗЛОЖИТЬ"
+    bl_label = "ORGANISE"
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
@@ -1029,9 +1034,9 @@ bpy.types.Scene.nt_hook_or_not = BoolProperty(
 
 
 class NikitronPanel(bpy.types.Panel):
-    """ Инструменты для работы """
+    """ Panel Nikitron. Инструменты для работы """
     bl_idname = "panel.nikitron"
-    bl_label = "ИНСТРУМЕНТЫ НТ"
+    bl_label = "Nikitron tools"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
     bl_category = 'NT'
@@ -1057,10 +1062,10 @@ class NikitronPanel(bpy.types.Panel):
         box = layout.box()
         
         row = box.row(align=True)
-        row.label(text="ГЛАВНЫЕ")
-        row = box.row(align=True)
-        row.operator("object.nt_compliment_wom")
-        row.operator('wm.url_open', text='мужицкий').url = 'http://w-o-s.ru/article/2469'
+        row.label(text="nt. GENERAL")
+        #row = box.row(align=True)
+        #row.operator("object.nt_compliment_wom")
+        #row.operator('wm.url_open', text='мужицкий').url = 'http://w-o-s.ru/article/2469'
         
         
         col = box.column(align=True)
@@ -1083,7 +1088,7 @@ class NikitronPanel(bpy.types.Panel):
         row = col.row(align=True)
         row.scale_y=1.1
         row.operator("object.nt_delete_nodelayouts",icon="NODE")
-        row.prop(bpy.context.scene, "nt_clean_layout_used", text='И ИСПОЛЬЗ')
+        row.prop(bpy.context.scene, "nt_clean_layout_used", text='AND USED')
         
         
         
@@ -1093,7 +1098,7 @@ class NikitronPanel(bpy.types.Panel):
                 col = box.column(align=True)
                 row = col.row(align=True)
                 row.scale_y=1.1
-                row.label(text="КРИВЫЕ")
+                row.label(text="nt. CURVES")
                 row = col.row(align=True)
                 row.operator("object.nt_curv_to_3d",icon="CURVE_DATA")
                 row.operator("object.nt_curv_to_2d",icon="CURVE_DATA")
@@ -1103,14 +1108,14 @@ class NikitronPanel(bpy.types.Panel):
                 box = layout.box()
                 col = box.column(align=True)
                 col.scale_y=1.1
-                col.label(text="СЕТКА")
+                col.label(text="nt. MESH")
                 row = col.row(align=True)
                 row.scale_y=1.1
                 row.operator("object.nt_edgelength",icon="FONT_DATA")
                 row.operator("object.nt_areaoflenin",icon="FONT_DATA")
                 row = col.row(align=True)
                 row.operator("object.nt_separator_multi",icon="MOD_BUILD")
-                row.prop(bpy.context.scene, "NS_vertices_separator", text='ВЕРШИН')
+                row.prop(bpy.context.scene, "NS_vertices_separator", text='VERTS')
                 row = col.row(align=True)
                 row.operator("object.nt_boolerator_random",icon="MOD_BOOLEAN")
                 row.operator("object.nt_boolerator_intersection",icon="MOD_BOOLEAN")
@@ -1120,9 +1125,9 @@ class NikitronPanel(bpy.types.Panel):
                 row.operator("object.nt_connect2objects",icon="LINKED")
                 row = col.row(align=True)
                 row.scale_y=1.1
-                row.prop(bpy.context.scene, "nt_shift_verts", text="СДВИГ")
-                row.prop(bpy.context.scene, "nt_hook_or_not", text="КРЮК?")
-                row.label(text="МАКС " + str(maxim()))
+                row.prop(bpy.context.scene, "nt_shift_verts", text="SHIFT")
+                row.prop(bpy.context.scene, "nt_hook_or_not", text="HOOK?")
+                row.label(text="MAX " + str(maxim()))
                 
         
 my_classes = [
