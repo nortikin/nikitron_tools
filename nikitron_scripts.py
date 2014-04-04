@@ -1,6 +1,5 @@
 # GPL-3 license
 
-
 bl_info = {
     "name": "Nikitron tools",
     "version": (0, 1, 4),
@@ -14,7 +13,6 @@ bl_info = {
     "tracker_url": "http://www.blenderartists.org/forum/showthread.php?272679-Addon-WIP-Sverchok-parametric-tool-for-architects",  
 }
 
-
 import bpy
 from mathutils.geometry import intersect_line_plane
 import mathutils
@@ -22,14 +20,103 @@ from mathutils import Vector
 import math
 from math import radians
 import re
+import os
 import random
 import bmesh
 from bpy_extras.object_utils import object_data_add
+from bpy.props import IntProperty, BoolProperty
+
+my_str_classes = [
+                'CurvesTo3D', 'CurvesTo2D', 'NikitronPanel', 'ObjectNames',
+                'VerticesNumbers3D', 'Connect2Meshes', 'MaterialToObjectAll',
+                'MaterialToDataAll', 'BoundingBox', 'SpreadObjects',
+                'DeleteOrientation', 'SeparatorM', 'BooleratorRandom',
+                'BooleratorTranslation', 'BooleratorIntersection',
+                'ComplimentWoman', 'AreaOfLenin', 'EdgeLength',
+                'CliffordAttractors', 'NT_ClearNodesLayouts',
+                'NT_language'
+                ]
+                
+my_var_names = [] # extend with veriables names
+
+ru_dict = [
+                'Кривые_3М', 'Кривые_2М', 'ИНСТРУМЕНТЫ НТ', 'Имена Об',
+                'Верш 3М', 'Соединить 2', 'Мат в Об',
+                'Мат в Дан', 'Габарит', 'Разложить',
+                'Уд ориентацию', 'Разделить', 'Бул С',
+                'Бул П', 'Бул Х',
+                'Копмлимент', 'Площ гра', 'Длин рёб',
+                'Супер кривые', 'Уд раскладки',
+                'english'
+                ]
+                
+en_dict = [
+                'Curves_3D', 'Curves_2D', 'NT toolset', 'Obj Names',
+                'Verts ind', 'Connect 2', 'Mat 2 obj',
+                'Mat 2 data', 'Boundbox', 'Spread',
+                'Del Orient', 'Separate', 'Bool R',
+                'Bool T', 'Bool X',
+                'Копмлимент', 'Area pols', 'Length edgs',
+                'Clifford attr', 'Del node layouts',
+                'Русский'
+                ]
+                
+#bpy.types.Scene.nt_language = bpy.props.BoolProperty(
+    #name='language',
+    #description='interface language',
+    #default=True)
+    
+bpy.types.Scene.nt_shift_verts = IntProperty(
+    name="shift_verts",
+    description="shift vertices of smaller object. смещает вершины для соединения",
+    min=0, max=1000,
+    default = 0,
+    options={'ANIMATABLE', 'LIBRARY_EDITABLE'})
+    
+bpy.types.Scene.NS_vertices_separator = IntProperty(
+    name="separate",
+    description="how many vertices in one object",
+    min=3, max=1000,
+    default = 8)
+    
+bpy.types.Scene.nt_clean_layout_used = BoolProperty(
+    name="clean_layout_used",
+    description="remove even if layout has one user (not fake user)",
+    default = False)
+    
+bpy.types.Scene.nt_hook_or_not = BoolProperty(
+    name="hook_or_not",
+    description="зацепить вершины к изначальным объектам.",
+    default = True)
+    
+def nt_make_lang(classes, names):
+    dict = {}
+    for i, c in enumerate(classes):
+        dict[str(c)] = names[i]
+    return dict
+
+def get_lang(lang_dict):
+    lang = lang_dict
+    return lang
+        
+
+def maxim():
+    """this def for connect2objects maximum shift (it cannot update scene's veriable somehow)"""
+    if len(bpy.context.selected_objects) >= 2:   
+        if bpy.context.selected_objects[0].type == 'MESH':
+            len1 = len(bpy.context.selected_objects[0].data.vertices)
+            len2 = len(bpy.context.selected_objects[1].data.vertices)
+            maxim = min(len1, len2)
+            return maxim
+
+lang_dict_ru = nt_make_lang(my_str_classes, ru_dict)
+lang_dict_en = nt_make_lang(my_str_classes, en_dict)
+vert_max = 0
 
 class EdgeLength(bpy.types.Operator):
     """Длина рёбер объектов"""
     bl_idname = "object.nt_edgelength"
-    bl_label = "ДЛИНА_РЁБ"
+    bl_label = 'ДЛИН_РЁБ'
     bl_options = {'REGISTER', 'UNDO'}
     
     length = bpy.props.StringProperty(name='длина', default='')
@@ -368,7 +455,7 @@ class VerticesNumbers3D (bpy.types.Operator):
         tcu.extrude = 0
         tcu.fill_mode = 'BOTH'
 
-vert_max = 0
+
 
 class Connect2Meshes (bpy.types.Operator):
     """Соединить два объекта"""      
@@ -991,42 +1078,20 @@ class SpreadObjects (bpy.types.Operator):
             dx, dy, ddy = 0, 0, 0
             del(x_curr)
         return {'FINISHED'}
+
+
+
+class NT_language (bpy.types.Operator):
+    """Меняет язык"""      
+    bl_idname = "object.nt_language" 
+    bl_label = "English"
+    bl_options = {'REGISTER', 'UNDO'}
     
-from bpy.props import IntProperty, BoolProperty
-
-# this def for connect2objects maximum shift (it cannot update scene's veriable somehow)
-def maxim():
-    if len(bpy.context.selected_objects) >= 2:   
-        if bpy.context.selected_objects[0].type == 'MESH':
-            len1 = len(bpy.context.selected_objects[0].data.vertices)
-            len2 = len(bpy.context.selected_objects[1].data.vertices)
-            maxim = min(len1, len2)
-            return maxim
-bpy.types.Scene.nt_shift_verts = IntProperty(name="nt_shift_verts", description="shift vertices of smaller object. смещает вершины для соединения",  min=0, max=1000,  default = 0, options={'ANIMATABLE', 'LIBRARY_EDITABLE'})
-bpy.types.Scene.NS_vertices_separator = IntProperty(name="separate", description="how many vertices in one object",  min=3, max=1000,  default = 8)
-bpy.types.Scene.nt_clean_layout_used = BoolProperty(name="clean_layout_used", description="remove even if layout has one user (not fake user)", default = False)
-
-    
-# this flag for connetc2objects, hook or not?
-bpy.types.Scene.nt_hook_or_not = BoolProperty(
-    name="nt_hook_or_not",
-    description="зацепить вершины к изначальным объектам.",
-    default = True)
-
-
-
-# this cache for define vertex count of currently selected materials.
-#cache_obj = []
-#def cache_add():
-#    for i in bpy.context.selected_objects:
-#        cache_obj.append(i)
-#    print (cache_obj)
-#cache_add()
-
-
-
-
-
+    def execute(self, context):
+        recall_lang()
+        #unregister()
+        register()
+        return {'FINISHED'}
 
 class NikitronPanel(bpy.types.Panel):
     """ Инструменты для работы """
@@ -1038,12 +1103,12 @@ class NikitronPanel(bpy.types.Panel):
     #bl_context = 'objectmode'
     #bl_options = {'HIDE_HEADER'}
 
-
     def draw(self, context):
         #global cache_obj
         #global cache_add
         #global shift
         global maxim
+        
         layout = self.layout
         
         # it is all about maximum shift, it cannot update scene's veriable 'shift_verts' with 'maxim' veriable somehow
@@ -1055,9 +1120,10 @@ class NikitronPanel(bpy.types.Panel):
 
         
         box = layout.box()
-        
         row = box.row(align=True)
         row.label(text="ГЛАВНЫЕ")
+        row.operator('object.nt_language')
+        
         row = box.row(align=True)
         row.operator("object.nt_compliment_wom")
         row.operator('wm.url_open', text='мужицкий').url = 'http://w-o-s.ru/article/2469'
@@ -1123,8 +1189,7 @@ class NikitronPanel(bpy.types.Panel):
                 row.prop(bpy.context.scene, "nt_shift_verts", text="СДВИГ")
                 row.prop(bpy.context.scene, "nt_hook_or_not", text="КРЮК?")
                 row.label(text="МАКС " + str(maxim()))
-                
-        
+
 my_classes = [
                 CurvesTo3D, CurvesTo2D, NikitronPanel, ObjectNames,
                 VerticesNumbers3D, Connect2Meshes, MaterialToObjectAll,
@@ -1132,16 +1197,45 @@ my_classes = [
                 DeleteOrientation, SeparatorM, BooleratorRandom,
                 BooleratorTranslation, BooleratorIntersection,
                 ComplimentWoman, AreaOfLenin, EdgeLength,
-                CliffordAttractors, NT_ClearNodesLayouts
+                CliffordAttractors, NT_ClearNodesLayouts,
+                NT_language,
                 ]
+
+def recall_lang():
+    global handle_lang
+    if handle_lang == True:
+        lang = get_lang(lang_dict_ru)
+        for i, c in enumerate(my_classes):
+            c.bl_label = lang[my_str_classes[i]]
+    else:
+        lang = get_lang(lang_dict_en)
+        for i, c in enumerate(my_classes):
+            c.bl_label = lang[my_str_classes[i]]
+
+
     
 def register():
+    global handle_lang
     for clas in my_classes:
         bpy.utils.register_class(clas)
+    path = os.path.join(os.path.dirname(__file__),'nikitron_locale')
+    file=open(path, 'r+', encoding='utf-8')
+    text=file.read()
+    file.close()
+    #file=open(path, 'w+', encoding='utf-8')
+    if 'ru' in text:
+        handle_lang = False
+        #file.write('en')
+    elif 'en' in text:
+        handle_lang = True
+        #file.write('ru')
+    #file.close()
 
 def unregister():
-    for clas in my_classes:
+    a = rversed(my_classes)
+    for clas in a:
         bpy.utils.unregister_class(clas)
-    
+    del a
+            
 if __name__ == "__main__":
     register()
