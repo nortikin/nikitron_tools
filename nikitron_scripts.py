@@ -34,10 +34,14 @@ my_str_classes = [
                 'BooleratorTranslation', 'BooleratorIntersection',
                 'ComplimentWoman', 'AreaOfLenin', 'EdgeLength',
                 'CliffordAttractors', 'NT_ClearNodesLayouts',
-                'NT_language'
+                'NT_language', 'ComplimMan', 'Title_section', 'CleanLayoutUsed',
+                'Curves_section', 'verticesNum_separator', 'shift_vers',
+                'hook', 'maxvers', 'Mesh_section', 'toolsetNT',
                 ]
                 
 my_var_names = [] # extend with veriables names
+sv_lang = {}
+handle_lang = True
 
 ru_dict = [
                 'Кривые_3М', 'Кривые_2М', 'ИНСТРУМЕНТЫ НТ', 'Имена Об',
@@ -47,18 +51,22 @@ ru_dict = [
                 'Бул П', 'Бул Х',
                 'Копмлимент', 'Площ гра', 'Длин рёб',
                 'Супер кривые', 'Уд раскладки',
-                'english'
+                'english', 'Мужской', 'ГЛАВНЫЕ', 'и активные',
+                'КРИВЫЕ', 'Верш', 'Сдвиг',
+                'Крюк', 'МаксВер', 'СЕТКА', 'ИНСТРУМЕНТЫ НТ',
                 ]
                 
 en_dict = [
                 'Curves_3D', 'Curves_2D', 'NT toolset', 'Obj Names',
                 'Verts ind', 'Connect 2', 'Mat 2 obj',
-                'Mat 2 data', 'Boundbox', 'Spread',
+                'Mat 2 data', 'Boundbox', 'Spread to ground',
                 'Del Orient', 'Separate', 'Bool R',
                 'Bool T', 'Bool X',
-                'Копмлимент', 'Area pols', 'Length edgs',
-                'Clifford attr', 'Del node layouts',
-                'Русский'
+                'Compliment(rus)', 'Area pols', 'Length edgs',
+                'Clifford attractors curves', 'Del node layouts',
+                'Русский', 'For men', 'MAIN', 'And active',
+                'CURVES', 'Vers', 'Shift',
+                'Hook', 'MaxVers', 'MESH', 'TOOLSET NT',
                 ]
                 
 #bpy.types.Scene.nt_language = bpy.props.BoolProperty(
@@ -99,6 +107,15 @@ def get_lang(lang_dict):
     lang = lang_dict
     return lang
         
+def nt_lang_panel():
+    global handle_lang
+    global sv_lang
+    if handle_lang:
+        sv_lang = get_lang(lang_dict_ru)
+        handle_lang = False
+    else:
+        sv_lang = get_lang(lang_dict_en)
+        handle_lang = True
 
 def maxim():
     """this def for connect2objects maximum shift (it cannot update scene's veriable somehow)"""
@@ -112,6 +129,7 @@ def maxim():
 lang_dict_ru = nt_make_lang(my_str_classes, ru_dict)
 lang_dict_en = nt_make_lang(my_str_classes, en_dict)
 vert_max = 0
+nt_lang_panel()
 
 class EdgeLength(bpy.types.Operator):
     """Длина рёбер объектов"""
@@ -692,15 +710,22 @@ class DeleteOrientation (bpy.types.Operator):
     """Удалить ориентации (alt+space)"""      
     bl_idname = "object.nt_delete_orientation"
     bl_label = "УД_ОРИЕНТ"
-    bl_options = {'REGISTER', 'UNDO'} 
+    bl_options = {'REGISTER', 'UNDO'}
     
+    @classmethod
+    def poll(cls, context):
+        return context.space_data.type == 'VIEW_3D'
+        
     def execute(self, context):
         orients = bpy.data.scenes[bpy.context.scene.name].orientations
         for o in orients:
             if o.name != 'Global' or o.name != 'Local' or o.name != 'Normal' or o.name != 'Gimbal' or o.name != 'View':
                 bpy.ops.transform.select_orientation(orientation=o.name)
-                print (str(o.name)+' orientation deleted')
-                bpy.ops.transform.delete_orientation()
+                try:
+                    bpy.ops.transform.delete_orientation()
+                    print (str(o.name)+' orientation deleted')
+                except:
+                    print ('cannot delete orientation' + str(o.name))
         return {'FINISHED'}
 
 class BooleratorRandom (bpy.types.Operator):
@@ -1088,15 +1113,13 @@ class NT_language (bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
-        recall_lang()
-        #unregister()
-        register()
+        nt_lang_panel()
         return {'FINISHED'}
 
 class NikitronPanel(bpy.types.Panel):
     """ Инструменты для работы """
     bl_idname = "panel.nikitron"
-    bl_label = "ИНСТРУМЕНТЫ НТ"
+    bl_label = 'ИНСТРУМЕНТЫ НТ'
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
     bl_category = 'NT'
@@ -1108,6 +1131,7 @@ class NikitronPanel(bpy.types.Panel):
         #global cache_add
         #global shift
         global maxim
+        global sv_lang
         
         layout = self.layout
         
@@ -1121,35 +1145,37 @@ class NikitronPanel(bpy.types.Panel):
         
         box = layout.box()
         row = box.row(align=True)
-        row.label(text="ГЛАВНЫЕ")
-        row.operator('object.nt_language')
+        row.label(text=sv_lang['Title_section'])
+        row.operator('object.nt_language', text=sv_lang['NT_language'])
+        
+        
         
         row = box.row(align=True)
-        row.operator("object.nt_compliment_wom")
-        row.operator('wm.url_open', text='мужицкий').url = 'http://w-o-s.ru/article/2469'
+        row.operator("object.nt_compliment_wom", text=sv_lang['ComplimentWoman'])
+        row.operator('wm.url_open', text=sv_lang['ComplimMan']).url = 'http://w-o-s.ru/article/2469'
         
         
         col = box.column(align=True)
         col.scale_y=1.1
-        col.operator("object.nt_spread_objects",icon="GRID")
+        col.operator("object.nt_spread_objects",icon="GRID", text=sv_lang['SpreadObjects'])
         row = col.row(align=True)
-        row.operator("object.nt_cliffordattractors",icon="OUTLINER_OB_CURVE")
+        row.operator("object.nt_cliffordattractors",icon="OUTLINER_OB_CURVE", text=sv_lang['CliffordAttractors'])
         row = col.row(align=True)
-        row.operator("object.nt_materials_to_object",icon="MATERIAL_DATA")
-        row.operator("object.nt_materials_to_data",icon="MATERIAL_DATA")
+        row.operator("object.nt_materials_to_object",icon="MATERIAL_DATA", text=sv_lang['MaterialToObjectAll'])
+        row.operator("object.nt_materials_to_data",icon="MATERIAL_DATA", text=sv_lang['MaterialToDataAll'])
             
         row = col.row(align=True)
-        row.operator("object.nt_name_objects",icon="OUTLINER_OB_FONT")
-        row.operator("object.nt_vertices_numbers3d",icon="FONT_DATA")
+        row.operator("object.nt_name_objects",icon="OUTLINER_OB_FONT", text=sv_lang['ObjectNames'])
+        row.operator("object.nt_vertices_numbers3d",icon="FONT_DATA", text=sv_lang['VerticesNumbers3D'])
         
         row = col.row(align=True)
-        row.operator("object.nt_bounding_boxers",icon="SNAP_VOLUME")
-        row.operator("object.nt_delete_orientation",icon="MANIPUL")
+        row.operator("object.nt_bounding_boxers",icon="SNAP_VOLUME", text=sv_lang['BoundingBox'])
+        row.operator("object.nt_delete_orientation",icon="MANIPUL", text=sv_lang['DeleteOrientation'])
         
         row = col.row(align=True)
         row.scale_y=1.1
-        row.operator("object.nt_delete_nodelayouts",icon="NODE")
-        row.prop(bpy.context.scene, "nt_clean_layout_used", text='И ИСПОЛЬЗ')
+        row.operator("object.nt_delete_nodelayouts",icon="NODE", text=sv_lang['NT_ClearNodesLayouts'])
+        row.prop(bpy.context.scene, "nt_clean_layout_used", text=sv_lang['CleanLayoutUsed'])
         
         
         
@@ -1159,36 +1185,36 @@ class NikitronPanel(bpy.types.Panel):
                 col = box.column(align=True)
                 row = col.row(align=True)
                 row.scale_y=1.1
-                row.label(text="КРИВЫЕ")
+                row.label(text=sv_lang['Curves_section'])
                 row = col.row(align=True)
-                row.operator("object.nt_curv_to_3d",icon="CURVE_DATA")
-                row.operator("object.nt_curv_to_2d",icon="CURVE_DATA")
+                row.operator("object.nt_curv_to_3d",icon="CURVE_DATA", text=sv_lang['CurvesTo3D'])
+                row.operator("object.nt_curv_to_2d",icon="CURVE_DATA", text=sv_lang['CurvesTo2D'])
         
         if context.selected_objects:
             if context.selected_objects[0].type == 'MESH':
                 box = layout.box()
                 col = box.column(align=True)
                 col.scale_y=1.1
-                col.label(text="СЕТКА")
+                col.label(text=sv_lang['Mesh_section'])
                 row = col.row(align=True)
                 row.scale_y=1.1
-                row.operator("object.nt_edgelength",icon="FONT_DATA")
-                row.operator("object.nt_areaoflenin",icon="FONT_DATA")
+                row.operator("object.nt_edgelength",icon="FONT_DATA", text=sv_lang['EdgeLength'])
+                row.operator("object.nt_areaoflenin",icon="FONT_DATA", text=sv_lang['AreaOfLenin'])
                 row = col.row(align=True)
-                row.operator("object.nt_separator_multi",icon="MOD_BUILD")
-                row.prop(bpy.context.scene, "NS_vertices_separator", text='ВЕРШИН')
+                row.operator("object.nt_separator_multi",icon="MOD_BUILD", text=sv_lang['SeparatorM'])
+                row.prop(bpy.context.scene, "NS_vertices_separator", text=sv_lang['verticesNum_separator'])
                 row = col.row(align=True)
-                row.operator("object.nt_boolerator_random",icon="MOD_BOOLEAN")
-                row.operator("object.nt_boolerator_intersection",icon="MOD_BOOLEAN")
-                row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN")
+                row.operator("object.nt_boolerator_random",icon="MOD_BOOLEAN", text=sv_lang['BooleratorRandom'])
+                row.operator("object.nt_boolerator_intersection",icon="MOD_BOOLEAN", text=sv_lang['BooleratorIntersection'])
+                row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
                 
                 row = col.row(align=True)
-                row.operator("object.nt_connect2objects",icon="LINKED")
+                row.operator("object.nt_connect2objects",icon="LINKED", text=sv_lang['Connect2Meshes'])
                 row = col.row(align=True)
                 row.scale_y=1.1
-                row.prop(bpy.context.scene, "nt_shift_verts", text="СДВИГ")
-                row.prop(bpy.context.scene, "nt_hook_or_not", text="КРЮК?")
-                row.label(text="МАКС " + str(maxim()))
+                row.prop(bpy.context.scene, "nt_shift_verts", text=sv_lang['shift_vers'])
+                row.prop(bpy.context.scene, "nt_hook_or_not", text=sv_lang['hook'])
+                row.label(text=sv_lang['maxvers'] + ' ' + str(maxim()))
 
 my_classes = [
                 CurvesTo3D, CurvesTo2D, NikitronPanel, ObjectNames,
@@ -1201,35 +1227,23 @@ my_classes = [
                 NT_language,
                 ]
 
-def recall_lang():
-    global handle_lang
-    if handle_lang == True:
-        lang = get_lang(lang_dict_ru)
-        for i, c in enumerate(my_classes):
-            c.bl_label = lang[my_str_classes[i]]
-    else:
-        lang = get_lang(lang_dict_en)
-        for i, c in enumerate(my_classes):
-            c.bl_label = lang[my_str_classes[i]]
 
+    
 
     
 def register():
     global handle_lang
     for clas in my_classes:
         bpy.utils.register_class(clas)
-    path = os.path.join(os.path.dirname(__file__),'nikitron_locale')
-    file=open(path, 'r+', encoding='utf-8')
-    text=file.read()
-    file.close()
-    #file=open(path, 'w+', encoding='utf-8')
-    if 'ru' in text:
-        handle_lang = False
-        #file.write('en')
-    elif 'en' in text:
-        handle_lang = True
-        #file.write('ru')
+    #path = os.path.join(os.path.dirname(__file__),'nikitron_locale')
+    #file=open(path, 'r+', encoding='utf-8')
+    #text=file.read()
     #file.close()
+    #if 'ru' in text:
+        #handle_lang = False
+    #elif 'en' in text:
+        #handle_lang = True
+        
 
 def unregister():
     a = rversed(my_classes)
