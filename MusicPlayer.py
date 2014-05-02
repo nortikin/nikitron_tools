@@ -122,6 +122,7 @@ class MP_PlaySIC(bpy.types.Operator):
         context.window_manager.mp_playsound.volume=context.window_manager.mp_volume
         threading.Thread(target=soundIsOn, args=(context,)).start()
         self.report({'INFO'}, 'Lets rock...')
+        context.window_manager.mp_playing = True
         
         if bpy.context.window_manager.mp_playlist_names:
             pl = bpy.context.window_manager.mp_playlist_names
@@ -195,6 +196,7 @@ class MP_StopSIC(bpy.types.Operator):
         context.window_manager.mp_playsound.stop()
         context.window_manager.mp_index = context.window_manager.mp_playlist.__len__()
         self.report({'INFO'}, 'Break...')
+        context.window_manager.mp_playing = False
         return {'FINISHED'}
 
 class MP_DelList(bpy.types.Operator):
@@ -317,7 +319,7 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
     
     def draw(self, context):
         layout = self.layout
-        row = layout.row(align=False)
+        row = layout.row(align=True)
         
         #############
         col2 = row.column(align=True)
@@ -332,39 +334,44 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
             col2.operator("sound.pause", text=" ", icon='PAUSE')
         
         #############
-        col = row.column()
-        col.scale_y=2
-        if not context.window_manager.mp_playsound.position:
-            op = col.operator("sound.play", text="PLAY ", icon='PLAY')
+        col = row.column(align=False)
+        col.scale_y=2.5
+        if not context.window_manager.mp_playing:
+            col.operator("sound.play", text="PLAY ", icon='PLAY')
         else:
-            op = col.operator("sound.stop", text="STOP ", icon='FULLSCREEN')
+            col.operator("sound.stop", text="STOP ", icon='FULLSCREEN')
         if bpy.context.window_manager.mp_playlist_names:
+            
             plaingindex = 'Song: '+str(context.window_manager.mp_index+1)+'/'+str(len(context.window_manager.mp_playlist))
-            row2 = col.row(align=False)
+            row2 = col.row(align=True)
             row2.scale_y=0.5
             row2.label(text=plaingindex)
             columna=row2.column()
             columna.scale_x=0.35
             columna.scale_y=0.5
-            columna.label(text = str(round(context.window_manager.mp_playsound.position))+' s')
+            if context.window_manager.mp_playing:
+                posa = str(round(context.window_manager.mp_playsound.position))
+            else:
+                posa = 0
+            columna.label(text = str(posa)+' s')
         else:
             row2 = col.row(align=False)
             row2.scale_y=0.5
             row2.label(text='Load music, please')
         
         #############
-        col2 = row.column(align=True)
-        col2.scale_x=0.12
-        col2.scale_y=1.35
+        col3 = row.column(align=True)
+        col3.scale_x=0.12
+        col3.scale_y=1.35
         #col2.operator("sound.import_m3u", text="Import m3u", icon='ZOOMIN')
         #col2.operator("sound.writeplaylist", text="Save playlist", icon='ZOOMIN')
-        col2.operator("sound.delplaylist", text=" ", icon='X')
-        col2.operator("sound.next", text=" ", icon='FF')
+        col3.operator("sound.delplaylist", text=" ", icon='X')
+        col3.operator("sound.next", text=" ", icon='FF')
         if bpy.context.window_manager.mp_show_names:
             ico = 'FILE'
         else:
             ico = 'TEXT'#'RESTRICT_VIEW_ON'
-        col2.prop(bpy.context.window_manager, 'mp_show_names',icon=ico, icon_only=True)
+        col3.prop(bpy.context.window_manager, 'mp_show_names',icon=ico, icon_only=True)
         
         
         col=layout.column(align=True)
@@ -429,6 +436,7 @@ def register():
     bpy.types.WindowManager.mp_playlist=[]
     bpy.types.WindowManager.mp_index=bpy.props.IntProperty()
     bpy.types.WindowManager.mp_pause = bpy.props.BoolProperty(False)
+    bpy.types.WindowManager.mp_playing = bpy.props.BoolProperty(False)
     bpy.types.WindowManager.mp_volume = bpy.props.FloatProperty(name="Volume",default=1.0, min=0.0, max=1.0, update=volume_up)
     bpy.types.WindowManager.mp_d = aud.device()
     bpy.types.WindowManager.mp_MusHandle = bpy.props.FloatProperty(name="MusHandle",default=0.0, min=0.0, max=300)
