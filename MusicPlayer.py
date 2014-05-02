@@ -318,70 +318,91 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         row = layout.row(align=False)
+        
+        #############
         col2 = row.column(align=True)
+        col2.scale_x=0.12
+        col2.scale_y=1.35
         #col2.operator("sound.openplaylist", text="Open playlist", icon='ZOOMIN')
-        col2.operator("sound.import", text="Import sound", icon='FILE_SOUND')
-        col2.operator("sound.prev", text="Previus", icon='REW')
+        col2.operator("sound.import", text=' ', icon='FILE_SOUND')
+        col2.operator("sound.prev", text=" ", icon='REW')
         if context.window_manager.mp_pause:
-            col2.operator("sound.resume", text="Resume", icon='PLAY')
+            col2.operator("sound.resume", text=" ", icon='PLAY')
         else:
-            col2.operator("sound.pause", text="Pause", icon='PAUSE')
+            col2.operator("sound.pause", text=" ", icon='PAUSE')
+        
+        #############
+        col = row.box()
+        col.scale_y=2
+        if not context.window_manager.mp_playsound.position:
+            op = col.operator("sound.play", text="PLAY ", icon='PLAY')
+        else:
+            op = col.operator("sound.stop", text="STOP ", icon='FULLSCREEN')
+        if bpy.context.window_manager.mp_playlist_names:
+            plaingindex = 'Song: '+str(context.window_manager.mp_index+1)+'/'+str(len(context.window_manager.mp_playlist))
+            row2 = col.row(align=False)
+            row2.scale_y=0.5
+            row2.label(text=plaingindex)
+            columna=row2.column()
+            columna.scale_x=0.35
+            columna.scale_y=0.5
+            columna.label(text = str(round(context.window_manager.mp_playsound.position))+' s')
+        else:
+            row2 = col.row(align=False)
+            row2.scale_y=0.5
+            row2.label(text='Load music, please')
+        
+        #############
         col2 = row.column(align=True)
+        col2.scale_x=0.12
+        col2.scale_y=1.35
         #col2.operator("sound.import_m3u", text="Import m3u", icon='ZOOMIN')
         #col2.operator("sound.writeplaylist", text="Save playlist", icon='ZOOMIN')
-        col2.operator("sound.delplaylist", text="Clear play list", icon='X')
-        col2.operator("sound.next", text="Next", icon='FF')
-        col2.operator("sound.stop", text="Stop", icon='FULLSCREEN')
-        col = layout.column(align=True)
-        col.scale_y=2
-        col.operator("sound.play", text="Play           ", icon='PLAY')
+        col2.operator("sound.delplaylist", text=" ", icon='X')
+        col2.operator("sound.next", text=" ", icon='FF')
+        if bpy.context.window_manager.mp_show_names:
+            ico = 'FILE'
+        else:
+            ico = 'TEXT'#'RESTRICT_VIEW_ON'
+        col2.prop(bpy.context.window_manager, 'mp_show_names',icon=ico, icon_only=True)
+        
+        
+        col=layout.column(align=True)
         row = col.row(align=True)
-        row.scale_y=0.75
+        row.scale_y=1
         row.prop(context.window_manager, "mp_volume", slider=True)
         
         #col.operator("sound.printplaylist", text="Print playlist", icon='TEXT')
         row = col.row(align=True)
-        row.scale_y=0.75
-        row.prop(context.window_manager, 'mp_MusHandle', slider=True, text='Position(sec)')
+        row.scale_y=1
+        row.prop(context.window_manager, 'mp_MusHandle', slider=True, text='Second')
         row.operator('sound.setpos', text='Set Position')
         row = layout.row(align=False)
-        plaingindex = 'Song index: '+str(context.window_manager.mp_index+1)+'/'+str(len(context.window_manager.mp_playlist))
-        row.label(text=plaingindex)
         
-        if bpy.context.window_manager.mp_show_names:
-            ico = 'RESTRICT_VIEW_OFF'
-        else:
-            ico = 'RESTRICT_VIEW_ON'
         
-        if len(bpy.context.window_manager.mp_playlist_names) > 0:
-            columna=row.column()
-            columna.scale_x=0.35
-            columna.label(text = str(round(context.window_manager.mp_playsound.position))+' s')
-            columna=row.column()
-            columna.scale_x=0.12
-            columna.prop(bpy.context.window_manager, 'mp_show_names',icon=ico, icon_only=True, text=' ')
-            row = layout.row(align=False)
-            row.label(text=bpy.context.window_manager.mp_playlist_names[ \
-                                context.window_manager.mp_index])
-            
+        
         
         if bpy.context.window_manager.mp_playlist_names:
+            row = layout.row(align=False)
+            if context.window_manager.mp_playsound.position:
+                row.label(text=bpy.context.window_manager.mp_playlist_names[ \
+                                    context.window_manager.mp_index])
+            
+        
             playlist_print=context.window_manager.mp_playlist_names
-        else:
-            playlist_print=context.window_manager.mp_playlist
-        if bpy.context.window_manager.mp_show_names:
-            col = layout.column(align=True)
-            i=0
-            for p in playlist_print:
-                i+=1
-                if i == (context.window_manager.mp_index+1):
-                    col.operator("sound.play", text='> '+str(i)+' | '+str(p)).item_play=str([True, i-1])
-                else:
-                    col.operator("sound.play", text=str(i)+' | '+str(p)).item_play=str([True, i-1])
-        #a = context.window_manager
-        #a.progress_begin(0,1)
-        #a.progress_update(0.5)
-        #a.progress_end()
+            if bpy.context.window_manager.mp_show_names:
+                col = layout.column(align=True)
+                i=0
+                for p in playlist_print:
+                    i+=1
+                    if i == (context.window_manager.mp_index+1):
+                        col.operator("sound.play", text='> '+str(i)+' | '+str(p)).item_play=str([True, i-1])
+                    else:
+                        col.operator("sound.play", text=str(i)+' | '+str(p)).item_play=str([True, i-1])
+            #a = context.window_manager
+            #a.progress_begin(0,1)
+            #a.progress_update(0.5)
+            #a.progress_end()
 
 
 # define classes for registration
