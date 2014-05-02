@@ -332,7 +332,7 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
             col2.operator("sound.pause", text=" ", icon='PAUSE')
         
         #############
-        col = row.box()
+        col = row.column()
         col.scale_y=2
         if not context.window_manager.mp_playsound.position:
             op = col.operator("sound.play", text="PLAY ", icon='PLAY')
