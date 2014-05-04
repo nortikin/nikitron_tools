@@ -14,7 +14,7 @@ from bpy_extras.io_utils import ImportHelper
 from bpy.props import *
 import bpy, aud, time, threading
 import re
-import urllib.request as req
+import urllib.request as req # for future playlists
 import os
 import random
 
@@ -117,7 +117,7 @@ class MP_PlaySIC(bpy.types.Operator):
             bpy.context.window_manager.mp_index = check[1]
             check[0] = False
         bpy.types.WindowManager.mp_f = aud.Factory(context.window_manager.mp_playlist[context.window_manager.mp_index])
-        bpy.types.WindowManager.mp_playsound = context.window_manager.mp_d.play(context.window_manager.mp_f)
+        bpy.types.WindowManager.mp_playsound = context.window_manager.mp_d.play(context.window_manager.mp_f.fadein(0,3))
         context.window_manager.mp_pause=False
         context.window_manager.mp_playsound.volume=context.window_manager.mp_volume
         threading.Thread(target=soundIsOn, args=(context,)).start()
