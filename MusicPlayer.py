@@ -130,7 +130,12 @@ class MP_PlaySIC(bpy.types.Operator):
             pl = bpy.context.window_manager.mp_playlist
         print ("||| %s of %s ||| %s" % (str(context.window_manager.mp_index+1), str(len(context.window_manager.mp_playlist)), str(pl[context.window_manager.mp_index])))
         return {'FINISHED'}
-
+    
+    #could be used for shuffle button or some button to show operators dinamically
+    #def invoke(self, context, event):
+        #wm = context.window_manager
+        #wm.invoke_props_dialog(self, 250)
+        #return {'RUNNING_MODAL'}
 
 class MP_ImportSIC(bpy.types.Operator):
     '''Load a sound File'''
