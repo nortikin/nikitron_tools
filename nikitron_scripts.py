@@ -144,16 +144,24 @@ class EdgeLength(bpy.types.Operator):
         return {'FINISHED'}
 
     def calclength(self):
-        obj = bpy.context.selected_objects
-        allthelength = []
-        for o in obj:
-            v = o.data.vertices
-            for e in o.data.edges:
-                ev = e.vertices
-                diff = v[ev[0]].co-v[ev[1]].co
-                edglength = diff.length
-                allthelength.append(edglength)
-        summa = sum(allthelength)
+        if bpy.context.mode == 'OBJECT':
+            obj = bpy.context.selected_objects
+            allthelength = []
+            for o in obj:
+                v = o.data.vertices
+                for e in o.data.edges:
+                    ev = e.vertices
+                    diff = v[ev[0]].co-v[ev[1]].co
+                    edglength = diff.length
+                    allthelength.append(edglength)
+            summa = sum(allthelength)
+        elif bpy.context.mode == 'EDIT_MESH':
+            data = bpy.context.active_object.data
+            edgs, vers = data.edges, data.vertices
+            bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
+            edgs_sel = [ tuple(e.vertices[:]) for e in edgs if e.select ]
+            summa = sum([ (vers[e[0]].co-vers[e[1]].co).length for e in edgs_sel ])
+            bpy.ops.object.mode_set(mode='EDIT', toggle=False)
         return round(summa, 4)
 
 class AreaOfLenin(bpy.types.Operator):
@@ -169,12 +177,18 @@ class AreaOfLenin(bpy.types.Operator):
         return {'FINISHED'}
 
     def calcarea(self):
-        obj = bpy.context.selected_objects
-        allthearea = []
-        for o in obj:
-            for p in o.data.polygons:
-                allthearea.append(p.area)
-        summa = sum(allthearea)
+        if bpy.context.mode == 'OBJECT':
+            obj = bpy.context.selected_objects
+            allthearea = []
+            for o in obj:
+                for p in o.data.polygons:
+                    allthearea.append(p.area)
+            summa = sum(allthearea)
+        elif bpy.context.mode == 'EDIT_MESH':
+            pols = bpy.context.active_object.data.polygons
+            bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
+            summa = sum([ p.area for p in pols if p.select ])
+            bpy.ops.object.mode_set(mode='EDIT', toggle=False)
         return round(summa, 4)
 
 class CliffordAttractors(bpy.types.Operator):
@@ -334,9 +348,13 @@ class CurvesTo3D (bpy.types.Operator):
                     bpy.ops.curve.spline_type_set(type='BEZIER', use_handles=False)
                     bpy.ops.curve.handle_type_set(type=self.handle)
                     bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
-
         return {'FINISHED'}
-
+    
+    def invoke(self, context, event):
+        wm = context.window_manager
+        wm.invoke_props_dialog(self, 250)
+        return {'RUNNING_MODAL'}
+    
 class CurvesTo2D (bpy.types.Operator):
     """Превращает кривые в 2М кривые скопом (толщина по умолчанию 0.03)"""
     bl_idname = "object.nt_curv_to_2d"
@@ -379,6 +397,12 @@ class CurvesTo2D (bpy.types.Operator):
                     bpy.ops.curve.handle_type_set(type=self.handle)
                     bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
         return {'FINISHED'}
+    
+    def invoke(self, context, event):
+        wm = context.window_manager
+        wm.invoke_props_dialog(self, 250)
+        return {'RUNNING_MODAL'}
+    
  #breakpoint
 class ObjectNames (bpy.types.Operator):
     """Имена объектов в 3М текст"""      
