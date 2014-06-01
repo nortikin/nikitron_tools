@@ -2,8 +2,8 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (0, 1, 4),
-    "blender": (2, 6, 9), 
+    "version": (0, 1, 5),
+    "blender": (2, 7, 5), 
     "category": "Object",
     "author": "Nikita Gorodetskiy",
     "location": "object",
@@ -90,6 +90,16 @@ bpy.types.Scene.NS_vertices_separator = IntProperty(
 bpy.types.Scene.nt_clean_layout_used = BoolProperty(
     name="clean_layout_used",
     description="remove even if layout has one user (not fake user)",
+    default = False)
+
+bpy.types.Scene.nt_main_panel = BoolProperty(
+    name="show main panel",
+    description="",
+    default = False)
+    
+bpy.types.Scene.nt_additional_panel = BoolProperty(
+    name="show additional panel",
+    description="",
     default = False)
     
 bpy.types.Scene.nt_hook_or_not = BoolProperty(
@@ -1147,6 +1157,7 @@ class NikitronPanel(bpy.types.Panel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
     bl_category = 'NT'
+    bl_options = {'DEFAULT_CLOSED'}
     #bl_context = 'objectmode'
     #bl_options = {'HIDE_HEADER'}
 
@@ -1169,76 +1180,94 @@ class NikitronPanel(bpy.types.Panel):
         
         box = layout.box()
         row = box.row(align=True)
+        
+        split = row.split(percentage=0.34)
+        main = bpy.context.scene
+        if main.nt_main_panel:
+            split.prop(main, 'nt_main_panel', text=" ", icon='DOWNARROW_HLT')
+        else:
+            split.prop(main, 'nt_main_panel', text=" ", icon='RIGHTARROW')
         row.label(text=sv_lang['Title_section'])
         row.operator('object.nt_language', text=sv_lang['NT_language'])
-        
-        
-        
-        row = box.row(align=True)
-        row.operator("object.nt_compliment_wom", text=sv_lang['ComplimentWoman'])
-        row.operator('wm.url_open', text=sv_lang['ComplimMan']).url = 'http://w-o-s.ru/article/2469'
-        
-        
-        col = box.column(align=True)
-        col.scale_y=1.1
-        col.operator("object.nt_spread_objects",icon="GRID", text=sv_lang['SpreadObjects'])
-        row = col.row(align=True)
-        row.operator("object.nt_cliffordattractors",icon="OUTLINER_OB_CURVE", text=sv_lang['CliffordAttractors'])
-        row = col.row(align=True)
-        row.operator("object.nt_materials_to_object",icon="MATERIAL_DATA", text=sv_lang['MaterialToObjectAll'])
-        row.operator("object.nt_materials_to_data",icon="MATERIAL_DATA", text=sv_lang['MaterialToDataAll'])
             
-        row = col.row(align=True)
-        row.operator("object.nt_name_objects",icon="OUTLINER_OB_FONT", text=sv_lang['ObjectNames'])
-        row.operator("object.nt_vertices_numbers3d",icon="FONT_DATA", text=sv_lang['VerticesNumbers3D'])
+            
         
-        row = col.row(align=True)
-        row.operator("object.nt_bounding_boxers",icon="SNAP_VOLUME", text=sv_lang['BoundingBox'])
-        row.operator("object.nt_delete_orientation",icon="MANIPUL", text=sv_lang['DeleteOrientation'])
-        
-        row = col.row(align=True)
-        row.scale_y=1.1
-        row.operator("object.nt_delete_nodelayouts",icon="NODE", text=sv_lang['NT_ClearNodesLayouts'])
-        row.prop(bpy.context.scene, "nt_clean_layout_used", text=sv_lang['CleanLayoutUsed'])
-        
-        
-        
-        if context.selected_objects:
-            if context.selected_objects[0].type == 'CURVE':
-                box = layout.box()
-                col = box.column(align=True)
-                row = col.row(align=True)
-                row.scale_y=1.1
-                row.label(text=sv_lang['Curves_section'])
-                row = col.row(align=True)
-                row.operator("object.nt_curv_to_3d",icon="CURVE_DATA", text=sv_lang['CurvesTo3D'])
-                row.operator("object.nt_curv_to_2d",icon="CURVE_DATA", text=sv_lang['CurvesTo2D'])
-        
-        if context.selected_objects:
-            if context.selected_objects[0].type == 'MESH':
-                box = layout.box()
-                col = box.column(align=True)
-                col.scale_y=1.1
-                col.label(text=sv_lang['Mesh_section'])
-                row = col.row(align=True)
-                row.scale_y=1.1
-                row.operator("object.nt_edgelength",icon="FONT_DATA", text=sv_lang['EdgeLength'])
-                row.operator("object.nt_areaoflenin",icon="FONT_DATA", text=sv_lang['AreaOfLenin'])
-                row = col.row(align=True)
-                row.operator("object.nt_separator_multi",icon="MOD_BUILD", text=sv_lang['SeparatorM'])
-                row.prop(bpy.context.scene, "NS_vertices_separator", text=sv_lang['verticesNum_separator'])
-                row = col.row(align=True)
-                row.operator("object.nt_boolerator_random",icon="MOD_BOOLEAN", text=sv_lang['BooleratorRandom'])
-                row.operator("object.nt_boolerator_intersection",icon="MOD_BOOLEAN", text=sv_lang['BooleratorIntersection'])
-                row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
+        if main.nt_main_panel:
+            row = box.row(align=True)
+            row.operator("object.nt_compliment_wom", text=sv_lang['ComplimentWoman'])
+            row.operator('wm.url_open', text=sv_lang['ComplimMan']).url = 'http://w-o-s.ru/article/2469'
+            
+            
+            col = box.column(align=True)
+            col.scale_y=1.1
+            col.operator("object.nt_spread_objects",icon="GRID", text=sv_lang['SpreadObjects'])
+            row = col.row(align=True)
+            row.operator("object.nt_cliffordattractors",icon="OUTLINER_OB_CURVE", text=sv_lang['CliffordAttractors'])
+            row = col.row(align=True)
+            row.operator("object.nt_materials_to_object",icon="MATERIAL_DATA", text=sv_lang['MaterialToObjectAll'])
+            row.operator("object.nt_materials_to_data",icon="MATERIAL_DATA", text=sv_lang['MaterialToDataAll'])
                 
-                row = col.row(align=True)
-                row.operator("object.nt_connect2objects",icon="LINKED", text=sv_lang['Connect2Meshes'])
-                row = col.row(align=True)
-                row.scale_y=1.1
-                row.prop(bpy.context.scene, "nt_shift_verts", text=sv_lang['shift_vers'])
-                row.prop(bpy.context.scene, "nt_hook_or_not", text=sv_lang['hook'])
-                row.label(text=sv_lang['maxvers'] + ' ' + str(maxim()))
+            row = col.row(align=True)
+            row.operator("object.nt_name_objects",icon="OUTLINER_OB_FONT", text=sv_lang['ObjectNames'])
+            row.operator("object.nt_vertices_numbers3d",icon="FONT_DATA", text=sv_lang['VerticesNumbers3D'])
+            
+            row = col.row(align=True)
+            row.operator("object.nt_bounding_boxers",icon="SNAP_VOLUME", text=sv_lang['BoundingBox'])
+            row.operator("object.nt_delete_orientation",icon="MANIPUL", text=sv_lang['DeleteOrientation'])
+            
+            row = col.row(align=True)
+            row.scale_y=1.1
+            row.operator("object.nt_delete_nodelayouts",icon="NODE", text=sv_lang['NT_ClearNodesLayouts'])
+            row.prop(bpy.context.scene, "nt_clean_layout_used", text=sv_lang['CleanLayoutUsed'])
+        
+        if bpy.context.selected_objects:
+            box = layout.box()
+            col = box.column(align=True)
+            row = col.row(align=True)
+            row.scale_y=1.1
+            split = row.split(percentage=0.22)
+            if main.nt_additional_panel:
+                split.prop(main, "nt_additional_panel", text=" ", icon='DOWNARROW_HLT')
+                if context.selected_objects[0].type == 'CURVE':
+                    row.label(text=sv_lang['Curves_section'])
+                else:
+                    row.label(text=sv_lang['Mesh_section'])
+            else:
+                split.prop(main, "nt_additional_panel", text=" ", icon='RIGHTARROW')
+                if context.selected_objects[0].type == 'CURVE':
+                    row.label(text=sv_lang['Curves_section'])
+                else:
+                    row.label(text=sv_lang['Mesh_section'])
+            
+            
+            if main.nt_additional_panel:
+                if context.selected_objects:
+                    if context.selected_objects[0].type == 'CURVE':
+                        row = col.row(align=True)
+                        row.operator("object.nt_curv_to_3d",icon="CURVE_DATA", text=sv_lang['CurvesTo3D'])
+                        row.operator("object.nt_curv_to_2d",icon="CURVE_DATA", text=sv_lang['CurvesTo2D'])
+                
+                if context.selected_objects:
+                    if context.selected_objects[0].type == 'MESH':
+                        row = col.row(align=True)
+                        row.scale_y=1.1
+                        row.operator("object.nt_edgelength",icon="FONT_DATA", text=sv_lang['EdgeLength'])
+                        row.operator("object.nt_areaoflenin",icon="FONT_DATA", text=sv_lang['AreaOfLenin'])
+                        row = col.row(align=True)
+                        row.operator("object.nt_separator_multi",icon="MOD_BUILD", text=sv_lang['SeparatorM'])
+                        row.prop(bpy.context.scene, "NS_vertices_separator", text=sv_lang['verticesNum_separator'])
+                        row = col.row(align=True)
+                        row.operator("object.nt_boolerator_random",icon="MOD_BOOLEAN", text=sv_lang['BooleratorRandom'])
+                        row.operator("object.nt_boolerator_intersection",icon="MOD_BOOLEAN", text=sv_lang['BooleratorIntersection'])
+                        row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
+                        
+                        row = col.row(align=True)
+                        row.operator("object.nt_connect2objects",icon="LINKED", text=sv_lang['Connect2Meshes'])
+                        row = col.row(align=True)
+                        row.scale_y=1.1
+                        row.prop(bpy.context.scene, "nt_shift_verts", text=sv_lang['shift_vers'])
+                        row.prop(bpy.context.scene, "nt_hook_or_not", text=sv_lang['hook'])
+                        row.label(text=sv_lang['maxvers'] + ' ' + str(maxim()))
 
 my_classes = [
                 CurvesTo3D, CurvesTo2D, NikitronPanel, ObjectNames,

@@ -1,8 +1,8 @@
 bl_info = {
     "name": "Music Player",
     "author": "edddy <edddy74@live.fr> + nikitron.cc.ua a little",
-    "version": (0, 1, 3),
-    "blender": (2, 70, 0),
+    "version": (0, 1, 4),
+    "blender": (2, 7, 5),
     "location": "View3D > Tool Shelf > Music Player",
     "description": "A Little Music Player for Blender",
     "warning": "",
@@ -326,7 +326,7 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
         layout = self.layout
         row = layout.row(align=True)
         
-        #############
+        ############# left column
         col2 = row.column(align=True)
         col2.scale_x=0.12
         col2.scale_y=1.35
@@ -338,7 +338,7 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
         else:
             col2.operator("sound.pause", text=" ", icon='PAUSE')
         
-        #############
+        ############# central column
         col = row.column(align=False)
         col.scale_y=2.5
         if not context.window_manager.mp_playing:
@@ -347,9 +347,10 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
             col.operator("sound.stop", text="STOP ", icon='FULLSCREEN')
         if bpy.context.window_manager.mp_playlist_names:
             
+            # line - item and time
             plaingindex = 'Song: '+str(context.window_manager.mp_index+1)+'/'+str(len(context.window_manager.mp_playlist))
-            row2 = col.row(align=True)
-            row2.scale_y=0.5
+            row2 = col.row(align=False)
+            row2.scale_y=0.35
             row2.label(text=plaingindex)
             columna=row2.column()
             columna.scale_x=0.35
@@ -359,12 +360,19 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
             else:
                 posa = 0
             columna.label(text = str(posa)+' s')
+            
+            # line - name of song
+            row2 = col.row(align=False)
+            row2.scale_y=0.25
+            if context.window_manager.mp_playsound.position:
+                row2.label(text=bpy.context.window_manager.mp_playlist_names[ \
+                                    context.window_manager.mp_index])
         else:
             row2 = col.row(align=False)
             row2.scale_y=0.5
             row2.label(text='Load music, please')
         
-        #############
+        ############# right column
         col3 = row.column(align=True)
         col3.scale_x=0.12
         col3.scale_y=1.35
@@ -395,12 +403,6 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
         
         
         if bpy.context.window_manager.mp_playlist_names:
-            row = layout.row(align=False)
-            if context.window_manager.mp_playsound.position:
-                row.label(text=bpy.context.window_manager.mp_playlist_names[ \
-                                    context.window_manager.mp_index])
-            
-        
             playlist_print=context.window_manager.mp_playlist_names
             if bpy.context.window_manager.mp_show_names:
                 col = layout.column(align=True)
