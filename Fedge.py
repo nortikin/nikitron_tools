@@ -12,9 +12,9 @@ bl_info = {
 
 import bpy
 
-class D1_select_loose(bpy.types.Operator):
-    ''' Select loose edges '''
-    bl_idname = "object.d1_select_loose_edges"
+class D1_fedge(bpy.types.Operator):
+    ''' Select loose edges - fedge'''
+    bl_idname = "object.fedge"
     bl_label = "Fedge"
     
     def make_edges(self, edges, name):
@@ -71,9 +71,11 @@ class D1_select_loose(bpy.types.Operator):
             for i, v in enumerate(obj.data.vertices):
                 if i not in vertices:
                     v.select = True
+                    selected_edges = True
             bpy.ops.object.editmode_toggle()
-            
-                
+        if not selected_edges:
+            bpy.ops.mesh.select_mode(type='FACE')
+    
     def execute(self, context):
         if bpy.context.mode == 'OBJECT':
             self.select_loose_objt()
@@ -81,7 +83,7 @@ class D1_select_loose(bpy.types.Operator):
             self.select_loose_edit()
         return {'FINISHED'}
 
-class D1_select_loose_panel(bpy.types.Panel):
+class D1_fedge_panel(bpy.types.Panel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
     bl_label = "Fedge"
@@ -91,30 +93,31 @@ class D1_select_loose_panel(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         row = layout.row(align=True)
-        row.operator('object.d1_select_loose_edges', text='select loose')
+        row.operator('object.fedge', text='fedge')
 
 addons_keymap = []
 def register():
-    bpy.utils.register_class(D1_select_loose)
-    bpy.utils.register_class(D1_select_loose_panel)
+    bpy.utils.register_class(D1_fedge)
+    bpy.utils.register_class(D1_fedge_panel)
     
     # short
     wm = bpy.context.window_manager
     km = wm.keyconfigs.addon.keymaps.new(name='Fedge', space_type='VIEW_3D')
-    kmi = km.keymap_items.new('object.d1_select_loose_edges', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
+    kmi = km.keymap_items.new('object.fedge', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
     addons_keymap.append((km, kmi))
     km = wm.keyconfigs.addon.keymaps.new(name='Fedge', space_type='VIEW_3D')
-    kmi = km.keymap_items.new('object.d1_select_loose_edges', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
+    kmi = km.keymap_items.new('object.fedge', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
     addons_keymap.append((km, kmi))
     #new_shortcut.properties.name = 'd1_select_loose_edges'
 
 def unregister():
-    bpy.utils.unregister_class(D1_select_loose)
-    bpy.utils.unregister_class(D1_select_loose_panel)
+    bpy.utils.unregister_class(D1_fedge)
+    bpy.utils.unregister_class(D1_fedge_panel)
     
     for a, b in addons_keymap:
         a.keymap_items.remove(b)
         del a, b
     
 if __name__ == "__main__":
+    unregister()
     register()
