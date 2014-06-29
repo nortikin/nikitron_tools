@@ -34,3 +34,16 @@ Install as usual addon.
     a. Blendernation site RSS by default. 
     b. width adaptive text.
     c. You can add your link.
+
+3. Fedge - Tool for finding loose edges, loose vertices. 
+    a. In object mode on hit between selected left selected onlt objects with loose edges/vertices or
+        if there is no vertices at all
+    b. In edit mode on hit selects loose edges, if no loose edges, select loose vertices, if no loose vertices
+        turn to faces edit mode
+
+4. Выпадениедней - Полностью на русском скрипт, который ищет какие дни выпадают сколько раз в месяц. 
+    а. Скрпт возник как реакция на предположение, будто пять пятниц, суббот и воскресений в месяце 
+        выпадают раз в несколько лет. Но проверка показала, что это очень частое событие.
+    б. Для просчёта надо запустить его как >>> python3.4 выпадениедней.py
+    в. Изменить выпадание(['пятница'], 2017, 5) можно на выпадение(['пятница','суббота','воскресенье'],2016,4)
+        тогда считает до 2016 года дни выпадающие 4 раза в месяце.
