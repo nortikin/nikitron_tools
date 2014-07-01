@@ -13,7 +13,10 @@ bl_info = {
 import bpy
 
 class D1_fedge(bpy.types.Operator):
-    ''' Select loose edges - fedge'''
+    ''' \
+    Select loose parts. edges first, vertices second, non-quad polygons third. \
+    Выделяет потеряные рёбра, потом вершины и грани, каждый раз вызываясь. \
+    '''
     bl_idname = "object.fedge"
     bl_label = "Fedge"
     
@@ -30,6 +33,12 @@ class D1_fedge(bpy.types.Operator):
     
     def select_loose_objt(self):
         objects = bpy.context.selected_objects
+        if not objects:
+            self.report({'ERROR'},\
+                'ALARMA!!!\n'+
+                'Fedge founds no objects selected.\n'+
+                'Select objects or enter edit mode.')
+            return
         bpy.ops.object.select_all(action='DESELECT')
         
         for obj in objects:
@@ -52,15 +61,19 @@ class D1_fedge(bpy.types.Operator):
     
     def select_loose_edit(self):
         obj = bpy.context.active_object
+        # stage one edges
         bpy.ops.mesh.select_mode(type='EDGE')
         bpy.ops.mesh.select_all(action='DESELECT')
         bpy.ops.object.editmode_toggle()
         selected_edges = False
+        # bpy.ops.mesh.select_non_manifolds()
+        # manifolds not work because we not come to next stage 
         for edg in obj.data.edges:
             if edg.is_loose:
                 edg.select = True
                 selected_edges = True
         bpy.ops.object.editmode_toggle()
+        # stage two verts
         if not selected_edges:
             bpy.ops.mesh.select_mode(type='VERT')
             bpy.ops.mesh.select_all(action='DESELECT')
@@ -68,14 +81,29 @@ class D1_fedge(bpy.types.Operator):
             vertices = set()
             self.make_indeces(obj.data.edges, vertices)
             self.make_indeces(obj.data.polygons, vertices)
-            for i, v in enumerate(obj.data.vertices):
+            for i, ver in enumerate(obj.data.vertices):
                 if i not in vertices:
-                    v.select = True
+                    ver.select = True
                     selected_edges = True
             bpy.ops.object.editmode_toggle()
+        #stage three polygons
         if not selected_edges:
             bpy.ops.mesh.select_mode(type='FACE')
-    
+            bpy.ops.mesh.select_all(action='DESELECT')
+            bpy.ops.object.editmode_toggle()
+            # bpy.ops.mesh.select_face_by_sides(number=4, type='NOTEQUAL')
+            # not fit ours needs selectfacesbysides
+            for pol in obj.data.polygons:
+                if len(pol.vertices) != 4:
+                    pol.select = True
+                    selected_edges = True
+            # object mode if mesh clean
+            if selected_edges:
+                bpy.ops.object.editmode_toggle()
+            else:
+                self.report({'INFO'}, \
+                    'FEDGE: Your object is clean')
+
     def execute(self, context):
         if bpy.context.mode == 'OBJECT':
             self.select_loose_objt()
@@ -91,6 +119,10 @@ class D1_fedge_panel(bpy.types.Panel):
     bl_category = '1D'
     
     def draw(self, context):
+        ''' \
+        If not finds loose - returs object mode \
+        Если нет потеряшек - возвращается в объектный режим \
+        '''
         layout = self.layout
         row = layout.row(align=True)
         row.operator('object.fedge', text='fedge')
@@ -102,12 +134,12 @@ def register():
     
     # short
     wm = bpy.context.window_manager
-    km = wm.keyconfigs.addon.keymaps.new(name='Fedge', space_type='VIEW_3D')
-    kmi = km.keymap_items.new('object.fedge', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
+    km = wm.keyconfigs.addon.keymaps.new(name='Fedge', space_type='EMPTY')
+    kmi = km.keymap_items.new('bpy.ops.object.fedge', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
     addons_keymap.append((km, kmi))
-    km = wm.keyconfigs.addon.keymaps.new(name='Fedge', space_type='VIEW_3D')
-    kmi = km.keymap_items.new('object.fedge', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
-    addons_keymap.append((km, kmi))
+    #km = wm.keyconfigs.addon.keymaps.new(name='Fedge', space_type='VIEW_3D')
+    #kmi = km.keymap_items.new('mesh.fedge', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
+    #addons_keymap.append((km, kmi))
     #new_shortcut.properties.name = 'd1_select_loose_edges'
 
 def unregister():
@@ -119,5 +151,5 @@ def unregister():
         del a, b
     
 if __name__ == "__main__":
-    unregister()
     register()
+
