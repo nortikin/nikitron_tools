@@ -55,6 +55,8 @@ class D1_fedge(bpy.types.Operator):
             data = obj.data
             if not len(data.vertices):
                 obj.select = True
+                if obj.name[:9] != '__fedge__':
+                    obj.name = '__fedge__' + obj.name
                 continue
             vertices = set()
             self.make_indeces(data.edges, vertices)
@@ -177,6 +179,7 @@ def unregister():
 
 if __name__ == "__main__":
     register()
+
 
 
 
