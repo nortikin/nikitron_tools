@@ -26,10 +26,18 @@ class D1_fedge(bpy.types.Operator):
                 return True
         return False
     
+    # makes indexes set for compare with vertices 
+    # in object and find difference
     def make_indeces(self, list, vertices):
         for e in list:
             for i in e.vertices:
                 vertices.add(i)
+
+    def make_areas(self, pols):
+        for p in pols:
+            if p.area == 0:
+                return True
+        return False
     
     def select_loose_objt(self):
         objects = bpy.context.selected_objects
@@ -55,12 +63,15 @@ class D1_fedge(bpy.types.Operator):
             if v.difference(vertices):
                 obj.select = True
                 continue
+            if not obj.select:
+                obj.select = self.make_areas(obj.data.polygons)
             lost = self.make_edges(data.edges, obj.name)
             if lost: obj.select = True
                 
     
     def select_loose_edit(self):
         obj = bpy.context.active_object
+        
         # stage one edges
         bpy.ops.mesh.select_mode(type='EDGE')
         bpy.ops.mesh.select_all(action='DESELECT')
@@ -73,6 +84,7 @@ class D1_fedge(bpy.types.Operator):
                 edg.select = True
                 selected_edges = True
         bpy.ops.object.editmode_toggle()
+        
         # stage two verts
         if not selected_edges:
             bpy.ops.mesh.select_mode(type='VERT')
@@ -86,6 +98,18 @@ class D1_fedge(bpy.types.Operator):
                     ver.select = True
                     selected_edges = True
             bpy.ops.object.editmode_toggle()
+            
+        #stage
+        if not selected_edges:
+            bpy.ops.mesh.select_mode(type='FACE')
+            bpy.ops.mesh.select_all(action='DESELECT')
+            bpy.ops.object.editmode_toggle()
+            for pol in obj.data.polygons:
+                if not pol.area:
+                    pol.select = True
+                    selected_edges = True
+            bpy.ops.object.editmode_toggle()
+            
         #stage three polygons
         if not selected_edges:
             bpy.ops.mesh.select_mode(type='FACE')
@@ -127,7 +151,6 @@ class D1_fedge_panel(bpy.types.Panel):
         row = layout.row(align=True)
         row.operator('object.fedge', text='fedge')
 
-addons_keymap = []
 def register():
     bpy.utils.register_class(D1_fedge)
     bpy.utils.register_class(D1_fedge_panel)
@@ -135,7 +158,8 @@ def register():
     # short
     wm = bpy.context.window_manager
     km = wm.keyconfigs.addon.keymaps.new(name='Fedge', space_type='EMPTY')
-    kmi = km.keymap_items.new('bpy.ops.object.fedge', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
+    kmi = km.keymap_items.new('object.fedge', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
+    addons_keymap = []
     addons_keymap.append((km, kmi))
     #km = wm.keyconfigs.addon.keymaps.new(name='Fedge', space_type='VIEW_3D')
     #kmi = km.keymap_items.new('mesh.fedge', 'L', 'PRESS', shift=True, ctrl=True, alt=True)
@@ -143,13 +167,18 @@ def register():
     #new_shortcut.properties.name = 'd1_select_loose_edges'
 
 def unregister():
-    bpy.utils.unregister_class(D1_fedge)
     bpy.utils.unregister_class(D1_fedge_panel)
+    bpy.utils.unregister_class(D1_fedge)
     
     for a, b in addons_keymap:
         a.keymap_items.remove(b)
         del a, b
-    
+    del addons_keymap
+
 if __name__ == "__main__":
     register()
+
+
+
+
 
