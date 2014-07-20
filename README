@@ -36,10 +36,8 @@ Install as usual addon.
     c. You can add your link.
 
 3. Fedge - Tool for finding loose edges, loose vertices. 
-    a. In object mode on hit between selected left selected onlt objects with loose edges/vertices or
-        if there is no vertices at all
-    b. In edit mode on hit selects loose edges, if no loose edges, select loose vertices, if no loose vertices
-        turn to faces edit mode
+    a. In object mode on hit between selected left selected onlt objects with loose edges/vertices or if there is no vertices at all or zero area polygons
+    b. In edit mode on hit selects loose edges, if no loose edges, select loose vertices, if no loose vertices select zero faces, other turn to object mode
 
 4. Выпадениедней - Полностью на русском скрипт, который ищет какие дни выпадают сколько раз в месяц. 
     а. Скрпт возник как реакция на предположение, будто пять пятниц, суббот и воскресений в месяце 
