@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Music Player",
     "author": "edddy <edddy74@live.fr> + nikitron.cc.ua a little",
-    "version": (0, 1, 4),
+    "version": (0, 2, 0),
     "blender": (2, 7, 5),
     "location": "View3D > Tool Shelf > Music Player",
     "description": "A Little Music Player for Blender",
@@ -22,7 +22,6 @@ import random
 #bpy.context.window_manager.mp_playlist.append(itemdefault)
 bpy.types.WindowManager.mp_show_names = bpy.props.BoolProperty(default=False,
             name='show_names', description='show playlist')
-bpy.types.WindowManager.mp_playlist_names = []
 
 phrase=['This is it...','That it...','Next...','You good...','She is well...',
         'То что надо...','They did it...','Push...','Alloha...','Na-na-na...',
@@ -31,9 +30,12 @@ phrase=['This is it...','That it...','Next...','You good...','She is well...',
         'Me gustos...','Круто...','Ещё...','Да...','Это оно...','Расслабон...',
         'Да, детка...',]
 
+class MP_Playlist(bpy.types.PropertyGroup):
+    playlist = bpy.props.StringProperty()
+
 def volume_up(self, context):
     try:
-        context.window_manager.mp_playsound.volume=context.window_manager.mp_volume
+        context.window_manager.mp_playsound.volume = context.window_manager.mp_volume
     except:
         pass
 
@@ -48,9 +50,9 @@ def soundIsOn(context):
             context.window_manager.mp_index = 0
     except:
         pass
-
+# not used
 def playlistprint():
-    pl = bpy.context.window_manager.mp_playlist
+    pl = [a.playlist for a in bpy.context.window_manager.mp_playlist]
     print ('Playlist: \n')
     for i, p in enumerate(pl):
         print (str(i+1)+ '.', p)
@@ -69,7 +71,7 @@ class MP_writePL(bpy.types.Operator):
         path = os.path.join(os.path.dirname(__file__),'MP_playlist')
         file=open(path, 'w+', encoding='utf-8')
         for t in context.window_manager.mp_playlist:
-            file.write(t)
+            file.write(t.playlist)
         file.close()
         return {'FINISHED'}
 
@@ -80,7 +82,7 @@ class MP_openPL(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return (context.window_manager.mp_playlist.__len__())
+        return context.window_manager.mp_playlist.__len__()
 
     def execute(self, context):
         path = os.path.join(os.path.dirname(__file__),'MP_playlist')
@@ -88,7 +90,8 @@ class MP_openPL(bpy.types.Operator):
         text=file.read()
         file.close()
         for t in text:
-            context.window_manager.mp_playlist.append(t)
+            context.window_manager.mp_playlist.add()
+            context.window_manager.mp_playlist[-1].playlist = t
         return {'FINISHED'}
 
 class MP_PlaySIC(bpy.types.Operator):
@@ -116,7 +119,7 @@ class MP_PlaySIC(bpy.types.Operator):
         if check[0]:
             bpy.context.window_manager.mp_index = check[1]
             check[0] = False
-        bpy.types.WindowManager.mp_f = aud.Factory(context.window_manager.mp_playlist[context.window_manager.mp_index])
+        bpy.types.WindowManager.mp_f = aud.Factory(context.window_manager.mp_playlist[context.window_manager.mp_index].playlist)
         bpy.types.WindowManager.mp_playsound = context.window_manager.mp_d.play(context.window_manager.mp_f.fadein(0,3))
         context.window_manager.mp_pause=False
         context.window_manager.mp_playsound.volume=context.window_manager.mp_volume
@@ -124,10 +127,10 @@ class MP_PlaySIC(bpy.types.Operator):
         self.report({'INFO'}, 'Lets rock...')
         context.window_manager.mp_playing = True
         
-        if bpy.context.window_manager.mp_playlist_names:
-            pl = bpy.context.window_manager.mp_playlist_names
+        if bpy.context.window_manager.mp_playlist_names.__len__():
+            pl = [a.playlist for a in bpy.context.window_manager.mp_playlist_names]
         else:
-            pl = bpy.context.window_manager.mp_playlist
+            pl = [a.playlist for a in bpy.context.window_manager.mp_playlist]
         print ("||| %s of %s ||| %s" % (str(context.window_manager.mp_index+1), str(len(context.window_manager.mp_playlist)), str(pl[context.window_manager.mp_index])))
         return {'FINISHED'}
     
@@ -154,11 +157,14 @@ class MP_ImportSIC(bpy.types.Operator):
         print(self.filename)
         if self.files :
             for sfile in self.files:
-                context.window_manager.mp_playlist.append(self.directory + sfile.name)
-                context.window_manager.mp_playlist_names.append(sfile.name)
+                context.window_manager.mp_playlist.add()
+                context.window_manager.mp_playlist[-1].playlist = os.path.join(self.directory + sfile.name)
+                context.window_manager.mp_playlist_names.add()
+                context.window_manager.mp_playlist_names[-1].playlist = sfile.name
             playlistprint()
         else:
-            context.window_manager.mp_playlist.append(self.filepath)
+            context.window_manager.mp_playlist.add()
+            context.window_manager.mp_playlist[-1].playlist = self.filepath
         self.report({'INFO'}, 'Do it again...')
         return {'FINISHED'}
 
@@ -178,7 +184,8 @@ class MP_ImportM3U(bpy.types.Operator, ImportHelper):
         f = open(self.filepath)
         for l in f :
             if not l[0]=='#':
-                context.window_manager.mp_playlist.append(l[0:-1])
+                context.window_manager.mp_playlist.add()
+                context.window_manager.mp_playlist[-1].playlist = l[0:-1]
         f.close()
         del f
         playlistprint()
@@ -214,10 +221,8 @@ class MP_DelList(bpy.types.Operator):
         return (context.window_manager.mp_playlist.__len__())
 
     def execute(self, context):
-        
-        bpy.types.WindowManager.mp_playlist=[]
-        bpy.types.WindowManager.mp_playlist_names=[]
-        bpy.types.WindowManager.mp_playlist_print=[]
+        context.window_manager.mp_playlist.clear()
+        context.window_manager.mp_playlist_names.clear()
         self.report({'INFO'}, 'Fresh...')
         
         return {'FINISHED'}
@@ -230,7 +235,8 @@ class MP_NextSIC(bpy.types.Operator):
     @classmethod
     def poll(cls, context):
         try:
-            return (context.window_manager.mp_playsound.status and context.window_manager.mp_index+1 < context.window_manager.mp_playlist.__len__())
+            return (context.window_manager.mp_playsound.status and \
+                context.window_manager.mp_index+1 < context.window_manager.mp_playlist.__len__())
         except:
             return 0
 
@@ -297,6 +303,13 @@ class MP_SetPosSIC(bpy.types.Operator):
     bl_idname = "sound.setpos"
     bl_label = "set position"
 
+    @classmethod
+    def poll(cls, context):
+        try:
+            return (context.window_manager.mp_playsound.status)
+        except:
+            return 0
+
     def execute(self, context):
         context.window_manager.mp_playsound.position = context.window_manager.mp_MusHandle
         return {'FINISHED'} 
@@ -308,7 +321,7 @@ class MP_PrintPlaylist(bpy.types.Operator):
     bl_label = "print playlist"
 
     def execute(self, context):
-        pl = context.window_manager.mp_playlist
+        pl = [a.playlist for a in context.window_manager.mp_playlist]
         print ('Playlist: \n')
         for i, p in enumerate(pl):
             print (str(i+1)+ '.', p)
@@ -320,7 +333,7 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
     bl_region_type = 'TOOLS'
     bl_label = "Music Player"
     bl_options = {'DEFAULT_CLOSED'}
-    bl_category = 'NT'
+    bl_category = 'SV'
     
     def draw(self, context):
         layout = self.layout
@@ -345,7 +358,7 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
             col.operator("sound.play", text="PLAY ", icon='PLAY')
         else:
             col.operator("sound.stop", text="STOP ", icon='FULLSCREEN')
-        if bpy.context.window_manager.mp_playlist_names:
+        if bpy.context.window_manager.mp_playlist_names.__len__():
             
             # line - item and time
             plaingindex = 'Song: '+str(context.window_manager.mp_index+1)+'/'+str(len(context.window_manager.mp_playlist))
@@ -364,9 +377,12 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
             # line - name of song
             row2 = col.row(align=False)
             row2.scale_y=0.25
-            if context.window_manager.mp_playsound.position:
-                row2.label(text=bpy.context.window_manager.mp_playlist_names[ \
-                                    context.window_manager.mp_index])
+            if hasattr(bpy.types.WindowManager, 'mp_playsound'):
+                if hasattr(context.window_manager.mp_playsound, 'position'):
+                    row2.label(text=bpy.context.window_manager.mp_playlist_names[ \
+                        context.window_manager.mp_index].playlist)
+                else:
+                    row2.label(text='nothing here')
         else:
             row2 = col.row(align=False)
             row2.scale_y=0.5
@@ -402,8 +418,8 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
         
         
         
-        if bpy.context.window_manager.mp_playlist_names:
-            playlist_print=context.window_manager.mp_playlist_names
+        if bpy.context.window_manager.mp_playlist_names.__len__():
+            playlist_print = [a.playlist for a in context.window_manager.mp_playlist_names]
             if bpy.context.window_manager.mp_show_names:
                 col = layout.column(align=True)
                 i=0
@@ -433,20 +449,22 @@ classes = [MP_PlaySIC,
             VIEW3D_PT_Musicplayer,
             MP_PrintPlaylist,
             MP_openPL,
-            MP_writePL]
+            MP_writePL,
+            MP_Playlist]
 
 
 # registering 
 def register():
     for c in classes:
         bpy.utils.register_class(c)
-    bpy.types.WindowManager.mp_playlist=[]
     bpy.types.WindowManager.mp_index=bpy.props.IntProperty()
     bpy.types.WindowManager.mp_pause = bpy.props.BoolProperty(False)
     bpy.types.WindowManager.mp_playing = bpy.props.BoolProperty(False)
     bpy.types.WindowManager.mp_volume = bpy.props.FloatProperty(name="Volume",default=1.0, min=0.0, max=1.0, update=volume_up)
     bpy.types.WindowManager.mp_d = aud.device()
     bpy.types.WindowManager.mp_MusHandle = bpy.props.FloatProperty(name="MusHandle",default=0.0, min=0.0, max=300)
+    bpy.types.WindowManager.mp_playlist = bpy.props.CollectionProperty(type=MP_Playlist)
+    bpy.types.WindowManager.mp_playlist_names = bpy.props.CollectionProperty(type=MP_Playlist)
 
 
 # unregistering 
@@ -473,3 +491,6 @@ if __name__ == "__main__":
     #unregister()
     register()
     
+
+
+
