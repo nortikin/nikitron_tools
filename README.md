@@ -1,7 +1,7 @@
-nikitron_tools
+##nikitron_tools
 ==============
 
-Install as usual addon.
+ Install as usual addon.
 
 0. Nikitron tools - tools for everyday use.
     a. Converts from 2d curves to 3d, bring them to floor, bring extrusion to 0, so they came wireframe.
