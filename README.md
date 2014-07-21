@@ -1,10 +1,10 @@
 ##Разное
-==============
+______________
 
  Install as usual addon.
 
 ###Nikitron tools
-  ==tools for everyday use.==    
+  __tools for everyday use.__    
     a. Converts from 2d curves to 3d, bring them to floor, bring extrusion to 0, so they came wireframe.
     b. Spreads objects (flat curves initially) to layout, so you can export them to dxf for work in autocad.
     c. Names objects by 3Dtext.
@@ -26,7 +26,7 @@
     q. http://blenderaddonlist.blogspot.com/2013/11/addon-nikitron-tools.html
 
 ###Music player 
-  ==made by edddy and some developed by nikitron. Situated in 3D toolshelf in NT tab.==    
+  __made by edddy and some developed by nikitron. Situated in 3D toolshelf in NT tab.__    
     a. play music and sound from videofiles.
     b. jump to defined seconds (no current sound position).
     c. you see now playlist and choose sound to play.
@@ -34,18 +34,18 @@
     https://cloud.githubusercontent.com/assets/5783432/2811334/042e8b64-ce16-11e3-8a18-3d1846af8e21.png
 
 ###RSS feed reader 
-  ==made by Nikolay Fomichev. It is 2.5 blender addon, old one. Situated in World properties==    
+  __made by Nikolay Fomichev. It is 2.5 blender addon, old one. Situated in World properties__    
     a. Blendernation site RSS by default. 
     b. width adaptive text.
     c. You can add your link.
 
 ###Fedge
-  ==Tool for finding loose edges, loose vertices.==     
+  __Tool for finding loose edges, loose vertices.__     
     a. In object mode on hit between selected left selected onlt objects with loose edges/vertices or if there is no vertices at all or zero area polygons
     b. In edit mode on hit selects loose edges, if no loose edges, select loose vertices, if no loose vertices select zero faces, other turn to object mode
 
 ###Выпадениедней
-  ==Полностью на русском скрипт, который ищет какие дни выпадают сколько раз в месяц.==     
+  __Полностью на русском скрипт, который ищет какие дни выпадают сколько раз в месяц.__     
     а. Скрпт возник как реакция на предположение, будто пять пятниц, суббот и воскресений в месяце 
         выпадают раз в несколько лет. Но проверка показала, что это очень частое событие.
     б. Для просчёта надо запустить его как >>> python3.4 выпадениедней.py
