@@ -712,19 +712,25 @@ class MaterialToDataAll (bpy.types.Operator):
 
 
 class NT_ClearNodesLayouts (bpy.types.Operator):
-    """Очистить раскладки узлов (сверчок, узлы Атома)"""      
+    """Очистить раскладки узлов (Сверчок, Блендграф) работает когда рядом нет редактора узлов \
+    Clear node layouts, when no nodes editor opened"""      
     bl_idname = "object.nt_delete_nodelayouts"
     bl_label = "УД_РАСКЛ"
     bl_options = {'REGISTER', 'UNDO'} 
+    
+    
+    @classmethod
+    def poll(cls, self):
+        for area in bpy.context.window.screen.areas:
+            if area.type == 'NODE_EDITOR':
+                return False
+        return True
     
     do_clear = bpy.props.BoolProperty(default=False, name='even used', description='remove even if layout has one user (not fake user)')
     
     def execute(self, context):
         self.do_clear = context.scene.nt_clean_layout_used
         trees = bpy.data.node_groups
-        for area in bpy.context.window.screen.areas:
-            if area.type == 'NODE_EDITOR':
-                self.do_clear = False
         for T in trees:
             if T.bl_rna.name in ['Shader Node Tree']:
                 continue
@@ -741,7 +747,8 @@ class NT_ClearNodesLayouts (bpy.types.Operator):
 
 
 class DeleteOrientation (bpy.types.Operator):
-    """Удалить ориентации (alt+space)"""      
+    """Удалить ориентации (alt+space) \
+    delete orientations"""      
     bl_idname = "object.nt_delete_orientation"
     bl_label = "УД_ОРИЕНТ"
     bl_options = {'REGISTER', 'UNDO'}
@@ -1000,6 +1007,7 @@ class SeparatorM (bpy.types.Operator):
     def execute(self, context):
         self.separate()
         return {'FINISHED'}
+    
     def separate(self):
         objects = bpy.context.selected_objects
         goon = False
@@ -1014,9 +1022,12 @@ class SeparatorM (bpy.types.Operator):
             bpy.ops.object.select_all(action='DESELECT')
             bpy.data.objects[name].select = True
             bpy.context.scene.objects.active = bpy.data.objects[name]
+            #bpy.ops.object.mode_set(mode='EDIT', toggle=False)
+            #bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
             bpy.ops.object.mode_set(mode='EDIT', toggle=False)
             bpy.ops.mesh.select_all(action='DESELECT')
-            bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
+            bpy.data.objects[name].data.vertices[0].select = True
+            bpy.ops.mesh.select_linked(limit=True)
             if lenth == vert_limit1:
                 print ('объект ' + str(name) + ' готов')
             elif lenth == 0:
@@ -1156,7 +1167,7 @@ class NikitronPanel(bpy.types.Panel):
     bl_label = 'ИНСТРУМЕНТЫ НТ'
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
-    bl_category = 'NT'
+    bl_category = 'SV'
     bl_options = {'DEFAULT_CLOSED'}
     #bl_context = 'objectmode'
     #bl_options = {'HIDE_HEADER'}
@@ -1253,13 +1264,13 @@ class NikitronPanel(bpy.types.Panel):
                         row.scale_y=1.1
                         row.operator("object.nt_edgelength",icon="FONT_DATA", text=sv_lang['EdgeLength'])
                         row.operator("object.nt_areaoflenin",icon="FONT_DATA", text=sv_lang['AreaOfLenin'])
-                        row = col.row(align=True)
-                        row.operator("object.nt_separator_multi",icon="MOD_BUILD", text=sv_lang['SeparatorM'])
-                        row.prop(bpy.context.scene, "NS_vertices_separator", text=sv_lang['verticesNum_separator'])
-                        row = col.row(align=True)
-                        row.operator("object.nt_boolerator_random",icon="MOD_BOOLEAN", text=sv_lang['BooleratorRandom'])
-                        row.operator("object.nt_boolerator_intersection",icon="MOD_BOOLEAN", text=sv_lang['BooleratorIntersection'])
-                        row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
+                        #row = col.row(align=True)
+                        #row.operator("object.nt_separator_multi",icon="MOD_BUILD", text=sv_lang['SeparatorM'])
+                        #row.prop(bpy.context.scene, "NS_vertices_separator", text=sv_lang['verticesNum_separator'])
+                        #row = col.row(align=True)
+                        #row.operator("object.nt_boolerator_random",icon="MOD_BOOLEAN", text=sv_lang['BooleratorRandom'])
+                        #row.operator("object.nt_boolerator_intersection",icon="MOD_BOOLEAN", text=sv_lang['BooleratorIntersection'])
+                        #row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
                         
                         row = col.row(align=True)
                         row.operator("object.nt_connect2objects",icon="LINKED", text=sv_lang['Connect2Meshes'])
@@ -1299,10 +1310,14 @@ def register():
         
 
 def unregister():
-    a = rversed(my_classes)
+    a = reversed(my_classes)
     for clas in a:
         bpy.utils.unregister_class(clas)
     del a
             
 if __name__ == "__main__":
     register()
+
+
+
+
