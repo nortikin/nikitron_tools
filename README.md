@@ -1,9 +1,10 @@
-##nikitron_tools
+##Разное
 ==============
 
  Install as usual addon.
 
-0. Nikitron tools - tools for everyday use.
+###Nikitron tools
+  tools for everyday use.
     a. Converts from 2d curves to 3d, bring them to floor, bring extrusion to 0, so they came wireframe.
     b. Spreads objects (flat curves initially) to layout, so you can export them to dxf for work in autocad.
     c. Names objects by 3Dtext.
@@ -24,23 +25,27 @@
     p. Boolean many objects at once by three ways.
     q. http://blenderaddonlist.blogspot.com/2013/11/addon-nikitron-tools.html
 
-1. Music player - made by edddy and some developed by nikitron. Situated in 3D toolshelf in NT tab.
+###Music player 
+  made by edddy and some developed by nikitron. Situated in 3D toolshelf in NT tab.
     a. play music and sound from videofiles.
     b. jump to defined seconds (no current sound position).
     c. you see now playlist and choose sound to play.
     d. http://blenderaddonlist.blogspot.com/2013/12/addon-music-player.html
     https://cloud.githubusercontent.com/assets/5783432/2811334/042e8b64-ce16-11e3-8a18-3d1846af8e21.png
 
-2. RSS feed reader - made by Nikolay Fomichev. It is 2.5 blender addon, old one. Situated in World properties
+###RSS feed reader 
+  made by Nikolay Fomichev. It is 2.5 blender addon, old one. Situated in World properties
     a. Blendernation site RSS by default. 
     b. width adaptive text.
     c. You can add your link.
 
-3. Fedge - Tool for finding loose edges, loose vertices. 
+###Fedge
+  Tool for finding loose edges, loose vertices. 
     a. In object mode on hit between selected left selected onlt objects with loose edges/vertices or if there is no vertices at all or zero area polygons
     b. In edit mode on hit selects loose edges, if no loose edges, select loose vertices, if no loose vertices select zero faces, other turn to object mode
 
-4. Выпадениедней - Полностью на русском скрипт, который ищет какие дни выпадают сколько раз в месяц. 
+###Выпадениедней
+  Полностью на русском скрипт, который ищет какие дни выпадают сколько раз в месяц. 
     а. Скрпт возник как реакция на предположение, будто пять пятниц, суббот и воскресений в месяце 
         выпадают раз в несколько лет. Но проверка показала, что это очень частое событие.
     б. Для просчёта надо запустить его как >>> python3.4 выпадениедней.py
