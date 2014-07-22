@@ -7,7 +7,7 @@ ______________
   __tools for everyday use. in toolbar SV__    
   __Праздник, который всегда со мной.__    
     a. Converts from 2d curves to 3d, bring them to floor, bring extrusion to 0, so they came wireframe.    
-    а. Обратить 3М кривые в 3М и обратно со всеми вытекающими
+    а. Обратить 2М кривые в 3М и обратно со всеми вытекающими
     b. Spreads objects (flat curves initially) to layout, so you can export them to dxf for work in autocad.    
     б. Расположить объекты по полу, чтобы хоть как-то упорядочить их перед выводом в чертёж
     c. Names objects by 3Dtext.    
