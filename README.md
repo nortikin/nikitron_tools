@@ -17,8 +17,7 @@ ______________
     f. Links all selected object's materials slots to object or data.    
     д. Все материалы выделенных объектов становятся от данных или от объектов, удобно когда часть сцены надо сделать в одном материале, а остальное время оно разноцветное    
     
-    g. CONNECT TWO OBJECTS with edges! It is main feature. So, he connects both object's vertices with     
-        custom shift and at the end hooks them to initial objects!    
+    g. CONNECT TWO OBJECTS with edges! It is main feature. So, he connects both object's vertices with custom shift and at the end hooks them to initial objects!    
     
     е. СОЕДИНИТЬ ДВА ОБЪЕКТА рёбрами. Основной инструмент этого набора. Соединяет и крючкует, хукает то есть. И двигая и масштабируя объекты, вы меняете топологию рёбер.     
         
