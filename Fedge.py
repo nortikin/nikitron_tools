@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Fedge",
     "author": "nikitron.cc.ua",
-    "version": (0, 1, 0),
+    "version": (0, 1, 2),
     "blender": (2, 7, 5),
     "location": "View3D > Tool Shelf > 1D > select loose",
     "description": "selects objects and edges that lost",
@@ -11,6 +11,8 @@ bl_info = {
     "category": "Object"}
 
 import bpy
+
+WRONG_AREA = 0.02
 
 class D1_fedge(bpy.types.Operator):
     ''' \
@@ -35,7 +37,7 @@ class D1_fedge(bpy.types.Operator):
 
     def make_areas(self, pols):
         for p in pols:
-            if p.area == 0:
+            if p.area <= WRONG_AREA:
                 return True
         return False
     
@@ -107,7 +109,7 @@ class D1_fedge(bpy.types.Operator):
             bpy.ops.mesh.select_all(action='DESELECT')
             bpy.ops.object.editmode_toggle()
             for pol in obj.data.polygons:
-                if not pol.area:
+                if pol.area <= WRONG_AREA:
                     pol.select = True
                     selected_edges = True
             bpy.ops.object.editmode_toggle()
@@ -179,9 +181,3 @@ def unregister():
 
 if __name__ == "__main__":
     register()
-
-
-
-
-
-
