@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012 Городецкий
 # Licensed GPL 3.0
-# http://nikitronn.narod.ru/
+# http://nikitron.cc.ua/
 # Python 2.7
 
 #Это программа-дешифратор типа пунто-свитчера, только не потоковая,
@@ -55,7 +55,7 @@ def decode(filename, doprint):
 
 def main():
     if len(sys.argv) != 2:
-        print '''использование: python ./trans.py [входной_файл]/[-p]
+        print '''использование: trans [входной_файл]/[-p]
 -p означает ввод текста вручную или копипаст'''
         sys.exit(1)
     filename = sys.argv[1]

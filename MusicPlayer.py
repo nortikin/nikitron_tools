@@ -378,11 +378,11 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
             row2 = col.row(align=False)
             row2.scale_y=0.25
             if hasattr(bpy.types.WindowManager, 'mp_playsound'):
-                if hasattr(context.window_manager.mp_playsound, 'position'):
+                if hasattr(context.window_manager.mp_playsound, 'position') and \
+                        context.window_manager.mp_index < \
+                        context.scene.mp_playlist_names.__len__():
                     row2.label(text=bpy.context.scene.mp_playlist_names[ \
-                        context.window_manager.mp_index].playlist)
-                else:
-                    row2.label(text='nothing here')
+                            context.window_manager.mp_index].playlist)
         else:
             row2 = col.row(align=False)
             row2.scale_y=0.5
@@ -428,7 +428,7 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
                     if i == (context.window_manager.mp_index+1):
                         col.operator("sound.play", text='> '+str(i)+' | '+str(p)).item_play=str([True, i-1])
                     else:
-                        col.operator("sound.play", text=str(i)+' | '+str(p)).item_play=str([True, i-1])
+                        col.operator("sound.play", text='    '+str(i)+' | '+str(p)).item_play=str([True, i-1])
             #a = context.window_manager
             #a.progress_begin(0,1)
             #a.progress_update(0.5)
@@ -462,7 +462,7 @@ def register():
     bpy.types.WindowManager.mp_playing = bpy.props.BoolProperty(False)
     bpy.types.Scene.mp_volume = bpy.props.FloatProperty(name="Volume",default=1.0, min=0.0, max=1.0, update=volume_up)
     bpy.types.WindowManager.mp_d = aud.device()
-    bpy.types.WindowManager.mp_MusHandle = bpy.props.FloatProperty(name="MusHandle",default=0.0, min=0.0, max=300)
+    bpy.types.WindowManager.mp_MusHandle = bpy.props.FloatProperty(name="MusHandle",default=0.0, min=0.0, max=600)
     bpy.types.Scene.mp_playlist = bpy.props.CollectionProperty(type=MP_Playlist)
     bpy.types.Scene.mp_playlist_names = bpy.props.CollectionProperty(type=MP_Playlist)
 
@@ -492,6 +492,9 @@ if __name__ == "__main__":
     #unregister()
     register()
     
+
+
+
 
 
 
