@@ -17,6 +17,7 @@ import urllib.error as err
 import urllib.request as req
 from xml.etree import ElementTree as ET
 import re
+import pprint
 
 bpy.types.WindowManager.RSSadress = bpy.props.StringProperty(name='', default='http://feeds.feedburner.com/BlenderNation')
 
@@ -41,45 +42,41 @@ class RssPanel(bpy.types.Panel):
     
     #adress = bpy.context.window_manager.RSSadress[1]['default']
     tree = getRss(bpy.context.window_manager.RSSadress)
-    
+    def init(self, context):
+        pass
+        
     def draw(self, context):
+        width1=100
+        for i in context.screen.areas:
+            if i.type == 'PROPERTIES':
+                width1 = (i.width-70)//4.5
         layout = self.layout
         row = layout.row()
         row.scale_y=2
         row.prop(context.window_manager, "RSSadress")
         row.operator('world.reloadrss', text='Reload')
-        width=100
-        for i in context.screen.areas:
-            if i.type == 'PROPERTIES':
-                width = i.width
-        if self.tree:  
+        def RSS_read():
             for el in self.tree.getchildren():
                 for i in el.findall('item'):
                     box = layout.box()
                     title = i.find('title')
                     link = i.find('link')
                     description = i.find('description')
+                    dtext_ = re.split('<img', description.text)[:-1]
                     col = box.column()
                     col.scale_y=1.5
                     col.operator('wm.url_open', text=title.text).url = link.text
-                    dtext_ = re.split('<br/>',description.text)[0]
-                    dtext=''
-                    for a in re.split('&#.....', dtext_):
-                        dtext += a
-                    labeltext = []
-                    string = ''
-                    k=0
-                    for j in dtext:
-                        if k == width//7:
-                            k=0
-                            labeltext.append(string)
-                            string = ''
-                        k+=1
-                        string+=j
+                    # dtext_ = re.split('<br/>',description.text)[0]
+                    print(width1)
+                    dtext = pprint.pformat(dtext_, width=width1)
                     col = box.column()
                     col.scale_y=0.6
-                    for t in labeltext:
-                        col.label(t)
+                    for a in dtext.splitlines():
+                        col.label(a)
+        if self.tree:
+            if bpy.context.window_manager.RSSadress == \
+                    'http://feeds.feedburner.com/BlenderNation':
+                RSS_read()
         else:
             layout.label('No connection to Internet!')
 
@@ -105,3 +102,4 @@ def unregister():
  
 if __name__ == "__main__":
     register()
+
