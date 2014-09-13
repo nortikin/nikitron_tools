@@ -36,7 +36,7 @@ my_str_classes = [
                 'CliffordAttractors', 'NT_ClearNodesLayouts',
                 'NT_language', 'ComplimMan', 'Title_section', 'CleanLayoutUsed',
                 'Curves_section', 'verticesNum_separator', 'shift_vers',
-                'hook', 'maxvers', 'Mesh_section', 'toolsetNT',
+                'hook', 'maxvers', 'Mesh_section', 'toolsetNT', 'NTTextMeshWeld'
                 ]
                 
 my_var_names = [] # extend with veriables names
@@ -54,6 +54,7 @@ ru_dict = [
                 'english', 'Мужской', 'ГЛАВНЫЕ', 'и активные',
                 'КРИВЫЕ', 'Верш', 'Сдвиг',
                 'Крюк', 'МаксВер', 'СЕТКА', 'ИНСТРУМЕНТЫ НТ',
+                'ТЕКСТ+СЕТКА',
                 ]
                 
 en_dict = [
@@ -67,6 +68,7 @@ en_dict = [
                 'Русский', 'For men', 'MAIN', 'And active',
                 'CURVES', 'Vers', 'Shift',
                 'Hook', 'MaxVers', 'MESH', 'TOOLSET NT',
+                'TEXT+MESH',
                 ]
                 
 #bpy.types.Scene.nt_language = bpy.props.BoolProperty(
@@ -140,6 +142,38 @@ lang_dict_ru = nt_make_lang(my_str_classes, ru_dict)
 lang_dict_en = nt_make_lang(my_str_classes, en_dict)
 vert_max = 0
 nt_lang_panel()
+
+class NTTextMeshWeld(bpy.types.Operator):
+    """Соединение текстов и сеток если матрицы совпадают"""
+    bl_idname = "object.nt_text_mesh_weld"
+    bl_label = 'ТЕКСТ_И_СЕТКА_ДРУЗЬЯ'
+    bl_options = {'REGISTER', 'UNDO'}
+    
+    length = bpy.props.StringProperty(name='длина', default='')
+    
+    def execute(self, context):
+        objs = bpy.context.selected_objects
+        bpy.ops.object.select_all(action='TOGGLE')
+        for i in objs:
+            if i.type == 'FONT':
+                i.select = True
+                bpy.context.scene.objects.active = bpy.data.objects[i.name]
+                bpy.ops.object.convert(target='MESH')
+                bpy.ops.object.editmode_toggle()
+                bpy.ops.mesh.select_mode(use_extend=False, use_expand=False, type='VERT')
+                bpy.ops.mesh.select_all(action='SELECT')
+                bpy.ops.mesh.remove_doubles(threshold=0.005)
+                bpy.ops.object.editmode_toggle()
+                for o in objs:
+                    if i != o and o.matrix_world.translation == i.matrix_world.translation:
+                        # objmesh = bpy.data.objects['Sv_'+re.match(r'(\d+)', i.name)[0]]
+                        o.select = True
+                        bpy.ops.object.join()
+                bpy.ops.object.editmode_toggle()
+                bpy.ops.mesh.remove_doubles(threshold=0.0005)
+                bpy.ops.object.editmode_toggle()
+                bpy.ops.object.select_all(action='TOGGLE')
+        return {'FINISHED'}
 
 class EdgeLength(bpy.types.Operator):
     """Длина рёбер объектов"""
@@ -1258,7 +1292,6 @@ class NikitronPanel(bpy.types.Panel):
                         row.operator("object.nt_curv_to_3d",icon="CURVE_DATA", text=sv_lang['CurvesTo3D'])
                         row.operator("object.nt_curv_to_2d",icon="CURVE_DATA", text=sv_lang['CurvesTo2D'])
                 
-                if context.selected_objects:
                     if context.selected_objects[0].type == 'MESH':
                         row = col.row(align=True)
                         row.scale_y=1.1
@@ -1272,6 +1305,8 @@ class NikitronPanel(bpy.types.Panel):
                         #row.operator("object.nt_boolerator_intersection",icon="MOD_BOOLEAN", text=sv_lang['BooleratorIntersection'])
                         #row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
                         
+                        row = col.row(align=True)
+                        row.operator("object.nt_text_mesh_weld",icon="FULLSCREEN_EXIT", text=sv_lang['NTTextMeshWeld'])
                         row = col.row(align=True)
                         row.operator("object.nt_connect2objects",icon="LINKED", text=sv_lang['Connect2Meshes'])
                         row = col.row(align=True)
@@ -1288,7 +1323,7 @@ my_classes = [
                 BooleratorTranslation, BooleratorIntersection,
                 ComplimentWoman, AreaOfLenin, EdgeLength,
                 CliffordAttractors, NT_ClearNodesLayouts,
-                NT_language,
+                NT_language, NTTextMeshWeld,
                 ]
 
 
@@ -1317,6 +1352,7 @@ def unregister():
             
 if __name__ == "__main__":
     register()
+
 
 
 
