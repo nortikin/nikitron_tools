@@ -9,12 +9,13 @@ ______________
     b. Spreads objects (flat curves initially) to layout, so you can export them to dxf for work in autocad.    
     c. Names objects by 3Dtext.    
     d. INndexes object's vertices by 3Dtext.   
-    f. Links all selected object's materials slots to object or data.    
-    g. CONNECT TWO OBJECTS with edges! It is main feature. So, he connects both object's vertices with custom shift and at the end hooks them to initial objects!    
-    h. Make compliment in Russian.    
-    i. Makes super curves with Clifford Attractors - mathematically sin/cos definitions for cool curves.  
-    j. Make bound boxes of objects.      
-    k. Delete orientations (if you made much of them and watn make some order in scene).    
+    f. Links all selected object's materials slots to object or data.   
+    g. Join text and mesh if matrix location equal    
+    h. CONNECT TWO OBJECTS with edges! It is main feature. So, he connects both object's vertices with custom shift and at the end hooks them to initial objects!    
+    i. Make compliment in Russian.    
+    j. Makes super curves with Clifford Attractors - mathematically sin/cos definitions for cool curves.  
+    k. Make bound boxes of objects.      
+    l. Delete orientations (if you made much of them and watn make some order in scene).    
     m. Counts edges length.    
     n. Counts Area of object's polygons.    
     q. http://blenderaddonlist.blogspot.com/2013/11/addon-nikitron-tools.html    
@@ -25,14 +26,15 @@ ______________
     в. Имена объектов в 3М   
     г. Индексы вершин в 3М      
     д. Все материалы выделенных объектов становятся от данных или от объектов, удобно когда часть сцены надо сделать в одном материале, а остальное время оно разноцветное    
-    е. СОЕДИНИТЬ ДВА ОБЪЕКТА рёбрами. Основной инструмент этого набора. Соединяет и крючкует, хукает то есть. И двигая и масштабируя объекты, вы меняете топологию рёбер.     
-    ё. Комплимент   
-    ж. Супер-кривая. синусо-косинусовая. В сверчке можно узлом генератора формулы делать такое же.  
-    з. Габаритный куб   
-    и. Удалить все ориентации которые вы ctrl+alt+space   
-    й. Длина рёбер, можно скопипастить   
-    к. Площадь - можно скопипастить    
-    q. http://blenderaddonlist.blogspot.com/2013/11/addon-nikitron-tools.html    
+    е. Соединить текст и сетку если положение объектов совпадает (прикладная задача в моём рабочем процессе)
+    ё. СОЕДИНИТЬ ДВА ОБЪЕКТА рёбрами. Основной инструмент этого набора. Соединяет и крючкует, хукает то есть. И двигая и масштабируя объекты, вы меняете топологию рёбер.     
+    ж. Комплимент   
+    з. Супер-кривая. синусо-косинусовая. В сверчке можно узлом генератора формулы делать такое же.  
+    и. Габаритный куб   
+    й. Удалить все ориентации которые вы ctrl+alt+space   
+    к. Длина рёбер, можно скопипастить   
+    л. Площадь - можно скопипастить    
+    м. http://blenderaddonlist.blogspot.com/2013/11/addon-nikitron-tools.html    
 
 ###Music player 
   __made by edddy and some developed by nikitron. Situated in 3D toolshelf in SV tab.__    
