@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Music Player",
     "author": "edddy <edddy74@live.fr> + nikitron.cc.ua a little",
-    "version": (0, 2, 0),
+    "version": (0, 2, 2),
     "blender": (2, 7, 5),
     "location": "View3D > Tool Shelf > Music Player",
     "description": "A Little Music Player for Blender",
@@ -92,6 +92,31 @@ class MP_openPL(bpy.types.Operator):
         for t in text:
             context.scene.mp_playlist.add()
             context.scene.mp_playlist[-1].playlist = t
+        return {'FINISHED'}
+
+class MP_DelComposition(bpy.types.Operator):
+    '''delete composition'''
+    bl_idname = "sound.delcompos"
+    bl_label = "Delete composition"
+    
+    item_delete = bpy.props.IntProperty(name="item", default=0)
+    
+    @classmethod
+    def poll(cls, context):
+        if context.scene.mp_playlist.__len__():
+            return 1
+        else:
+            return 0
+
+    def execute(self, context):
+        context.scene.mp_playlist.remove(self.item_delete)
+        context.scene.mp_playlist_names.remove(self.item_delete)
+        if context.window_manager.mp_index > 0 and \
+                self.item_delete < context.window_manager.mp_index:
+            context.window_manager.mp_index -= 1
+        elif self.item_delete == context.window_manager.mp_index and \
+                context.window_manager.mp_playsound.status:
+            bpy.ops.sound.stop()
         return {'FINISHED'}
 
 class MP_PlaySIC(bpy.types.Operator):
@@ -425,10 +450,13 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
                 i=0
                 for p in playlist_print:
                     i+=1
+                    row = col.row(align=True)
                     if i == (context.window_manager.mp_index+1):
-                        col.operator("sound.play", text='> '+str(i)+' | '+str(p)).item_play=str([True, i-1])
+                        row.operator("sound.play", text='> '+str(i)+' | '+str(p)).item_play=str([True, i-1])
                     else:
-                        col.operator("sound.play", text='    '+str(i)+' | '+str(p)).item_play=str([True, i-1])
+                        row.operator("sound.play", text='    '+str(i)+' | '+str(p)).item_play=str([True, i-1])
+                    delco = row.operator('sound.delcompos', text='', icon='X')
+                    delco.item_delete = i-1
             #a = context.window_manager
             #a.progress_begin(0,1)
             #a.progress_update(0.5)
@@ -450,7 +478,8 @@ classes = [MP_PlaySIC,
             MP_PrintPlaylist,
             MP_openPL,
             MP_writePL,
-            MP_Playlist]
+            MP_Playlist,
+            MP_DelComposition]
 
 
 # registering 
@@ -492,6 +521,8 @@ if __name__ == "__main__":
     #unregister()
     register()
     
+
+
 
 
 
