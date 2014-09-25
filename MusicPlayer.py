@@ -464,7 +464,7 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
                             context.window_manager.mp_index].playlist)
         else:
             row_nomus = col.row(align=False)
-            row_nomus.scale_y=0.25
+            row_nomus.scale_y=1.5
             row_nomus.label(text='Load music, please')
         row_vol = col.row(align=False)
         row_vol.scale_y=1
@@ -573,6 +573,7 @@ if __name__ == "__main__":
     #unregister()
     register()
     
+
 
 
 
