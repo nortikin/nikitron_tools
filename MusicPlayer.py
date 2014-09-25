@@ -268,6 +268,8 @@ class MP_StopSIC(bpy.types.Operator):
     bl_idname = "sound.stop"
     bl_label = "stop sound"
 
+    cicle_off = BoolProperty(default=False)
+
     @classmethod
     def poll(cls, context):
         try:
@@ -280,6 +282,10 @@ class MP_StopSIC(bpy.types.Operator):
         context.window_manager.mp_index = context.scene.mp_playlist.__len__()
         self.report({'INFO'}, 'Break...')
         context.window_manager.mp_playing = False
+        
+        if self.cicle_off:
+            context.window_manager.mp_cycled = False
+            self.cicle_off = False
         return {'FINISHED'}
 
 class MP_DelList(bpy.types.Operator):
@@ -431,7 +437,8 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
         if not context.window_manager.mp_playing:
             row_butt.operator("sound.play", text="PLAY ", icon='PLAY')
         else:
-            row_butt.operator("sound.stop", text="STOP ", icon='FULLSCREEN')
+            sto = row_butt.operator("sound.stop", text="STOP ", icon='FULLSCREEN')
+            sto.cicle_off = True
         if bpy.context.scene.mp_playlist_names.__len__():
             
             # line - item and time
@@ -566,6 +573,7 @@ if __name__ == "__main__":
     #unregister()
     register()
     
+
 
 
 
