@@ -46,6 +46,9 @@ def soundIsOn(context):
         if context.window_manager.mp_index+1 < context.scene.mp_playlist.__len__():
             context.window_manager.mp_index += 1
             bpy.ops.sound.play()
+        elif context.window_manager.mp_cycled:
+            context.window_manager.mp_index = 0
+            bpy.ops.sound.play()
         else:
             context.window_manager.mp_index = 0
     except:
@@ -93,6 +96,50 @@ class MP_openPL(bpy.types.Operator):
             context.scene.mp_playlist.add()
             context.scene.mp_playlist[-1].playlist = t
         return {'FINISHED'}
+
+class MP_Shuffle(bpy.types.Operator):
+    '''shuffle'''
+    bl_idname = "sound.shuffle"
+    bl_label = "Shuffle"
+
+    @classmethod
+    def poll(cls, context):
+        if context.scene.mp_playlist.__len__():
+            return 1
+        else:
+            return 0
+
+    def execute(self, context):
+        #storing
+        comp_store = []
+        comp_store_names = []
+        
+        item = context.window_manager.mp_index
+        it_adress = context.scene.mp_playlist[item].playlist
+        for comp, compn in zip(context.scene.mp_playlist, \
+                context.scene.mp_playlist_names):
+            comp_store.append(comp.playlist)
+            comp_store_names.append(compn.playlist)
+        #clearing
+        context.scene.mp_playlist.clear()
+        context.scene.mp_playlist_names.clear()
+        #shuffling
+        u = random.randint(0,len(comp_store)-1)
+        random.shuffle(comp_store, random=random.seed(u))
+        random.shuffle(comp_store_names, random=random.seed(u))
+        #rewriting
+        k = 0
+        for comp, compn in zip(comp_store, comp_store_names):
+            context.scene.mp_playlist.add()
+            context.scene.mp_playlist_names.add()
+            context.scene.mp_playlist[-1].playlist = comp
+            context.scene.mp_playlist_names[-1].playlist = compn
+            if it_adress == comp:
+                context.window_manager.mp_index = k
+            k += 1
+        
+        return {'FINISHED'}
+    
 
 class MP_DelComposition(bpy.types.Operator):
     '''delete composition'''
@@ -229,7 +276,6 @@ class MP_StopSIC(bpy.types.Operator):
             return 0
 
     def execute(self, context):
-        
         context.window_manager.mp_playsound.stop()
         context.window_manager.mp_index = context.scene.mp_playlist.__len__()
         self.report({'INFO'}, 'Break...')
@@ -362,7 +408,8 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
     
     def draw(self, context):
         layout = self.layout
-        row = layout.row(align=True)
+        col_over = layout.column()
+        row = col_over.row(align=True)
         
         ############# left column
         col2 = row.column(align=True)
@@ -375,24 +422,24 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
             col2.operator("sound.resume", text=" ", icon='PLAY')
         else:
             col2.operator("sound.pause", text=" ", icon='PAUSE')
+        col2.prop(bpy.context.window_manager, 'mp_cycled', text='', icon='RECOVER_LAST')
         
         ############# central column
         col = row.column(align=False)
-        col.scale_y=2.5
+        row_butt = col.row()
+        row_butt.scale_y=2.5
         if not context.window_manager.mp_playing:
-            col.operator("sound.play", text="PLAY ", icon='PLAY')
+            row_butt.operator("sound.play", text="PLAY ", icon='PLAY')
         else:
-            col.operator("sound.stop", text="STOP ", icon='FULLSCREEN')
+            row_butt.operator("sound.stop", text="STOP ", icon='FULLSCREEN')
         if bpy.context.scene.mp_playlist_names.__len__():
             
             # line - item and time
             plaingindex = 'Song: '+str(context.window_manager.mp_index+1)+'/'+str(len(context.scene.mp_playlist))
             row2 = col.row(align=False)
-            row2.scale_y=0.35
+            row2.scale_y=0.75
             row2.label(text=plaingindex)
             columna=row2.column()
-            columna.scale_x=0.35
-            columna.scale_y=0.5
             if context.window_manager.mp_playing:
                 posa = str(round(context.window_manager.mp_playsound.position))
             else:
@@ -400,18 +447,21 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
             columna.label(text = str(posa)+' s')
             
             # line - name of song
-            row2 = col.row(align=False)
-            row2.scale_y=0.25
+            row_pos = col.row(align=False)
+            row_pos.scale_y=0.75
             if hasattr(bpy.types.WindowManager, 'mp_playsound'):
                 if hasattr(context.window_manager.mp_playsound, 'position') and \
                         context.window_manager.mp_index < \
                         context.scene.mp_playlist_names.__len__():
-                    row2.label(text=bpy.context.scene.mp_playlist_names[ \
+                    row_pos.label(text=bpy.context.scene.mp_playlist_names[ \
                             context.window_manager.mp_index].playlist)
         else:
-            row2 = col.row(align=False)
-            row2.scale_y=0.5
-            row2.label(text='Load music, please')
+            row_nomus = col.row(align=False)
+            row_nomus.scale_y=0.25
+            row_nomus.label(text='Load music, please')
+        row_vol = col.row(align=False)
+        row_vol.scale_y=1
+        row_vol.prop(context.scene, "mp_volume", slider=True)
         
         ############# right column
         col3 = row.column(align=True)
@@ -426,23 +476,15 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
         else:
             ico = 'TEXT'#'RESTRICT_VIEW_ON'
         col3.prop(bpy.context.window_manager, 'mp_show_names',icon=ico, icon_only=True)
+        col3.operator('sound.shuffle', text='', icon='RNDCURVE')
         
-        
-        col=layout.column(align=True)
-        row = col.row(align=True)
-        row.scale_y=1
-        row.prop(context.scene, "mp_volume", slider=True)
         
         #col.operator("sound.printplaylist", text="Print playlist", icon='TEXT')
-        row = col.row(align=True)
-        row.scale_y=1
+        row = col_over.row(align=True)
         row.prop(context.window_manager, 'mp_MusHandle', slider=True, text='Second')
         row.operator('sound.setpos', text='Set Position')
-        row = layout.row(align=False)
-        
-        
-        
-        
+        #row = layout.row(align=False)
+
         if bpy.context.scene.mp_playlist_names.__len__():
             playlist_print = [a.playlist for a in context.scene.mp_playlist_names]
             if bpy.context.window_manager.mp_show_names:
@@ -479,7 +521,8 @@ classes = [MP_PlaySIC,
             MP_openPL,
             MP_writePL,
             MP_Playlist,
-            MP_DelComposition]
+            MP_DelComposition,
+            MP_Shuffle]
 
 
 # registering 
@@ -487,6 +530,8 @@ def register():
     for c in classes:
         bpy.utils.register_class(c)
     bpy.types.WindowManager.mp_index=bpy.props.IntProperty()
+    bpy.types.WindowManager.mp_cycled = bpy.props.BoolProperty( \
+        description='start first if last is played',default=False)
     bpy.types.WindowManager.mp_pause = bpy.props.BoolProperty(False)
     bpy.types.WindowManager.mp_playing = bpy.props.BoolProperty(False)
     bpy.types.Scene.mp_volume = bpy.props.FloatProperty(name="Volume",default=1.0, min=0.0, max=1.0, update=volume_up)
@@ -521,6 +566,9 @@ if __name__ == "__main__":
     #unregister()
     register()
     
+
+
+
 
 
 
