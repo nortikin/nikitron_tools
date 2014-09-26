@@ -53,7 +53,7 @@ def soundIsOn(context):
             context.window_manager.mp_index = 0
     except:
         pass
-# not used
+
 def playlistprint():
     pl = [a.playlist for a in bpy.context.scene.mp_playlist]
     print ('Playlist: \n')
@@ -573,6 +573,7 @@ if __name__ == "__main__":
     #unregister()
     register()
     
+
 
 
 
