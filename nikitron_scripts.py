@@ -248,10 +248,9 @@ class AreaOfLenin(bpy.types.Operator):
         for ob, mats in area.items():
             for_file += ob + '; ' + str(area[ob].pop('Total')) + '\n'
             for ma, ar in mats.items():
-                for_file += ma + '; ' + str(ar) + '\n'
-            for_file += '\n'*2
-        # for_file += '\n' + '*'*80
-        
+                for_file += ' '*4 + ma + '; ' + str(ar) + '\n'
+            for_file += '\n'
+
         bpy.data.texts['Materials.csv'].clear()
         bpy.data.texts['Materials.csv'].write(for_file)
 
