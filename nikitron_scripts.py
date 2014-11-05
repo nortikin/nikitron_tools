@@ -218,13 +218,16 @@ class AreaOfLenin(bpy.types.Operator):
     #materials = bpy.props.BoolProperty(name='materials')
 
     def execute(self, context):
-        if bpy.context.mode == 'OBJECT':
-            mats = self.calc_materials()
-            self.area = str(round(mats['Total'],4))
-            print(mats)
-            self.do_text(mats)
-        elif bpy.context.mode == 'EDIT_MESH':
-            self.area = self.calcarea()
+        try:
+            if bpy.context.selected_objects:
+                if bpy.context.mode == 'OBJECT':
+                    mats = self.calc_materials()
+                    self.area = str(round(mats['Total'],4))
+                    self.do_text(mats)
+                elif bpy.context.mode == 'EDIT_MESH':
+                    self.area = self.calcarea()
+        except:
+            self.report({'ERROR'}, 'Проверьте материалы и объекты')
         return {'FINISHED'}
 
     def calcarea(self):
@@ -259,18 +262,26 @@ class AreaOfLenin(bpy.types.Operator):
     def calc_materials(self):
         if bpy.context.mode == 'OBJECT':
             obj = bpy.context.selected_objects
-        area = {}
-        area['Total'] = 0.0
-        for o in obj:
-            area[o.name] = {}
-            area[o.name]['Total'] = 0.0
-            for m in o.material_slots:
-                area[o.name][m.name] = 0.0
-            for p in o.data.polygons:
-                i = p.material_index
-                area[o.name][o.material_slots[i].name] += p.area
-                area[o.name]['Total'] += p.area
-                area['Total'] += p.area
+            area = {}
+            area['Total'] = 0.0
+            for o in obj:
+                if o.type == 'MESH':
+                    area[o.name] = {}
+                    area[o.name]['Total'] = 0.0
+                    #if len(o.material_slots):
+                    for m in o.material_slots:
+                        area[o.name][m.name] = 0.0
+                    #else:
+                    #    area[o.name]['None'] = 0.0
+                    for p in o.data.polygons:
+                        #if p.material_index:
+                        i = p.material_index
+                        area[o.name][o.material_slots[i].name] += p.area
+                        area[o.name]['Total'] += p.area
+                        area['Total'] += p.area
+                        #else:
+                            #area[o.name]['Total'] += p.area
+                            #area['Total'] += p.area
         return area
 
 
