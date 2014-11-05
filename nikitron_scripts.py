@@ -2,7 +2,7 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (0, 1, 5),
+    "version": (2, 0, 0),
     "blender": (2, 7, 5), 
     "category": "Object",
     "author": "Nikita Gorodetskiy",
@@ -208,7 +208,6 @@ class EdgeLength(bpy.types.Operator):
             bpy.ops.object.mode_set(mode='EDIT', toggle=False)
         return round(summa, 4)
 
-
 class AreaOfLenin(bpy.types.Operator):
     """площадь объектов"""
     bl_idname = "object.nt_areaoflenin"
@@ -239,21 +238,22 @@ class AreaOfLenin(bpy.types.Operator):
         texts = bpy.data.texts.items()
         exists = False
         for t in texts:
-            if bpy.data.texts[t[0]].name == 'Materials':
+            if bpy.data.texts[t[0]].name == 'Materials.csv':
                 exists = True
                 break
         if not exists:
-            bpy.data.texts.new('Materials')
-        for_file = 'Total area: ' + str(area.pop('Total')) + '\n'*2
+            bpy.data.texts.new('Materials.csv')
+        for_file = 'Позиция; ' + 'Площадь м2' + '\n'*2
+        for_file += 'Всего; ' + str(area.pop('Total')) + '\n'*2
         for ob, mats in area.items():
-            for_file += ob + ' total area: ' + str(area[ob].pop('Total')) + '\n'
+            for_file += ob + '; ' + str(area[ob].pop('Total')) + '\n'
             for ma, ar in mats.items():
-                for_file += ma + ' area: ' + str(ar) + '\n'
+                for_file += ma + '; ' + str(ar) + '\n'
             for_file += '\n'*2
-        for_file += '\n' + '*'*80
+        # for_file += '\n' + '*'*80
         
-        bpy.data.texts['Materials'].clear()
-        bpy.data.texts['Materials'].write(for_file)
+        bpy.data.texts['Materials.csv'].clear()
+        bpy.data.texts['Materials.csv'].write(for_file)
 
 
     def calc_materials(self):
