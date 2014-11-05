@@ -235,6 +235,7 @@ class AreaOfLenin(bpy.types.Operator):
         return round(summa, 4)
 
     def do_text(self, area):
+        roro = 4
         texts = bpy.data.texts.items()
         exists = False
         for t in texts:
@@ -244,11 +245,11 @@ class AreaOfLenin(bpy.types.Operator):
         if not exists:
             bpy.data.texts.new('Materials.csv')
         for_file = 'Позиция; ' + 'Площадь м2' + '\n'*2
-        for_file += 'Всего; ' + str(area.pop('Total')) + '\n'*2
+        for_file += 'Всего; ' + str(round(area.pop('Total'),roro)) + '\n'*2
         for ob, mats in area.items():
-            for_file += ob + '; ' + str(area[ob].pop('Total')) + '\n'
+            for_file += ob + '; ' + str(round(area[ob].pop('Total'),roro)) + '\n'
             for ma, ar in mats.items():
-                for_file += ' '*4 + ma + '; ' + str(ar) + '\n'
+                for_file += ' '*4 + ma + '; ' + str(round(ar,roro)) + '\n'
             for_file += '\n'
 
         bpy.data.texts['Materials.csv'].clear()
@@ -1390,8 +1391,3 @@ def unregister():
             
 if __name__ == "__main__":
     register()
-
-
-
-
-
