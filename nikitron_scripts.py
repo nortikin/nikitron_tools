@@ -220,7 +220,7 @@ class AreaOfLenin(bpy.types.Operator):
     def execute(self, context):
         if bpy.context.mode == 'OBJECT':
             mats = self.calc_materials()
-            self.area = str(mats['Total'])
+            self.area = str(round(mats['Total'],4))
             print(mats)
             self.do_text(mats)
         elif bpy.context.mode == 'EDIT_MESH':
