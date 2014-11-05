@@ -208,6 +208,7 @@ class EdgeLength(bpy.types.Operator):
             bpy.ops.object.mode_set(mode='EDIT', toggle=False)
         return round(summa, 4)
 
+
 class AreaOfLenin(bpy.types.Operator):
     """площадь объектов"""
     bl_idname = "object.nt_areaoflenin"
@@ -215,25 +216,63 @@ class AreaOfLenin(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     
     area = bpy.props.StringProperty(name='площадь', default='')
-    
+    #materials = bpy.props.BoolProperty(name='materials')
+
     def execute(self, context):
-        self.area = str(self.calcarea())
+        if bpy.context.mode == 'OBJECT':
+            mats = self.calc_materials()
+            self.area = str(mats['Total'])
+            print(mats)
+            self.do_text(mats)
+        elif bpy.context.mode == 'EDIT_MESH':
+            self.area = self.calcarea()
         return {'FINISHED'}
 
     def calcarea(self):
+        pols = bpy.context.active_object.data.polygons
+        bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
+        summa = sum([ p.area for p in pols if p.select ])
+        bpy.ops.object.mode_set(mode='EDIT', toggle=False)
+        return round(summa, 4)
+
+    def do_text(self, area):
+        texts = bpy.data.texts.items()
+        exists = False
+        for t in texts:
+            if bpy.data.texts[t[0]].name == 'Materials':
+                exists = True
+                break
+        if not exists:
+            bpy.data.texts.new('Materials')
+        for_file = 'Total area: ' + str(area.pop('Total')) + '\n'*2
+        for ob, mats in area.items():
+            for_file += ob + ' total area: ' + str(area[ob].pop('Total')) + '\n'
+            for ma, ar in mats.items():
+                for_file += ma + ' area: ' + str(ar) + '\n'
+            for_file += '\n'*2
+        for_file += '\n' + '*'*80
+        
+        bpy.data.texts['Materials'].clear()
+        bpy.data.texts['Materials'].write(for_file)
+
+
+    def calc_materials(self):
         if bpy.context.mode == 'OBJECT':
             obj = bpy.context.selected_objects
-            allthearea = []
-            for o in obj:
-                for p in o.data.polygons:
-                    allthearea.append(p.area)
-            summa = sum(allthearea)
-        elif bpy.context.mode == 'EDIT_MESH':
-            pols = bpy.context.active_object.data.polygons
-            bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
-            summa = sum([ p.area for p in pols if p.select ])
-            bpy.ops.object.mode_set(mode='EDIT', toggle=False)
-        return round(summa, 4)
+        area = {}
+        area['Total'] = 0.0
+        for o in obj:
+            area[o.name] = {}
+            area[o.name]['Total'] = 0.0
+            for m in o.material_slots:
+                area[o.name][m.name] = 0.0
+            for p in o.data.polygons:
+                i = p.material_index
+                area[o.name][o.material_slots[i].name] += p.area
+                area[o.name]['Total'] += p.area
+                area['Total'] += p.area
+        return area
+
 
 class CliffordAttractors(bpy.types.Operator):
     """ клиффорда точки притяжения в кривые """
