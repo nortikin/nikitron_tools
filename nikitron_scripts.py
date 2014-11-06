@@ -1,4 +1,22 @@
-# GPL-3 license
+# -*- coding: utf-8 -*-
+# ##### BEGIN GPL LICENSE BLOCK #####
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation; either version 2
+#  of the License, or (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software Foundation,
+#  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+# ##### END GPL LICENSE BLOCK #####
+
 
 bl_info = {
     "name": "Nikitron tools",
@@ -25,6 +43,7 @@ import random
 import bmesh
 from bpy_extras.object_utils import object_data_add
 from bpy.props import IntProperty, BoolProperty, EnumProperty
+import operator
 
 my_str_classes = [
                 'CurvesTo3D', 'CurvesTo2D', 'NikitronPanel', 'ObjectNames',
@@ -229,16 +248,16 @@ class AreaOfLenin(bpy.types.Operator):
     #materials = bpy.props.BoolProperty(name='materials')
 
     def execute(self, context):
-        try:
-            if bpy.context.selected_objects:
-                if bpy.context.mode == 'OBJECT':
-                    mats, materials = self.calc_materials()
-                    self.area = str(round(mats['Total'],4))
-                    self.do_text(mats, materials)
-                elif bpy.context.mode == 'EDIT_MESH':
-                    self.area = self.calcarea()
-        except:
-            self.report({'ERROR'}, 'Проверьте материалы и объекты')
+        #try:
+        if bpy.context.selected_objects:
+            if bpy.context.mode == 'OBJECT':
+                mats, materials = self.calc_materials()
+                self.area = str(round(mats['Total'],4))
+                self.do_text(mats, materials)
+            elif bpy.context.mode == 'EDIT_MESH':
+                self.area = self.calcarea()
+        #except:
+        #    self.report({'ERROR'}, 'Проверьте материалы и объекты')
         return {'FINISHED'}
 
     def calcarea(self):
@@ -271,26 +290,29 @@ class AreaOfLenin(bpy.types.Operator):
                 break
         if not exists:
             bpy.data.texts.new('Materials.csv')
-        for_file = 'Позиция'+sep + 'Площадь м2'+sep + 'Примечание\n\n'
+
+
+        for_file = 'Объект'+ sep + 'Материал' + sep + 'Площадь м2'+sep + 'Примечание\n\n'
         for_file += 'По материалам:'+sep + sep + '\n'
         a = self.take_digit(coma, materials.pop('Total'), roro)
-        for_file += 'Всего:' + sep + a + sep + 'Материалов' + '\n'*2
+        for_file += 'Всего:' + sep + sep + a + sep + 'Материалов' + '\n'*2
         for mat, val in materials.items():
             a = self.take_digit(coma, val, roro)
-            for_file += mat + sep + a + sep + '\n'
+            for_file += sep + mat + sep + a + sep + '\n'
         for_file += '\n\n'
-        for_file += 'По объектам:'+sep + sep + '\n'
+        for_file += 'По объектам:'+sep + sep + sep + '\n'
         a = self.take_digit(coma, area.pop('Total'), roro)
-        for_file += 'Всего:' + sep + a + sep + 'Из выделения' + '\n'*2
-        for ob, mats in area.items():
+        for_file += 'Всего:' + sep + sep + a + sep + 'Из выделения' + '\n'*2
+        sorted_a = sorted(area.items(), key=operator.itemgetter(0))
+        for ob, mats in sorted_a:
             a = self.take_digit(coma, area[ob].pop('Total'), roro)
             if len(mats):
-                for_file += ob + sep + a + sep + '\n'
+                for_file += ob + sep + sep + a + sep + '\n'
                 for ma, ar in mats.items():
                     a = self.take_digit(coma, ar, roro)
-                    for_file += tab + ma + sep + tab + a + sep + '\n'
+                    for_file += ob + sep + ma + sep + tab + a + sep + '\n'
             else:
-                for_file += ob + sep + a + sep + 'Нет материалов' + '\n'
+                for_file += ob + sep + sep + a + sep + 'Нет материалов' + '\n'
 
         bpy.data.texts['Materials.csv'].clear()
         bpy.data.texts['Materials.csv'].write(for_file)
@@ -299,31 +321,33 @@ class AreaOfLenin(bpy.types.Operator):
     def calc_materials(self):
         if bpy.context.mode == 'OBJECT':
             obj = bpy.context.selected_objects
+            objects = [[o.name, o] for o in obj]
+            objects.sort()
             area = {}
             materials = {}
             area['Total'] = 0.0
             materials['Total'] = 0.0
-            for o in obj:
+            for name, o in objects:
                 if o.type == 'MESH':
-                    area[o.name] = {}
-                    area[o.name]['Total'] = 0.0
+                    area[name] = {}
+                    area[name]['Total'] = 0.0
                     if len(o.material_slots):
                         for m in o.material_slots:
-                            area[o.name][m.name] = 0.0
+                            area[name][m.name] = 0.0
                             if not m.name in materials:
                                 materials[m.name] = 0.0
                         for p in o.data.polygons:
                             parea = p.area
                             i = p.material_index
-                            area[o.name][o.material_slots[i].name] += parea
-                            area[o.name]['Total'] += parea
+                            area[name][o.material_slots[i].name] += parea
+                            area[name]['Total'] += parea
                             area['Total'] += parea
                             materials[o.material_slots[i].name] += parea
                             materials['Total'] += parea
                     else:
                         for p in o.data.polygons:
                             parea = p.area
-                            area[o.name]['Total'] += parea
+                            area[name]['Total'] += parea
                             area['Total'] += parea
         return area, materials
 
