@@ -265,12 +265,11 @@ class AreaOfLenin(bpy.types.Operator):
         bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
         summa = sum([ p.area for p in pols if p.select ])
         bpy.ops.object.mode_set(mode='EDIT', toggle=False)
-        return round(summa, 4)
+        return str(round(summa, 4))
 
     def take_digit(self, coma, digit, roro):
         if coma == ',':
-            a = re.split('\D',str(round(digit,roro)))
-            return a[0]+coma+a[1]
+            return str(round(digit,roro)).replace('.',',')
         else:
             return str(round(digit,roro))
 
