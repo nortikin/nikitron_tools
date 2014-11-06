@@ -2,7 +2,7 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (0, 1, 5),
+    "version": (2, 0, 0),
     "blender": (2, 7, 5), 
     "category": "Object",
     "author": "Nikita Gorodetskiy",
@@ -215,25 +215,95 @@ class AreaOfLenin(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     
     area = bpy.props.StringProperty(name='площадь', default='')
-    
+    #materials = bpy.props.BoolProperty(name='materials')
+
     def execute(self, context):
-        self.area = str(self.calcarea())
+        try:
+            if bpy.context.selected_objects:
+                if bpy.context.mode == 'OBJECT':
+                    mats, materials = self.calc_materials()
+                    self.area = str(round(mats['Total'],4))
+                    self.do_text(mats, materials)
+                elif bpy.context.mode == 'EDIT_MESH':
+                    self.area = self.calcarea()
+        except:
+            self.report({'ERROR'}, 'Проверьте материалы и объекты')
         return {'FINISHED'}
 
     def calcarea(self):
+        pols = bpy.context.active_object.data.polygons
+        bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
+        summa = sum([ p.area for p in pols if p.select ])
+        bpy.ops.object.mode_set(mode='EDIT', toggle=False)
+        return round(summa, 4)
+
+    def do_text(self, area, materials):
+        roro = 4
+        texts = bpy.data.texts.items()
+        exists = False
+        for t in texts:
+            if bpy.data.texts[t[0]].name == 'Materials.csv':
+                exists = True
+                break
+        if not exists:
+            bpy.data.texts.new('Materials.csv')
+        for_file = 'Позиция;Площадь м2;Примечание\n\n'
+        for_file += 'По материалам:;;\n'
+        a = re.split('\D',str(round(materials.pop('Total'),roro)))
+        for_file += 'Всего:;' + a[0]+','+a[1] + ';Материалов' + '\n'*2
+        for mat, val in materials.items():
+            a = re.split('\D',str(round(val,4)))
+            for_file += mat + ';' + a[0]+','+a[1] + ';\n'
+        for_file += '\n\n'
+        for_file += 'По объектам:;;\n'
+        a = re.split('\D',str(round(area.pop('Total'),roro)))
+        for_file += 'Всего:;' + a[0]+','+a[1] + ';Из выделения' + '\n'*2
+        for ob, mats in area.items():
+            a = re.split('\D',str(round(area[ob].pop('Total'),roro)))
+            if len(mats):
+                for_file += ob + ';' + a[0]+','+a[1] + ';' + '\n'
+                for ma, ar in mats.items():
+                    a = re.split('\D',str(round(ar,roro)))
+                    for_file += '    ' + ma + ';    ' + a[0]+','+a[1] + ';' + '\n'
+            else:
+                for_file += ob + ';' + a[0]+','+a[1] + ';Нет материалов' + '\n'
+            #for_file += '\n'
+
+        bpy.data.texts['Materials.csv'].clear()
+        bpy.data.texts['Materials.csv'].write(for_file)
+
+
+    def calc_materials(self):
         if bpy.context.mode == 'OBJECT':
             obj = bpy.context.selected_objects
-            allthearea = []
+            area = {}
+            materials = {}
+            area['Total'] = 0.0
+            materials['Total'] = 0.0
             for o in obj:
-                for p in o.data.polygons:
-                    allthearea.append(p.area)
-            summa = sum(allthearea)
-        elif bpy.context.mode == 'EDIT_MESH':
-            pols = bpy.context.active_object.data.polygons
-            bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
-            summa = sum([ p.area for p in pols if p.select ])
-            bpy.ops.object.mode_set(mode='EDIT', toggle=False)
-        return round(summa, 4)
+                if o.type == 'MESH':
+                    area[o.name] = {}
+                    area[o.name]['Total'] = 0.0
+                    if len(o.material_slots):
+                        for m in o.material_slots:
+                            area[o.name][m.name] = 0.0
+                            if not m.name in materials:
+                                materials[m.name] = 0.0
+                        for p in o.data.polygons:
+                            parea = p.area
+                            i = p.material_index
+                            area[o.name][o.material_slots[i].name] += parea
+                            area[o.name]['Total'] += parea
+                            area['Total'] += parea
+                            materials[o.material_slots[i].name] += parea
+                            materials['Total'] += parea
+                    else:
+                        for p in o.data.polygons:
+                            parea = p.area
+                            area[o.name]['Total'] += parea
+                            area['Total'] += parea
+        return area, materials
+
 
 class CliffordAttractors(bpy.types.Operator):
     """ клиффорда точки притяжения в кривые """
