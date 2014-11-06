@@ -24,7 +24,7 @@ import os
 import random
 import bmesh
 from bpy_extras.object_utils import object_data_add
-from bpy.props import IntProperty, BoolProperty
+from bpy.props import IntProperty, BoolProperty, EnumProperty
 
 my_str_classes = [
                 'CurvesTo3D', 'CurvesTo2D', 'NikitronPanel', 'ObjectNames',
@@ -36,7 +36,8 @@ my_str_classes = [
                 'CliffordAttractors', 'NT_ClearNodesLayouts',
                 'NT_language', 'ComplimMan', 'Title_section', 'CleanLayoutUsed',
                 'Curves_section', 'verticesNum_separator', 'shift_vers',
-                'hook', 'maxvers', 'Mesh_section', 'toolsetNT', 'NTTextMeshWeld'
+                'hook', 'maxvers', 'Mesh_section', 'toolsetNT',
+                'NTTextMeshWeld', 'areaseps', 'areacoma',
                 ]
                 
 my_var_names = [] # extend with veriables names
@@ -54,7 +55,7 @@ ru_dict = [
                 'english', 'Мужской', 'ГЛАВНЫЕ', 'и активные',
                 'КРИВЫЕ', 'Верш', 'Сдвиг',
                 'Крюк', 'МаксВер', 'СЕТКА', 'ИНСТРУМЕНТЫ НТ',
-                'ТЕКСТ+СЕТКА',
+                'ТЕКСТ+СЕТКА', 'Разделитель', 'Точка',
                 ]
                 
 en_dict = [
@@ -68,14 +69,24 @@ en_dict = [
                 'Русский', 'For men', 'MAIN', 'And active',
                 'CURVES', 'Vers', 'Shift',
                 'Hook', 'MaxVers', 'MESH', 'TOOLSET NT',
-                'TEXT+MESH',
+                'TEXT+MESH', 'Separator', 'Coma',
                 ]
-                
-#bpy.types.Scene.nt_language = bpy.props.BoolProperty(
-    #name='language',
-    #description='interface language',
-    #default=True)
-    
+
+area_seps = [(';',';',';'),('    ','tab','    '),(',',',',','),(' ','space',' ')]
+area_coma = [(',',',',','),('.','.','.')]
+
+bpy.types.Scene.nt_areaseps = EnumProperty(
+    items=area_seps,
+    name='separator',
+    description='materials separator',
+    default=';')
+
+bpy.types.Scene.nt_areacoma = EnumProperty(
+    items=area_coma,
+    name='coma',
+    description='materials coma',
+    default=',')
+
 bpy.types.Scene.nt_shift_verts = IntProperty(
     name="shift_verts",
     description="shift vertices of smaller object. смещает вершины для соединения",
@@ -237,8 +248,21 @@ class AreaOfLenin(bpy.types.Operator):
         bpy.ops.object.mode_set(mode='EDIT', toggle=False)
         return round(summa, 4)
 
+    def take_digit(self, coma, digit, roro):
+        if coma == ',':
+            a = re.split('\D',str(round(digit,roro)))
+            return a[0]+coma+a[1]
+        else:
+            return str(round(digit,roro))
+
     def do_text(self, area, materials):
         roro = 4
+        sep = bpy.context.scene.nt_areaseps
+        if sep == '    ':
+            tab = ''
+        else:
+            tab = '    '
+        coma = bpy.context.scene.nt_areacoma
         texts = bpy.data.texts.items()
         exists = False
         for t in texts:
@@ -247,27 +271,26 @@ class AreaOfLenin(bpy.types.Operator):
                 break
         if not exists:
             bpy.data.texts.new('Materials.csv')
-        for_file = 'Позиция;Площадь м2;Примечание\n\n'
-        for_file += 'По материалам:;;\n'
-        a = re.split('\D',str(round(materials.pop('Total'),roro)))
-        for_file += 'Всего:;' + a[0]+','+a[1] + ';Материалов' + '\n'*2
+        for_file = 'Позиция'+sep + 'Площадь м2'+sep + 'Примечание\n\n'
+        for_file += 'По материалам:'+sep + sep + '\n'
+        a = self.take_digit(coma, materials.pop('Total'), roro)
+        for_file += 'Всего:' + sep + a + sep + 'Материалов' + '\n'*2
         for mat, val in materials.items():
-            a = re.split('\D',str(round(val,4)))
-            for_file += mat + ';' + a[0]+','+a[1] + ';\n'
+            a = self.take_digit(coma, val, roro)
+            for_file += mat + sep + a + sep + '\n'
         for_file += '\n\n'
-        for_file += 'По объектам:;;\n'
-        a = re.split('\D',str(round(area.pop('Total'),roro)))
-        for_file += 'Всего:;' + a[0]+','+a[1] + ';Из выделения' + '\n'*2
+        for_file += 'По объектам:'+sep + sep + '\n'
+        a = self.take_digit(coma, area.pop('Total'), roro)
+        for_file += 'Всего:' + sep + a + sep + 'Из выделения' + '\n'*2
         for ob, mats in area.items():
-            a = re.split('\D',str(round(area[ob].pop('Total'),roro)))
+            a = self.take_digit(coma, area[ob].pop('Total'), roro)
             if len(mats):
-                for_file += ob + ';' + a[0]+','+a[1] + ';' + '\n'
+                for_file += ob + sep + a + sep + '\n'
                 for ma, ar in mats.items():
-                    a = re.split('\D',str(round(ar,roro)))
-                    for_file += '    ' + ma + ';    ' + a[0]+','+a[1] + ';' + '\n'
+                    a = self.take_digit(coma, ar, roro)
+                    for_file += tab + ma + sep + tab + a + sep + '\n'
             else:
-                for_file += ob + ';' + a[0]+','+a[1] + ';Нет материалов' + '\n'
-            #for_file += '\n'
+                for_file += ob + sep + a + sep + 'Нет материалов' + '\n'
 
         bpy.data.texts['Materials.csv'].clear()
         bpy.data.texts['Materials.csv'].write(for_file)
@@ -1363,9 +1386,14 @@ class NikitronPanel(bpy.types.Panel):
                         row.operator("object.nt_curv_to_2d",icon="CURVE_DATA", text=sv_lang['CurvesTo2D'])
                 
                     if context.selected_objects[0].type == 'MESH':
-                        row = col.row(align=True)
-                        row.scale_y=1.1
-                        row.operator("object.nt_edgelength",icon="FONT_DATA", text=sv_lang['EdgeLength'])
+                        box0 = col.box()
+                        box1 = box0.column(align=True)
+                        row = box1.row(align=True)
+                        row.prop(bpy.context.scene, "nt_areacoma", text=' ', expand=True) # sv_lang['areacoma'])
+                        row = box1.row(align=True)
+                        row.prop(bpy.context.scene, "nt_areaseps", text=' ', expand=True) # sv_lang['areaseps'])
+                        row = box1.row(align=True)
+                        row.scale_y=1.5
                         row.operator("object.nt_areaoflenin",icon="FONT_DATA", text=sv_lang['AreaOfLenin'])
                         #row = col.row(align=True)
                         #row.operator("object.nt_separator_multi",icon="MOD_BUILD", text=sv_lang['SeparatorM'])
@@ -1376,6 +1404,7 @@ class NikitronPanel(bpy.types.Panel):
                         #row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
                         
                         row = col.row(align=True)
+                        row.operator("object.nt_edgelength",icon="FONT_DATA", text=sv_lang['EdgeLength'])
                         row.operator("object.nt_text_mesh_weld",icon="FULLSCREEN_EXIT", text=sv_lang['NTTextMeshWeld'])
                         row = col.row(align=True)
                         row.operator("object.nt_connect2objects",icon="LINKED", text=sv_lang['Connect2Meshes'])
@@ -1412,6 +1441,7 @@ def register():
         #handle_lang = False
     #elif 'en' in text:
         #handle_lang = True
+    bpy
         
 
 def unregister():
