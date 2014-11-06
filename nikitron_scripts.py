@@ -2,7 +2,7 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (2, 0, 0),
+    "version": (0, 1, 5),
     "blender": (2, 7, 5), 
     "category": "Object",
     "author": "Nikita Gorodetskiy",
@@ -215,75 +215,25 @@ class AreaOfLenin(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     
     area = bpy.props.StringProperty(name='площадь', default='')
-    #materials = bpy.props.BoolProperty(name='materials')
-
+    
     def execute(self, context):
-        try:
-            if bpy.context.selected_objects:
-                if bpy.context.mode == 'OBJECT':
-                    mats = self.calc_materials()
-                    self.area = str(round(mats['Total'],4))
-                    self.do_text(mats)
-                elif bpy.context.mode == 'EDIT_MESH':
-                    self.area = self.calcarea()
-        except:
-            self.report({'ERROR'}, 'Проверьте материалы и объекты')
+        self.area = str(self.calcarea())
         return {'FINISHED'}
 
     def calcarea(self):
-        pols = bpy.context.active_object.data.polygons
-        bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
-        summa = sum([ p.area for p in pols if p.select ])
-        bpy.ops.object.mode_set(mode='EDIT', toggle=False)
-        return round(summa, 4)
-
-    def do_text(self, area):
-        roro = 4
-        texts = bpy.data.texts.items()
-        exists = False
-        for t in texts:
-            if bpy.data.texts[t[0]].name == 'Materials.csv':
-                exists = True
-                break
-        if not exists:
-            bpy.data.texts.new('Materials.csv')
-        for_file = 'Позиция; ' + 'Площадь м2' + '\n'*2
-        for_file += 'Всего; ' + str(round(area.pop('Total'),roro)) + '\n'*2
-        for ob, mats in area.items():
-            for_file += ob + '; ' + str(round(area[ob].pop('Total'),roro)) + '\n'
-            for ma, ar in mats.items():
-                for_file += ' '*4 + ma + '; ' + str(round(ar,roro)) + '\n'
-            for_file += '\n'
-
-        bpy.data.texts['Materials.csv'].clear()
-        bpy.data.texts['Materials.csv'].write(for_file)
-
-
-    def calc_materials(self):
         if bpy.context.mode == 'OBJECT':
             obj = bpy.context.selected_objects
-            area = {}
-            area['Total'] = 0.0
+            allthearea = []
             for o in obj:
-                if o.type == 'MESH':
-                    area[o.name] = {}
-                    area[o.name]['Total'] = 0.0
-                    #if len(o.material_slots):
-                    for m in o.material_slots:
-                        area[o.name][m.name] = 0.0
-                    #else:
-                    #    area[o.name]['None'] = 0.0
-                    for p in o.data.polygons:
-                        #if p.material_index:
-                        i = p.material_index
-                        area[o.name][o.material_slots[i].name] += p.area
-                        area[o.name]['Total'] += p.area
-                        area['Total'] += p.area
-                        #else:
-                            #area[o.name]['Total'] += p.area
-                            #area['Total'] += p.area
-        return area
-
+                for p in o.data.polygons:
+                    allthearea.append(p.area)
+            summa = sum(allthearea)
+        elif bpy.context.mode == 'EDIT_MESH':
+            pols = bpy.context.active_object.data.polygons
+            bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
+            summa = sum([ p.area for p in pols if p.select ])
+            bpy.ops.object.mode_set(mode='EDIT', toggle=False)
+        return round(summa, 4)
 
 class CliffordAttractors(bpy.types.Operator):
     """ клиффорда точки притяжения в кривые """
