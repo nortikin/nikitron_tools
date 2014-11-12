@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Fedge",
     "author": "nikitron.cc.ua",
-    "version": (0, 1, 2),
+    "version": (0, 5, 72),
     "blender": (2, 7, 5),
     "location": "View3D > Tool Shelf > 1D > select loose",
     "description": "selects objects and edges that lost",
@@ -75,59 +75,72 @@ class D1_fedge(bpy.types.Operator):
     
     def select_loose_edit(self):
         obj = bpy.context.active_object
-        
-        # stage one edges
-        bpy.ops.mesh.select_mode(type='EDGE')
-        bpy.ops.mesh.select_all(action='DESELECT')
-        bpy.ops.object.editmode_toggle()
-        selected_edges = False
-        # bpy.ops.mesh.select_non_manifolds()
-        # manifolds not work because we not come to next stage 
-        for edg in obj.data.edges:
-            if edg.is_loose:
-                edg.select = True
-                selected_edges = True
-        bpy.ops.object.editmode_toggle()
+        selected_show = False
+        selected_hide = False
         
         # stage two verts
-        if not selected_edges:
-            bpy.ops.mesh.select_mode(type='VERT')
+        bpy.ops.mesh.select_mode(type='VERT')
+        bpy.ops.mesh.select_all(action='DESELECT')
+        bpy.ops.object.editmode_toggle()
+        vertices = set()
+        self.make_indeces(obj.data.edges, vertices)
+        self.make_indeces(obj.data.polygons, vertices)
+        for i, ver in enumerate(obj.data.vertices):
+            if i not in vertices and not ver.hide:
+                ver.select = True
+                selected_show = True
+            elif i not in vertices and ver.hide:
+                selected_hide = True
+        bpy.ops.object.editmode_toggle()
+        
+        # stage one edges
+        if not selected_show:
+            bpy.ops.mesh.select_mode(type='EDGE')
             bpy.ops.mesh.select_all(action='DESELECT')
             bpy.ops.object.editmode_toggle()
-            vertices = set()
-            self.make_indeces(obj.data.edges, vertices)
-            self.make_indeces(obj.data.polygons, vertices)
-            for i, ver in enumerate(obj.data.vertices):
-                if i not in vertices:
-                    ver.select = True
-                    selected_edges = True
+            # bpy.ops.mesh.select_non_manifolds()
+            # manifolds not work because we not come to next stage 
+            for edg in obj.data.edges:
+                if edg.is_loose and not edg.hide:
+                    edg.select = True
+                    selected_show = True
+                elif edg.is_loose and edg.hide:
+                    selected_hide = True
             bpy.ops.object.editmode_toggle()
             
         #stage
-        if not selected_edges:
+        if not selected_show:
             bpy.ops.mesh.select_mode(type='FACE')
             bpy.ops.mesh.select_all(action='DESELECT')
             bpy.ops.object.editmode_toggle()
             for pol in obj.data.polygons:
-                if pol.area <= WRONG_AREA:
+                if pol.area <= WRONG_AREA and not pol.hide:
                     pol.select = True
-                    selected_edges = True
+                    selected_show = True
+                elif pol.area <= WRONG_AREA and pol.hide:
+                    selected_hide = True
             bpy.ops.object.editmode_toggle()
             
         #stage three polygons
-        if not selected_edges:
+        if not selected_show:
             bpy.ops.mesh.select_mode(type='FACE')
             bpy.ops.mesh.select_all(action='DESELECT')
             bpy.ops.object.editmode_toggle()
             # bpy.ops.mesh.select_face_by_sides(number=4, type='NOTEQUAL')
             # not fit ours needs selectfacesbysides
             for pol in obj.data.polygons:
-                if len(pol.vertices) != 4:
+                if len(pol.vertices) != 4 and not pol.hide:
                     pol.select = True
-                    selected_edges = True
+                    selected_show = True
+                elif len(pol.vertices) != 4 and pol.hide:
+                    selected_hide = True
             # object mode if mesh clean
-            if selected_edges:
+            if selected_show:
                 bpy.ops.object.editmode_toggle()
+            elif selected_hide:
+                bpy.ops.object.editmode_toggle()
+                self.report({'INFO'}, \
+                    'FEDGE: Nothing found (but hidden)')
             else:
                 self.report({'INFO'}, \
                     'FEDGE: Your object is clean')
