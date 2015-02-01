@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Fedge",
     "author": "nikitron.cc.ua",
-    "version": (0, 6, 0),
+    "version": (0, 6, 2),
     "blender": (2, 7, 5),
     "location": "View3D > Tool Shelf > 1D > select loose",
     "description": "selects objects and edges that lost",
@@ -129,19 +129,19 @@ class D1_fedge(bpy.types.Operator):
             return
         bpy.ops.object.select_all(action='DESELECT')
 
-        def dosel(obj):
+        def dosel(obj, renam):
             obj.select = True
-            if obj.name[:9] != '__fedge__':
-                obj.name = '__fedge__' + obj.name
+            if obj.name[:9] != '__empty__' and renam:
+                obj.name = '__empty__' + obj.name
 
         for obj in objects:
             if obj.type != 'MESH':
                 continue
             data = obj.data
             # zero-verts objs
-            if bpy.context.scene.nover:
+            if bpy.context.scene.empty:
                 if not len(data.vertices):
-                    dosel(obj)
+                    dosel(obj,True)
             # loose verts objs
             if bpy.context.scene.verts:
                 vertices = set()
@@ -149,20 +149,20 @@ class D1_fedge(bpy.types.Operator):
                 self.make_indeces(data.polygons, vertices)
                 v = set([i for i in range(len(data.vertices))])
                 if v.difference(vertices):
-                    dosel(obj)
+                    dosel(obj,False)
             # zero area pols condition in def
             if bpy.context.scene.zerop:
                 if self.make_areas(obj.data.polygons):
-                    dosel(obj)
+                    dosel(obj,False)
             # loose edges
             if bpy.context.scene.edges:
                 if self.make_edges(data.edges):
-                    dosel(obj)
+                    dosel(obj,False)
             # triangles
             if bpy.context.scene.three:
                 for p in data.polygons:
                     if len(p.vertices) == 3:
-                        dosel(obj)
+                        dosel(obj,False)
             print(obj.name, obj.select)
                 
     def select_loose_edit(self):
@@ -216,7 +216,7 @@ class D1_fedge_panel(bpy.types.Panel):
         row.operator('object.fedge', text='fedge')
         if bpy.context.mode == 'OBJECT':
             row = layout.row(align=True)
-            row.prop(bpy.context.scene, 'nover')
+            row.prop(bpy.context.scene, 'empty')
         row = layout.row(align=True)
         row.prop(bpy.context.scene, 'verts')
         row.prop(bpy.context.scene, 'edges')
@@ -231,7 +231,7 @@ def register():
             options={'ANIMATABLE'})
     bpy.types.Scene.zerop = BoolProperty(name='zerop', default=True,
             options={'ANIMATABLE'})
-    bpy.types.Scene.nover = BoolProperty(name='nover', default=True,
+    bpy.types.Scene.empty = BoolProperty(name='empty', default=True,
             options={'ANIMATABLE'})
     bpy.types.Scene.three = BoolProperty(name='three', default=True,
             options={'ANIMATABLE'})
@@ -261,6 +261,13 @@ def unregister():
         a.keymap_items.remove(b)
         del a, b
     del addons_keymap
+
+    
+    del bpy.types.Scene.verts
+    del bpy.types.Scene.edges
+    del bpy.types.Scene.zerop
+    del bpy.types.Scene.empty
+    del bpy.types.Scene.three
 
 if __name__ == "__main__":
     register()
