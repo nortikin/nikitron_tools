@@ -57,6 +57,7 @@ my_str_classes = [
                 'Curves_section', 'verticesNum_separator', 'shift_vers',
                 'hook', 'maxvers', 'Mesh_section', 'toolsetNT',
                 'NTTextMeshWeld', 'areaseps', 'areacoma',
+                'volume',
                 ]
                 
 my_var_names = [] # extend with veriables names
@@ -75,6 +76,7 @@ ru_dict = [
                 'КРИВЫЕ', 'Верш', 'Сдвиг',
                 'Крюк', 'МаксВер', 'СЕТКА', 'ИНСТРУМЕНТЫ НТ',
                 'ТЕКСТ+СЕТКА', 'Разделитель', 'Точка',
+                'Объём'
                 ]
                 
 en_dict = [
@@ -89,6 +91,7 @@ en_dict = [
                 'CURVES', 'Vers', 'Shift',
                 'Hook', 'MaxVers', 'MESH', 'TOOLSET NT',
                 'TEXT+MESH', 'Separator', 'Coma',
+                'Volume',
                 ]
 
 area_seps = [(';',';',';'),('    ','tab','    '),(',',',',','),(' ','space',' ')]
@@ -173,6 +176,31 @@ lang_dict_en = nt_make_lang(my_str_classes, en_dict)
 vert_max = 0
 nt_lang_panel()
 
+class NTVolumeCalculate(bpy.types.Operator):
+    """Подсчёт объёма выбранной сетки"""
+    bl_idname = "object.nt_calc_volume"
+    bl_label = 'Объём считает'
+    bl_options = {'REGISTER', 'UNDO'}
+    
+    volume = bpy.props.StringProperty(name='объём', default='')
+
+    def execute(self, context):
+        self.volume = str(self.calcVolume())
+        return {'FINISHED'}
+    
+    def calcVolume(self):
+        objs = bpy.context.selected_objects
+        bpy.ops.object.select_all(action='DESELECT')
+        volume = 0
+        for o in objs:
+            bpy.data.objects[o.name].select = True
+            bo = bmesh.new()
+            bo.from_mesh(o.data)
+            volume += bo.calc_volume()
+            bpy.ops.object.select_all(action='DESELECT')
+        bpy.data.objects[o.name].select = True
+        return volume
+    
 class NTTextMeshWeld(bpy.types.Operator):
     """Соединение текстов и сеток если матрицы совпадают"""
     bl_idname = "object.nt_text_mesh_weld"
@@ -1418,6 +1446,12 @@ class NikitronPanel(bpy.types.Panel):
                         row = box1.row(align=True)
                         row.scale_y=1.5
                         row.operator("object.nt_areaoflenin",icon="FONT_DATA", text=sv_lang['AreaOfLenin'])
+                        
+                        box0 = col.box()
+                        box1 = box0.column(align=True)
+                        row = box1.row(align=True)
+                        row.operator("object.nt_calc_volume",icon="FONT_DATA", text=sv_lang['volume'])
+                        
                         #row = col.row(align=True)
                         #row.operator("object.nt_separator_multi",icon="MOD_BUILD", text=sv_lang['SeparatorM'])
                         #row.prop(bpy.context.scene, "NS_vertices_separator", text=sv_lang['verticesNum_separator'])
@@ -1445,7 +1479,7 @@ my_classes = [
                 BooleratorTranslation, BooleratorIntersection,
                 ComplimentWoman, AreaOfLenin, EdgeLength,
                 CliffordAttractors, NT_ClearNodesLayouts,
-                NT_language, NTTextMeshWeld,
+                NT_language, NTTextMeshWeld, NTVolumeCalculate,
                 ]
 
 
