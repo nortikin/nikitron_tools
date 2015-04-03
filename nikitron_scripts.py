@@ -20,7 +20,7 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (2, 0, 0),
+    "version": (2, 1, 0),
     "blender": (2, 7, 5), 
     "category": "Object",
     "author": "Nikita Gorodetskiy",
@@ -176,31 +176,6 @@ lang_dict_en = nt_make_lang(my_str_classes, en_dict)
 vert_max = 0
 nt_lang_panel()
 
-class NTVolumeCalculate(bpy.types.Operator):
-    """Подсчёт объёма выбранной сетки"""
-    bl_idname = "object.nt_calc_volume"
-    bl_label = 'Объём считает'
-    bl_options = {'REGISTER', 'UNDO'}
-    
-    volume = bpy.props.StringProperty(name='объём', default='')
-
-    def execute(self, context):
-        self.volume = str(self.calcVolume())
-        return {'FINISHED'}
-    
-    def calcVolume(self):
-        objs = bpy.context.selected_objects
-        bpy.ops.object.select_all(action='DESELECT')
-        volume = 0
-        for o in objs:
-            bpy.data.objects[o.name].select = True
-            bo = bmesh.new()
-            bo.from_mesh(o.data)
-            volume += bo.calc_volume()
-            bpy.ops.object.select_all(action='DESELECT')
-        bpy.data.objects[o.name].select = True
-        return volume
-    
 class NTTextMeshWeld(bpy.types.Operator):
     """Соединение текстов и сеток если матрицы совпадают"""
     bl_idname = "object.nt_text_mesh_weld"
@@ -233,61 +208,8 @@ class NTTextMeshWeld(bpy.types.Operator):
                 bpy.ops.object.select_all(action='TOGGLE')
         return {'FINISHED'}
 
-class EdgeLength(bpy.types.Operator):
-    """Длина рёбер объектов"""
-    bl_idname = "object.nt_edgelength"
-    bl_label = 'ДЛИН_РЁБ'
-    bl_options = {'REGISTER', 'UNDO'}
-    
-    length = bpy.props.StringProperty(name='длина', default='')
-    
-    def execute(self, context):
-        self.length = str(self.calclength())
-        return {'FINISHED'}
-
-    def calclength(self):
-        if bpy.context.mode == 'OBJECT':
-            obj = bpy.context.selected_objects
-            allthelength = []
-            for o in obj:
-                v = o.data.vertices
-                for e in o.data.edges:
-                    ev = e.vertices
-                    diff = v[ev[0]].co-v[ev[1]].co
-                    edglength = diff.length
-                    allthelength.append(edglength)
-            summa = sum(allthelength)
-        elif bpy.context.mode == 'EDIT_MESH':
-            data = bpy.context.active_object.data
-            edgs, vers = data.edges, data.vertices
-            bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
-            edgs_sel = [ tuple(e.vertices[:]) for e in edgs if e.select ]
-            summa = sum([ (vers[e[0]].co-vers[e[1]].co).length for e in edgs_sel ])
-            bpy.ops.object.mode_set(mode='EDIT', toggle=False)
-        return round(summa, 4)
-
-class AreaOfLenin(bpy.types.Operator):
-    """площадь объектов"""
-    bl_idname = "object.nt_areaoflenin"
-    bl_label = "ПЛОЩ_ОБ"
-    bl_options = {'REGISTER', 'UNDO'}
-    
-    area = bpy.props.StringProperty(name='площадь', default='')
-    #materials = bpy.props.BoolProperty(name='materials')
-
-    def execute(self, context):
-        #try:
-        if bpy.context.selected_objects:
-            if bpy.context.mode == 'OBJECT':
-                mats, materials = self.calc_materials()
-                self.area = str(round(mats['Total'],4))
-                self.do_text(mats, materials)
-            elif bpy.context.mode == 'EDIT_MESH':
-                self.area = self.calcarea()
-        #except:
-        #    self.report({'ERROR'}, 'Проверьте материалы и объекты')
-        return {'FINISHED'}
-
+class NTcsvCalc(bpy.types.Operator):
+        
     def calcarea(self):
         pols = bpy.context.active_object.data.polygons
         bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
@@ -378,6 +300,86 @@ class AreaOfLenin(bpy.types.Operator):
                             area['Total'] += parea
         return area, materials
 
+
+class NTVolumeCalculate(NTcsvCalc):
+    """Подсчёт объёма выбранной сетки"""
+    bl_idname = "object.nt_calc_volume"
+    bl_label = 'Объём считает'
+    bl_options = {'REGISTER', 'UNDO'}
+    
+    volume = bpy.props.StringProperty(name='объём', default='')
+
+    def execute(self, context):
+        self.volume = str(self.calcVolume())
+        return {'FINISHED'}
+    
+    def calcVolume(self):
+        objs = bpy.context.selected_objects
+        bpy.ops.object.select_all(action='DESELECT')
+        volume = 0
+        for o in objs:
+            bpy.data.objects[o.name].select = True
+            bo = bmesh.new()
+            bo.from_mesh(o.data)
+            volume += bo.calc_volume()
+            bpy.ops.object.select_all(action='DESELECT')
+        bpy.data.objects[o.name].select = True
+        return volume
+    
+class EdgeLength(NTcsvCalc):
+    """Длина рёбер объектов"""
+    bl_idname = "object.nt_edgelength"
+    bl_label = 'ДЛИН_РЁБ'
+    bl_options = {'REGISTER', 'UNDO'}
+    
+    length = bpy.props.StringProperty(name='длина', default='')
+    
+    def execute(self, context):
+        self.length = str(self.calclength())
+        return {'FINISHED'}
+
+    def calclength(self):
+        if bpy.context.mode == 'OBJECT':
+            obj = bpy.context.selected_objects
+            allthelength = []
+            for o in obj:
+                v = o.data.vertices
+                for e in o.data.edges:
+                    ev = e.vertices
+                    diff = v[ev[0]].co-v[ev[1]].co
+                    edglength = diff.length
+                    allthelength.append(edglength)
+            summa = sum(allthelength)
+        elif bpy.context.mode == 'EDIT_MESH':
+            data = bpy.context.active_object.data
+            edgs, vers = data.edges, data.vertices
+            bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
+            edgs_sel = [ tuple(e.vertices[:]) for e in edgs if e.select ]
+            summa = sum([ (vers[e[0]].co-vers[e[1]].co).length for e in edgs_sel ])
+            bpy.ops.object.mode_set(mode='EDIT', toggle=False)
+        return round(summa, 4)
+
+class AreaOfLenin(NTcsvCalc):
+    """площадь объектов"""
+    bl_idname = "object.nt_areaoflenin"
+    bl_label = "ПЛОЩ_ОБ"
+    bl_options = {'REGISTER', 'UNDO'}
+    
+    area = bpy.props.StringProperty(name='площадь', default='')
+    #materials = bpy.props.BoolProperty(name='materials')
+
+    def execute(self, context):
+        #try:
+        if bpy.context.selected_objects:
+            if bpy.context.mode == 'OBJECT':
+                area, materials = self.calc_materials()
+                self.area = str(round(area['Total'],4))
+                self.do_text(area, materials)
+            elif bpy.context.mode == 'EDIT_MESH':
+                self.area = self.calcarea()
+        #except:
+        #    self.report({'ERROR'}, 'Проверьте материалы и объекты')
+        return {'FINISHED'}
 
 class CliffordAttractors(bpy.types.Operator):
     """ клиффорда точки притяжения в кривые """
@@ -1444,13 +1446,13 @@ class NikitronPanel(bpy.types.Panel):
                         row = box1.row(align=True)
                         row.prop(bpy.context.scene, "nt_areaseps", text=' ', expand=True) # sv_lang['areaseps'])
                         row = box1.row(align=True)
-                        row.scale_y=1.5
+                        # row.scale_y=1.5
                         row.operator("object.nt_areaoflenin",icon="FONT_DATA", text=sv_lang['AreaOfLenin'])
-                        
-                        box0 = col.box()
-                        box1 = box0.column(align=True)
                         row = box1.row(align=True)
                         row.operator("object.nt_calc_volume",icon="FONT_DATA", text=sv_lang['volume'])
+                        row = box1.row(align=True)
+                        row.operator("object.nt_edgelength",icon="FONT_DATA", text=sv_lang['EdgeLength'])
+                        
                         
                         #row = col.row(align=True)
                         #row.operator("object.nt_separator_multi",icon="MOD_BUILD", text=sv_lang['SeparatorM'])
@@ -1461,7 +1463,6 @@ class NikitronPanel(bpy.types.Panel):
                         #row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
                         
                         row = col.row(align=True)
-                        row.operator("object.nt_edgelength",icon="FONT_DATA", text=sv_lang['EdgeLength'])
                         row.operator("object.nt_text_mesh_weld",icon="FULLSCREEN_EXIT", text=sv_lang['NTTextMeshWeld'])
                         row = col.row(align=True)
                         row.operator("object.nt_connect2objects",icon="LINKED", text=sv_lang['Connect2Meshes'])
