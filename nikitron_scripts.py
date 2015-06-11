@@ -20,7 +20,7 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (2, 1, 0),
+    "version": (2, 1, 5),
     "blender": (2, 7, 5), 
     "category": "Object",
     "author": "Nikita Gorodetskiy",
@@ -57,7 +57,7 @@ my_str_classes = [
                 'Curves_section', 'verticesNum_separator', 'shift_vers',
                 'hook', 'maxvers', 'Mesh_section', 'toolsetNT',
                 'NTTextMeshWeld', 'areaseps', 'areacoma',
-                'volume',
+                'volume', 'NTbezierOrdering',
                 ]
                 
 my_var_names = [] # extend with veriables names
@@ -76,7 +76,7 @@ ru_dict = [
                 'КРИВЫЕ', 'Верш', 'Сдвиг',
                 'Крюк', 'МаксВер', 'СЕТКА', 'ИНСТРУМЕНТЫ НТ',
                 'ТЕКСТ+СЕТКА', 'Разделитель', 'Точка',
-                'Объём'
+                'Объём', 'Безье выпрямить'
                 ]
                 
 en_dict = [
@@ -91,7 +91,7 @@ en_dict = [
                 'CURVES', 'Vers', 'Shift',
                 'Hook', 'MaxVers', 'MESH', 'TOOLSET NT',
                 'TEXT+MESH', 'Separator', 'Coma',
-                'Volume',
+                'Volume', 'Good bezier'
                 ]
 
 area_seps = [(';',';',';'),('    ','tab','    '),(',',',',','),(' ','space',' ')]
@@ -175,6 +175,46 @@ lang_dict_ru = nt_make_lang(my_str_classes, ru_dict)
 lang_dict_en = nt_make_lang(my_str_classes, en_dict)
 vert_max = 0
 nt_lang_panel()
+
+
+
+class NTbezierOrdering(bpy.types.Operator):
+    """Делает прямые безье прямыми для перевода в сетку"""
+    bl_idname = "object.nt_bezier_making_good"
+    bl_label = 'ДЕЛАТЬ_БЕЗЬЕ_ХОРОШО'
+    bl_options = {'REGISTER', 'UNDO'}
+    
+    допуск = bpy.props.FloatProperty(name='допуск', default=0.001)
+    
+    def bezier_make_good(self, curve):
+        for spline in curve.splines:
+            spline.type == 'BEZIER'
+            for i in range(len(spline.bezier_points)):
+                if i != 0:
+                    poileft = spline.bezier_points[i-1]
+                    poiright = spline.bezier_points[i]
+                    if poileft.handle_right_type != 'VECTOR' and poiright.handle_left_type != 'VECTOR':
+                        pl,pr,hl,hr = poileft.co, poiright.co, poileft.handle_right, poiright.handle_left
+                        n1 = (pl-pr)
+                        n1.normalize()
+                        n2 = (pl-hl)
+                        n2.normalize()
+                        n3 = (pl-hr)
+                        n3.normalize()
+                        #ugly solution
+                        if (n1-n2).length <= self.допуск:
+                            poileft.handle_right_type = 'VECTOR'
+                        if (n1-n3).length <= self.допуск:
+                            poiright.handle_left_type = 'VECTOR'
+    
+    def execute(self, context):
+        obj = bpy.context.selected_objects
+        for o in obj:
+            curve = o.data
+            self.bezier_make_good(curve)
+        return {'FINISHED'}
+
+
 
 class NTTextMeshWeld(bpy.types.Operator):
     """Соединение текстов и сеток если матрицы совпадают"""
@@ -1437,6 +1477,7 @@ class NikitronPanel(bpy.types.Panel):
                         row = col.row(align=True)
                         row.operator("object.nt_curv_to_3d",icon="CURVE_DATA", text=sv_lang['CurvesTo3D'])
                         row.operator("object.nt_curv_to_2d",icon="CURVE_DATA", text=sv_lang['CurvesTo2D'])
+                        row.operator("object.nt_bezier_making_good",icon="CURVE_DATA", text=sv_lang['NTbezierOrdering'])
                 
                     if context.selected_objects[0].type == 'MESH':
                         box0 = col.box()
@@ -1481,6 +1522,7 @@ my_classes = [
                 ComplimentWoman, AreaOfLenin, EdgeLength,
                 CliffordAttractors, NT_ClearNodesLayouts,
                 NT_language, NTTextMeshWeld, NTVolumeCalculate,
+                NTbezierOrdering,
                 ]
 
 
