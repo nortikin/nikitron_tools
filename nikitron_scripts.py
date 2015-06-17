@@ -20,8 +20,8 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (2, 1, 5),
-    "blender": (2, 7, 5), 
+    "version": (2, 1, 0),
+    "blender": (2, 7, 6), 
     "category": "Object",
     "author": "Nikita Gorodetskiy",
     "location": "object",
@@ -57,7 +57,7 @@ my_str_classes = [
                 'Curves_section', 'verticesNum_separator', 'shift_vers',
                 'hook', 'maxvers', 'Mesh_section', 'toolsetNT',
                 'NTTextMeshWeld', 'areaseps', 'areacoma',
-                'volume', 'NTbezierOrdering',
+                'volume', 'NTbezierOrdering', 'NTduplicat',
                 ]
                 
 my_var_names = [] # extend with veriables names
@@ -76,7 +76,7 @@ ru_dict = [
                 'КРИВЫЕ', 'Верш', 'Сдвиг',
                 'Крюк', 'МаксВер', 'СЕТКА', 'ИНСТРУМЕНТЫ НТ',
                 'ТЕКСТ+СЕТКА', 'Разделитель', 'Точка',
-                'Объём', 'Безье выпрямить'
+                'Объём', 'Безье выпрямить', 'Дубликаты',
                 ]
                 
 en_dict = [
@@ -91,7 +91,7 @@ en_dict = [
                 'CURVES', 'Vers', 'Shift',
                 'Hook', 'MaxVers', 'MESH', 'TOOLSET NT',
                 'TEXT+MESH', 'Separator', 'Coma',
-                'Volume', 'Good bezier'
+                'Volume', 'Good bezier', 'Duplicats'
                 ]
 
 area_seps = [(';',';',';'),('    ','tab','    '),(',',',',','),(' ','space',' ')]
@@ -176,6 +176,31 @@ lang_dict_en = nt_make_lang(my_str_classes, en_dict)
 vert_max = 0
 nt_lang_panel()
 
+
+
+
+
+
+class NTduplicat(bpy.types.Operator):
+    """дубликатирует"""
+    bl_idname = "object.nt_duplicat"
+    bl_label = 'ДУБЛИКАТИТ'
+    bl_options = {'REGISTER', 'UNDO'}
+    
+    def execute(self, context):
+        obj = bpy.context.selected_objects
+
+        o = bpy.context.active_object
+        locata = o.matrix_local.copy()
+        data = o.data
+        name = o.name
+        for o in obj:
+            if o.name != name:
+                ob = bpy.data.objects.new(name+'_duplicatio', data)
+                ob.matrix_local = locata
+                bpy.context.scene.objects.link(ob)
+                ob.parent = o
+        return {'FINISHED'}
 
 
 class NTbezierOrdering(bpy.types.Operator):
@@ -1504,6 +1529,8 @@ class NikitronPanel(bpy.types.Panel):
                         #row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
                         
                         row = col.row(align=True)
+                        row.operator("object.nt_duplicat",icon="GROUP_VERTEX", text=sv_lang['NTduplicat'])
+                        row = col.row(align=True)
                         row.operator("object.nt_text_mesh_weld",icon="FULLSCREEN_EXIT", text=sv_lang['NTTextMeshWeld'])
                         row = col.row(align=True)
                         row.operator("object.nt_connect2objects",icon="LINKED", text=sv_lang['Connect2Meshes'])
@@ -1522,7 +1549,7 @@ my_classes = [
                 ComplimentWoman, AreaOfLenin, EdgeLength,
                 CliffordAttractors, NT_ClearNodesLayouts,
                 NT_language, NTTextMeshWeld, NTVolumeCalculate,
-                NTbezierOrdering,
+                NTbezierOrdering, NTduplicat,
                 ]
 
 
