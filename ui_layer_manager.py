@@ -21,7 +21,7 @@
 bl_info = {
     "name": "Layer Management",
     "author": "Alfonso Annarumma, Bastien Montagne",
-    "version": (1, 5, 2),
+    "version": (1, 5, 3),
     "blender": (2, 72, 0),
     "location": "Toolshelf > Layers Tab",
     "warning": "",
