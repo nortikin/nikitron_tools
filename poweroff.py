@@ -29,7 +29,7 @@ $openssl s_client -starttls smtp -crlf -connect smtp.gmail.com:25
 '''
 
 @persistent
-def render_complete_handler(dummy):
+def render_complete_handler_nt(dummy):
     sender = 'email@yandex.ru'
     receivers = ['email@yandex.ru']
 
@@ -51,11 +51,11 @@ def render_complete_handler(dummy):
     os.system("shutdown /s") # shutdown command here for linux 'poweroff'
 
 def register():
-    bpy.app.handlers.render_complete.append(render_complete_handler)
+    bpy.app.handlers.render_complete.append(render_complete_handler_nt)
 
 
 def unregister():
-    bpy.app.handlers.render_complete.remove(render_complete_handler)
+    bpy.app.handlers.render_complete.remove(render_complete_handler_nt)
 
 if __name__ == "__main__":
     register()
