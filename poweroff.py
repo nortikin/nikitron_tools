@@ -37,7 +37,7 @@ def render_complete_handler(dummy):
     To: Nikitka <email@yandex.ru>
     Subject: Work is done, comp is off
 
-    Твой рендер сохранён на компьютере, ты можешь быть спокоен, компьютер выключен
+    Твой рендер сохранён на компьютере, ты можешь быть спокоен, компьютер выключен,носки поглажены.
     """
 
     try:
@@ -48,7 +48,7 @@ def render_complete_handler(dummy):
         print ("Successfully sent email")
     except:
         print ("Error: unable to send email")
-    os.system("shutdown /s") # shutdown command here
+    os.system("shutdown /s") # shutdown command here for linux 'poweroff'
 
 def register():
     bpy.app.handlers.render_complete.append(render_complete_handler)
