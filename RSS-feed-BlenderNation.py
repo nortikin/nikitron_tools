@@ -1,8 +1,8 @@
 # nikitron.cc.ua ordered for this. Much thanks to Nikolay Fomichev https://vk.com/pythal
 bl_info = {
     "name": "RSS",
-    "version": (0, 1, 2),
-    "blender": (2, 6, 9), 
+    "version": (0, 2, 0),
+    "blender": (2, 8, 0), 
     "category": "World",
     "author": "Nikolay Fomichev",
     "location": "World",
@@ -62,17 +62,17 @@ class RssPanel(bpy.types.Panel):
                     title = i.find('title')
                     link = i.find('link')
                     description = i.find('description')
-                    dtext_ = re.split('<img', description.text)[:-1]
+                    dtext___ = re.split('<img', description.text)[:-1]
+                    dtext__ = re.split('<p>',str(dtext___))[1]
+                    dtext_ = re.split('</p>',dtext__)[0]
                     col = box.column()
                     col.scale_y=1.5
                     col.operator('wm.url_open', text=title.text).url = link.text
-                    # dtext_ = re.split('<br/>',description.text)[0]
-                    print(width1)
                     dtext = pprint.pformat(dtext_, width=width1)
                     col = box.column()
                     col.scale_y=0.6
                     for a in dtext.splitlines():
-                        col.label(a)
+                        col.label(a[1:-1])
         if self.tree:
             if bpy.context.window_manager.RSSadress == \
                     'http://feeds.feedburner.com/BlenderNation':
