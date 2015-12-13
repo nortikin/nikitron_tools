@@ -44,6 +44,7 @@ FAKE_LAYER_GROUP = [True] * NUM_LAYERS
 class NamedLayer(PropertyGroup):
     name = StringProperty(name="Layer Name")
     use_lock = BoolProperty(name="Lock Layer", default=False)
+    use_render = BoolProperty(name="Render", default=True)
     use_object_select = BoolProperty(name="Object Select", default=True)
     use_wire = BoolProperty(name="Wire Layer", default=False)
 
@@ -75,6 +76,7 @@ class LayerGroup(PropertyGroup):
     use_toggle = BoolProperty(name="", default=False)
     use_wire = BoolProperty(name="", default=False)
     use_lock = BoolProperty(name="", default=False)
+    use_render = BoolProperty(name="", default=True)
 
     layers = BoolVectorProperty(name="Layers", default=([False] * NUM_LAYERS), size=NUM_LAYERS, subtype='LAYER')
 
@@ -174,6 +176,53 @@ class SCENE_OT_namedlayer_toggle_visibility(bpy.types.Operator):
         self.extend = event.shift
         return self.execute(context)
 
+class SCENE_OT_namedlayer_toggle_render(bpy.types.Operator):
+    """Render or not given layer (shift to extend)"""
+    bl_idname = "scene.namedlayer_toggle_render"
+    bl_label = "Render/Not Layer"
+
+    layer_idx = IntProperty()
+    group_idx = IntProperty()
+    use_spacecheck = BoolProperty()
+    extend = BoolProperty(options={'SKIP_SAVE'})
+
+    @classmethod
+    def poll(cls, context):
+        return context.scene and (context.area.spaces.active.type == 'VIEW_3D')
+
+    def execute(self, context):
+        scene = context.scene
+        layer_cont = context.area.spaces.active if self.use_spacecheck else context.scene
+        layer_idx = self.layer_idx
+
+        if layer_idx == -1:
+            group_idx = self.group_idx
+            layergroups = scene.layergroups[group_idx]
+            group_layers = layergroups.layers
+            layers = layer_cont.layers
+
+            if layergroups.use_render:
+                for group in scene.layergroups:
+                    group.use_render = False
+                #layer_cont.layers = [not group_layer and layer for group_layer, layer in zip(group_layers, layers)]
+                #layergroups.use_render = False
+            else:
+                for group in scene.layergroups:
+                    group.use_render = False
+                layer_cont.layers = [group_layer for group_layer, layer in zip(group_layers, layers)]
+                layergroups.use_render = True
+        else:
+            if self.extend:
+                layer_cont.layers[layer_idx] = not layer_cont.layers[layer_idx]
+            else:
+                layers = [False] * NUM_LAYERS
+                layers[layer_idx] = True
+                layer_cont.layers = layers
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        self.extend = event.shift
+        return self.execute(context)
 
 class SCENE_OT_namedlayer_move_to_layer(bpy.types.Operator):
     """Move selected objects to this Layer (shift to extend)"""
@@ -335,6 +384,40 @@ class SCENE_OT_namedlayer_select_objects_by_layer(bpy.types.Operator):
         self.active = event.ctrl
         return self.execute(context)
 
+class SCENE_OT_namedlayer_render(bpy.types.Operator):
+    """Render all the objects on this Layer"""
+    bl_idname = "scene.namedlayer_render"
+    bl_label = "Render Objects In Layer"
+
+    render_obj = BoolProperty()
+    layer_idx = IntProperty()
+
+    extend = BoolProperty(options={'SKIP_SAVE'})
+
+    @classmethod
+    def poll(cls, context):
+        return context.scene and (context.area.spaces.active.type == 'VIEW_3D')
+
+    def execute(self, context):
+        scene = context.scene
+        view_3d = context.area.spaces.active
+        render_obj = self.render_obj
+        layer_idx = self.layer_idx
+        layer_cont = scene if view_3d.lock_camera_and_layers else view_3d
+        #wtf
+        namedlayer = layer_cont.namedlayers.layers[layer_cont.namedlayers['layers'][layer_idx]['name']]
+
+        for obj in scene.objects:
+            if obj.layers[layer_idx]:
+                obj.hide_render = namedlayer.use_render
+        namedlayer.use_render = not namedlayer.use_render
+                
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        self.extend = event.shift
+        self.active = event.ctrl
+        return self.execute(context)
 
 class SCENE_OT_namedlayer_show_all(bpy.types.Operator):
     """Show or hide all layers in the scene"""
@@ -443,6 +526,9 @@ class SCENE_PT_namedlayer_layers(bpy.types.Panel):
             else:
                 row.prop(layer_cont, "layers", index=layer_idx, emboss=True, icon=icon, toggle=True, text="")
 
+            icon = 'RESTRICT_RENDER_OFF' if namedlayer.use_render else 'RESTRICT_RENDER_ON'
+            op = row.operator("scene.namedlayer_render", icon=icon, text="", emboss=True).layer_idx = layer_idx
+
             # Name (use special icon for active layer)
             icon = 'FILE_TICK' if (getattr(layer_cont, "active_layer", -1) == layer_idx) else 'NONE'
             row.prop(namedlayer, "name", text="", icon=icon)
@@ -508,6 +594,13 @@ class SCENE_UL_namedlayer_groups(UIList):
             op.group_idx = index
             op.layer_idx = -1
 
+            # render operator
+            icon = 'RESTRICT_RENDER_OFF' if layer_group.use_render else 'RESTRICT_RENDER_ON'
+            op = layout.operator("scene.namedlayer_toggle_render", text="", emboss=False, icon=icon)
+            op.use_spacecheck = use_spacecheck
+            op.group_idx = index
+            op.layer_idx = -1
+
             # wire operator
             use_wire = layer_group.use_wire
             icon = 'WIRE' if use_wire else 'POTATO'
@@ -568,3 +661,4 @@ def unregister():
 
 if __name__ == "__main__":
     register()
+    
