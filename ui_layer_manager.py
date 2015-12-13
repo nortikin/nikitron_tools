@@ -147,20 +147,23 @@ class SCENE_OT_namedlayer_toggle_visibility(bpy.types.Operator):
         layer_cont = context.area.spaces.active if self.use_spacecheck else context.scene
         layer_idx = self.layer_idx
 
+        def lg_zero(scene):
+            for group in scene.layergroups:
+                group.use_toggle = False
+
         if layer_idx == -1:
             group_idx = self.group_idx
             layergroups = scene.layergroups[group_idx]
             group_layers = layergroups.layers
             layers = layer_cont.layers
 
+
             if layergroups.use_toggle:
-                for group in scene.layergroups:
-                    group.use_toggle = False
+                lg_zero(scene)
                 #layer_cont.layers = [not group_layer and layer for group_layer, layer in zip(group_layers, layers)]
                 #layergroups.use_toggle = False
             else:
-                for group in scene.layergroups:
-                    group.use_toggle = False
+                lg_zero(scene)
                 layer_cont.layers = [group_layer for group_layer, layer in zip(group_layers, layers)]
                 layergroups.use_toggle = True
         else:
@@ -195,22 +198,41 @@ class SCENE_OT_namedlayer_toggle_render(bpy.types.Operator):
         layer_cont = context.area.spaces.active if self.use_spacecheck else context.scene
         layer_idx = self.layer_idx
 
+        def obj_render(scene, layer, group_l, layer_idx, render):
+            for obj in scene.objects:
+                print(group_l, obj.layers[layer_idx], layer_idx)
+                if obj.layers[layer_idx]:
+                    obj.hide_render = not render
+            layer.use_render = render
+
+        def layer_render(group_layers, layer_cont, layergroup, render):
+            for group_l, named_l, y in zip(group_layers, layer_cont.namedlayers.layers, range(20)):
+                if group_l:
+                    obj_render(scene, named_l, group_l, y, render)
+            layergroup.use_render = render
+
+
+        def lg_zero(scene):
+            for group in scene.layergroups:
+                group.use_render = True
+                
         if layer_idx == -1:
             group_idx = self.group_idx
-            layergroups = scene.layergroups[group_idx]
-            group_layers = layergroups.layers
+            layergroup = scene.layergroups[group_idx]
+            group_layers = layergroup.layers
             layers = layer_cont.layers
 
-            if layergroups.use_render:
-                for group in scene.layergroups:
-                    group.use_render = False
-                #layer_cont.layers = [not group_layer and layer for group_layer, layer in zip(group_layers, layers)]
-                #layergroups.use_render = False
+            if layergroup.use_render:
+                lg_zero(scene)
+                layer_render(group_layers, layer_cont, layergroup, False)
             else:
-                for group in scene.layergroups:
-                    group.use_render = False
-                layer_cont.layers = [group_layer for group_layer, layer in zip(group_layers, layers)]
-                layergroups.use_render = True
+                lg_zero(scene)
+                layer_render(group_layers, layer_cont, layergroup, True)
+        '''
+        for objects in bpy.data.objects:
+            for i,z in zip(objects.layers,range(20)):
+                if i:
+                    print(z,objects.name)
         else:
             if self.extend:
                 layer_cont.layers[layer_idx] = not layer_cont.layers[layer_idx]
@@ -218,6 +240,7 @@ class SCENE_OT_namedlayer_toggle_render(bpy.types.Operator):
                 layers = [False] * NUM_LAYERS
                 layers[layer_idx] = True
                 layer_cont.layers = layers
+        '''
         return {'FINISHED'}
 
     def invoke(self, context, event):
