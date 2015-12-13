@@ -15,7 +15,7 @@ def do_file():
         angle = int(degrees(vec1.angle(vec2)))
         outdict[i] = [angle, round(ver2[0],3), round(ver2[1],3), round(ver1[0],3), round(ver1[1],3), round(vec2.length,3), round(-vec2.length,3)]
 
-    a_file = '''*PATTERN1, Nikitron'''
+    a_file = '''*PATTERN1, NewPaternNameHere'''
 
     for val in outdict.values():
         out = str(val[:])[1:-1]
