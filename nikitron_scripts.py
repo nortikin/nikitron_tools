@@ -385,14 +385,14 @@ class NTVolumeCalculate(NTcsvCalc):
     
     def calcVolume(self):
         objs = bpy.context.selected_objects
-        bpy.ops.object.select_all(action='DESELECT')
+        #bpy.ops.object.select_all(action='DESELECT')
         volume = 0
         for o in objs:
-            bpy.data.objects[o.name].select = True
+            #bpy.data.objects[o.name].select = True
             bo = bmesh.new()
             bo.from_mesh(o.data)
             volume += bo.calc_volume()
-            bpy.ops.object.select_all(action='DESELECT')
+            #bpy.ops.object.select_all(action='DESELECT')
         bpy.data.objects[o.name].select = True
         return volume
     
