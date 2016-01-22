@@ -1533,6 +1533,8 @@ class NikitronPanel(bpy.types.Panel):
             row.scale_y=1.1
             row.operator("object.nt_delete_nodelayouts",icon="NODE", text=sv_lang['NT_ClearNodesLayouts'])
             row.prop(bpy.context.scene, "nt_clean_layout_used", text=sv_lang['CleanLayoutUsed'])
+            row = col.row(align=True)
+            row.operator("object.nt_duplicat",icon="GROUP_VERTEX", text=sv_lang['NTduplicat'])
         
         if bpy.context.selected_objects:
             box = layout.box()
@@ -1586,8 +1588,6 @@ class NikitronPanel(bpy.types.Panel):
                         #row.operator("object.nt_boolerator_intersection",icon="MOD_BOOLEAN", text=sv_lang['BooleratorIntersection'])
                         #row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
                         
-                        row = col.row(align=True)
-                        row.operator("object.nt_duplicat",icon="GROUP_VERTEX", text=sv_lang['NTduplicat'])
                         row = col.row(align=True)
                         row.operator("object.nt_text_mesh_weld",icon="FULLSCREEN_EXIT", text=sv_lang['NTTextMeshWeld'])
                         row = col.row(align=True)
