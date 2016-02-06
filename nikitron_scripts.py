@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 # ##### BEGIN GPL LICENSE BLOCK #####
 #
 #  This program is free software; you can redistribute it and/or
@@ -20,8 +20,8 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (2, 1, 1),
-    "blender": (2, 7, 5),  
+    "version": (2, 1, 2),
+    "blender": (2, 7, 7),  
     "category": "Object",
     "author": "Nikita Gorodetskiy",
     "location": "object",
@@ -287,7 +287,7 @@ class NTTextMeshWeld(bpy.types.Operator):
 
 class NTcsvCalc(bpy.types.Operator):
         
-    def calcarea(self):
+    def calcareasum(self):
         pols = bpy.context.active_object.data.polygons
         bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
         summa = sum([ p.area for p in pols if p.select ])
@@ -300,7 +300,7 @@ class NTcsvCalc(bpy.types.Operator):
         else:
             return str(round(digit,roro))
 
-    def do_text(self, area, materials):
+    def do_area(self, area, materials):
         roro = 4
         sep = bpy.context.scene.nt_areaseps
         if sep == '    ':
@@ -336,6 +336,29 @@ class NTcsvCalc(bpy.types.Operator):
         bpy.data.texts['Materials.csv'].clear()
         bpy.data.texts['Materials.csv'].write(for_file)
 
+    def do_volume(self, volumes, volume):
+        'volumes = object name = mesh name + volume; volume = total volume'
+        roro = 4
+        sep = bpy.context.scene.nt_areaseps
+        if sep == '    ':
+            tab = ''
+        else:
+            tab = '    '
+        coma = bpy.context.scene.nt_areacoma
+        NTmaketext('Volumes.csv')
+
+
+        for_file = 'Объект' + sep + 'Сетка' + sep + 'Объём м3' + sep + 'Примечание' + '\n'*2
+        a = self.take_digit(coma, volume, roro)
+        for_file += 'Всего:' + sep + sep + a + sep + 'Из выделения' + '\n'*2
+        sorted_v = sorted(volumes.items())
+        for nam, val in sorted_v:
+            a = self.take_digit(coma, val[1], roro)
+            for_file += nam + sep + val[0] + sep + a + sep + '\n'
+        for_file += '\n\n'
+
+        bpy.data.texts['Volumes.csv'].clear()
+        bpy.data.texts['Volumes.csv'].write(for_file)
 
     def calc_materials(self):
         if bpy.context.mode == 'OBJECT':
@@ -380,21 +403,26 @@ class NTVolumeCalculate(NTcsvCalc):
     volume = bpy.props.StringProperty(name='объём', default='')
 
     def execute(self, context):
-        self.volume = str(self.calcVolume())
+        self.volume = str(self.calcVolume()[0])
         return {'FINISHED'}
     
     def calcVolume(self):
         objs = bpy.context.selected_objects
-        #bpy.ops.object.select_all(action='DESELECT')
+        volumes = {}
         volume = 0
         for o in objs:
-            #bpy.data.objects[o.name].select = True
-            bo = bmesh.new()
-            bo.from_mesh(o.data)
-            volume += bo.calc_volume()
-            #bpy.ops.object.select_all(action='DESELECT')
-        bpy.data.objects[o.name].select = True
-        return volume
+            on = o.name
+            od = o.data
+            dn = od.name
+            if o.type == 'MESH':
+                bo = bmesh.new()
+                bo.from_mesh(od)
+                vo = bo.calc_volume()
+                volumes[on] = [dn,vo]
+                volume += vo
+        bpy.data.objects[on].select = True
+        self.do_volume(volumes,volume)
+        return volume, volumes
     
 class EdgeLength(NTcsvCalc):
     """Длина рёбер объектов"""
@@ -436,7 +464,6 @@ class AreaOfLenin(NTcsvCalc):
     bl_options = {'REGISTER', 'UNDO'}
     
     area = bpy.props.StringProperty(name='площадь', default='')
-    #materials = bpy.props.BoolProperty(name='materials')
 
     def execute(self, context):
         #try:
@@ -444,9 +471,9 @@ class AreaOfLenin(NTcsvCalc):
             if bpy.context.mode == 'OBJECT':
                 area, materials = self.calc_materials()
                 self.area = str(round(area['Total'],4))
-                self.do_text(area, materials)
+                self.do_area(area, materials)
             elif bpy.context.mode == 'EDIT_MESH':
-                self.area = self.calcarea()
+                self.area = self.calcareasum()
         #except:
         #    self.report({'ERROR'}, 'Проверьте материалы и объекты')
         return {'FINISHED'}
