@@ -20,8 +20,8 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (2, 1, 2),
-    "blender": (2, 7, 7),  
+    "version": (2, 1, 3),
+    "blender": (2, 7, 6),  
     "category": "Object",
     "author": "Nikita Gorodetskiy",
     "location": "object",
@@ -42,7 +42,7 @@ import os
 import random
 import bmesh
 from bpy_extras.object_utils import object_data_add
-from bpy.props import IntProperty, BoolProperty, EnumProperty
+from bpy.props import IntProperty, BoolProperty, EnumProperty, FloatProperty
 import operator
 
 my_str_classes = [
@@ -58,7 +58,7 @@ my_str_classes = [
                 'hook', 'maxvers', 'Mesh_section', 'toolsetNT',
                 'NTTextMeshWeld', 'areaseps', 'areacoma',
                 'volume', 'NTManifestGenerator', 'NTbezierOrdering',
-                'NTduplicat',
+                'NTduplicat', 'NTScaleFit', 'Volums'
                 ]
                 
 my_var_names = [] # extend with veriables names
@@ -77,7 +77,8 @@ ru_dict = [
                 'КРИВЫЕ', 'Верш', 'Сдвиг',
                 'Крюк', 'МаксВер', 'СЕТКА', 'ИНСТРУМЕНТЫ НТ',
                 'ТЕКСТ+СЕТКА', 'Разделитель', 'Точка',
-                'Объём', 'МаниФест', 'Безье выпрямить', 'Дубликаты',
+                'Объём', 'МаниФест', 'Безье выпрямить', 
+                'Дубликаты', 'МасшВОбъём', 'Единицы'
                 ]
                 
 en_dict = [
@@ -92,7 +93,8 @@ en_dict = [
                 'CURVES', 'Vers', 'Shift',
                 'Hook', 'MaxVers', 'MESH', 'TOOLSET NT',
                 'TEXT+MESH', 'Separator', 'Coma',
-                'Volume', 'ManiFest', 'Good bezier', 'Duplicats'
+                'Volume', 'ManiFest', 'Good bezier', 
+                'Duplicats', 'Scale2Vol', 'Units'
                 ]
 
 area_seps = [(';',';',';'),('    ','tab','    '),(',',',',','),(' ','space',' ')]
@@ -188,6 +190,49 @@ vert_max = 0
 nt_lang_panel()
 
 
+
+
+
+class NTScaleFit(bpy.types.Operator):
+    """Масштабирует в указаный объём"""
+    bl_idname = "object.nt_scalefit"
+    bl_label = 'МАСШТвОБЪ'
+    bl_options = {'REGISTER', 'UNDO'}
+
+    Объём = bpy.props.FloatProperty(name='Объём', default=1.0)
+    volums = [('m3','m3','m3'),('l','l','l'),('sm3','sm3','sm3')]
+    scaleunit = EnumProperty(
+        items=volums,
+        name="scale2vol_units",
+        description="Масштабирует в указанный объём. Scale to defined volume.",
+        default = 'm3')
+
+    def execute(self, context):
+        objs = bpy.context.selected_objects
+        
+        volinit = 0
+        if self.scaleunit == 'l':
+            volend = self.Объём/1000
+        elif self.scaleunit == 'sm3':
+            volend = self.Объём/1000000
+        elif self.scaleunit == 'm3':
+            volend = self.Объём
+
+
+        for o in objs:
+            bo = bmesh.new()
+            bo.from_mesh(o.data)
+            vo = bo.calc_volume()
+            su = 1
+            for s in o.scale[:]:
+                su *= s
+            vol = su*vo
+            volinit += vol
+        coef = volend / volinit
+        coep = math.pow(coef,1/3)
+        for o in objs:
+            o.scale *= coep
+        return {'FINISHED'}
 
 
 
@@ -418,8 +463,12 @@ class NTVolumeCalculate(NTcsvCalc):
                 bo = bmesh.new()
                 bo.from_mesh(od)
                 vo = bo.calc_volume()
-                volumes[on] = [dn,vo]
-                volume += vo
+                su = 1
+                for s in o.scale[:]:
+                    su *= s
+                vol = su*vo
+                volumes[on] = [dn,vol]
+                volume += vol
         bpy.data.objects[on].select = True
         self.do_volume(volumes,volume)
         return volume, volumes
@@ -1614,7 +1663,10 @@ class NikitronPanel(bpy.types.Panel):
                         #row.operator("object.nt_boolerator_random",icon="MOD_BOOLEAN", text=sv_lang['BooleratorRandom'])
                         #row.operator("object.nt_boolerator_intersection",icon="MOD_BOOLEAN", text=sv_lang['BooleratorIntersection'])
                         #row.operator("object.nt_boolerator_translation",icon="MOD_BOOLEAN", text=sv_lang['BooleratorTranslation'])
-                        
+
+                        row = col.row(align=True)
+                        #row.prop(bpy.context.scene, "nt_scale2vol", text=sv_lang['Volums'])
+                        row.operator("object.nt_scalefit",icon="VIEW3D", text=sv_lang['NTScaleFit'])                        
                         row = col.row(align=True)
                         row.operator("object.nt_text_mesh_weld",icon="FULLSCREEN_EXIT", text=sv_lang['NTTextMeshWeld'])
                         row = col.row(align=True)
@@ -1635,6 +1687,7 @@ my_classes = [
                 CliffordAttractors, NT_ClearNodesLayouts,
                 NT_language, NTTextMeshWeld, NTVolumeCalculate,
                 NTManifestGenerator, NTbezierOrdering, NTduplicat,
+                NTScaleFit
                 ]
 
 
