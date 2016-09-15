@@ -1150,7 +1150,7 @@ class DeleteOrientation (bpy.types.Operator):
 class BooleratorRandom (bpy.types.Operator):
     """Булен объединение nt_hook_or_not, Случайном порядке если нет - Обычном порядке поимённо"""      
     bl_idname = "object.nt_boolerator_random"
-    bl_label = "БУЛ_СЛ"
+    bl_label = "Bool_СЛ"
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
@@ -1187,7 +1187,7 @@ class BooleratorRandom (bpy.types.Operator):
 class BooleratorIntersection (bpy.types.Operator):
     """ Булен единство Пересечения"""      
     bl_idname = "object.nt_boolerator_intersection"
-    bl_label = "БУЛ_ПЕР"
+    bl_label = "Bool_ПЕР"
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
@@ -1333,7 +1333,7 @@ class BooleratorIntersection (bpy.types.Operator):
 class BooleratorTranslation (bpy.types.Operator):
     """ Булен единство от Перемещения"""      
     bl_idname = "object.nt_boolerator_translation"
-    bl_label = "БУЛ_ПОЛОЖ"
+    bl_label = "Bool_ПОЛОЖ"
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
