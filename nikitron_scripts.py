@@ -1468,7 +1468,8 @@ class BoundingBox (bpy.types.Operator):
     def make_it(self, i, obj):
         box = bpy.context.selected_objects[i].bound_box
         mw = bpy.context.selected_objects[i].matrix_world
-        name = (bpy.context.selected_objects[i].name + '_bounding_box')
+        WDH = str(bpy.context.selected_objects[i].dimensions[:])
+        name = (bpy.context.selected_objects[i].name + '_bbox|WDH' + WDH + '|')
         me = bpy.data.meshes.new(name+'Mesh')
         ob = bpy.data.objects.new(name, me)
         ob.location = mw.translation
