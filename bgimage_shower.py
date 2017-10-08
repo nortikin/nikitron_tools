@@ -19,7 +19,7 @@
 
 
 bl_info = {
-    "name": "Nikitron tools",
+    "name": "Camera backgrounder/Задники камеры",
     "version": (0, 1, 0),
     "blender": (2, 7, 9),  
     "category": "Camera",
