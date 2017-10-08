@@ -34,7 +34,8 @@ bl_info = {
 
 
 import bpy
-from bpy.props import StringProperty, CollectionProperty
+from bpy.props import StringProperty, CollectionProperty, \
+                        BoolProperty
 import os
 
 
@@ -152,7 +153,9 @@ class OP_SV_bgimage_bgimageset(bpy.types.Operator):
 
     def execute(self, context):
         context.scene.camera = bpy.data.objects[self.camera]
-
+        bgimages = context.space_data.background_images
+        for bgi in bgimages:
+            bgi.show_background_image = False
         bginame = bpy.data.objects[self.camera].bgimage
         bgi = context.space_data.background_images.new()
         bgi.image = bpy.data.images[bginame]
@@ -234,7 +237,7 @@ class OP_SV_bgimage_import(bpy.types.Operator):
 
 
 class VIEW3D_PT_camera_bgimages(bpy.types.Panel):
-    bl_label = "camera_bgimages"
+    bl_label = "Backgrounds / Задники"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
     bl_category = '1D'
@@ -251,8 +254,19 @@ class VIEW3D_PT_camera_bgimages(bpy.types.Panel):
         col = layout.column(align=True)
         
         #col.split(percentage=0.1, align=False)
-        col.operator("image.sv_bgimage_remove", text='clear all bgimages')
-        col.operator("image.sv_bgimage_remove_unused", text='clear unused bgimages')
+        main = context.scene
+        row = col.row(align=True)
+        #split = row.split(percentage=0.15)
+        if main.bgimage_panel:
+            row.prop(main, 'bgimage_panel', text="Be carefull!", icon='DOWNARROW_HLT')
+        else:
+            row.prop(main, 'bgimage_panel', text="Basics", icon='RIGHTARROW')
+        if main.bgimage_panel:
+            row = col.row(align=True)
+            row.operator("image.sv_bgimage_remove", text='clear all')
+            row.operator("image.sv_bgimage_remove_unused", text='clear unused')
+            row.prop(bpy.context.space_data,'show_background_images',text='ACTIVE',expand=True,toggle=True)
+        col.label(text='  ')
         box = col.column(align=True)
         for c in bpy.data.cameras:
             row = box.row(align=True)
@@ -274,9 +288,14 @@ class VIEW3D_PT_camera_bgimages(bpy.types.Panel):
                 imagebgexists = False
                 for bgi in bgimages:
                     if bgi.image.name == imname:
-                        row.prop(bgi,'show_on_foreground',text='',expand=True,toggle=True,icon='IMAGE_ZDEPTH')
                         imagebgexists = True
-                        #row = box.row(align=True)
+                        
+                        row = box.row(align=True)
+                        #row.scale_y=0.7
+                        row.prop(bgi,'opacity',text='Opacity',expand=True,toggle=True)
+                        row.prop(bgi,'show_on_foreground',text='',expand=True,toggle=True,icon='IMAGE_ZDEPTH')
+                        box.label(text=' ')
+
                         #row.template_ID(bgi, "image", open="image.open")
                         #row.template_ID_preview(bgi, 'image',open="image.open", rows=2, cols=3)
                 if not imagebgexists:
@@ -305,6 +324,10 @@ class VIEW3D_PT_camera_bgimages(bpy.types.Panel):
 
 
 def register():
+    bpy.types.Scene.bgimage_panel = BoolProperty(
+                                name="show main panel",
+                                description="",
+                                default = False)
     bpy.types.Object.bgimage = bpy.props.StringProperty()
     bpy.utils.register_class(OP_SV_bgimage_bgimageset)
     bpy.utils.register_class(OP_SV_bgimage_cameraset)
