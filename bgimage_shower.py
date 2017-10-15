@@ -163,7 +163,11 @@ class OP_SV_bgimage_bgimageset(bpy.types.Operator):
 
         return {'FINISHED'}
 
-
+''' help for future text:
+        for t in text:
+            context.scene.mp_playlist.add()
+            context.scene.mp_playlist[-1].playlist = t
+'''
 
 class OP_SV_bgimage_show(bpy.types.Operator):
     '''!!!!! Not active operator !!!!!'''
@@ -271,6 +275,7 @@ class VIEW3D_PT_camera_bgimages(bpy.types.Panel):
         for c in bpy.data.cameras:
             row = box.row(align=True)
             imname = bpy.data.objects[c.name].bgimage
+            #row.prop(bpy.data.objects, "lock_object", text="")
             if context.space_data.camera == bpy.data.objects[c.name]:
                 row.label(text='V '+c.name)
             else:
@@ -321,6 +326,9 @@ class VIEW3D_PT_camera_bgimages(bpy.types.Panel):
                 #if not camimage:
                 #row.label(text='Noimage')
 
+class SvBgImage(bpy.types.PropertyGroup):
+    object = bpy.props.PointerProperty(type=bpy.types.Object, name='object')
+    bgimage = bpy.props.PointerProperty(type=bpy.types.Image, name='image')
 
 
 def register():
@@ -328,6 +336,7 @@ def register():
                                 name="show main panel",
                                 description="",
                                 default = False)
+    #bpy.types.Object.bgobjects = 
     bpy.types.Object.bgimage = bpy.props.StringProperty()
     bpy.utils.register_class(OP_SV_bgimage_bgimageset)
     bpy.utils.register_class(OP_SV_bgimage_cameraset)
