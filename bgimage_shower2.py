@@ -35,7 +35,8 @@ bl_info = {
 
 import bpy
 from bpy.props import StringProperty, CollectionProperty, \
-                        BoolProperty, PointerProperty
+                        BoolProperty, PointerProperty, \
+                        IntProperty
 
 
 class SvBgImage(bpy.types.PropertyGroup):
@@ -56,7 +57,8 @@ class OP_SV_bgimage_remove(bpy.types.Operator):
         a = context.space_data.background_images
         obs = bpy.data.cameras
         for i in a:
-            bpy.data.images[i.image.name].user_clear()
+            if i.image:
+                i.image.user_clear()
             a.remove(i)
         for o in obs:
             bpy.data.objects[o.name].bgimage = ''
@@ -128,7 +130,36 @@ class OP_SV_bgimage_new_slot(bpy.types.Operator):
 
 
 
-class VIEW3D_PT_camera_bgimages(bpy.types.Panel):
+class OP_SV_bgimage_setcamera(bpy.types.Operator):
+    '''Set camera active bg'''
+    bl_idname = "image.sv_bgimage_set_camera"
+    bl_label = "Open image"
+    bl_description = "activate gbimage"
+    bl_options = {'REGISTER'}
+
+    item = IntProperty(name='item')
+
+
+    def execute(self, context):
+        bgimages = context.space_data.background_images
+        item= self.item
+        im = False
+        for bgi in bgimages:
+            if bgi.image.name == context.scene.bgobjects[item].image.name:
+                bgi.show_background_image = True
+                context.scene.camera = context.scene.bgobjects[item].object
+            else:
+                bgi.show_background_image = False
+        if not im:
+            newbgimage = context.space_data.background_images.new()
+            print(context.scene.bgobjects[item].image)
+            context.scene.camera = context.scene.bgobjects[item].object
+            newbgimage.image = context.scene.bgobjects[item].image
+        return {'FINISHED'}
+
+
+
+class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
     bl_label = "Backgrounds"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
@@ -155,13 +186,14 @@ class VIEW3D_PT_camera_bgimages(bpy.types.Panel):
             col.prop(main,'bgimage_preview', text='Preview',expand=True,toggle=True, icon='RESTRICT_VIEW_OFF')
         col.label(text='  ')
         col.operator('object.sv_bgimage_new_slot', text='New', icon='ZOOMIN')
-        for bgo in context.scene.bgobjects:
+        for ind,bgo in enumerate(context.scene.bgobjects):
             row = col.row(align=True)
             if bgo.opened:
                 row.prop(bgo, 'opened', text='', icon='TRIA_DOWN')
                 try:
                     row.label(text=bgo.object.name)
-                    row.operator('object.sv_bgimage_set_camera', text='',icon='RESTRICT_VIEW_OFF')
+                    a = row.operator('image.sv_bgimage_set_camera', text='',icon='RESTRICT_VIEW_OFF')
+                    a.item = ind
                 except:
                     row.label(text='')
                 cam = bgo.object
@@ -176,7 +208,8 @@ class VIEW3D_PT_camera_bgimages(bpy.types.Panel):
                 row.prop(bgo, 'opened', text='', icon='TRIA_RIGHT')
                 try:
                     row.label(text=bgo.object.name)
-                    row.operator('object.sv_bgimage_set_camera', text='',icon='RESTRICT_VIEW_OFF')
+                    a = row.operator('image.sv_bgimage_set_camera', text='',icon='RESTRICT_VIEW_OFF')
+                    a.item = ind
                 except:
                     row.label(text='')
         
@@ -193,7 +226,8 @@ def register():
                                 default = False)
     bpy.utils.register_class(SvBgImage)
     bpy.types.Scene.bgobjects = CollectionProperty(type=SvBgImage)
-    bpy.utils.register_class(VIEW3D_PT_camera_bgimages)
+    bpy.utils.register_class(VIEW3D_PT_camera_bgimages2)
+    bpy.utils.register_class(OP_SV_bgimage_setcamera)
     bpy.utils.register_class(OP_SV_bgimage_new_slot)
     bpy.utils.register_class(OP_SV_bgimage_remove)
     bpy.utils.register_class(OP_SV_bgimage_remove_unused)
@@ -203,7 +237,8 @@ def unregister():
     bpy.utils.unregister_class(OP_SV_bgimage_remove_unused)
     bpy.utils.unregister_class(OP_SV_bgimage_remove)
     bpy.utils.unregister_class(OP_SV_bgimage_new_slot)
-    bpy.utils.unregister_class(VIEW3D_PT_camera_bgimages)
+    bpy.utils.unregister_class(OP_SV_bgimage_setcamera)
+    bpy.utils.unregister_class(VIEW3D_PT_camera_bgimages2)
     bpy.utils.unregister_class(SvBgImage)
     try:
         del bpy.types.Scene.bgobjects
