@@ -107,24 +107,17 @@ class OP_SV_bgimage_new_slot(bpy.types.Operator):
     def execute(self, context):
         obj = context.object
         bpy.ops.view3d.object_as_camera()
-        
+        bgobjects = context.scene.bgobjects
         bgimages = context.space_data.background_images
-        context.scene.bgobjects.add()
-        context.scene.bgobjects[-1].object = obj
-        #context.scene.bgobjects[-1].image
-        bgi = bgimages.new()
-        bgi.image = context.scene.bgobjects[-1].image
-        '''if bgim:
-            for bgi in bgimages:
-                if bgi.image.name == bgim:
-                    #print(bgi.image.name, bgim)
-                    bgi.show_background_image = True
-                else:
-                    bgi.show_background_image = False
-        else:
-            for bgi in bgimages:
-                print('noimage',bgi.show_background_image)
-                bgi.show_background_image = False'''
+        bgobjects.add()
+        bgobjects[-1].object = obj
+        if len(bpy.data.images):
+            context.scene.bgobjects[-1].image = bpy.data.images[0]
+            bgi = bgimages.new()
+            bgi.image = context.scene.bgobjects[-1].image
+            for bgims in bgimages:
+                bgims.show_background_image = False
+            bgi.show_background_image = True
 
         return {'FINISHED'}
 
