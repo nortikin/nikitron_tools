@@ -79,18 +79,17 @@ class OP_SV_bgimage_remove_unused(bpy.types.Operator):
 
 
     def execute(self, context):
-        a = context.space_data.background_images
-        obs = bpy.data.cameras
-        obj = bpy.data.objects
-        used = []
-        for i in a:
-            for o in obs:
-                if i.image.name == obj[o.name].bgimage:
-                    used.append(i.image.name)
-        for i in a:
-            if i.image.name not in used:
-                bpy.data.images[i.image.name].user_clear()
-                a.remove(i)
+        bgimages = context.space_data.background_images
+        bgobjects = context.scene.bgobjects
+        onames = []
+        inames = []
+        for obj in bgobjects:
+            inames.append(obj.image.name)
+            onames.append(obj.object.name)
+        for im in bgimages:
+            if im.image.name not in inames:
+                bpy.data.images[im.image.name].user_clear()
+                bgimages.remove(im)
 
         self.report({'INFO'}, 'cleared unused backgrounds')
         return {'FINISHED'}
@@ -124,7 +123,7 @@ class OP_SV_bgimage_new_slot(bpy.types.Operator):
 
 
 class OP_SV_bgimage_setcamera(bpy.types.Operator):
-    '''Set camera active bg'''
+    '''Set camera active bg. Main function, acts as initiation'''
     bl_idname = "image.sv_bgimage_set_camera"
     bl_label = "Open image"
     bl_description = "activate gbimage"
@@ -132,28 +131,45 @@ class OP_SV_bgimage_setcamera(bpy.types.Operator):
 
     item = IntProperty(name='item')
 
-
-    def execute(self, context):
-        bgimages = context.space_data.background_images
+    def areas_set(self, context, space):
+        bgimages = space.background_images
         bgobjects = context.scene.bgobjects
         item= self.item
         bgobject = bgobjects[item]
         im = False
+        # first check for existance of bgs
         for bgi in bgimages:
-            print(bgi.image.name)
+            #print(bgi.image.name)
             if bgi.image.name == bgobject.image.name:
                 print('image %s switched, not created + %s' % (bgobject.image.name, bgi.image.name))
                 bgi.show_background_image = True
                 im = True
-                context.scene.camera = bgobject.object
+                space.camera = bgobject.object
             else:
                 bgi.show_background_image = False
         if not im:
             print('image %s not switched, created' % (bgobject.image.name))
             newbgimage = bgimages.new()
-            print(bgobject.image)
-            context.scene.camera = bgobject.object
+            #print(bgobject.image)
+            space.camera = bgobject.object
             newbgimage.image = bgobject.image
+
+    def execute(self, context):
+        areas = bpy.data.screens[context.screen.name].areas
+        if not context.space_data.lock_camera_and_layers:
+            # if you work in not locked self space
+            self.areas_set(context, context.space_data)
+            print('NOT LOCKED CAMERA')
+            return {'FINISHED'}
+        else:
+            # if you work with locked self space
+            for ar in areas:
+                if ar.type == 'VIEW_3D':
+                    #if ar.spaces[0] == context.space_data:
+                    #    self.areas_set(context, ar.spaces[0])
+                    if ar.spaces[0].lock_camera_and_layers: #not own space data, but VIEW_3D
+                        self.areas_set(context, ar.spaces[0])
+                    
         return {'FINISHED'}
 
 
