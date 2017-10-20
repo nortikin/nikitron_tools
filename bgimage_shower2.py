@@ -39,10 +39,13 @@ from bpy.props import StringProperty, CollectionProperty, \
                         IntProperty
 
 
+
+
+
 class SvBgImage(bpy.types.PropertyGroup):
     object = PointerProperty(type=bpy.types.Object, name='object')
     image = PointerProperty(type=bpy.types.Image, name='image')
-    opened = BoolProperty(name='opened',default=True)
+    opened = BoolProperty(name='opened',default=False)
 
 
 
@@ -54,14 +57,10 @@ class OP_SV_bgimage_remove(bpy.types.Operator):
 
 
     def execute(self, context):
-        a = context.space_data.background_images
-        obs = bpy.data.cameras
-        for i in a:
-            if i.image:
-                i.image.user_clear()
-            a.remove(i)
-        for o in obs:
-            bpy.data.objects[o.name].bgimage = ''
+        bgobjects = context.scene.bgobjects
+        le = len(bgobjects)
+        for i,bgo in enumerate(bgobjects):
+            bpy.ops.image.sv_bgimage_rem_bgimage(item=-1-i)
         self.report({'INFO'}, 'cleared all backgrounds')
         return {'FINISHED'}
 
@@ -78,18 +77,25 @@ class OP_SV_bgimage_remove_unused(bpy.types.Operator):
     bl_options = {'REGISTER'}
 
 
-    def execute(self, context):
-        bgimages = context.space_data.background_images
+    def rem_unused(self, context, space):
+        bgimages = space.background_images
         bgobjects = context.scene.bgobjects
-        onames = []
-        inames = []
-        for obj in bgobjects:
-            inames.append(obj.image.name)
-            onames.append(obj.object.name)
-        for im in bgimages:
-            if im.image.name not in inames:
-                bpy.data.images[im.image.name].user_clear()
-                bgimages.remove(im)
+        unused = []
+        # first check for existance of bgs
+        for bgo in bgobjects:
+            for bgi in bgimages:
+                if not bgo.image == bgi.image:
+                    unused.append(bgi)
+        for bg in unused:
+            print('image %s will be unnihilated' % bg.image.name)
+            #bpy.data.images[bg].user_clear()
+            bgimages.remove(bg)
+
+    def execute(self, context):
+        areas = bpy.data.screens[context.screen.name].areas
+        for ar in areas:
+            if ar.type == 'VIEW_3D':
+                self.rem_unused(context, ar.spaces[0])
 
         self.report({'INFO'}, 'cleared unused backgrounds')
         return {'FINISHED'}
@@ -131,6 +137,7 @@ class OP_SV_bgimage_setcamera(bpy.types.Operator):
 
     item = IntProperty(name='item')
 
+
     def areas_set(self, context, space):
         bgimages = space.background_images
         bgobjects = context.scene.bgobjects
@@ -159,7 +166,7 @@ class OP_SV_bgimage_setcamera(bpy.types.Operator):
         if not context.space_data.lock_camera_and_layers:
             # if you work in not locked self space
             self.areas_set(context, context.space_data)
-            print('NOT LOCKED CAMERA')
+            print('NOT LOCKED CAMERA, changed only current 3d view camera backgrounds')
             return {'FINISHED'}
         else:
             # if you work with locked self space
@@ -182,23 +189,33 @@ class OP_SV_bgimage_rem_bgimage(bpy.types.Operator):
     bl_options = {'REGISTER'}
 
     item = IntProperty(name='item')
+    im = BoolProperty(name='im', default=False)
 
+    def rem_backgroundimage(self, context, space):
+        bgimages = space.background_images
+        bgobjects = context.scene.bgobjects
+        item= self.item
+        bgobject = bgobjects[item]
+        # first check for existance of bgs
+        for bgi in bgimages:
+            #print(bgi.image.name)
+            if bgi.image.name == bgobject.image.name:
+                print('image %s switched, not created + %s' % (bgobject.image.name, bgi.image.name))
+                bgimages.remove(bgi)
+                self.im = True
 
     def execute(self, context):
-        bgimages = context.space_data.background_images
+        areas = bpy.data.screens[context.screen.name].areas
+        for ar in areas:
+            if ar.type == 'VIEW_3D':
+                self.rem_backgroundimage(context, ar.spaces[0])
         bgobjects = context.scene.bgobjects
         item = self.item
-        bgobject = bgobjects[item]
-        im = False
-        for bgi in bgimages:
-            if bgi.image.name == bgobject.image.name:
-                print('image %s for object %s was removed' % (bgobject.image.name, bgobject.object.name))
-                bgimages.remove(bgi)
-                bgobjects.remove(item)
-                im = True
-        if not im:
-            print('impossible thing - we canot remove item under index', str(item))
+        if not self.im:
+            print('impossible thing - we canot remove item under index', str(item),'will create it')
             bpy.ops.image.sv_bgimage_set_camera(item=item)
+        print('remove item under index', str(item))
+        bgobjects.remove(item)
         return {'FINISHED'}
 
 
@@ -228,20 +245,6 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
             row.operator("image.sv_bgimage_remove_unused", text='unused', icon='X')
             row.prop(context.space_data,'show_background_images',text='Activate',expand=True,toggle=True)
             col.prop(main,'bgimage_preview', text='Preview',expand=True,toggle=True, icon='RESTRICT_VIEW_OFF')
-            col.prop(main,'bgimage_debug', text='Debug',expand=True,toggle=True)
-        if context.scene.bgimage_debug:
-            col.label(text='EXISTING BGIMAGESETS:')
-            for Y,bgo in enumerate(context.scene.bgobjects):
-                row = col.row(align=True)
-                row.label(text=str(Y))
-                row.label(text=bgo.image.name)
-                row.label(text=bgo.object.name)
-                row.label(text=str(bgo.opened))
-            col.label(text='EXISTING BACKGROUNDS:')
-            for Y,bgs_existing in enumerate(context.space_data.background_images):
-                row = col.row(align=True)
-                row.label(text=str(Y))
-                row.label(text=bgs_existing.image.name)
         col.label(text='  ')
         col.operator('object.sv_bgimage_new_slot', text='New', icon='ZOOMIN')
         for ind,bgo in enumerate(context.scene.bgobjects):
@@ -275,6 +278,20 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
                     except:
                         row.label(text='')
 
+        col.prop(main,'bgimage_debug', text='Debug',expand=True,toggle=True)
+        if context.scene.bgimage_debug:
+            col.label(text='EXISTING BGIMAGESETS:')
+            for Y,bgo in enumerate(context.scene.bgobjects):
+                row = col.row(align=True)
+                row.label(text=str(Y))
+                row.label(text=bgo.image.name)
+                row.label(text=bgo.object.name)
+                row.label(text=str(bgo.opened))
+            col.label(text='EXISTING BACKGROUNDS:')
+            for Y,bgs_existing in enumerate(context.space_data.background_images):
+                row = col.row(align=True)
+                row.label(text=str(Y))
+                row.label(text=bgs_existing.image.name)
 
 
 def register():
