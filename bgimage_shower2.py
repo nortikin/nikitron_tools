@@ -49,6 +49,20 @@ class SvBgImage(bpy.types.PropertyGroup):
 
 
 
+class OP_SV_bgimage_object_picker(bpy.types.Operator):
+    bl_idname = 'image.sv_bgimage_object_picker'
+    bl_label = "pick selected object"
+    bl_description = "pick selected object as camera"
+    bl_options = {'REGISTER'}
+
+    item = IntProperty(name='item')
+
+    def execute(self, context):
+        context.scene.bgobjects[self.item].object = context.selected_objects[0]
+        return {'FINISHED'}
+
+
+
 class OP_SV_bgimage_remove(bpy.types.Operator):
     bl_idname = 'image.sv_bgimage_remove'
     bl_label = "remover of bgimages"
@@ -88,7 +102,7 @@ class OP_SV_bgimage_remove_unused(bpy.types.Operator):
                     unused.append(bgi)
         for bg in unused:
             print('image %s will be unnihilated' % bg.image.name)
-            #bpy.data.images[bg].user_clear()
+            bg.image.user_clear()
             bgimages.remove(bg)
 
     def execute(self, context):
@@ -176,6 +190,7 @@ class OP_SV_bgimage_setcamera(bpy.types.Operator):
                     #    self.areas_set(context, ar.spaces[0])
                     if ar.spaces[0].lock_camera_and_layers: #not own space data, but VIEW_3D
                         self.areas_set(context, ar.spaces[0])
+        
                     
         return {'FINISHED'}
 
@@ -254,29 +269,31 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
                 if bgo.image and bgo.object:
                     try:
                         row.label(text=bgo.object.name)
-                        a = row.operator('image.sv_bgimage_set_camera', text='',icon='RESTRICT_VIEW_OFF')
+                        row.operator('image.sv_bgimage_object_picker', text='', icon='RESTRICT_SELECT_OFF').item = ind
+                        a = row.operator('image.sv_bgimage_set_camera', text='', icon='RESTRICT_VIEW_OFF')
                         a.item = ind
-                        row.operator('image.sv_bgimage_rem_bgimage', text='',icon='X').item = ind
+                        row.operator('image.sv_bgimage_rem_bgimage', text='', icon='X').item = ind
                     except:
-                        row.label(text='')
+                        row.label(text='error')
                 cam = bgo.object
                 img = bgo.image
                 col.prop(bgo, "object")
                 #col.template_ID(bgo, "object", open="camera.open")
-                if context.scene.bgimage_preview:
-                    col.template_ID_preview(bgo, 'image',open="image.open", rows=2, cols=3)
-                else:
+                if not context.scene.bgimage_preview:
                     col.template_ID(bgo, 'image',open="image.open")
             else:
                 row.prop(bgo, 'opened', text='', icon='TRIA_RIGHT')
                 if bgo.image and bgo.object:
                     try:
                         row.label(text=bgo.object.name)
+                        row.operator('image.sv_bgimage_object_picker', text='',icon='RESTRICT_SELECT_OFF').item = ind
                         a = row.operator('image.sv_bgimage_set_camera', text='',icon='RESTRICT_VIEW_OFF')
                         a.item = ind
                         row.operator('image.sv_bgimage_rem_bgimage', text='',icon='X').item = ind
                     except:
-                        row.label(text='')
+                        row.label(text='error')
+            if context.scene.bgimage_preview:
+                col.template_ID_preview(bgo, 'image',open="image.open", rows=2, cols=3)
 
         col.prop(main,'bgimage_debug', text='Debug',expand=True,toggle=True)
         if context.scene.bgimage_debug:
@@ -315,9 +332,11 @@ def register():
     bpy.utils.register_class(OP_SV_bgimage_remove)
     bpy.utils.register_class(OP_SV_bgimage_remove_unused)
     bpy.utils.register_class(OP_SV_bgimage_rem_bgimage)
+    bpy.utils.register_class(OP_SV_bgimage_object_picker)
 
 
 def unregister():
+    bpy.utils.unregister_class(OP_SV_bgimage_object_picker)
     bpy.utils.unregister_class(OP_SV_bgimage_rem_bgimage)
     bpy.utils.unregister_class(OP_SV_bgimage_remove_unused)
     bpy.utils.unregister_class(OP_SV_bgimage_remove)
