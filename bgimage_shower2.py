@@ -19,7 +19,7 @@
 
 
 bl_info = {
-    "name": "Camera backgrounder",
+    "name": "Camstore",
     "version": (0, 2, 0),
     "blender": (2, 7, 9),  
     "category": "Camera",
@@ -59,6 +59,7 @@ class OP_SV_bgimage_object_picker(bpy.types.Operator):
 
     def execute(self, context):
         context.scene.bgobjects[self.item].object = context.selected_objects[0]
+        context.space_data.camera = context.selected_objects[0]
         return {'FINISHED'}
 
 
@@ -236,7 +237,7 @@ class OP_SV_bgimage_rem_bgimage(bpy.types.Operator):
 
 
 class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
-    bl_label = "Backgrounds"
+    bl_label = "Camstore"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
     bl_category = '1D'
