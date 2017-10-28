@@ -19,8 +19,8 @@
 
 
 bl_info = {
-    "name": "Camera backgrounder",
-    "version": (0, 2, 0),
+    "name": "Camstore",
+    "version": (0, 3, 0),
     "blender": (2, 7, 9),  
     "category": "Camera",
     "author": "Nikita Gorodetskiy",
@@ -111,13 +111,14 @@ class OP_SV_bgimage_remove_unused(bpy.types.Operator):
                         if bgi.image:
                             if bgo.image == bgi.image:
                                 used.add(bgi)
-                        else:
-                            used.add(bgi)
             print('camsetter - unused remover',used)
             for bg in bgimages:
                 if bg not in used:
-                    name_for_delete = bg.image.name
-                    bg.image.user_clear()
+                    if bg.image:
+                        name_for_delete = bg.image.name
+                        bg.image.user_clear()
+                    else:
+                        name_for_delete = 'None'
                     print('image %s will be unnihilated' % name_for_delete)
                     bgimages.remove(bg)
         for ar in areas:
