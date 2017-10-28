@@ -31,6 +31,8 @@ bl_info = {
     "tracker_url": "https://vk.com/sverchok_b3d",  
 }
 
+# Link for current addon on github:
+# https://github.com/nortikin/nikitron_tools/blob/master/camstore.py
 
 
 import bpy
