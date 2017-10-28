@@ -100,25 +100,26 @@ class OP_SV_bgimage_remove_unused(bpy.types.Operator):
 
     def execute(self, context):
         areas = bpy.data.screens[context.screen.name].areas
-        unused = set()
+        used = set()
         def rem_unused(space):
             bgimages = space.background_images
             bgobjects = context.scene.bgobjects
             # first check for existance of bgs
-            for bgi in bgimages:
-                if bgobjects:
-                    for bgo in bgobjects:
+            if bgobjects:
+                for bgo in bgobjects:
+                    for bgi in bgimages:
                         if bgi.image:
-                            if not bgo.image == bgi.image:
-                                unused.add(bgi)
-                else:
-                    unused.add(bgi)
-            print('camsetter - unused remover',unused)
-            for bg in unused:
-                name_for_delete = bg.image.name
-                # bg.image.user_clear()
-                print('image %s will be unnihilated' % name_for_delete)
-                bgimages.remove(bg)
+                            if bgo.image == bgi.image:
+                                used.add(bgi)
+                        else:
+                            used.add(bgi)
+            print('camsetter - unused remover',used)
+            for bg in bgimages:
+                if bg not in used:
+                    name_for_delete = bg.image.name
+                    bg.image.user_clear()
+                    print('image %s will be unnihilated' % name_for_delete)
+                    bgimages.remove(bg)
         for ar in areas:
             if ar.type == 'VIEW_3D':
                 rem_unused(ar.spaces[0])
