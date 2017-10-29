@@ -20,7 +20,7 @@
 
 bl_info = {
     "name": "Camstore",
-    "version": (0, 3, 0),
+    "version": (0, 4, 0),
     "blender": (2, 7, 9),  
     "category": "Camera",
     "author": "Nikita Gorodetskiy",
@@ -39,7 +39,7 @@ import bpy
 from bpy.props import StringProperty, CollectionProperty, \
                         BoolProperty, PointerProperty, \
                         IntProperty
-
+import collections as co
 
 
 
@@ -60,8 +60,18 @@ class OP_SV_bgimage_object_picker(bpy.types.Operator):
     item = IntProperty(name='item')
 
     def execute(self, context):
-        context.scene.bgobjects[self.item].object = context.selected_objects[0]
+        bgobjects = context.scene.bgobjects
+        bgobjects[self.item].object = context.selected_objects[0]
         context.space_data.camera = context.selected_objects[0]
+        
+        bgimages = context.space_data.background_images
+
+        for bgims in bgimages:
+            if bgims.image:
+                if bgims.image.name == bgobjects[self.item].image.name:
+                    bgims.show_background_image = True
+                else:
+                    bgims.show_background_image = False
         return {'FINISHED'}
 
 
@@ -121,6 +131,13 @@ class OP_SV_bgimage_remove_unused(bpy.types.Operator):
                         name_for_delete = 'None'
                     print('image %s will be unnihilated' % name_for_delete)
                     bgimages.remove(bg)
+            howmuch = []
+            for bg in bgimages:
+                if bg.image:
+                    if bg.image.name not in howmuch:
+                        howmuch.append(bg.image.name)
+                    else:
+                        bgimages.remove(bg)
         for ar in areas:
             if ar.type == 'VIEW_3D':
                 rem_unused(ar.spaces[0])
@@ -251,7 +268,7 @@ class OP_SV_bgimage_rem_bgimage(bpy.types.Operator):
 
 
 class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
-    bl_label = "Backgrounds"
+    bl_label = "Camstore"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
     bl_category = '1D'
@@ -260,75 +277,95 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-
         col = layout.column(align=True)
-        
         main = context.scene
-        row = col.row(align=True)
-        if main.bgimage_panel:
-            row.prop(main, 'bgimage_panel', text="Be carefull", icon='DOWNARROW_HLT')
-        else:
-            row.prop(main, 'bgimage_panel', text="Basics", icon='RIGHTARROW')
-        if main.bgimage_panel:
-            row = col.row(align=True)
-            row.operator("image.sv_bgimage_remove", text='all', icon='X')
-            row.operator("image.sv_bgimage_remove_unused", text='unused', icon='X')
-            row.prop(context.space_data,'show_background_images',text='Activate',expand=True,toggle=True)
-            col.prop(main,'bgimage_preview', text='Preview',expand=True,toggle=True, icon='RESTRICT_VIEW_OFF')
-        col.label(text='  ')
-        col.operator('object.sv_bgimage_new_slot', text='New', icon='ZOOMIN')
-        for ind,bgo in enumerate(context.scene.bgobjects):
-            row = col.row(align=True)
-            if bgo.opened:
-                row.prop(bgo, 'opened', text='', icon='TRIA_DOWN')
-                try:
-                    if bgo.object:
-                        row.label(text=bgo.object.name)
-                    row.operator('image.sv_bgimage_object_picker', text='', icon='RESTRICT_SELECT_OFF').item = ind
-                    if bgo.image:
-                        row.operator('image.sv_bgimage_set_camera', text='', icon='RESTRICT_VIEW_OFF').item = ind
-                    row.operator('image.sv_bgimage_rem_bgimage', text='', icon='X').item = ind
-                except:
-                    row.label(text='error')
-                cam = bgo.object
-                img = bgo.image
-                col.prop(bgo, "object")
-                #col.template_ID(bgo, "object", open="camera.open")
-                if not context.scene.bgimage_preview:
-                    col.template_ID(bgo, 'image',open="image.open")
-            else:
-                row.prop(bgo, 'opened', text='', icon='TRIA_RIGHT')
-                try:
-                    if bgo.object:
-                        row.label(text=bgo.object.name)
-                    row.operator('image.sv_bgimage_object_picker', text='',icon='RESTRICT_SELECT_OFF').item = ind
-                    if bgo.image:
-                        row.operator('image.sv_bgimage_set_camera', text='',icon='RESTRICT_VIEW_OFF').item = ind
-                    row.operator('image.sv_bgimage_rem_bgimage', text='',icon='X').item = ind
-                except:
-                    row.label(text='error')
-            if context.scene.bgimage_preview:
-                col.template_ID_preview(bgo, 'image',open="image.open", rows=2, cols=3)
 
-        col.prop(main,'bgimage_debug', text='Debug',expand=True,toggle=True)
-        if context.scene.bgimage_debug:
-            col.label(text='EXISTING BGIMAGESETS:')
-            for Y,bgo in enumerate(context.scene.bgobjects):
+        def basic_panel(col):
+            row = col.row(align=True)
+            if main.bgimage_panel:
+                row.prop(main, 'bgimage_panel', text="Be carefull", icon='DOWNARROW_HLT')
+            else:
+                row.prop(main, 'bgimage_panel', text="Basics", icon='RIGHTARROW')
+            if main.bgimage_panel:
                 row = col.row(align=True)
-                row.label(text=str(Y))
-                if bgo.image:
-                    row.label(text=bgo.image.name)
-                if bgo.object:
-                    row.label(text=bgo.object.name)
-                row.label(text=str(bgo.opened))
-            col.label(text='EXISTING BACKGROUNDS:')
-            for Y,bgs_existing in enumerate(context.space_data.background_images):
+                row.operator("image.sv_bgimage_remove", text='all', icon='X')
+                row.operator("image.sv_bgimage_remove_unused", text='unused', icon='X')
+                row.prop(context.space_data,'show_background_images',text='Activate',expand=True,toggle=True)
+                col.prop(main,'bgimage_preview', text='Preview',expand=True,toggle=True, icon='RESTRICT_VIEW_OFF')
+
+        def main_panel(col):
+            col.operator('object.sv_bgimage_new_slot', text='New', icon='ZOOMIN')
+            for ind,bgo in enumerate(context.scene.bgobjects):
                 row = col.row(align=True)
-                row.label(text=str(Y))
-                if bgs_existing.image:
-                    row.label(text=bgs_existing.image.name)
+                if bgo.opened:
+                    row.prop(bgo, 'opened', text='', icon='TRIA_DOWN')
+                    try:
+                        if bgo.object:
+                            row.label(text=bgo.object.name)
+                        row.operator('image.sv_bgimage_object_picker', text='', icon='RESTRICT_SELECT_OFF').item = ind
+                        if bgo.image:
+                            row.operator('image.sv_bgimage_set_camera', text='', icon='RESTRICT_VIEW_OFF').item = ind
+                        row.operator('image.sv_bgimage_rem_bgimage', text='', icon='X').item = ind
+                    except:
+                        row.label(text='error')
+                    cam = bgo.object
+                    img = bgo.image
+                    col.prop(bgo, "object")
+                    #col.template_ID(bgo, "object", open="camera.open")
+                    if not main.bgimage_preview:
+                        col.template_ID(bgo, 'image',open="image.open")
                 else:
-                    row.label(text='None')
+                    row.prop(bgo, 'opened', text='', icon='TRIA_RIGHT')
+                    try:
+                        if bgo.object:
+                            row.label(text=bgo.object.name)
+                        row.operator('image.sv_bgimage_object_picker', text='',icon='RESTRICT_SELECT_OFF').item = ind
+                        if bgo.image:
+                            row.operator('image.sv_bgimage_set_camera', text='',icon='RESTRICT_VIEW_OFF').item = ind
+                        row.operator('image.sv_bgimage_rem_bgimage', text='',icon='X').item = ind
+                    except:
+                        row.label(text='error')
+                if context.scene.bgimage_preview:
+                    col.template_ID_preview(bgo, 'image',open="image.open", rows=2, cols=3)
+
+        def debug_panel(col):
+            row = col.row(align=True)
+            if main.bgimage_debug:
+                row.prop(main, 'bgimage_debug', text="Debug", icon='DOWNARROW_HLT')
+            else:
+                row.prop(main, 'bgimage_debug', text="Debug", icon='RIGHTARROW')
+
+
+            if main.bgimage_debug:
+                col.label(text='EXISTING BGIMAGESETS:')
+                box = col.box()
+                row = box.row(align=True)
+                row.label(text='# IMAGE')
+                row.label(text='OBJECT')
+                for Y,bgo in enumerate(main.bgobjects):
+                    row = box.row(align=True)
+                    if bgo.image:
+                        row.label(text=str(Y)+' '+bgo.image.name)
+                    else:
+                        row.label(text=str(Y)+' None')
+                    if bgo.object:
+                        row.label(text=bgo.object.name)
+                    else:
+                        row.label(text='None')
+                col.label(text='EXISTING BACKGROUNDS:')
+                box = col.box()
+                row = box.row(align=True)
+                row.label(text='# IMAGE')
+                for Y,bgs_existing in enumerate(context.space_data.background_images):
+                    row = box.row(align=True)
+                    if bgs_existing.image:
+                        row.label(text=str(Y)+' '+bgs_existing.image.name)
+                    else:
+                        row.label(text=str(Y)+' None')
+        main_panel(col)
+        basic_panel(col)
+        debug_panel(col)
+
 
 
 def register():
