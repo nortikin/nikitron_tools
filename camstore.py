@@ -362,8 +362,8 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
                         row.label(text=str(Y)+' '+bgs_existing.image.name)
                     else:
                         row.label(text=str(Y)+' None')
-        main_panel(col)
         basic_panel(col)
+        main_panel(col)
         debug_panel(col)
 
 
