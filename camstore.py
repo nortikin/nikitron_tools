@@ -339,11 +339,12 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
             if main.bgimage_debug:
                 col.label(text='EXISTING BGIMAGESETS:')
                 box = col.box()
-                row = box.row(align=True)
+                col2 = box.column(align=True).size_y=0.5
+                row = col2.row(align=True)
                 row.label(text='# IMAGE')
                 row.label(text='OBJECT')
                 for Y,bgo in enumerate(main.bgobjects):
-                    row = box.row(align=True)
+                    row = col2.row(align=True)
                     if bgo.image:
                         row.label(text=str(Y)+' '+bgo.image.name)
                     else:
@@ -354,10 +355,11 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
                         row.label(text='None')
                 col.label(text='EXISTING BACKGROUNDS:')
                 box = col.box()
-                row = box.row(align=True)
+                col2 = box.column(align=True).size_y=0.5
+                row = col2.row(align=True)
                 row.label(text='# IMAGE')
                 for Y,bgs_existing in enumerate(context.space_data.background_images):
-                    row = box.row(align=True)
+                    row = col2.row(align=True)
                     if bgs_existing.image:
                         row.label(text=str(Y)+' '+bgs_existing.image.name)
                     else:
