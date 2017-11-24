@@ -12,7 +12,7 @@ bl_info = {
 }
 
 
-# https://github.com/nortikin/nikitron_tools/interface_reset.py
+# https://github.com/nortikin/nikitron_tools/blob/master/interface_reset.py
 
 import bpy
 from collections import Counter as coc
