@@ -60,12 +60,18 @@ class OP_Area_do_please(bpy.types.Operator):
             import ctypes
             user32 = ctypes.windll.user32
             W,H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-        if bpy.app.build_platform == b'Linux':
+        elif bpy.app.build_platform == b'Linux':
             import re
             from subprocess import run, PIPE
             output = run(['xrandr'], stdout=PIPE).stdout.decode()
             result = re.search(r'current (\d+) x (\d+)', output)
             W,H = map(int, result.groups()) if result else (800, 600)
+        elif bpy.app.build_platform == b'MacOS':
+            print('not working on MACOS')
+            return {'CANCELLED'}
+        else:
+            print('not working on your OS')
+            return {'CANCELLED'}
         if W == context.window.width and H == context.window.height:
             bpy.ops.wm.window_fullscreen_toggle()
             ''' HOWTO MAKE IT IN PYTHON? howto check full screen?
