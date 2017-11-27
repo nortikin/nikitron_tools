@@ -57,9 +57,9 @@ class OP_Area_do_please(bpy.types.Operator):
 
         # СДЕЛАТЬ: ВЫЙТИ ИЗ alt+F11 РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
         if bpy.app.build_platform == b'Windows':
-            from win32api import GetSystemMetrics
-            W = GetSystemMetrics(0)
-            H = GetSystemMetrics(1)
+            import ctypes
+            user32 = ctypes.windll.user32
+            W,H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
         if bpy.app.build_platform == b'Linux':
             import re
             from subprocess import run, PIPE
