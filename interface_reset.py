@@ -16,22 +16,68 @@ bl_info = {
 
 import bpy
 from collections import Counter as coc
+from bpy.props import EnumProperty, IntProperty
 
 
 
-def renew_screen():
+type = (('default','default','sverchok'),('sverchok','sverchok','sverchok'))
+bpy.types.Screen.screentype = EnumProperty(name='screentype',items=type,description='screentype for 1d scripts',default='default')
+
+
+def renew_screen(pick=False):
     '''lets leave this comments as evidence of 
     my search of correct update screen way
     maybe there is better solution or will be in 2.8+'''
     #bpy.ops.screen.spacedata_cleanup()
     bpy.ops.screen.screen_set(delta=1)
     bpy.ops.screen.screen_set(delta=-1)
-    #bpy.ops.screen.screen_full_area(dict(screen=screen,window=window,region=a.regions[0],area=a,blend_data=blend_data))
-    #bpy.ops.screen.screen_full_area(dict(screen=screen,window=window,region=a.regions[0],area=a,blend_data=blend_data))
+    if pick:
+        context = bpy.context
+        context.screen.areas.update()
+        window = context.window
+        areas = context.screen.areas 
+        main = context.area # [i for i in areas if i.type == 'VIEW_3D'][0] # shit
+        screen = context.screen
+        bpy.ops.screen.screen_full_area(dict(screen=screen,window=window,region=main.regions[0],area=main,blend_data=blend_data))
+        bpy.ops.screen.screen_full_area(dict(screen=screen,window=window,region=main.regions[0],area=main,blend_data=blend_data))
     # bpy.ops.screen.back_to_previous(dict(screen=screen,window=window,region=region,area=context.area,blend_data=blend_data))
     # print('joined and die')
-    #areas.update()
     # context.screen.update_tag(refresh=set({'DATA'})) # id ONLY
+
+
+
+class OP_Area_get(bpy.types.Operator):
+    '''Area get - get areas type and order'''
+    bl_idname = "screen.areaget"
+    bl_label = "area get"
+
+
+
+    def execute(self, context):
+        wd = context.window
+        ww,wh = wd.width, wd.height
+        w,h,dir,types,ars,pxy = [],[],[],[],[],[]
+        for area in context.areas:
+            aw, ah = area.width/ww, area.height/wh
+            w.append(aw)
+            h.append(ah)
+            pxy.append((area.x/ww+aw/2+area.y/wh+ah/2)/2)
+            types.append(area.type)
+
+        #dv, dh = 'VERTICAL', 'HORIZONTAL'
+        #factor = [0.98,0.8,0.4,0.5,0.2]
+        #dirs = [dh,dv,dh,dv,dh]
+        #ars = [0,0,0,-1,-2]
+        #types = ['NODE_EDITOR','INFO','PROPERTIES','VIEW_3D','TEXT_EDITOR','TIMELINE']
+        # сортировать чтобы порядок следовал за тем, у кого больше индекс высоты и ширины 
+        # (максимальный индекс Ш и В + превалирует ширина или высота - 
+        # даёт направление сразу по итерации сортированного)
+        # сортировать затем по этим весам типы и ширины(или высоты в зависимости от направления)
+        # затем попробовать присвоить индекс в зависимости от центра предполагаемой 
+        # оставшейся площади, насколько она близка к центру окна, наверное для этого надо смоделировать
+        # разбивку площадей или просто оставить и найти по итерации ближайшую к центру, может заработает.
+        return {'FINISHED'}
+
 
 
 class OP_Area_do_please(bpy.types.Operator):
@@ -39,7 +85,7 @@ class OP_Area_do_please(bpy.types.Operator):
     bl_idname = "screen.areado_please"
     bl_label = "area do (jso)"
 
-    action=bpy.props.StringProperty(name='area_action')
+
 
     def execute(self, context):
         context = bpy.context
@@ -88,8 +134,8 @@ class OP_Area_do_please(bpy.types.Operator):
             	
             }
             '''
-        bpy.ops.screen.areado(action='join')
-        #renew_screen()
+        bpy.ops.screen.areado()
+        #renew_screen(pick=True)
         #bpy.ops.screen.areado(action='split')
         return {'FINISHED'}
 
@@ -98,8 +144,7 @@ class OP_Area_do(bpy.types.Operator):
     '''Reset interface of UI'''
     bl_idname = "screen.areado"
     bl_label = "interface reset"
-    
-    action=bpy.props.StringProperty(name='area_action')
+
 
 
     def get_mergables(self, areas,hw):
@@ -201,34 +246,47 @@ class OP_Area_do(bpy.types.Operator):
             bpy.ops.screen.screen_full_area()
             #bpy.ops.screen.back_to_previous()
 
-        if self.action == 'join':
-            ''' check height and width ping-pong till areas count rize 1 '''
-            hw = 'h'
-            while True:
-                if len(areas) == 1:
-                    break
-                a,b,mix,miy,max,may = self.get_mergables(areas,hw)
-                if a:
-                    bpy.ops.screen.area_join(dict(region=a.regions[0],area=a,window=window,screen=screen,sarea=a,narea=b),min_x=mix, min_y=miy, max_x=max, max_y=may)
-                    blend_data = context.blend_data
-                    renew_screen()
-                if hw == 'h':
-                    hw = 'w'
-                else:
-                    hw = 'h'
-            areas[0].type = 'VIEW_3D'
-        elif self.action == 'split':
+        ''' check height and width ping-pong till areas count rize 1 '''
+        hw = 'h'
+        while True:
+            if len(areas) == 1:
+                break
+            a,b,mix,miy,max,may = self.get_mergables(areas,hw)
+            if a:
+                bpy.ops.screen.area_join(dict(region=a.regions[0],area=a,window=window,screen=screen,sarea=a,narea=b),min_x=mix, min_y=miy, max_x=max, max_y=may)
+                blend_data = context.blend_data
+                renew_screen()
+            if hw == 'h':
+                hw = 'w'
+            else:
+                hw = 'h'
+        areas[0].type = 'VIEW_3D'
+        typ = context.screen.screentype
+        if typ == 'default':
             dv, dh = 'VERTICAL', 'HORIZONTAL'
             factor = [0.98,0.8,0.12,0.7]
             dirs = [dh,dv,dh,dh]
             ars = [0,0,0,-2]
             types = ['VIEW_3D','INFO','PROPERTIES','TIMELINE','OUTLINER']
-            for p,d,a in zip(factor,dirs,ars):
-                are = context.screen.areas[a]
-                bpy.ops.screen.area_split(dict(region=are.regions[0],area=are,screen=screen,window=window),direction=d,factor=p)
-                renew_screen()
-            for a,t in zip(areas,types):
-                a.type = t
+        elif typ == 'sverchok':
+            dv, dh = 'VERTICAL', 'HORIZONTAL'
+            factor = [0.98,0.8,0.4,0.5,0.2]
+            dirs = [dh,dv,dh,dv,dh]
+            ars = [0,0,0,-1,-2]
+            types = ['NODE_EDITOR','INFO','PROPERTIES','VIEW_3D','TEXT_EDITOR','TIMELINE']
+            #INFO
+            #PROPERTIES
+            #NODE_EDITOR
+            #VIEW_3D
+            #CONSOLE
+            #TIMELINE
+        
+        for p,d,a in zip(factor,dirs,ars):
+            are = context.screen.areas[a]
+            bpy.ops.screen.area_split(dict(region=are.regions[0],area=are,screen=screen,window=window),direction=d,factor=p)
+            renew_screen()
+        for a,t in zip(areas,types):
+            a.type = t
         # bpy.ops.screen.area_move(x=0, y=0, delta=10)
         # bpy.ops.screen.area_move(dict(region=region,area=main,screen=screen,window=window),direction="HORIZONTAL",delta=0.3)
 
@@ -246,16 +304,22 @@ class VIEW3D_PT_area_do(bpy.types.Panel):
     bl_label = "Interface reset"
     bl_options = {'DEFAULT_CLOSED'}
     bl_category = '1D'
-    
+
+
+
+
     def draw(self, context):
         layout = self.layout
         col = layout.column()
         #col.operator('screen.areado_please', text='interface defaulting')
-        col.operator('screen.areado_please', text='join').action = 'join'
-        col.operator('screen.areado', text='split').action = 'split'
-
+        col.prop(bpy.context.screen,'screentype',text='type')
+        col.operator('screen.areado_please', text='default')
+        col.operator('screen.areaget', text='get')
+        
 # registering 
 def register():
+    
+    bpy.utils.register_class(OP_Area_get)
     bpy.utils.register_class(OP_Area_do_please)
     bpy.utils.register_class(OP_Area_do)
     bpy.utils.register_class(VIEW3D_PT_area_do)
@@ -265,6 +329,7 @@ def unregister():
     bpy.utils.unregister_class(VIEW3D_PT_area_do)
     bpy.utils.unregister_class(OP_Area_do)
     bpy.utils.unregister_class(OP_Area_do_please)
+    bpy.utils.unregister_class(OP_Area_get)
 
 if __name__ == "__main__":
     #unregister()
