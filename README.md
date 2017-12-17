@@ -1,21 +1,21 @@
-##Разное
+## Разное
 ______________
 
  Install as usual addon.
 
-###Nikitron tools
-  __tools for everyday use. in toolbar SV__    
+### Nikitron tools
+  __tools for everyday use, in toolbar SV__    
     a. Converts from 2d curves to 3d, bring them to floor, bring extrusion to 0, so they came wireframe.    
     b. Spreads objects (flat curves initially) to layout, so you can export them to dxf for work in autocad.    
     c. Names objects by 3Dtext.    
-    d. INndexes object's vertices by 3Dtext.   
+    d. Indexes object's vertices by 3Dtext.   
     f. Links all selected object's materials slots to object or data.   
     g. Join text and mesh if matrix location equal    
     h. CONNECT TWO OBJECTS with edges! It is main feature. So, he connects both object's vertices with custom shift and at the end hooks them to initial objects!    
     i. Make compliment in Russian.    
     j. Makes super curves with Clifford Attractors - mathematically sin/cos definitions for cool curves.  
     k. Make bound boxes of objects.      
-    l. Delete orientations (if you made much of them and watn make some order in scene).    
+    l. Delete orientations (if you made much of them and want make some order in scene).    
     m. Counts edges length.    
     n. Counts Area of object's polygons.    
     q. http://blenderaddonlist.blogspot.com/2013/11/addon-nikitron-tools.html    
@@ -36,7 +36,7 @@ ______________
     л. Площадь - можно скопипастить    
     м. http://blenderaddonlist.blogspot.com/2013/11/addon-nikitron-tools.html    
 
-###Music player 
+### Music player 
   __made by edddy and some developed by nikitron. Situated in 3D toolshelf in SV tab.__    
     a. play music and sound from videofiles.    
     b. jump to defined seconds (no current sound position).    
@@ -53,7 +53,7 @@ ______________
     e. http://blenderaddonlist.blogspot.com/2013/12/addon-music-player.html    
     https://cloud.githubusercontent.com/assets/5783432/2811334/042e8b64-ce16-11e3-8a18-3d1846af8e21.png    
 
-###RSS feed reader 
+### RSS feed reader 
   __made by Nikolay Fomichev. It is 2.5 blender addon, old one. Situated in World properties__    
     a. Blendernation site RSS by default.     
     b. width adaptive text.    
@@ -64,16 +64,16 @@ ______________
     б. адаптивный текст по ширине     
     в. вы можете вставить свою ссылку     
 
-###Fedge
+### Fedge
   __Tool for finding loose edges, loose vertices.__     
-    a. In object mode on hit between selected left selected onlt objects with loose edges/vertices or if there is no vertices at all or zero area polygons    
+    a. In object mode on hit between selected left selected only objects with loose edges/vertices or if there is no vertices at all or zero area polygons    
     b. In edit mode on hit selects loose edges, if no loose edges, select loose vertices, if no loose vertices select zero faces, other turn to object mode    
     
   __Находит потеряшки - вершинки, рёберки и нулевые полигоны.__     
     а. в объектном режиме оставляет выделенными только калечные объекты    
     б. В редактировании выделяет сначала калечные рёбра, потом вершины-потеряшки, потом нуль-полигоны и кончает в объектный режим    
 
-###Выпадениедней
+### Выпадениедней
   __Полностью на русском скрипт, который ищет какие дни выпадают сколько раз в месяц.__     
     а. Скрпт возник как реакция на предположение, будто пять пятниц, суббот и воскресений в месяце     
         выпадают раз в несколько лет. Но проверка показала, что это очень частое событие.    

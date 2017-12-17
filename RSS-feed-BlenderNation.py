@@ -6,7 +6,7 @@ bl_info = {
     "category": "World",
     "author": "Nikolay Fomichev",
     "location": "World",
-    "description": "makes RSS appears in world propertyes",
+    "description": "makes RSS appears in world properties",
     "warning": "",
     "wiki_url": "",          
     "tracker_url": "",  

@@ -208,7 +208,7 @@ class D1_fedge_panel(bpy.types.Panel):
 
     def draw(self, context):
         ''' \
-        If not finds loose - returs object mode \
+        If not finds loose - returns object mode \
         Если нет потеряшек - возвращается в объектный режим \
         '''
         layout = self.layout

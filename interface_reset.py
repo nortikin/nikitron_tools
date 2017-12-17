@@ -12,7 +12,7 @@ bl_info = {
 }
 
 
-# https://github.com/nortikin/nikitron_tools/interface_reset.py
+# https://github.com/nortikin/nikitron_tools/blob/master/interface_reset.py
 
 import bpy
 from collections import Counter as coc
@@ -103,15 +103,21 @@ class OP_Area_do_please(bpy.types.Operator):
 
         # СДЕЛАТЬ: ВЫЙТИ ИЗ alt+F11 РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
         if bpy.app.build_platform == b'Windows':
-            from win32api import GetSystemMetrics
-            W = GetSystemMetrics(0)
-            H = GetSystemMetrics(1)
-        if bpy.app.build_platform == b'Linux':
+            import ctypes
+            user32 = ctypes.windll.user32
+            W,H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+        elif bpy.app.build_platform == b'Linux':
             import re
             from subprocess import run, PIPE
             output = run(['xrandr'], stdout=PIPE).stdout.decode()
             result = re.search(r'current (\d+) x (\d+)', output)
             W,H = map(int, result.groups()) if result else (800, 600)
+        elif bpy.app.build_platform == b'MacOS':
+            print('not working on MACOS')
+            return {'CANCELLED'}
+        else:
+            print('not working on your OS')
+            return {'CANCELLED'}
         if W == context.window.width and H == context.window.height:
             bpy.ops.wm.window_fullscreen_toggle()
             ''' HOWTO MAKE IT IN PYTHON? howto check full screen?
