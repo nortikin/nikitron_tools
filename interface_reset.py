@@ -1,6 +1,6 @@
 bl_info = {
     "name": "interface dafaulter",
-    "version": (0, 9, 99),
+    "version": (1, 0, 0),
     "blender": (2, 8, 0), 
     "category": "View3D > Tool Shelf > 1D interface",
     "author": "nikitron",
@@ -118,6 +118,8 @@ class OP_Area_do_please(bpy.types.Operator):
         else:
             print('not working on your OS')
             return {'CANCELLED'}
+        if W == context.area.width and not context.screen.show_fullscreen:
+            bpy.ops.screen.screen_full_area(use_hide_panels=True)
         if W == context.window.width and H == context.window.height:
             bpy.ops.wm.window_fullscreen_toggle()
             ''' HOWTO MAKE IT IN PYTHON? howto check full screen?
