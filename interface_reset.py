@@ -22,7 +22,7 @@ from bpy.props import EnumProperty, IntProperty, BoolProperty
 
 type = (('default','default','default'),('sverchok','sverchok','sverchok'))
 bpy.types.Screen.screentype1D = EnumProperty(name='screentype1D',items=type,description='screentype for 1d scripts',default='default')
-
+bpy.types.Screen.keys1D = BoolProperty(name='keys1D', default=True)
 
 def renew_screen(pick=False):
     '''lets leave this comments as evidence of 
@@ -167,7 +167,6 @@ class OP_Area_do(bpy.types.Operator):
     bl_idname = "screen.areado"
     bl_label = "interface reset"
 
-    keys_ = BoolProperty(name='')
 
     def get_mergables(self, areas,hw):
         ' let it be for a while == True\
@@ -279,14 +278,14 @@ class OP_Area_do(bpy.types.Operator):
         '''
 
         # if needed keys
-        if 
-        if typ == 'default':
-            context.user_preferences.inputs.select_mouse='LEFT'
-            wmkc.active = wmkc['Blender']
-            
-        elif typ == 'sverchok':
-            context.user_preferences.inputs.select_mouse='RIGHT'
-            wmkc.active = wmkc['Blender']
+        if bpy.context.screen.keys1D:
+            if typ == 'default':
+                context.user_preferences.inputs.select_mouse='LEFT'
+                wmkc.active = wmkc['Blender']
+
+            elif typ == 'sverchok':
+                context.user_preferences.inputs.select_mouse='RIGHT'
+                wmkc.active = wmkc['Blender']
 
         # ВЫЙТИ ИЗ ПОЛРНОЭКРАННОГО РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
         if context.screen.show_fullscreen:
@@ -346,9 +345,11 @@ class VIEW3D_PT_area_do(bpy.types.Panel):
     bl_options = {'DEFAULT_CLOSED'}
     bl_category = '1D'
 
+
     def draw(self, context):
         layout = self.layout
         col = layout.column()
+        col.prop(bpy.context.screen, 'keys1D', text='keys')
         col.prop(bpy.context.screen,'screentype1D',text='type')
         col.operator('screen.areado_please', text=bpy.context.screen.screentype1D)
         #col.operator('screen.areaget', text='get')
