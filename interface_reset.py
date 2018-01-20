@@ -16,12 +16,12 @@ bl_info = {
 
 import bpy
 from collections import Counter as coc
-from bpy.props import EnumProperty, IntProperty
+from bpy.props import EnumProperty, IntProperty, BoolProperty
 
 
 
-type = (('default','default','sverchok'),('sverchok','sverchok','sverchok'))
-bpy.types.Screen.screentype = EnumProperty(name='screentype',items=type,description='screentype for 1d scripts',default='default')
+type = (('default','default','default'),('sverchok','sverchok','sverchok'))
+bpy.types.Screen.screentype1D = EnumProperty(name='screentype1D',items=type,description='screentype for 1d scripts',default='default')
 
 
 def renew_screen(pick=False):
@@ -47,7 +47,8 @@ def renew_screen(pick=False):
 
 
 class OP_Area_get(bpy.types.Operator):
-    '''Area get - get areas type and order'''
+    '''Area get - get areas type and order
+    !!!!!! WIP. Not working yet !!!!!!'''
     bl_idname = "screen.areaget"
     bl_label = "area get"
 
@@ -81,27 +82,31 @@ class OP_Area_get(bpy.types.Operator):
 
 
 class OP_Area_do_please(bpy.types.Operator):
-    '''Area do (join, split, options) for preparations of UI'''
+    '''Area do please
+    execution: escape from fullscreen modes in all the ways '''
     bl_idname = "screen.areado_please"
     bl_label = "area do (jso)"
 
 
 
     def execute(self, context):
+        # somehow it is needed
         context = bpy.context
+
+        # veriables definitions
         window = context.window
         areas = context.screen.areas 
         main = context.area # [i for i in areas if i.type == 'VIEW_3D'][0] # shit
         region = main.regions[0] # bullshit
         screen = context.screen
 
-        # СДЕЛАТЬ: ВЫЙТИ ИЗ <Ctrl><UP>/<Shift><SPACE> РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
+        # ВЫЙТИ ИЗ <Ctrl><UP>/<Shift><SPACE> РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
         if context.screen.show_fullscreen:
             self.report({'INFO'}, 'It was fullscreen.')
             bpy.ops.screen.screen_full_area()
             #bpy.ops.screen.back_to_previous()
 
-        # СДЕЛАТЬ: ВЫЙТИ ИЗ alt+F11 РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
+        # DEFINE PLATFORM AND ANALIZE WINDOW FROM SYSTEM VALUES
         if bpy.app.build_platform == b'Windows':
             import ctypes
             user32 = ctypes.windll.user32
@@ -118,10 +123,16 @@ class OP_Area_do_please(bpy.types.Operator):
         else:
             print('not working on your OS')
             return {'CANCELLED'}
+
+        # ВЫЙТИ ИЗ alt+F10 РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
         if context.window_manager.windows[0].width == context.area.width and not context.screen.show_fullscreen:
             bpy.ops.screen.screen_full_area(use_hide_panels=True)
+
+        # ВЫЙТИ ИЗ alt+F11 РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
         if W == context.window.width and H == context.window.height:
             bpy.ops.wm.window_fullscreen_toggle()
+
+        # OLD FINDINGS
             ''' HOWTO MAKE IT IN PYTHON? howto check full screen?
             /* fullscreen operator callback */
             int wm_window_fullscreen_toggle_exec(bContext *C, wmOperator *UNUSED(op))
@@ -142,6 +153,8 @@ class OP_Area_do_please(bpy.types.Operator):
             	
             }
             '''
+
+        # FINALLY JOIN THIS STUFF AND SEPARATE THAN
         bpy.ops.screen.areado()
         #renew_screen(pick=True)
         #bpy.ops.screen.areado(action='split')
@@ -149,11 +162,12 @@ class OP_Area_do_please(bpy.types.Operator):
 
 
 class OP_Area_do(bpy.types.Operator):
-    '''Reset interface of UI'''
+    '''Area do for preparations of UI
+    execution: join screen, split screen, change the keymaps for sketchup '''
     bl_idname = "screen.areado"
     bl_label = "interface reset"
 
-
+    keys_ = BoolProperty(name='')
 
     def get_mergables(self, areas,hw):
         ' let it be for a while == True\
@@ -242,19 +256,45 @@ class OP_Area_do(bpy.types.Operator):
 
     def execute(self, context):
         context = bpy.context
+
+
+        # veriables definitions
         window = context.window
         areas = context.screen.areas 
         main = context.area # [i for i in areas if i.type == 'VIEW_3D'][0] # shit
         region = main.regions[0] # bullshit
         screen = context.screen
+        typ = context.screen.screentype1D
+        wmkc = bpy.data.window_managers['WinMan'].keyconfigs
 
-        # СДЕЛАТЬ: ВЫЙТИ ИЗ ПОЛРНОЭКРАННОГО РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
+        # here is keymaps estimation 
+        '''
+        if not '1D' in wmkc:
+            wmkc.new(name='1D')
+            wmkc['1D'].keymaps.new(name, space_type='VIEW_3D', region_type='WINDOW')
+            wmkc1Dkm3D = wmkc['1D'].keymaps['3D View']
+            wmkc1Dkm3Dkmi = wmkc1Dkm3D.keymap_items
+            wmkc1Dkm3Dkmi.new(idname='view3d.rotate', type='MIDDLEMOUSE', value='PRESS', any=False, shift=False, ctrl=False, alt=False, oskey=False, key_modifier='NONE', head=False)
+            wmkc1Dkm3Dkmi.new(idname='view3d.move', type='MIDDLEMOUSE', value='PRESS', any=False, shift=True, ctrl=False, alt=False, oskey=False, key_modifier='NONE', head=False)
+        '''
+
+        # if needed keys
+        if 
+        if typ == 'default':
+            context.user_preferences.inputs.select_mouse='LEFT'
+            wmkc.active = wmkc['Blender']
+            
+        elif typ == 'sverchok':
+            context.user_preferences.inputs.select_mouse='RIGHT'
+            wmkc.active = wmkc['Blender']
+
+        # ВЫЙТИ ИЗ ПОЛРНОЭКРАННОГО РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
         if context.screen.show_fullscreen:
             self.report({'INFO'}, 'It was fullscreen.')
             bpy.ops.screen.screen_full_area()
             #bpy.ops.screen.back_to_previous()
 
-        ''' check height and width ping-pong till areas count rize 1 '''
+        # check height and width ping-pong till areas count rize 1
         hw = 'h'
         while True:
             if len(areas) == 1:
@@ -268,8 +308,8 @@ class OP_Area_do(bpy.types.Operator):
                 hw = 'w'
             else:
                 hw = 'h'
+        # devide screen according to type predefined. here is definitions
         areas[0].type = 'VIEW_3D'
-        typ = context.screen.screentype
         if typ == 'default':
             dv, dh = 'VERTICAL', 'HORIZONTAL'
             factor = [0.98,0.8,0.12,0.7]
@@ -282,28 +322,21 @@ class OP_Area_do(bpy.types.Operator):
             dirs = [dh,dv,dh,dv,dh]
             ars = [0,0,0,-1,-2]
             types = ['NODE_EDITOR','INFO','PROPERTIES','VIEW_3D','TEXT_EDITOR','TIMELINE']
-            #INFO
-            #PROPERTIES
-            #NODE_EDITOR
-            #VIEW_3D
-            #CONSOLE
-            #TIMELINE
         
+        # devide screen according to type predefined. here is devision
         for p,d,a in zip(factor,dirs,ars):
             are = context.screen.areas[a]
             bpy.ops.screen.area_split(dict(region=are.regions[0],area=are,screen=screen,window=window),direction=d,factor=p)
             renew_screen()
+        # type arrange
         for a,t in zip(areas,types):
             a.type = t
-        # bpy.ops.screen.area_move(x=0, y=0, delta=10)
-        # bpy.ops.screen.area_move(dict(region=region,area=main,screen=screen,window=window),direction="HORIZONTAL",delta=0.3)
+            if t == 'VIEW_3D':
+                a.spaces[0].clip_start = 0.01
+                a.spaces[0].clip_end = 1500
 
         return {'FINISHED'} 
 
-    #def invoke(self, context, event):
-        #wm = context.window_manager
-        #wm.invoke_props_dialog(self, 250)
-        #return {'RUNNING_MODAL'}
 
 
 class VIEW3D_PT_area_do(bpy.types.Panel):
@@ -313,17 +346,15 @@ class VIEW3D_PT_area_do(bpy.types.Panel):
     bl_options = {'DEFAULT_CLOSED'}
     bl_category = '1D'
 
-
-
-
     def draw(self, context):
         layout = self.layout
         col = layout.column()
-        #col.operator('screen.areado_please', text='interface defaulting')
-        col.prop(bpy.context.screen,'screentype',text='type')
-        col.operator('screen.areado_please', text='default')
-        col.operator('screen.areaget', text='get')
-        
+        col.prop(bpy.context.screen,'screentype1D',text='type')
+        col.operator('screen.areado_please', text=bpy.context.screen.screentype1D)
+        #col.operator('screen.areaget', text='get')
+
+
+
 # registering 
 def register():
     
