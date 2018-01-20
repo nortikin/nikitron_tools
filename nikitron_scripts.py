@@ -1460,6 +1460,10 @@ class BoundingBox (bpy.types.Operator):
     def execute(self, context):
         objects = bpy.context.selected_objects
         i = 0
+        #for ob in bpy.context.selected_objects:
+            #if ob.type == 'MESH':
+            #z = ob.dimensions
+            #ob.name = "_".join(list(map(lambda x: str(int(round(x,1)*100)),z)))
         for a in objects:
             self.make_it(i, a)
             i += 1

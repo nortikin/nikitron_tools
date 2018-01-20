@@ -118,7 +118,7 @@ class OP_Area_do_please(bpy.types.Operator):
         else:
             print('not working on your OS')
             return {'CANCELLED'}
-        if W == context.area.width and not context.screen.show_fullscreen:
+        if context.window_manager.windows[0].width == context.area.width and not context.screen.show_fullscreen:
             bpy.ops.screen.screen_full_area(use_hide_panels=True)
         if W == context.window.width and H == context.window.height:
             bpy.ops.wm.window_fullscreen_toggle()
