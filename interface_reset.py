@@ -267,14 +267,23 @@ class OP_Area_do(bpy.types.Operator):
         wmkc = bpy.data.window_managers['WinMan'].keyconfigs
 
         # here is keymaps estimation 
-        '''
-        if not '1D' in wmkc:
-            wmkc.new(name='1D')
-            wmkc['1D'].keymaps.new(name, space_type='VIEW_3D', region_type='WINDOW')
-            wmkc1Dkm3D = wmkc['1D'].keymaps['3D View']
-            wmkc1Dkm3Dkmi = wmkc1Dkm3D.keymap_items
-            wmkc1Dkm3Dkmi.new(idname='view3d.rotate', type='MIDDLEMOUSE', value='PRESS', any=False, shift=False, ctrl=False, alt=False, oskey=False, key_modifier='NONE', head=False)
-            wmkc1Dkm3Dkmi.new(idname='view3d.move', type='MIDDLEMOUSE', value='PRESS', any=False, shift=True, ctrl=False, alt=False, oskey=False, key_modifier='NONE', head=False)
+        #if not '1D' in wmkc:
+        #    wmkc.new(name='1D')
+        #    wmkc['1D'].keymaps.new(name, space_type='VIEW_3D', region_type='WINDOW')
+        wmkc1Dkm3D = wmkc.active.keymaps['3D View']
+        wmkc1Dkm3Dkmi = wmkc1Dkm3D.keymap_items
+        wmkc1Dkm3Dkmi['view3d.rotate'].shift = False
+        wmkc1Dkm3Dkmi['view3d.rotate'].alt = False
+        wmkc1Dkm3Dkmi['view3d.rotate'].ctrl = False
+        wmkc1Dkm3Dkmi['view3d.rotate'].type = 'MIDDLEMOUSE'
+        wmkc1Dkm3Dkmi['view3d.rotate'].value = 'PRESS'
+        wmkc1Dkm3Dkmi['view3d.move'].shift = True
+        wmkc1Dkm3Dkmi['view3d.move'].alt = False
+        wmkc1Dkm3Dkmi['view3d.move'].ctrl = False
+        wmkc1Dkm3Dkmi['view3d.move'].type = 'MIDDLEMOUSE'
+        wmkc1Dkm3Dkmi['view3d.move'].value = 'PRESS'
+        #    wmkc1Dkm3Dkmi.new(idname='view3d.rotate', type='MIDDLEMOUSE', value='PRESS', any=False, shift=False, ctrl=False, alt=False, oskey=False, key_modifier='NONE', head=False)
+        #    wmkc1Dkm3Dkmi.new(idname='view3d.move', type='MIDDLEMOUSE', value='PRESS', any=False, shift=True, ctrl=False, alt=False, oskey=False, key_modifier='NONE', head=False)
         '''
 
         # if needed keys
@@ -286,6 +295,7 @@ class OP_Area_do(bpy.types.Operator):
             elif typ == 'sverchok':
                 context.user_preferences.inputs.select_mouse='RIGHT'
                 wmkc.active = wmkc['Blender']
+        '''
 
         # ВЫЙТИ ИЗ ПОЛРНОЭКРАННОГО РЕЖИМА ЕСЛИ ОН АКТИВИРОВАН
         if context.screen.show_fullscreen:
@@ -331,8 +341,8 @@ class OP_Area_do(bpy.types.Operator):
         for a,t in zip(areas,types):
             a.type = t
             if t == 'VIEW_3D':
-                a.spaces[0].clip_start = 0.01
-                a.spaces[0].clip_end = 1500
+                a.spaces[0].clip_start = 0.1
+                a.spaces[0].clip_end = 3000
 
         return {'FINISHED'} 
 
