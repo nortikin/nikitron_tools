@@ -153,6 +153,14 @@ class OP_SV_bgimage_new_slot(bpy.types.Operator):
     bl_description = "new slot"
     bl_options = {'REGISTER'}
 
+    filename_ext = ".jpg"
+    filter_glob = StringProperty(default="*.jpg;*.png;*.tiff;*.jpeg;*.gif", options={'HIDDEN'})
+    filepath = StringProperty(subtype="FILE_PATH")
+    filename = StringProperty()
+    files = CollectionProperty(name="File Path",type=bpy.types.OperatorFileListElement)
+    directory = StringProperty(subtype='DIR_PATH')
+
+    
 
     def execute(self, context):
         obj = context.object
@@ -161,16 +169,22 @@ class OP_SV_bgimage_new_slot(bpy.types.Operator):
         bgimages = context.space_data.background_images
         bgobjects.add()
         bgobjects[-1].object = obj
-        if len(bpy.data.images):
-            context.scene.bgobjects[-1].image = bpy.data.images[0]
-            bgi = bgimages.new()
-            bgi.image = context.scene.bgobjects[-1].image
-            for bgims in bgimages:
-                bgims.show_background_image = False
-            bgi.show_background_image = True
+        # if len(bpy.data.images):
+        bpy.ops.image.open(filepath=self.filepath, \
+                            directory=self.directory, \
+                            show_multiview=False)
+        context.scene.bgobjects[-1].image = bpy.data.images[-1]
+        bgi = bgimages.new()
+        bgi.image = context.scene.bgobjects[-1].image
+        for bgims in bgimages:
+            bgims.show_background_image = False
+        bgi.show_background_image = True
 
         return {'FINISHED'}
 
+    def invoke(self, context, event):
+        context.window_manager.fileselect_add(self)
+        return {'RUNNING_MODAL'}
 
 
 class OP_SV_bgimage_setcamera(bpy.types.Operator):
@@ -339,7 +353,8 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
             if main.bgimage_debug:
                 col.label(text='EXISTING BGIMAGESETS:')
                 box = col.box()
-                col2 = box.column(align=True).size_y=0.5
+                col2 = box.column(align=True)
+                col2.scale_y=0.5
                 row = col2.row(align=True)
                 row.label(text='# IMAGE')
                 row.label(text='OBJECT')
@@ -355,7 +370,8 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
                         row.label(text='None')
                 col.label(text='EXISTING BACKGROUNDS:')
                 box = col.box()
-                col2 = box.column(align=True).size_y=0.5
+                col2 = box.column(align=True)
+                col2.scale_y=0.5
                 row = col2.row(align=True)
                 row.label(text='# IMAGE')
                 for Y,bgs_existing in enumerate(context.space_data.background_images):
