@@ -36,17 +36,21 @@ bl_info = {
 
 
 import bpy
+import os
+import re
+import collections as co
 from bpy.props import StringProperty, CollectionProperty, \
                         BoolProperty, PointerProperty, \
                         IntProperty
-import collections as co
 
 
 
 
 class SvBgImage(bpy.types.PropertyGroup):
     object = PointerProperty(type=bpy.types.Object, name='object')
-    image = PointerProperty(type=bpy.types.Image, name='image')
+    image =  PointerProperty(type=bpy.types.Image, name='image')
+    # because of bpy_struct type of type is not collected in pointer property, only ID
+    # bg =     PointerProperty(type=bpy.types.BackgroundImage, name='bg')
     opened = BoolProperty(name='opened',default=False)
 
 
@@ -163,22 +167,28 @@ class OP_SV_bgimage_new_slot(bpy.types.Operator):
     
 
     def execute(self, context):
+        '''
+        Главная добавляющая функция
+        '''
         obj = context.object
         bpy.ops.view3d.object_as_camera()
         bgobjects = context.scene.bgobjects
         bgimages = context.space_data.background_images
-        bgobjects.add()
-        bgobjects[-1].object = obj
+        bgob = bgobjects.add()
+        bgob.object = obj
         # if len(bpy.data.images):
         bpy.ops.image.open(filepath=self.filepath, \
                             directory=self.directory, \
                             show_multiview=False)
-        context.scene.bgobjects[-1].image = bpy.data.images[-1]
+        bgob.image = bpy.data.images[-1]
+        #bgobjects[-1].bgimage.image = bpy.data.images[-1]
         bgi = bgimages.new()
-        bgi.image = context.scene.bgobjects[-1].image
+        bgi.image = bgob.image
         for bgims in bgimages:
             bgims.show_background_image = False
         bgi.show_background_image = True
+        bgi.view_axis = 'CAMERA'
+        bgi.draw_depth = 'FRONT'
 
         return {'FINISHED'}
 
@@ -217,11 +227,13 @@ class OP_SV_bgimage_setcamera(bpy.types.Operator):
         if not im:
             print('image %s not switched, created' % (bgobject.image.name))
             newbgimage = bgimages.new()
-            #print(bgobject.image)
             space.camera = bgobject.object
             newbgimage.image = bgobject.image
 
     def execute(self, context):
+        '''
+        Сделать задник, если его нет.
+        '''
         areas = bpy.data.screens[context.screen.name].areas
         if not context.space_data.lock_camera_and_layers:
             # if you work in not locked self space
@@ -281,6 +293,102 @@ class OP_SV_bgimage_rem_bgimage(bpy.types.Operator):
 
 
 
+class OP_SV_bgimage_front_back(bpy.types.Operator):
+    '''Set image in front or back'''
+    bl_idname = "image.sv_bgimage_front_back"
+    bl_label = "front back"
+    bl_description = "set bg image to front or back"
+    bl_options = {'REGISTER'}
+
+    item = IntProperty(name='item')
+    fb = BoolProperty(name='frontback', default=False)
+
+    def fbact(self, bgobjects, space):
+        bgimages = space.background_images
+        item = self.item
+        bgobject = bgobjects[item]
+        # first check for existance of bgs
+        for bgi in bgimages:
+            if bgi.image and bgobject.image:
+                if bgi.image.name == bgobject.image.name:
+                    if self.fb:
+                        bgi.draw_depth = 'FRONT'
+                    else:
+                        bgi.draw_depth = 'BACK'
+
+    def execute(self, context):
+        areas = bpy.data.screens[context.screen.name].areas
+        bgobjects = context.scene.bgobjects
+        item = self.item
+        for ar in areas:
+            if ar.type == 'VIEW_3D':
+                self.fbact(bgobjects, ar.spaces[0])
+        return {'FINISHED'}
+
+
+
+class OP_SV_bgimage_load_images(bpy.types.Operator):
+    '''Load images from file directory'''
+    bl_idname = "object.sv_bgimage_load_images"
+    bl_label = "load"
+    bl_description = "set bg images loader"
+    bl_options = {'REGISTER'}
+
+
+    filename_ext = ".jpg"
+    filter_glob = StringProperty(default="*.jpg;*.png;*.tiff;*.jpeg;*.gif", options={'HIDDEN'})
+    filepath = StringProperty(subtype="FILE_PATH")
+    filename = StringProperty()
+    files = CollectionProperty(name="File Path",type=bpy.types.OperatorFileListElement)
+    directory = StringProperty(subtype='DIR_PATH')
+
+    
+
+    def execute(self, context):
+        '''
+        Функция добавления файлов из текучей директории,
+        соответствующих по названиям камерам
+        '''
+        obj = bpy.data.cameras
+        bpy.ops.view3d.object_as_camera()
+        bgobjects = context.scene.bgobjects
+        bgimages = context.space_data.background_images
+        images = bpy.data.images
+        if context.blend_data.is_saved:
+            path = context.blend_data.filepath
+            self.directory = os.path.split(path)[0]
+        else:
+            return {'FINISHED'}
+        # if len(bpy.data.images):
+        for cam in obj:
+            file = ''.join(re.split(r'_',cam.name))
+            filepath = os.path.join(self.directory,file)
+            self.filepath = filepath
+            im = bpy.ops.image.open(filepath=filepath, directory=self.directory, \
+                               files=[{"name":file, "name":file}], \
+                               relative_path=False, show_multiview=False)
+            #print('WHATA ',im)
+            bgob = bgobjects.add()
+            bgob.object = bpy.data.objects[cam.name]
+            bgob.image = bpy.data.images[file]
+            bgi = bgimages.new()
+            bgi.image = bgob.image
+
+        for bgims in bgimages:
+            bgims.show_background_image = False
+        bgi.show_background_image = True
+        bgi.view_axis = 'CAMERA'
+        bgi.draw_depth = 'FRONT'
+
+        return {'FINISHED'}
+
+# needed only for interactive
+#    def invoke(self, context, event):
+#        context.window_manager.fileselect_add(self)
+#        return {'RUNNING_MODAL'}
+
+
+
 class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
     bl_label = "Camstore"
     bl_space_type = 'VIEW_3D'
@@ -308,6 +416,7 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
                 col.prop(main,'bgimage_preview', text='Preview',expand=True,toggle=True, icon='RESTRICT_VIEW_OFF')
 
         def main_panel(col):
+            col.operator('object.sv_bgimage_load_images', text='Load All', icon='FILE_FOLDER')
             col.operator('object.sv_bgimage_new_slot', text='New', icon='ZOOMIN')
             for ind,bgo in enumerate(context.scene.bgobjects):
                 row = col.row(align=True)
@@ -326,6 +435,16 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
                     img = bgo.image
                     col.prop(bgo, "object")
                     #col.template_ID(bgo, "object", open="camera.open")
+
+                    ####### BACK // FRONT
+                    row = col.row(align=True)
+                    fb = row.operator('image.sv_bgimage_front_back',text='Back')
+                    fb.item = ind
+                    fb.fb = False
+                    fb = row.operator('image.sv_bgimage_front_back',text='Front')
+                    fb.item = ind
+                    fb.fb = True
+                    col.prop(context.area.spaces[0].background_images[ind],'opacity',text='opacity')
                     if not main.bgimage_preview:
                         col.template_ID(bgo, 'image',open="image.open")
                 else:
@@ -404,21 +523,25 @@ def register():
     bpy.utils.register_class(VIEW3D_PT_camera_bgimages2)
     bpy.utils.register_class(OP_SV_bgimage_setcamera)
     bpy.utils.register_class(OP_SV_bgimage_new_slot)
+    bpy.utils.register_class(OP_SV_bgimage_load_images)
     bpy.utils.register_class(OP_SV_bgimage_remove)
     bpy.utils.register_class(OP_SV_bgimage_remove_unused)
     bpy.utils.register_class(OP_SV_bgimage_rem_bgimage)
     bpy.utils.register_class(OP_SV_bgimage_object_picker)
+    bpy.utils.register_class(OP_SV_bgimage_front_back)
 
 
 def unregister():
+    bpy.utils.unregister_class(OP_SV_bgimage_front_back)
     bpy.utils.unregister_class(OP_SV_bgimage_object_picker)
     bpy.utils.unregister_class(OP_SV_bgimage_rem_bgimage)
     bpy.utils.unregister_class(OP_SV_bgimage_remove_unused)
     bpy.utils.unregister_class(OP_SV_bgimage_remove)
+    bpy.utils.unregister_class(OP_SV_bgimage_load_images)
     bpy.utils.unregister_class(OP_SV_bgimage_new_slot)
     bpy.utils.unregister_class(OP_SV_bgimage_setcamera)
     bpy.utils.unregister_class(VIEW3D_PT_camera_bgimages2)
-    bpy.utils.unregister_class(SvBgImage)
+    bpy.context.scene.bgobjects.clear()
     try:
         del bpy.types.Scene.bgobjects
         del bpy.types.Scene.bgimage_panel
@@ -426,15 +549,17 @@ def unregister():
         del bpy.types.Scene.bgimage_debug
     except:
         pass
+    bpy.utils.unregister_class(SvBgImage)
 
 if __name__ == '__main__':
     register()
-    '''for k,i in enumerate(bpy.data.images):
+    '''
+    #test
+    for k,i in enumerate(bpy.data.images):
         bpy.context.scene.bgobjects.add()
         bpy.context.scene.bgobjects[-1].object = bpy.context.object
         bpy.context.scene.bgobjects[-1].image = i
     for k,t in enumerate(bpy.context.scene.bgobjects):
         print(t.object, t.image)
     '''
-    #bpy.context.scene.bgobjects.clear()
 
