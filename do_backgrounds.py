@@ -19,7 +19,8 @@ cdname = path.split(cd)[-1]
 bd = '/usr/share/backgrounds'
 dd = path.join(bd,cdname)
 if not cdname in os.listdir(bd):
-    os.mkdir(dd)
+    os.symlink(cd,dd)
+    #os.mkdir(dd)
 list = os.listdir(cd)
 text = '<background> \n\
   <starttime> \n\
@@ -33,7 +34,7 @@ text = '<background> \n\
   <!-- This animation will start at midnight. --> \n'
 
 st =    '  <static>\n'
-dur =   '    <duration>500.0</duration>\n'
+dur =   '    <duration>60.0</duration>\n'
 dure =  '    <duration>5.0</duration>\n'
 ste =   '  </static>\n'
 tr =    '  <transition>\n'
@@ -45,7 +46,7 @@ for i, item in enumerate(list):
         f1   = path.join(dd,item)
         f2_s = path.join(cd,list[i+1])
         f2   = path.join(dd,list[i+1])
-        cf(f1_s, f1)
+        #cf(f1_s, f1)
         file_ = '    <file>'+f1+'</file>\n'
         from_ = '    <from>'+f1+'</from>\n'
         to =    '    <to>'+f2+'</to>\n'
@@ -54,7 +55,7 @@ for i, item in enumerate(list):
         f1   = path.join(dd,item)
         f2_s = path.join(cd,list[0])
         f2   = path.join(dd,list[0])
-        cf(f1_s, f1)
+        #cf(f1_s, f1)
         file_ = '    <file>'+f1+'</file>\n'
         from_ = '    <from>'+f1+'</from>\n'
         to =    '    <to>'+f2+'</to>\n'
@@ -62,7 +63,7 @@ for i, item in enumerate(list):
     os.chown(f1,1000,1000)
     text += text_
 text += '</background>'
-os.chdir(dd)
+os.chdir(cd)
 df = cdname+'_bg.xml'
 f= open(df,"w+")
 f.write(text)
