@@ -49,7 +49,6 @@ for i, item in enumerate(list):
         file_ = '    <file>'+f1+'</file>\n'
         from_ = '    <from>'+f1+'</from>\n'
         to =    '    <to>'+f2+'</to>\n'
-        text_ = st+dur+file_+ste+tr+dur+from_+to+tre
     else:
         f1_s = path.join(cd,item)
         f1   = path.join(dd,item)
@@ -59,7 +58,7 @@ for i, item in enumerate(list):
         file_ = '    <file>'+f1+'</file>\n'
         from_ = '    <from>'+f1+'</from>\n'
         to =    '    <to>'+f2+'</to>\n'
-        text_ = st+dur+file_+ste+tr+dur+from_+to+tre+st+dur+file_+ste
+    text_ = st+dur+file_+ste+tr+dure+from_+to+tre
     os.chown(f1,1000,1000)
     text += text_
 text += '</background>'
@@ -79,5 +78,5 @@ to mate-appearance window)')
 #os.setuid(1000)
 #os.setgid(1000)
 #os.chdir(bd)
-os.system('caja %s & mate-appearance-properties -p background' % dd)
-os.system('mate-appearance-properties -p background -i %s' % df)
+os.system('caja %s' % dd)
+#os.system('mate-appearance-properties -p background')
