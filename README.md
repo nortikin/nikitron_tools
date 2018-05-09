@@ -66,6 +66,7 @@ ______________
 
 ### Fedge
   __Tool for finding loose edges, loose vertices.__     
+    see 1D scripts on github
     a. In object mode on hit between selected left selected only objects with loose edges/vertices or if there is no vertices at all or zero area polygons    
     b. In edit mode on hit selects loose edges, if no loose edges, select loose vertices, if no loose vertices select zero faces, other turn to object mode    
     
@@ -80,3 +81,52 @@ ______________
     б. Для просчёта надо запустить его как >>> python3.4 выпадениедней.py    
     в. Изменить выпадание(['пятница'], 2017, 5) можно на выпадение(['пятница','суббота','воскресенье'],2016,4)    
         тогда считает до 2016 года дни выпадающие 4 раза в месяце.    
+### do_backgrounds
+  __do mate DE for linux backgrounds slideshow__
+    Destination:
+    Mate DE animated backgrounds creator
+    Author:
+    Nikitron
+    Usage:
+    #sudo python3 do_backgrounds.py
+    #mate-appearance-properties -p background
+    drug-n-drop xml from /usr/share/backgrounds/%your_folder/
+    to mate-appearance window
+### get_subfolders_files
+  __get all recursive subfolders files to current folder with rename doubles__
+    usage: 
+    #python3 get_subfolders_files.py
+### context printer
+  __print context of blender current screen__
+    see 1D scripts on github
+### camswitch
+  __just switch active camera__
+    see 1D scripts on github
+### camstore
+  __store cameras with backgrounds__
+    see 1D scripts on github
+    same as __bgimageshower__
+    make collection property of pointer properties to store images
+    and backgrounds and bind it to cameras
+### docub
+  __wastes__
+### interface reset
+  __Blender - reset default interface layout for current window__
+    see 1D scripts on github
+### zwcad pattern
+  __attempt to make pattern generator for zwcad__
+    use at own risk
+### trans
+  __если вводишь с ангшлийской раскладкой, но не любишьт пунтосвитчер, то это решение для тебя__
+    копируешь свой текст, вставляешь после выполнения команды и вуаля - у тебя по-русски
+### radio.sh
+  __bash radio with 30 channels__
+### replace
+  __don't remember what is it__
+### ui_layer_manager
+  __custon ui for blender layers fork__
+    uses group of layers instead of mask
+### poweroff
+  __WIP__
+    RIP - attempt to poweroff at the end
+
