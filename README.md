@@ -89,8 +89,9 @@ ______________
     Nikitron    
     Usage:    
     #sudo python3 do_backgrounds.py    
-    #mate-appearance-properties -p background    
-    drug-n-drop xml from /usr/share/backgrounds/%your_folder/    
+    It will open --/%your_folder/-- at the end    
+    $mate-appearance-properties -p background    
+    drug-n-drop xml from --/%your_folder/--    
     to mate-appearance window    
 ### get_subfolders_files    
   __get all recursive subfolders files to current folder with rename doubles__    
