@@ -47,6 +47,8 @@ from bpy.props import StringProperty, CollectionProperty, \
 
 
 class SvBgImage(bpy.types.PropertyGroup):
+    #screen = PointerProperty(type=bpy.types.Screen, name='screen')
+    #area = PointerProperty(type=bpy.types.Area, name='area')
     object = PointerProperty(type=bpy.types.Object, name='object')
     image =  PointerProperty(type=bpy.types.Image, name='image')
     # because of bpy_struct type of type is not collected in pointer property, only ID
@@ -58,7 +60,7 @@ class SvBgImage(bpy.types.PropertyGroup):
 class OP_SV_bgimage_object_picker(bpy.types.Operator):
     bl_idname = 'image.sv_bgimage_object_picker'
     bl_label = "pick selected object"
-    bl_description = "pick selected object as camera"
+    bl_description = "pick selected object as camera and create slot"
     bl_options = {'REGISTER'}
 
     item = IntProperty(name='item')
@@ -92,9 +94,12 @@ class OP_SV_bgimage_remove(bpy.types.Operator):
         le = len(bgobjects)
         if bgobjects:
             for i,bgo in enumerate(bgobjects):
+                bpy.data.images.remove(bgo.image)
                 bpy.ops.image.sv_bgimage_rem_bgimage(item=-1-i)
         else:
             bpy.ops.image.sv_bgimage_remove_unused()
+        for bgo in range(bgobjects):
+            bgobjects.remove(0)
         self.report({'INFO'}, 'cleared all backgrounds')
         return {'FINISHED'}
 
@@ -180,8 +185,8 @@ class OP_SV_bgimage_new_slot(bpy.types.Operator):
         bpy.ops.image.open(filepath=self.filepath, \
                             directory=self.directory, \
                             show_multiview=False)
-        bgob.image = bpy.data.images[-1]
-        #bgobjects[-1].bgimage.image = bpy.data.images[-1]
+        name = os.path.split(self.filepath)[1]
+        bgob.image = bpy.data.images[name]
         bgi = bgimages.new()
         bgi.image = bgob.image
         for bgims in bgimages:
@@ -286,7 +291,7 @@ class OP_SV_bgimage_rem_bgimage(bpy.types.Operator):
                 self.rem_backgroundimage(bgobjects, ar.spaces[0])
         if not self.im:
             print('impossible thing - we canot remove item under index', str(item))
-            # bgobjects[item].image
+            # bgobjects[item].image1
         print('remove item under index', str(item))
         bgobjects.remove(item)
         return {'FINISHED'}
@@ -331,7 +336,7 @@ class OP_SV_bgimage_load_images(bpy.types.Operator):
     '''Load images from file directory'''
     bl_idname = "object.sv_bgimage_load_images"
     bl_label = "load"
-    bl_description = "set bg images loader"
+    bl_description = "load ALL images named as camera data names (i.e. 01.jpg) in current directory"
     bl_options = {'REGISTER'}
 
 
@@ -364,13 +369,19 @@ class OP_SV_bgimage_load_images(bpy.types.Operator):
             file = ''.join(re.split(r'_',cam.name))
             filepath = os.path.join(self.directory,file)
             self.filepath = filepath
-            im = bpy.ops.image.open(filepath=filepath, directory=self.directory, \
+            if not cam.name in os.listdir(self.directory):
+                continue
+            bpy.ops.image.open(filepath=filepath, directory=self.directory, \
                                files=[{"name":file, "name":file}], \
                                relative_path=False, show_multiview=False)
             #print('WHATA ',im)
             bgob = bgobjects.add()
-            bgob.object = bpy.data.objects[cam.name]
-            bgob.image = bpy.data.images[file]
+            for o in bpy.data.objects:
+                if o.data.name == cam.name:
+                    # if break, than o left as fitted object, not changed
+                    break
+            bgob.object = o #bpy.data.objects[cam.name]
+            bgob.image = bpy.data.images[cam.name]
             bgi = bgimages.new()
             bgi.image = bgob.image
 
@@ -444,7 +455,9 @@ class VIEW3D_PT_camera_bgimages2(bpy.types.Panel):
                     fb = row.operator('image.sv_bgimage_front_back',text='Front')
                     fb.item = ind
                     fb.fb = True
-                    col.prop(context.area.spaces[0].background_images[ind],'opacity',text='opacity')
+                    for bi in context.area.spaces[0].background_images:
+                        if bi.image == bgo.image:
+                            col.prop(bi,'opacity',text='opacity')
                     if not main.bgimage_preview:
                         col.template_ID(bgo, 'image',open="image.open")
                 else:
