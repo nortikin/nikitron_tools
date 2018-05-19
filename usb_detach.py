@@ -1,21 +1,19 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
-# AUTHOR:	   (c) Nikitron
-# NAME:		   get_subfolders_files
-# DESCRIPTION:     GUI скрипт для Caja, достать файлы из под-папок
-# REQUIRES:	   python3, python-gtk3
+# AUTHOR:	   (c) P.L. Lucas, modified and translated by Aalexeey :-)
+# NAME:		   USB Detach
+# DESCRIPTION:     GUI скрипт для Caja, безопастное извлечение USB
+# REQUIRES:	   python, python-gtk2
 # LICENSE:	   GNU GPL v3 (http://www.gnu.org/licenses/gpl.html)
-# WEBSITE:	   https://nikitron.cc.ua
+# WEBSITE:	   https://debianforum.ru/index.php?topic=9141.0
 # ICON_USED:       /usr/share/icons/gnome-colors-common/16x16/actions/media-eject.png
 
-
+import shlex, subprocess
+import pygtk
+pygtk.require('2.0')
+import gtk
 import os
-import os.path as path
-import shutil
-
-#import pygtk
-#pygtk.require('2.0')
-#import gtk
+import dbus
 
 
 class USBsGUI:
@@ -161,34 +159,77 @@ class USBsGUI:
         def main(self):
                 gtk.main()
 
-'''
-Destination:
-get files from subfolders to curent folder
-Author:
-Nikitron
-Usage:
-#python3 get_subfolders_files.py
-'''
 
-cd = path.abspath('.')
-rmrf = os.removedirs
-rem = []
 
-for i in os.walk(cd):
-    for f in i[2]:
-        if f in os.listdir('.'):
-           f2 = 'повтор_'+f
-        else:
-           f2 = f
-        shutil.move(path.join(path.abspath(i[0]),f),path.join(cd,f2))
-    if not i[1]:
-        # remove folders, but need check for existing files inside
-        rem = i[0]
-#for i in rem:
-#    rmrf(i)
-print('done \n')
 
-#if __name__ == "__main__":
-#        gui = FilesGUI()
-#        gui.init_window()
-#        gui.main()
+
+
+#This function looks for usb pendrives connected to this computer and returns a list with host plugged
+def usb_list():
+        usb_list=parse_udisks()
+        return usb_list
+
+
+def list_partitions(bus, devices, parent_path):
+        partitions_list=[]
+        for path in devices:
+                if path.startswith(parent_path):
+                        udisks_device = bus.get_object("org.freedesktop.UDisks", path)
+                        if udisks_device!=None:
+                                device_props = dbus.Interface(udisks_device, dbus.PROPERTIES_IFACE)
+                                drive_ok=device_props.Get('org.freedesktop.UDisks.Device', "DeviceIsDrive")
+                                if not drive_ok:
+                                        for mount_path in device_props.Get('org.freedesktop.UDisks.Device', "DeviceMountPaths"):
+                                                partitions_list.append(mount_path)
+        if len(partitions_list)==0:
+                        partitions_list.append(parent_path)
+        return partitions_list
+
+
+def parse_udisks():
+        usb_list=[]
+        bus = dbus.SystemBus()
+        udisks = bus.get_object("org.freedesktop.UDisks", "/org/freedesktop/UDisks")
+        udisks = dbus.Interface(udisks, 'org.freedesktop.UDisks')
+        devices = udisks.get_dbus_method('EnumerateDevices')()
+        for path in devices:
+                udisks_device = bus.get_object("org.freedesktop.UDisks", path)
+                if udisks_device!=None:
+                        device_props = dbus.Interface(udisks_device, dbus.PROPERTIES_IFACE)
+                        native_path=device_props.Get('org.freedesktop.UDisks.Device', "NativePath")
+                        can_detach=device_props.Get('org.freedesktop.UDisks.Device', "DriveCanDetach")
+                        available=device_props.Get('org.freedesktop.UDisks.Device', "DeviceIsMediaAvailable")
+                        drive_ok=device_props.Get('org.freedesktop.UDisks.Device', "DeviceIsDrive")
+                        if 'usb' in native_path and can_detach and available and drive_ok:
+                                #print path
+                                partitions_list=list_partitions(bus, devices, path)
+                                for partition in partitions_list:
+                                        usb_list.append([path, partition])
+        return usb_list
+
+
+def unmount_and_detach(parent_path):
+        bus = dbus.SystemBus()
+        udisks = bus.get_object("org.freedesktop.UDisks", "/org/freedesktop/UDisks")
+        udisks = dbus.Interface(udisks, 'org.freedesktop.UDisks')
+        devices = udisks.get_dbus_method('EnumerateDevices')()
+        for path in devices:
+                if path.startswith(parent_path):
+                        udisks_device = bus.get_object("org.freedesktop.UDisks", path)
+                        if udisks_device!=None:
+                                device_props = dbus.Interface(udisks_device, dbus.PROPERTIES_IFACE)
+                                drive_ok=device_props.Get('org.freedesktop.UDisks.Device', "DeviceIsDrive")
+                                mounted_ok=device_props.Get('org.freedesktop.UDisks.Device', "DeviceIsMounted")
+                                if not drive_ok and mounted_ok:
+                                        #print path
+                                        device_methods = dbus.Interface(udisks_device, 'org.freedesktop.UDisks.Device')
+                                        device_methods.get_dbus_method('FilesystemUnmount')('')
+        udisks_device = bus.get_object("org.freedesktop.UDisks", parent_path)
+        device_methods = dbus.Interface(udisks_device, 'org.freedesktop.UDisks.Device')
+        return device_methods.get_dbus_method('DriveDetach')('')
+
+
+if __name__ == "__main__":
+        gui = USBsGUI()
+        gui.init_window()
+        gui.main()

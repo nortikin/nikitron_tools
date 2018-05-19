@@ -40,7 +40,15 @@ ste =   '  </static>\n'
 tr =    '  <transition>\n'
 tre =   '  </transition>\n'
 
+def ends(item):
+    for i in ['.jpg','.png','.tiff','.jpeg','.gif','.svg','.bmp']:
+        if item.endswith(i):
+            return True
+    return False
+
 for i, item in enumerate(list):
+    if not ends(item):
+        continue
     if i != len(list)-1:
         f1_s = path.join(cd,item)
         f1   = path.join(dd,item)
