@@ -237,8 +237,14 @@ def UVconnect(vertsL,edgesL,vertsU,edgesU):
         if ll == lu:
             #fout_ = [[i+endvert,i+ll+endvert,i+ll+endvert-1,i+endvert-1] for i in range(lu) if i>0]
             #eout_ = [[]]
-            fout_ = [[l[0]+endvert,u[0]+ll+endvert,u[1]+ll+endvert,l[1]+endvert] for l,u in zip(el,eu)]
+            #fout_ = [[l[0]+endvert,u[0]+ll+endvert,u[1]+ll+endvert,l[1]+endvert] for l,u in zip(el,eu)]
+            #vout.extend(vl)
+            #vout.extend(vu)
+            #endvert += ll+lu
+            fout_ = [[l[0]+endvert,l[0]+ll+endvert,l[1]+ll+endvert,l[1]+endvert] for l in el]
             vout.extend(vl)
+            zedobensich = vu[0][2]
+            vu = [[i[0],i[1],zedobensich] for i in vl]
             vout.extend(vu)
             endvert += ll+lu
         elif ll > lu:
@@ -319,8 +325,8 @@ class OP_bricker(bpy.types.Operator):
         object.matrix_world = mw
         if self.modifier:
             m = object.modifiers.new('Solid_brick',type='SOLIDIFY')
-            m.thickness = self.thick
-            m.offset = 1.0
+            m.thickness = self.thick*2
+            m.offset = 0.0
         else:
             bpy.data.scenes[bpy.context.scene.name].objects.active = object
             bpy.ops.object.editmode_toggle()
