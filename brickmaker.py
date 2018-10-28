@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Bricking",
     "author": "nikitron.cc.ua",
-    "version": (0, 0, 4),
+    "version": (0, 0, 5),
     "blender": (2, 7, 9),
     "location": "View3D > Tool Shelf > 1D > bricker",
     "description": "making fasade made from bkicks",
@@ -25,6 +25,8 @@ import bmesh
 # 0.0.2 - simplification of UVconnect
 # 0.0.3 - threshold became negative
 # 0.0.4 - download url
+# 0.0.5 - tryclean flag to choose to use both conditions - distance and overlap
+        # or use one of distance or overlap if not tryclean
 
 def dodo(edges,k):
     for ed in edges:
@@ -39,7 +41,8 @@ def dodo(edges,k):
 def compare(v1,v2,v3):
     # if vertex between points on same line = True
     vec, isit = IPL(V(v1),V(v2),V(v3))
-    return vec != V(v2), isit
+    same = v1 == v2 or v1 == v3
+    return same, isit
 
 def beginline(edges):
     ed_first = False
@@ -126,7 +129,7 @@ def bisec_all(rows,height,thick,in_verts,in_faces,object):
             edges_low_.append(resL[1])
             verts_up_.append(resU[0])
             edges_up_.append(resU[1])
-            #print('resL:  . . . . . .',edges_up_)
+            print('resL:  . . . . . .',edges_up_)
             #for i in bm.verts:
             #    print('masonry',i.co[:])
             bmL.clear()
@@ -190,7 +193,7 @@ def sorte(in_verts,in_edges):
     return vout,eout
 
 
-def remextra(rows,height,thick,threshold,vout,eout):
+def remextra(rows,height,thick,threshold,vout,eout,tryclean):
     # remove extra vertices along one line
     vouter = []
     verts_out = []
@@ -208,10 +211,16 @@ def remextra(rows,height,thick,threshold,vout,eout):
                     if 0 < i < (gl-1):
                         # choose if online or less 0.01 distance
                         comp, dist = compare(group[i-1], group[i], group[i+1])
-                        #print(threshold, dist)
-                        if not comp or dist > threshold:
-                            vouter_2.append(group[i])
-                            verts_out_.append(group[i])
+                        print(threshold, dist, comp)
+                        #if not comp and abs(dist) > abs(threshold):
+                        if tryclean:
+                            if not comp and abs(dist) < abs(threshold):
+                                vouter_2.append(group[i])
+                                verts_out_.append(group[i])
+                        else:
+                            if not comp or abs(dist) < abs(threshold):
+                                vouter_2.append(group[i])
+                                verts_out_.append(group[i])
                     elif i == 0 or i == gl-1:
                         vouter_2.append(group[i])
                         verts_out_.append(group[i])
@@ -304,7 +313,8 @@ class OP_bricker(bpy.types.Operator):
     height = bpy.props.FloatProperty(name='height',default=0.07)
     thick = bpy.props.FloatProperty(name='thickness',default=0.05)
     threshold = bpy.props.FloatProperty(name='thresh',default=-0.001)
-    modifier = bpy.props.FloatProperty(name='modifier',default=True)
+    modifier = bpy.props.BoolProperty(name='modifier',default=True)
+    tryclean = bpy.props.BoolProperty(name='tryclean',default=True)
 
     def execute(self, context):
         o = bpy.context.selected_objects[0]
@@ -315,8 +325,8 @@ class OP_bricker(bpy.types.Operator):
         #print(verts_up,len(verts_up),edges_up,len(edges_up))
         vl,el = sorte(verts_low,edges_low)
         vu,eu = sorte(verts_up,edges_up)
-        vertsL,edgesL = remextra(self.rows,self.height,self.thick,self.threshold,vl,el)
-        vertsU,edgesU = remextra(self.rows,self.height,self.thick,self.threshold,vu,eu)
+        vertsL,edgesL = remextra(self.rows,self.height,self.thick,self.threshold,vl,el,self.tryclean)
+        vertsU,edgesU = remextra(self.rows,self.height,self.thick,self.threshold,vu,eu,self.tryclean)
         #print('vertsL . . . . .. . . . . . .',vertsL[0],len(vertsL),edgesL[0],len(edgesL))
         vout,eout,fout = UVconnect(vertsL,edgesL,vertsU,edgesU)
         #print('UVconnect . . . . .. . . . . . .',vout[0],len(vout),eout[0],len(eout),fout[0],len(fout))
@@ -353,6 +363,7 @@ class OP_bricker_panel(bpy.types.Panel):
     thick = bpy.props.FloatProperty(name='thickness',default=0.05)
     threshold = bpy.props.FloatProperty(name='thresh',default=-0.001)
     modifier = bpy.props.BoolProperty(name='modifier',default=True)
+    tryclean = bpy.props.BoolProperty(name='tryclean',default=True)
 
     def draw(self, context):
         ''' \
@@ -368,12 +379,15 @@ class OP_bricker_panel(bpy.types.Panel):
         row.prop(context.scene, 'D1Brickerthreshold')
         row = col.row(align=True)
         row.prop(context.scene, 'D1Brickermodifier')
+        row.prop(context.scene, 'D1Brickertryclean')
+        row = col.row(align=True)
         bm = row.operator('object.bricker', text='',icon='FACESEL_HLT')
         bm.rows = context.scene.D1Brickerrows
         bm.height = context.scene.D1Brickerheight
         bm.thick = context.scene.D1Brickerthick
         bm.threshold = context.scene.D1Brickerthreshold
         bm.modifier = context.scene.D1Brickermodifier
+        bm.tryclean = context.scene.D1Brickertryclean
 
 
 
@@ -383,6 +397,7 @@ def register():
     bpy.types.Scene.D1Brickerthick = bpy.props.FloatProperty(name='thick',default=0.05)
     bpy.types.Scene.D1Brickerthreshold = bpy.props.FloatProperty(name='threshold',default=-0.001)
     bpy.types.Scene.D1Brickermodifier = bpy.props.BoolProperty(name='modifier',description='use modifier or solidifier?',default=True)
+    bpy.types.Scene.D1Brickertryclean = bpy.props.BoolProperty(name='tryclean',description='Try to make clean joints?',default=True)
     #bpy.types.Scene.D1Bricker = bpy.props.CollectionProperty(type=SvBricker)
     bpy.utils.register_class(OP_bricker)
     bpy.utils.register_class(OP_bricker_panel)
