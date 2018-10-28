@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Bricking",
     "author": "nikitron.cc.ua",
-    "version": (0, 0, 3),
+    "version": (0, 0, 4),
     "blender": (2, 7, 9),
     "location": "View3D > Tool Shelf > 1D > bricker",
     "description": "making fasade made from bkicks",
@@ -21,8 +21,10 @@ import bmesh
 #import timeit
 
 # changelog
+# download url: https://github.com/nortikin/nikitron_tools/blob/master/brickmaker.py
 # 0.0.2 - simplification of UVconnect
 # 0.0.3 - threshold became negative
+# 0.0.4 - download url
 
 def dodo(edges,k):
     for ed in edges:
