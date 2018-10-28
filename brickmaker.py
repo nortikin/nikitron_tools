@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Bricking",
     "author": "nikitron.cc.ua",
-    "version": (0, 0, 1),
+    "version": (0, 0, 3),
     "blender": (2, 7, 9),
     "location": "View3D > Tool Shelf > 1D > bricker",
     "description": "making fasade made from bkicks",
@@ -20,6 +20,9 @@ from mathutils import Matrix as M
 import bmesh
 #import timeit
 
+# changelog
+# 0.0.2 - simplification of UVconnect
+# 0.0.3 - threshold became negative
 
 def dodo(edges,k):
     for ed in edges:
@@ -78,7 +81,7 @@ def bisec(bm,geom_in,zb):
     bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=0.01)
     res = bmesh.ops.bisect_plane(
         bm, geom=geom_in, dist=0.01,
-        plane_co=V((0,0,zb)), plane_no=V((0.0,0,1)), use_snap_center=False,
+        plane_co=V((0.0,0.0,zb)), plane_no=V((0.0,0.0,1)), use_snap_center=False,
         clear_outer=True, clear_inner=True)
     # res = dict(geom_cut=[], geom=[])
     #bm.verts.index_update()
@@ -96,7 +99,7 @@ def bisec(bm,geom_in,zb):
     #edges = [[i,i+1] for i in range(len(verts)-1)]
     #edges.append([len(verts)-1,0])
     #verts = [i.co[:] for i in bm.verts]
-    print('bisectualism . . . . . . . . . . . .',edges,verts)
+    #print('bisectualism . . . . . . . . . . . .',edges,verts)
     return verts, edges
 
 def bisec_all(rows,height,thick,in_verts,in_faces,object):
@@ -298,7 +301,7 @@ class OP_bricker(bpy.types.Operator):
     rows = bpy.props.FloatProperty(name='rows',default=0.15)
     height = bpy.props.FloatProperty(name='height',default=0.07)
     thick = bpy.props.FloatProperty(name='thickness',default=0.05)
-    threshold = bpy.props.FloatProperty(name='thresh',default=0.001)
+    threshold = bpy.props.FloatProperty(name='thresh',default=-0.001)
     modifier = bpy.props.FloatProperty(name='modifier',default=True)
 
     def execute(self, context):
@@ -346,7 +349,7 @@ class OP_bricker_panel(bpy.types.Panel):
     rows = bpy.props.FloatProperty(name='rows',default=0.15)
     height = bpy.props.FloatProperty(name='height',default=0.07)
     thick = bpy.props.FloatProperty(name='thickness',default=0.05)
-    threshold = bpy.props.FloatProperty(name='thresh',default=0.001)
+    threshold = bpy.props.FloatProperty(name='thresh',default=-0.001)
     modifier = bpy.props.BoolProperty(name='modifier',default=True)
 
     def draw(self, context):
@@ -376,7 +379,7 @@ def register():
     bpy.types.Scene.D1Brickerrows = bpy.props.FloatProperty(name='rows',default=0.15)
     bpy.types.Scene.D1Brickerheight = bpy.props.FloatProperty(name='height',default=0.07)
     bpy.types.Scene.D1Brickerthick = bpy.props.FloatProperty(name='thick',default=0.05)
-    bpy.types.Scene.D1Brickerthreshold = bpy.props.FloatProperty(name='threshold',default=0.001)
+    bpy.types.Scene.D1Brickerthreshold = bpy.props.FloatProperty(name='threshold',default=-0.001)
     bpy.types.Scene.D1Brickermodifier = bpy.props.BoolProperty(name='modifier',description='use modifier or solidifier?',default=True)
     #bpy.types.Scene.D1Bricker = bpy.props.CollectionProperty(type=SvBricker)
     bpy.utils.register_class(OP_bricker)
