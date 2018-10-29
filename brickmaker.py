@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Bricking",
     "author": "nikitron.cc.ua",
-    "version": (0, 0, 5),
+    "version": (0, 0, 6),
     "blender": (2, 7, 9),
     "location": "View3D > Tool Shelf > 1D > bricker",
     "description": "making fasade made from bkicks",
@@ -27,6 +27,8 @@ import bmesh
 # 0.0.4 - download url
 # 0.0.5 - tryclean flag to choose to use both conditions - distance and overlap
         # or use one of distance or overlap if not tryclean
+# 0.0.6 - in bisect disabled remove doubles to exclude error od removed BMverts
+        # but in future it needed on this step i guess
 
 def dodo(edges,k):
     for ed in edges:
@@ -83,10 +85,16 @@ def bmeshing(cut_me_vertices,cut_me_polygons):
 def bisec(bm,geom_in,zb):
     #bm.verts.index_update()
     #bm.edges.index_update()
-    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=0.01)
+    #bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=0.00001)
+    bm.verts.ensure_lookup_table()
+    bm.edges.ensure_lookup_table()
+    bm.faces.ensure_lookup_table()
+    bm.verts.index_update()
+    bm.edges.index_update()
+    bm.faces.index_update()
     res = bmesh.ops.bisect_plane(
-        bm, geom=geom_in, dist=0.01,
-        plane_co=V((0.0,0.0,zb)), plane_no=V((0.0,0.0,1)), use_snap_center=False,
+        bm, geom=geom_in, dist=0.00001,
+        plane_co=V((0.0,0.0,zb)), plane_no=V((0.0,0.0,1.0)), use_snap_center=False,
         clear_outer=True, clear_inner=True)
     # res = dict(geom_cut=[], geom=[])
     #bm.verts.index_update()
@@ -94,6 +102,9 @@ def bisec(bm,geom_in,zb):
     #print(res)
     edges = []
     verts = []
+    bm.verts.index_update()
+    bm.edges.index_update()
+    bm.faces.index_update()
     #vets = {}
     for k in res['geom']:
         if isinstance(k, bmesh.types.BMVert):
