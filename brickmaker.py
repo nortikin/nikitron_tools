@@ -349,13 +349,15 @@ class OP_bricker(bpy.types.Operator):
         object = makemesh(vout,eout,fout)
         bpy.context.scene.objects.link(object)
         object.matrix_world = mw
+        bpy.data.scenes[bpy.context.scene.name].objects.active = object
+        bpy.ops.object.editmode_toggle()
+        bpy.ops.mesh.remove_doubles()
         if self.modifier:
+            bpy.ops.object.editmode_toggle()
             m = object.modifiers.new('Solid_brick',type='SOLIDIFY')
             m.thickness = self.thick*2
             m.offset = 0.0
         else:
-            bpy.data.scenes[bpy.context.scene.name].objects.active = object
-            bpy.ops.object.editmode_toggle()
             bpy.ops.mesh.solidify(thickness=-self.thick)
             bpy.ops.object.editmode_toggle()
 
