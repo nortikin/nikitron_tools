@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Bricking",
     "author": "nikitron.cc.ua",
-    "version": (0, 0, 6),
+    "version": (0, 0, 7),
     "blender": (2, 7, 9),
     "location": "View3D > Tool Shelf > 1D > bricker",
     "description": "making fasade made from bkicks",
@@ -29,6 +29,7 @@ import bmesh
         # or use one of distance or overlap if not tryclean
 # 0.0.6 - in bisect disabled remove doubles to exclude error od removed BMverts
         # but in future it needed on this step i guess
+# 0.0.7 - tryclean defaults changed
 
 def dodo(edges,k):
     for ed in edges:
@@ -325,7 +326,7 @@ class OP_bricker(bpy.types.Operator):
     thick = bpy.props.FloatProperty(name='thickness',default=0.05)
     threshold = bpy.props.FloatProperty(name='thresh',default=-0.001)
     modifier = bpy.props.BoolProperty(name='modifier',default=True)
-    tryclean = bpy.props.BoolProperty(name='tryclean',default=True)
+    tryclean = bpy.props.BoolProperty(name='tryclean',default=False)
 
     def execute(self, context):
         o = bpy.context.selected_objects[0]
@@ -376,7 +377,7 @@ class OP_bricker_panel(bpy.types.Panel):
     thick = bpy.props.FloatProperty(name='thickness',default=0.05)
     threshold = bpy.props.FloatProperty(name='thresh',default=-0.001)
     modifier = bpy.props.BoolProperty(name='modifier',default=True)
-    tryclean = bpy.props.BoolProperty(name='tryclean',default=True)
+    tryclean = bpy.props.BoolProperty(name='tryclean',default=False)
 
     def draw(self, context):
         ''' \
@@ -410,7 +411,7 @@ def register():
     bpy.types.Scene.D1Brickerthick = bpy.props.FloatProperty(name='thick',default=0.05)
     bpy.types.Scene.D1Brickerthreshold = bpy.props.FloatProperty(name='threshold',default=-0.001)
     bpy.types.Scene.D1Brickermodifier = bpy.props.BoolProperty(name='modifier',description='use modifier or solidifier?',default=True)
-    bpy.types.Scene.D1Brickertryclean = bpy.props.BoolProperty(name='tryclean',description='Try to make clean joints?',default=True)
+    bpy.types.Scene.D1Brickertryclean = bpy.props.BoolProperty(name='tryclean',description='Try to make clean joints?',default=False)
     #bpy.types.Scene.D1Bricker = bpy.props.CollectionProperty(type=SvBricker)
     bpy.utils.register_class(OP_bricker)
     bpy.utils.register_class(OP_bricker_panel)
