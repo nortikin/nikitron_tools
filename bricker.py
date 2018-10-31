@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Bricker",
     "author": "nikitron.cc.ua",
-    "version": (0, 0, 7),
+    "version": (0, 0, 8),
     "blender": (2, 7, 9),
     "location": "View3D > Tool Shelf > 1D > bricker",
     "description": "Making fasade made from bkicks",
@@ -30,6 +30,7 @@ import bmesh
 # 0.0.6 - in bisect disabled remove doubles to exclude error od removed BMverts
         # but in future it needed on this step i guess
 # 0.0.7 - tryclean defaults changed
+# 0.0.8 - rename and buttonering
 
 def dodo(edges,k):
     for ed in edges:
