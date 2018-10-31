@@ -1,10 +1,10 @@
 bl_info = {
-    "name": "Bricking",
+    "name": "Bricker",
     "author": "nikitron.cc.ua",
     "version": (0, 0, 7),
     "blender": (2, 7, 9),
     "location": "View3D > Tool Shelf > 1D > bricker",
-    "description": "making fasade made from bkicks",
+    "description": "Making fasade made from bkicks",
     "warning": "",
     "wiki_url": "",
     "tracker_url": "",
@@ -395,7 +395,7 @@ class OP_bricker_panel(bpy.types.Panel):
         row.prop(context.scene, 'D1Brickermodifier')
         row.prop(context.scene, 'D1Brickertryclean')
         row = col.row(align=True)
-        bm = row.operator('object.bricker', text='',icon='FACESEL_HLT')
+        bm = row.operator('object.bricker', text='Bricker',icon='FACESEL_HLT')
         bm.rows = context.scene.D1Brickerrows
         bm.height = context.scene.D1Brickerheight
         bm.thick = context.scene.D1Brickerthick
