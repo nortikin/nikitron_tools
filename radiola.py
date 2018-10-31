@@ -22,10 +22,26 @@ class OP_radiola(bpy.types.Operator):
     bl_idname = "sound.radiola"
     bl_label = "play radio"
 
+    make = bpy.props.BoolProperty(name='make',default=False)
+    clear = bpy.props.BoolProperty(name='clear',default=False)
     play = bpy.props.BoolProperty(name='play',default=True)
     item_play = bpy.props.IntProperty(name='composition',default=0)
 
     def execute(self, context):
+
+        if self.clear:
+            context.scene.rp_playlist.clear()
+            context.window_manager.radiola_clear = True
+            self.clear = False
+            return {'FINISHED'} 
+        if self.make:
+            self.dolist(urls,names)
+            context.window_manager.radiola_clear = False
+            self.make = False
+            return {'FINISHED'} 
+
+        if not len(context.scene.rp_playlist):
+            self.dolist(urls,names)
         url = context.scene.rp_playlist[self.item_play].url
 
         if self.play:
@@ -36,6 +52,12 @@ class OP_radiola(bpy.types.Operator):
             os.kill(context.window_manager.radiola, signal.SIGTERM)
             #music.terminate()
         return {'FINISHED'} 
+
+    def dolist(self,urls,names):
+        for u,n in zip(urls,names):
+            bpy.context.scene.rp_playlist.add()
+            bpy.context.scene.rp_playlist[-1].url = u
+            bpy.context.scene.rp_playlist[-1].name = n
 
 
 class OP_radiola_panel(bpy.types.Panel):
@@ -50,6 +72,12 @@ class OP_radiola_panel(bpy.types.Panel):
         Radiola \
         '''
         layout = self.layout
+        col = layout.column(align=True)
+        col.scale_y = 1
+        if context.window_manager.radiola_clear:
+            col.operator('sound.radiola',text='Make').make = True
+        else:
+            col.operator('sound.radiola',text='Clear').clear = True
         col = layout.column(align=True)
         col.scale_y = 3
         b = col.operator('sound.radiola',text='Stop')
@@ -130,11 +158,14 @@ def dolist(urls,names):
     #print(dic)
 
 def register():
-    if 'rp_playlist' in bpy.context.scene:
-        bpy.context.scene.rp_playlist.clear()
+    try:
+        if 'rp_playlist' in bpy.context.scene:
+            bpy.context.scene.rp_playlist.clear()
+    except:
+        pass
     bpy.utils.register_class(RP_Playlist)
     bpy.types.Scene.rp_playlist = bpy.props.CollectionProperty(type=RP_Playlist)
-    dolist(urls,names)
+    bpy.types.WindowManager.radiola_clear=bpy.props.BoolProperty(default=False)
     bpy.types.WindowManager.radiola=bpy.props.IntProperty()
     bpy.types.WindowManager.radiola_ind=bpy.props.IntProperty()
     bpy.utils.register_class(OP_radiola)
@@ -145,6 +176,7 @@ def unregister():
     bpy.utils.unregister_class(OP_radiola)
     del bpy.types.WindowManager.radiola_ind
     del bpy.types.WindowManager.radiola
+    del bpy.types.WindowManager.radiola_clear
     del bpy.types.Scene.rp_playlist
 
 
