@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Bricker",
     "author": "nikitron.cc.ua",
-    "version": (0, 0, 8),
+    "version": (0, 0, 9),
     "blender": (2, 7, 9),
     "location": "View3D > Tool Shelf > 1D > bricker",
     "description": "Making fasade made from bkicks",
@@ -21,7 +21,7 @@ import bmesh
 #import timeit
 
 # changelog
-# download url: https://github.com/nortikin/nikitron_tools/blob/master/brickmaker.py
+# download url: https://github.com/nortikin/nikitron_tools/blob/master/bricker.py
 # 0.0.2 - simplification of UVconnect
 # 0.0.3 - threshold became negative
 # 0.0.4 - download url
@@ -31,8 +31,14 @@ import bmesh
         # but in future it needed on this step i guess
 # 0.0.7 - tryclean defaults changed
 # 0.0.8 - rename and buttonering
+# 0.0.9 - start from cement
+        # ofset and even props from modifier are in panel
+        # recalc normals afterall
+        # Mesh-object name Q_Bricker
+        # link inside updated
 
 def dodo(edges,k):
+    # finds next vertex in other edge for initial vertex
     for ed in edges:
         #print(k,ed)
         if k in ed:
@@ -49,6 +55,8 @@ def compare(v1,v2,v3):
     return same, isit
 
 def beginline(edges):
+    # finds first edge and first index vertex, 
+    # assign it also to start/ edfirst to not forget
     ed_first = False
     e0 = edges[0][0]
     e1 = edges[0][1]
@@ -58,13 +66,16 @@ def beginline(edges):
 
 def diments(object):
     # return height and minimal Z
-    #pass
     a = [i[:][2] for i in object.bound_box]
     am = min(a)
     return object.dimensions[2], am
 
 def rows_calc(rows,height,thick,object):
+    # making rows data for z coor bottom and top
+    # rows-height is offset for brick to lay not on ground, but after cement
     z,zm = diments(object)
+    z -= rows-height
+    zm += rows-height
     rs = int(z//rows)
     
     rwslist_bottom = [zm+i*rows for i in range(rs)]
@@ -74,6 +85,7 @@ def rows_calc(rows,height,thick,object):
     # list(zip(rwslist_bottom,rwslist_top))
 
 def bmeshing(cut_me_vertices,cut_me_polygons):
+    # create bmesh and selected geometry for bisect it
     bm = bmesh.new()
     bm_verts = [bm.verts.new(V(v)) for v in cut_me_vertices]
     for face in cut_me_polygons:
@@ -85,6 +97,7 @@ def bmeshing(cut_me_vertices,cut_me_polygons):
     return bm, geom_in
 
 def bisec(bm,geom_in,zb):
+    # main section function
     #bm.verts.index_update()
     #bm.edges.index_update()
     #bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=0.00001)
@@ -121,6 +134,7 @@ def bisec(bm,geom_in,zb):
     return verts, edges
 
 def bisec_all(rows,height,thick,in_verts,in_faces,object):
+    # iterate and calculate rows
     verts_low = []
     edges_low = []
     verts_up = []
@@ -254,6 +268,7 @@ def remextra(rows,height,thick,threshold,vout,eout,tryclean):
     return verts_out, edges_out
 
 def UVconnect(vertsL,edgesL,vertsU,edgesU):
+    # connecting faces from bisected edges (simplyfied version)
     vout,eout,fout = [],[],[]
     endvert = 0
     vout_,fout_ = [],[]
@@ -304,8 +319,9 @@ def UVconnect(vertsL,edgesL,vertsU,edgesU):
     return vout,eout,fout
 
 def makemesh(v,e,p):
-    a = bpy.data.meshes.new('1Dbricks')
-    b = bpy.data.objects.new('1Dbricks', a)
+    # output object
+    a = bpy.data.meshes.new('Q_Bricker')
+    b = bpy.data.objects.new('Q_Bricker', a)
     #print(v)
     a.validate()
     if type(v[0]) == V:
@@ -328,6 +344,8 @@ class OP_bricker(bpy.types.Operator):
     threshold = bpy.props.FloatProperty(name='thresh',default=-0.001)
     modifier = bpy.props.BoolProperty(name='modifier',default=True)
     tryclean = bpy.props.BoolProperty(name='tryclean',default=False)
+    even = bpy.props.BoolProperty(name='even',default=True)
+    offset = bpy.props.FloatProperty(name='offset',default=1.0)
 
     def execute(self, context):
         o = bpy.context.selected_objects[0]
@@ -354,11 +372,14 @@ class OP_bricker(bpy.types.Operator):
         bpy.data.scenes[bpy.context.scene.name].objects.active = object
         bpy.ops.object.editmode_toggle()
         bpy.ops.mesh.remove_doubles()
+        bpy.ops.mesh.normals_make_consistent(inside=False)
         if self.modifier:
             bpy.ops.object.editmode_toggle()
             m = object.modifiers.new('Solid_brick',type='SOLIDIFY')
             m.thickness = self.thick*2
-            m.offset = 0.0
+            m.offset = self.offset
+            m.use_even_offset = self.even
+
         else:
             bpy.ops.mesh.solidify(thickness=-self.thick)
             bpy.ops.object.editmode_toggle()
@@ -379,6 +400,8 @@ class OP_bricker_panel(bpy.types.Panel):
     threshold = bpy.props.FloatProperty(name='thresh',default=-0.001)
     modifier = bpy.props.BoolProperty(name='modifier',default=True)
     tryclean = bpy.props.BoolProperty(name='tryclean',default=False)
+    even = bpy.props.BoolProperty(name='even',default=True)
+    offset = bpy.props.FloatProperty(name='offset',default=1.0)
 
     def draw(self, context):
         ''' \
@@ -395,6 +418,10 @@ class OP_bricker_panel(bpy.types.Panel):
         row = col.row(align=True)
         row.prop(context.scene, 'D1Brickermodifier')
         row.prop(context.scene, 'D1Brickertryclean')
+        if context.scene.D1Brickermodifier:
+            row = col.row(align=True)
+            row.prop(context.scene, 'D1Brickereven')
+            row.prop(context.scene, 'D1Brickeroffset')
         row = col.row(align=True)
         bm = row.operator('object.bricker', text='Bricker',icon='FACESEL_HLT')
         bm.rows = context.scene.D1Brickerrows
@@ -403,6 +430,8 @@ class OP_bricker_panel(bpy.types.Panel):
         bm.threshold = context.scene.D1Brickerthreshold
         bm.modifier = context.scene.D1Brickermodifier
         bm.tryclean = context.scene.D1Brickertryclean
+        bm.even = context.scene.D1Brickereven
+        bm.offset = context.scene.D1Brickeroffset
 
 
 
@@ -413,6 +442,8 @@ def register():
     bpy.types.Scene.D1Brickerthreshold = bpy.props.FloatProperty(name='threshold',default=-0.001)
     bpy.types.Scene.D1Brickermodifier = bpy.props.BoolProperty(name='modifier',description='use modifier or solidifier?',default=True)
     bpy.types.Scene.D1Brickertryclean = bpy.props.BoolProperty(name='tryclean',description='Try to make clean joints?',default=False)
+    bpy.types.Scene.D1Brickereven = bpy.props.BoolProperty(name='even',default=True)
+    bpy.types.Scene.D1Brickeroffset = bpy.props.FloatProperty(name='offset',default=1.0)
     #bpy.types.Scene.D1Bricker = bpy.props.CollectionProperty(type=SvBricker)
     bpy.utils.register_class(OP_bricker)
     bpy.utils.register_class(OP_bricker_panel)
@@ -425,6 +456,8 @@ def unregister():
     del bpy.types.Scene.D1Brickerthick
     del bpy.types.Scene.D1Brickerthreshold
     del bpy.types.Scene.D1Brickermodifier
+    del bpy.types.Scene.D1Brickereven
+    del bpy.types.Scene.D1Brickeroffset
 
 if __name__ == '__main__':
     register()
