@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Bricker",
     "author": "nikitron.cc.ua",
-    "version": (0, 0, 9),
+    "version": (0, 1, 0),
     "blender": (2, 7, 9),
     "location": "View3D > Tool Shelf > 1D > bricker",
     "description": "Making fasade made from bkicks",
@@ -36,6 +36,9 @@ import bmesh
         # recalc normals afterall
         # Mesh-object name Q_Bricker
         # link inside updated
+# 0.1.0 - startpoint from object's origin Z=0
+        # multiobject support
+        # if bisect gives no sect, than bi appending [[]]
 
 def dodo(edges,k):
     # finds next vertex in other edge for initial vertex
@@ -57,6 +60,7 @@ def compare(v1,v2,v3):
 def beginline(edges):
     # finds first edge and first index vertex, 
     # assign it also to start/ edfirst to not forget
+    #print(edges)
     ed_first = False
     e0 = edges[0][0]
     e1 = edges[0][1]
@@ -64,22 +68,29 @@ def beginline(edges):
     edges.pop(edges.index(edges[0]))
     return ed_first, e0, e1, start
 
-def diments(object):
+def diments(object,rows):
     # return height and minimal Z
     a = [i[:][2] for i in object.bound_box]
     am = min(a)
-    return object.dimensions[2], am
+    # to start from origin
+    if am >=0:
+        zm = rows*round(am//rows,2)+rows
+        z = object.dimensions[2]
+    else:
+        zm = rows*round(am//rows,2)
+        z = object.dimensions[2]
+    return z, zm
 
 def rows_calc(rows,height,thick,object):
     # making rows data for z coor bottom and top
     # rows-height is offset for brick to lay not on ground, but after cement
-    z,zm = diments(object)
-    z -= rows-height
-    zm += rows-height
-    rs = int(z//rows)
-    
+    z,zm = diments(object,rows)
+    z -= rows-height  # decrease on cement extra height
+    zm += rows-height # lift on cement
+    rs = int(z//rows) # rows count 5.2//0.15
     rwslist_bottom = [zm+i*rows for i in range(rs)]
     rwslist_top    = [zm+i*rows+height for i in range(rs)]
+    #print(rwslist_bottom,rwslist_top)
     return rwslist_bottom, rwslist_top
     # should not work
     # list(zip(rwslist_bottom,rwslist_top))
@@ -156,7 +167,7 @@ def bisec_all(rows,height,thick,in_verts,in_faces,object):
             edges_low_.append(resL[1])
             verts_up_.append(resU[0])
             edges_up_.append(resU[1])
-            print('resL:  . . . . . .',edges_up_)
+            # print('resL:  . . . . . .',edges_up_)
             #for i in bm.verts:
             #    print('masonry',i.co[:])
             bmL.clear()
@@ -174,6 +185,9 @@ def sorte(in_verts,in_edges):
     # sorting with chains consistency
     eout = []
     for edges in in_edges:
+        if not edges:
+            eout.append([[]])
+            continue
         ed_first, e0, e1, start = beginline(edges)
         # for nestedness objects[groups[edges[vertices[0,1]]]]
         # groups - isolated edges chains
@@ -216,7 +230,7 @@ def sorte(in_verts,in_edges):
     #print(eout)
 
     # same grouped vertices
-    vout = [[[vers[ed] for ed in group] for group in edges] for edges, vers in zip(eout,in_verts)]
+    vout = [[[vers[ed] for ed in group] for group in edges] for edges, vers in zip(eout,in_verts) if edges[0]]
     return vout,eout
 
 
@@ -238,7 +252,7 @@ def remextra(rows,height,thick,threshold,vout,eout,tryclean):
                     if 0 < i < (gl-1):
                         # choose if online or less 0.01 distance
                         comp, dist = compare(group[i-1], group[i], group[i+1])
-                        print(threshold, dist, comp)
+                        #print(threshold, dist, comp)
                         #if not comp and abs(dist) > abs(threshold):
                         if tryclean:
                             if not comp and abs(dist) < abs(threshold):
@@ -348,41 +362,41 @@ class OP_bricker(bpy.types.Operator):
     offset = bpy.props.FloatProperty(name='offset',default=1.0)
 
     def execute(self, context):
-        o = bpy.context.selected_objects[0]
-        mw = o.matrix_world
-        in_verts = [[i.co[:] for i in o.data.vertices]]
-        in_faces = [[list(i.vertices) for i in o.data.polygons]]
-        verts_low, edges_low, verts_up, edges_up = bisec_all(self.rows,self.height,self.thick,in_verts,in_faces,o)
-        #print(verts_up,len(verts_up),edges_up,len(edges_up))
-        vl,el = sorte(verts_low,edges_low)
-        vu,eu = sorte(verts_up,edges_up)
-        vertsL,edgesL = remextra(self.rows,self.height,self.thick,self.threshold,vl,el,self.tryclean)
-        vertsU,edgesU = remextra(self.rows,self.height,self.thick,self.threshold,vu,eu,self.tryclean)
-        #print('vertsL . . . . .. . . . . . .',vertsL[0],len(vertsL),edgesL[0],len(edgesL))
-        vout,eout,fout = UVconnect(vertsL,edgesL,vertsU,edgesU)
-        #print('UVconnect . . . . .. . . . . . .',vout[0],len(vout),eout[0],len(eout),fout[0],len(fout))
-        #for v,e in zip(vertsL,edgesL):
-        #for v,e in zip(verts_up,edges_up):
-        #    object = makemesh(v,e,[])
-        #    object = makemesh(v,e,f) #(vout,eout,fout)
-        #    bpy.context.scene.objects.link(object)
-        object = makemesh(vout,eout,fout)
-        bpy.context.scene.objects.link(object)
-        object.matrix_world = mw
-        bpy.data.scenes[bpy.context.scene.name].objects.active = object
-        bpy.ops.object.editmode_toggle()
-        bpy.ops.mesh.remove_doubles()
-        bpy.ops.mesh.normals_make_consistent(inside=False)
-        if self.modifier:
+        for o in context.selected_objects:
+            mw = o.matrix_world
+            in_verts = [[i.co[:] for i in o.data.vertices]]
+            in_faces = [[list(i.vertices) for i in o.data.polygons]]
+            verts_low, edges_low, verts_up, edges_up = bisec_all(self.rows,self.height,self.thick,in_verts,in_faces,o)
+            #print(verts_up,len(verts_up),edges_up,len(edges_up))
+            vl,el = sorte(verts_low,edges_low)
+            vu,eu = sorte(verts_up,edges_up)
+            vertsL,edgesL = remextra(self.rows,self.height,self.thick,self.threshold,vl,el,self.tryclean)
+            vertsU,edgesU = remextra(self.rows,self.height,self.thick,self.threshold,vu,eu,self.tryclean)
+            #print('vertsL . . . . .. . . . . . .',vertsL[0],len(vertsL),edgesL[0],len(edgesL))
+            vout,eout,fout = UVconnect(vertsL,edgesL,vertsU,edgesU)
+            #print('UVconnect . . . . .. . . . . . .',vout[0],len(vout),eout[0],len(eout),fout[0],len(fout))
+            #for v,e in zip(vertsL,edgesL):
+            #for v,e in zip(verts_up,edges_up):
+            #    object = makemesh(v,e,[])
+            #    object = makemesh(v,e,f) #(vout,eout,fout)
+            #    bpy.context.scene.objects.link(object)
+            object = makemesh(vout,eout,fout)
+            bpy.context.scene.objects.link(object)
+            object.matrix_world = mw
+            bpy.data.scenes[bpy.context.scene.name].objects.active = object
             bpy.ops.object.editmode_toggle()
-            m = object.modifiers.new('Solid_brick',type='SOLIDIFY')
-            m.thickness = self.thick*2
-            m.offset = self.offset
-            m.use_even_offset = self.even
+            bpy.ops.mesh.remove_doubles()
+            bpy.ops.mesh.normals_make_consistent(inside=False)
+            if self.modifier:
+                bpy.ops.object.editmode_toggle()
+                m = object.modifiers.new('Solid_brick',type='SOLIDIFY')
+                m.thickness = self.thick*2
+                m.offset = self.offset
+                m.use_even_offset = self.even
 
-        else:
-            bpy.ops.mesh.solidify(thickness=-self.thick)
-            bpy.ops.object.editmode_toggle()
+            else:
+                bpy.ops.mesh.solidify(thickness=-self.thick)
+                bpy.ops.object.editmode_toggle()
 
 
         return {'FINISHED'}
