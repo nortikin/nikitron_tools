@@ -20,8 +20,8 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (2, 1, 3),
-    "blender": (2, 7, 6),  
+    "version": (2, 1, 5),
+    "blender": (2, 7, 9),  
     "category": "Object",
     "author": "Nikita Gorodetskiy",
     "location": "object",
@@ -30,6 +30,8 @@ bl_info = {
     "wiki_url": "http://wiki.blender.org/index.php/Extensions:2.6/Py/Scripts/Object/Nikitron_tools",          
     "tracker_url": "http://www.blenderartists.org/forum/showthread.php?272679-Addon-WIP-Sverchok-parametric-tool-for-architects",  
 }
+
+# 2.1.5 - комплименты добавляю слово
 
 import bpy
 from mathutils.geometry import intersect_line_plane
@@ -683,10 +685,10 @@ class ComplimentWoman(bpy.types.Operator):
     
     def main(self):
         a1 = ['Ты',]
-        a2 = ['так', 'офигенски', 'просто', 'невероятно', 'супер', 'безумно', 'нереально']
+        a2 = ['так', 'офигенски', 'просто', 'невероятно', 'супер', 'безумно', 'нереально','всё равно']
         a3 = ['круто','потрясно','вкусно','улётно','клёво','прелестно','замечательно']
         a4 = ['выглядишь','пахнешь','целуешься','печёшь пирожки','двигаешься','танцуешь','готовишь','поёшь','смеёшься','работаешь']
-        a5 = ['пупсик','дорогая','милая','солнце','зайка','как всегда','моя королева','бегемотик']
+        a5 = ['пупсик','дорогая','милая','солнце','зайка','как всегда','моя королева','бегемотик','горошинка','луковичка','малинка']
         compliment = (str(self.w(a1))+' '+ str(self.w(a2))+ ' '+ str(self.w(a3))+ \
                         ' '+ str(self.w(a4)) + ','+ ' '+ str(self.w(a5)) + '!'
                         )
