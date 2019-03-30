@@ -24,8 +24,8 @@ if not cdname in os.listdir(bd):
 list = os.listdir(cd)
 text = '<background> \n\
   <starttime> \n\
-    <year>2017</year> \n\
-    <month>05</month> \n\
+    <year>2019</year> \n\
+    <month>01</month> \n\
     <day>07</day> \n\
     <hour>00</hour> \n\
     <minute>00</minute> \n\
@@ -34,8 +34,8 @@ text = '<background> \n\
   <!-- This animation will start at midnight. --> \n'
 
 st =    '  <static>\n'
-dur =   '    <duration>60.0</duration>\n'
-dure =  '    <duration>5.0</duration>\n'
+dur =   '    <duration>200.0</duration>\n'
+dure =  '    <duration>1.0</duration>\n'
 ste =   '  </static>\n'
 tr =    '  <transition>\n'
 tre =   '  </transition>\n'
