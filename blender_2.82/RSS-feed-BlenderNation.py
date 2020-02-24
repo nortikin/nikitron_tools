@@ -2,7 +2,7 @@
 bl_info = {
     "name": "RSS",
     "version": (0, 2, 0),
-    "blender": (2, 8, 0), 
+    "blender": (2, 80, 0), 
     "category": "World",
     "author": "Nikolay Fomichev",
     "location": "World",
@@ -72,7 +72,7 @@ class RssPanel(bpy.types.Panel):
                     col = box.column()
                     col.scale_y=0.6
                     for a in dtext.splitlines():
-                        col.label(a[1:-1])
+                        col.label(text=a[1:-1])
         if self.tree:
             if bpy.context.window_manager.RSSadress == \
                     'http://feeds.feedburner.com/BlenderNation':
