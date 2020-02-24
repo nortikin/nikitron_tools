@@ -759,6 +759,9 @@ class CurvesTo2D (bpy.types.Operator):
     variants_ = ['AUTOMATIC', 'VECTOR', 'ALIGNED', 'FREE_ALIGN', 'TOGGLE_FREE_ALIGN']
     variants = [tuple(3*[x]) for x in variants_]
     handle: bpy.props.EnumProperty(items=variants, name='тип рычажков', default='VECTOR')
+    variants1_ = ['FRONT', 'BACK', 'BOTH', 'NONE']
+    variants1 = [tuple(3*[x]) for x in variants1_]
+    fillmode: bpy.props.EnumProperty(items=variants1, name='заполнение', default='NONE')
     bevel: bpy.props.FloatProperty(name='закругление', default=0.0)
     bev_resolution: bpy.props.IntProperty(name='разрешение', default=0)
     
@@ -778,6 +781,7 @@ class CurvesTo2D (bpy.types.Operator):
                 o.data.resolution_u = self.resolution
                 o.data.bevel_depth = self.bevel
                 o.data.bevel_resolution = self.bev_resolution
+                o.data.fill_mode = self.fillmode
 
                 if self.bezier:
                     bpy.data.objects[nam].select_set(True)

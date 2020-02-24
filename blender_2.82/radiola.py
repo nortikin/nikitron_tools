@@ -1,8 +1,8 @@
 bl_info = {
     "name": "Radiola",
     "author": "nikitron.cc.ua",
-    "version": (0, 0, 1),
-    "blender": (2, 7, 9),
+    "version": (0, 0, 2),
+    "blender": (2, 82, 0),
     "location": "View3D > Tool Shelf > SV > Radiola",
     "description": "Play the radio",
     "warning": "",
@@ -16,16 +16,17 @@ import signal
 import bpy
 import time
 import subprocess as sp
+import aud
 
 class OP_radiola(bpy.types.Operator):
     '''Radiola'''
     bl_idname = "sound.radiola"
     bl_label = "play radio"
 
-    make = bpy.props.BoolProperty(name='make',default=False)
-    clear = bpy.props.BoolProperty(name='clear',default=False)
-    play = bpy.props.BoolProperty(name='play',default=True)
-    item_play = bpy.props.IntProperty(name='composition',default=0)
+    make : bpy.props.BoolProperty(name='make',default=False)
+    clear : bpy.props.BoolProperty(name='clear',default=False)
+    play : bpy.props.BoolProperty(name='play',default=True)
+    item_play : bpy.props.IntProperty(name='composition',default=0)
 
     def execute(self, context):
 
@@ -45,12 +46,15 @@ class OP_radiola(bpy.types.Operator):
         url = context.scene.rp_playlist[self.item_play].url
 
         if self.play:
-            music = sp.Popen(['/usr/bin/mplayer', url])
+            context.window_manager.radiola_dev.stopAll()
+            #music = sp.Popen(['/usr/bin/mplayer', url])
+            context.window_manager.radiola_dev.play(aud.Sound(url))
             context.window_manager.radiola_ind = self.item_play
-            context.window_manager.radiola = music.pid
+            #context.window_manager.radiola = music.pid
         else:
-            os.kill(context.window_manager.radiola, signal.SIGTERM)
+            #os.kill(context.window_manager.radiola, signal.SIGTERM)
             #music.terminate()
+            context.window_manager.radiola_dev.stopAll()
         return {'FINISHED'} 
 
     def dolist(self,urls,names):
@@ -62,7 +66,7 @@ class OP_radiola(bpy.types.Operator):
 
 class OP_radiola_panel(bpy.types.Panel):
     bl_space_type = 'VIEW_3D'
-    bl_region_type = 'TOOLS'
+    bl_region_type = 'UI'
     bl_label = "Radiola"
     bl_options = {'DEFAULT_CLOSED'}
     bl_category = 'SV'
@@ -98,8 +102,8 @@ class OP_radiola_panel(bpy.types.Panel):
                 a.play=True
 
 class RP_Playlist(bpy.types.PropertyGroup):
-    url = bpy.props.StringProperty()
-    name = bpy.props.StringProperty()
+    url : bpy.props.StringProperty()
+    name : bpy.props.StringProperty()
 
 urls = [    'http://icecast.vgtrk.cdnvideo.ru/vestifm_mp3_192kbps',
             'http://strm112.1.fm/atr_mobile_mp3',
@@ -168,6 +172,7 @@ def register():
     bpy.types.WindowManager.radiola_clear=bpy.props.BoolProperty(default=False)
     bpy.types.WindowManager.radiola=bpy.props.IntProperty()
     bpy.types.WindowManager.radiola_ind=bpy.props.IntProperty()
+    bpy.types.WindowManager.radiola_dev = aud.Device()
     bpy.utils.register_class(OP_radiola)
     bpy.utils.register_class(OP_radiola_panel)
 
