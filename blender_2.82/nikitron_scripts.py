@@ -1559,9 +1559,10 @@ class NikitronPanel(bpy.types.Panel):
     """ Инструменты для работы """
     bl_idname = "panel.nikitron"
     bl_label = 'ИНСТРУМЕНТЫ НТ'
-    bl_space_type = 'VIEW_3D'
-    bl_region_type = 'UI'
-    bl_category = 'SV'
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "UI"
+    bl_category = "Create"
+    bl_context = "objectmode"
     bl_options = {'DEFAULT_CLOSED'}
     #bl_context = 'objectmode'
     #bl_options = {'HIDE_HEADER'}
