@@ -65,11 +65,12 @@ class OP_radiola(bpy.types.Operator):
 
 
 class OP_radiola_panel(bpy.types.Panel):
-    bl_space_type = 'VIEW_3D'
-    bl_region_type = 'UI'
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "UI"
+    bl_category = "Create"
+    bl_context = "objectmode"
     bl_label = "Radiola"
     bl_options = {'DEFAULT_CLOSED'}
-    bl_category = 'SV'
 
     def draw(self, context):
         ''' \
