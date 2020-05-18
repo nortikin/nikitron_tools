@@ -1557,7 +1557,7 @@ class NT_language (bpy.types.Operator):
 
 class NikitronPanel(bpy.types.Panel):
     """ Инструменты для работы """
-    bl_idname = "panel.nikitron"
+    #bl_idname = "panel.nikitron"
     bl_label = 'ИНСТРУМЕНТЫ НТ'
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'

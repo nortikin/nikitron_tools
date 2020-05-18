@@ -1,10 +1,10 @@
 bl_info = {
     "name": "interface dafaulter",
     "version": (1, 0, 0),
-    "blender": (2, 8, 0), 
+    "blender": (2, 80, 0), 
     "category": "3D View",
-    "author": "nikitron",
-    "location": "View3D > Tool Shelf > 1D interface",
+    "author": "Nikita Gorodetskiy",
+    "location": "object",
     "description": "interface turn to default screen areas position and size",
     "warning": "",
     "wiki_url": "",          
@@ -310,7 +310,7 @@ class OP_Area_do(bpy.types.Operator):
                 break
             a,b,mix,miy,max,may = self.get_mergables(areas,hw)
             if a:
-                bpy.ops.screen.area_join(dict(region=a.regions[0],area=a,window=window,screen=screen,sarea=a,narea=b),min_x=mix, min_y=miy, max_x=max, max_y=may)
+                bpy.ops.screen.area_join(cursor=(int(mix),int(miy)))#dict(region=a.regions[0],area=a,window=window,screen=screen,sarea=a,narea=b))#,min_x=mix, min_y=miy, max_x=max, max_y=may)
                 blend_data = context.blend_data
                 renew_screen()
             if hw == 'h':
@@ -349,11 +349,12 @@ class OP_Area_do(bpy.types.Operator):
 
 
 class VIEW3D_PT_area_do(bpy.types.Panel):
+    #bl_idname = "panel.interface"
     bl_space_type = 'VIEW_3D'
-    bl_region_type = 'TOOLS'
+    bl_region_type = 'UI'
     bl_label = "Interface reset"
     bl_options = {'DEFAULT_CLOSED'}
-    bl_category = '1D'
+    bl_category = 'SV'
 
 
     def draw(self, context):
