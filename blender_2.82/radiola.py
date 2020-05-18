@@ -59,6 +59,7 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
     bl_idname = 'OBJECT_PT_radiola_panel'
     bl_label = "Radiola"
     bl_options = {'DEFAULT_CLOSED'}
+    bl_category = 'SV'
 
     def draw(self, context):
         ''' \
