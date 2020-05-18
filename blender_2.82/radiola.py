@@ -12,7 +12,6 @@ bl_info = {
 
 import os
 import signal
-#import threading
 import bpy
 import time
 import subprocess as sp
@@ -36,18 +35,12 @@ class OP_radiola(bpy.types.Operator):
             url = context.scene.rp_playlist[self.item_play].url
             context.window_manager.radiola_clear = False
             context.window_manager.radiola_dev.stopAll()
-            #music = sp.Popen(['/usr/bin/mplayer', url])
             try:
                 context.window_manager.radiola_dev.play(aud.Sound(url))
                 context.window_manager.radiola_ind = self.item_play
             except:
-                print()
-            #def invoke(self, context, event):
-                self.report({'ERROR'}, f'Radiola cannot read source:\nnumber {self.item_play-1}\n{names[self.item_play]} \n{url}')
-            #context.window_manager.radiola = music.pid
+                self.report({'ERROR'}, f'Radiola cannot read source:\nnumber {self.item_play+1}\n{names[self.item_play]} \n{url}')
         if self.stop:
-            #os.kill(context.window_manager.radiola, signal.SIGTERM)
-            #music.terminate()
             context.scene.rp_playlist.clear()
             context.window_manager.radiola_clear = True
             context.window_manager.radiola_dev.stopAll()
@@ -66,7 +59,6 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
     bl_idname = 'OBJECT_PT_radiola_panel'
     bl_label = "Radiola"
     bl_options = {'DEFAULT_CLOSED'}
-    bl_category = 'SV'
 
     def draw(self, context):
         ''' \
@@ -149,11 +141,9 @@ names = [   'Вести',
 def dolist(urls,names):
     dic={}
     for u,n in zip(urls,names):
-        #dic[n] = u
         bpy.context.scene.rp_playlist.add()
         bpy.context.scene.rp_playlist[-1].url = u
         bpy.context.scene.rp_playlist[-1].name = n
-    #print(dic)
 
 def register():
     try:

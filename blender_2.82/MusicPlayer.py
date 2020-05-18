@@ -406,9 +406,10 @@ class MP_PrintPlaylist(bpy.types.Operator):
 
 
 class VIEW3D_PT_Musicplayer(bpy.types.Panel):
-    bl_space_type = 'VIEW_3D'
-    bl_region_type = 'UI'
-    bl_label = "Music Player"
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "UI"
+    bl_category = "Create"
+    bl_context = "objectmode"
     bl_options = {'DEFAULT_CLOSED'}
     bl_category = 'SV'
     
