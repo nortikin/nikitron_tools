@@ -12,9 +12,9 @@ def openfile(filename):
 
 def trans(text):
     cyrillic = 'абсдефгшижклмнопкрстуввсйзАБСДЕФГШИЖКЛМНОПКРСТУВВСЙЗ          '
-    latin = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ()?!:….,/|' #.split('|')    
+    latin = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ()?!:….,/|' #.split('|')
     text = text.translate({ord(k):v for k,v in zip(latin,cyrillic)})
-    print(text)
+    #print(text)
     return text
 
 

@@ -1555,7 +1555,7 @@ class NT_language (bpy.types.Operator):
         nt_lang_panel()
         return {'FINISHED'}
 
-class NikitronPanel(bpy.types.Panel):
+class _PT_NikitronPanel(bpy.types.Panel):
     """ Инструменты для работы """
     #bl_idname = "panel.nikitron"
     bl_label = 'ИНСТРУМЕНТЫ НТ'
@@ -1695,7 +1695,7 @@ class NikitronPanel(bpy.types.Panel):
                         row.label(text=sv_lang['maxvers'] + ' ' + str(maxim()))
 
 my_classes = [
-                CurvesTo3D, CurvesTo2D, NikitronPanel, ObjectNames,
+                CurvesTo3D, CurvesTo2D, _PT_NikitronPanel, ObjectNames,
                 VerticesNumbers3D, Connect2Meshes, MaterialToObjectAll,
                 MaterialToDataAll, BoundingBox, SpreadObjects,
                 DeleteOrientation, SeparatorM, BooleratorRandom,

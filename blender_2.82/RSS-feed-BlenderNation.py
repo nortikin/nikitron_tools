@@ -31,7 +31,7 @@ def getRss(adress):
     
     return tree    
 
-class RssPanel(bpy.types.Panel):
+class _PT_RssPanel(bpy.types.Panel):
     ''' Read feed '''
     bl_label = "RSS"
     bl_space_type = 'PROPERTIES'
@@ -92,12 +92,12 @@ class reloadRSS(bpy.types.Operator):
               
 # registering and menu integration
 def register():
-    bpy.utils.register_class(RssPanel)
+    bpy.utils.register_class(_PT_RssPanel)
     bpy.utils.register_class(reloadRSS)
  
 # unregistering and removing menus
 def unregister():
-    bpy.utils.unregister_class(RssPanel)
+    bpy.utils.unregister_class(_PT_RssPanel)
     bpy.utils.unregister_class(reloadRSS)
  
 if __name__ == "__main__":
