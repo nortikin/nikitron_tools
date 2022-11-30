@@ -31,7 +31,7 @@ phrase=['This is it...','That it...','Next...','You good...','She is well...',
         'Да, детка...',]
 
 class MP_Playlist(bpy.types.PropertyGroup):
-    playlist = bpy.props.StringProperty()
+    playlist: bpy.props.StringProperty()
 
 def volume_up(self, context):
     try:
@@ -146,7 +146,7 @@ class MP_DelComposition(bpy.types.Operator):
     bl_idname = "sound.delcompos"
     bl_label = "Delete composition"
     
-    item_delete = bpy.props.IntProperty(name="item", default=0)
+    item_delete : bpy.props.IntProperty(name="item", default=0)
     
     @classmethod
     def poll(cls, context):
@@ -572,21 +572,3 @@ def unregister():
 if __name__ == "__main__": 
     #unregister()
     register()
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
