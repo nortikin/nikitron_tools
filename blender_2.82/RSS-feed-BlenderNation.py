@@ -28,7 +28,7 @@ def getRss(adress):
         page = None
        
     tree = ET.XML(page) if page else None
-    
+    print(tree)
     return tree    
 
 class _PT_RssPanel(bpy.types.Panel):
@@ -56,15 +56,17 @@ class _PT_RssPanel(bpy.types.Panel):
         row.prop(context.window_manager, "RSSadress")
         row.operator('world.reloadrss', text='Reload')
         def RSS_read():
-            for el in self.tree.getchildren():
+            for el in list(self.tree):
                 for i in el.findall('item'):
                     box = layout.box()
+                    channel = i.find('channel')
                     title = i.find('title')
                     link = i.find('link')
                     description = i.find('description')
-                    dtext___ = re.split('<img', description.text)[:-1]
-                    dtext__ = re.split('<p>',str(dtext___))[1]
-                    dtext_ = re.split('</p>',dtext__)[0]
+                    #dtext___ = re.split('<img>', description.text)[:-1]
+                    #dtext__ = re.split('<p>',str(dtext___))[1]
+                    #dtext_ = re.split('</p>',dtext__)[0]
+                    dtext_ = re.split('\n',description.text)[0]
                     col = box.column()
                     col.scale_y=1.5
                     col.operator('wm.url_open', text=title.text).url = link.text
