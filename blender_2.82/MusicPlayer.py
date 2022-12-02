@@ -1,8 +1,8 @@
 bl_info = {
     "name": "Music Player",
-    "author": "edddy <edddy74@live.fr> + nikitron.cc.ua a little",
+    "author": "edddy <edddy74@live.fr> + nikitron a little",
     "version": (1, 0, 0),
-    "blender": (2, 80, 0),
+    "blender": (3, 20, 0),
     "location": "View3D > Tool Shelf > Music Player",
     "description": "A Little Music Player for Blender",
     "warning": "",
@@ -319,7 +319,8 @@ class MP_NextSIC(bpy.types.Operator):
 
     def execute(self, context):
         global phrase
-        context.window_manager.mp_index+=0.5
+        context.window_manager.mp_index+=1
+        context.window_manager.mp_index-=1
         # sorry for 0.5 but i don't understand why it jump on x2 item FF...
         context.window_manager.mp_playsound.stop()
         self.report({'INFO'}, str(random.choice(phrase)))
