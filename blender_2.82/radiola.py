@@ -1,8 +1,8 @@
 bl_info = {
     "name": "Radiola",
     "author": "nikitron.cc.ua",
-    "version": (0, 0, 2),
-    "blender": (2, 82, 0),
+    "version": (0, 1, 2),
+    "blender": (3, 4, 0),
     "location": "View3D > Tool Shelf > SV > Radiola",
     "description": "Play the radio",
     "warning": "",
@@ -10,11 +10,11 @@ bl_info = {
     "tracker_url": "",
     "category": "Misc"}
 
-import os
-import signal
+# import os
+#import signal
 import bpy
-import time
-import subprocess as sp
+# import time
+# import subprocess as sp
 import aud
 
 class OP_radiola(bpy.types.Operator):
@@ -22,7 +22,7 @@ class OP_radiola(bpy.types.Operator):
     bl_idname = "sound.radiola"
     bl_label = "play radio"
 
-    play : bpy.props.BoolProperty(name='play',default=False)
+    play : bpy.props.BoolProperty(name='play',default=True)
     stop : bpy.props.BoolProperty(name='stop',default=False)
     item_play : bpy.props.IntProperty(name='composition',default=0)
 
@@ -32,18 +32,26 @@ class OP_radiola(bpy.types.Operator):
         if self.play:
             if not len(context.scene.rp_playlist):
                 self.dolist(urls,names)
-            url = context.scene.rp_playlist[self.item_play].url
-            context.window_manager.radiola_clear = False
+                context.window_manager.radiola_clear = False
             context.window_manager.radiola_dev.stopAll()
+            if context.window_manager.radiola_url:
+                url = context.window_manager.radiola_url
+            else:
+                url = context.scene.rp_playlist[self.item_play].url
             try:
                 context.window_manager.radiola_dev.play(aud.Sound(url))
                 context.window_manager.radiola_ind = self.item_play
             except:
-                self.report({'ERROR'}, f'Radiola cannot read source:\nnumber {self.item_play+1}\n{names[self.item_play]} \n{url}')
-        if self.stop:
-            context.scene.rp_playlist.clear()
-            context.window_manager.radiola_clear = True
+                if context.window_manager.radiola_url:
+                    self.report({'ERROR'}, f'Radiola cannot read source: {url}')
+                else:
+                    self.report({'ERROR'}, f'Radiola cannot read source:\nnumber {self.item_play+1}\n{names[self.item_play]} \n{url}')
+        else:
             context.window_manager.radiola_dev.stopAll()
+            if self.stop:
+                context.scene.rp_playlist.clear()
+                context.window_manager.radiola_clear = True
+                context.window_manager.radiola_dev.stopAll()
         return {'FINISHED'}
 
     def dolist(self,urls,names):
@@ -67,6 +75,8 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         '''
         layout = self.layout
         col = layout.column(align=True)
+        col.prop(context.window_manager, 'radiola_url')
+        col = layout.column(align=True)
         col.scale_y = 1.2
         b = col.operator('sound.radiola',text='B U T T O N')
         if context.window_manager.radiola_clear:
@@ -79,16 +89,21 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         i=0
         col = layout.column(align=True)
         col.scale_y = 0.8
-        for p in playlist_print:
-            i+=1
-            if i == (context.window_manager.radiola_ind+1):
-                a = col.operator('sound.radiola', text='> '+str(i)+' | '+str(p))
-                a.item_play=i-1
-                a.play=True
-            else:
-                a = col.operator("sound.radiola", text='    '+str(i)+' | '+str(p))
-                a.item_play=i-1
-                a.play=True
+        rurl = context.window_manager.radiola_url
+        if rurl:
+            col.label(text='Your URL is:',icon='WORLD_DATA')
+            col.label(text=context.window_manager.radiola_url)
+        else:
+            for p in playlist_print:
+                i+=1
+                if i == (context.window_manager.radiola_ind+1):
+                    a = col.operator('sound.radiola', text='> '+str(i)+' | '+str(p))
+                    a.item_play=i-1
+                    a.play=True
+                else:
+                    a = col.operator("sound.radiola", text='    '+str(i)+' | '+str(p))
+                    a.item_play=i-1
+                    a.play=True
 
 class RP_Playlist(bpy.types.PropertyGroup):
     url : bpy.props.StringProperty()
@@ -140,7 +155,7 @@ names = [   'Вести',
     ]
 
 def dolist(urls,names):
-    dic={}
+    # dic={}
     for u,n in zip(urls,names):
         bpy.context.scene.rp_playlist.add()
         bpy.context.scene.rp_playlist[-1].url = u
@@ -153,11 +168,12 @@ def register():
     except:
         pass
     bpy.utils.register_class(RP_Playlist)
-    bpy.types.Scene.rp_playlist = bpy.props.CollectionProperty(type=RP_Playlist)
-    bpy.types.WindowManager.radiola_clear=bpy.props.BoolProperty(default=False)
-    bpy.types.WindowManager.radiola=bpy.props.IntProperty()
-    bpy.types.WindowManager.radiola_ind=bpy.props.IntProperty()
-    bpy.types.WindowManager.radiola_dev = aud.Device()
+    bpy.types.Scene.rp_playlist =           bpy.props.CollectionProperty(type=RP_Playlist)
+    bpy.types.WindowManager.radiola_clear = bpy.props.BoolProperty(default=False)
+    bpy.types.WindowManager.radiola =       bpy.props.IntProperty()
+    bpy.types.WindowManager.radiola_ind =   bpy.props.IntProperty()
+    bpy.types.WindowManager.radiola_url =   bpy.props.StringProperty()
+    bpy.types.WindowManager.radiola_dev =   aud.Device()
     bpy.utils.register_class(OP_radiola)
     bpy.utils.register_class(OBJECT_PT_radiola_panel)
 
