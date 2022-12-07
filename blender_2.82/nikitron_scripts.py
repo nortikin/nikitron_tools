@@ -558,7 +558,7 @@ class CliffordAttractors(bpy.types.Operator):
     
     #ADD VERTICES TO A SPLINE
     def makeBezier(self, spline, vertList):
-        numPoints = (len(vertList) / 3) - 1
+        numPoints = int((len(vertList) / 3) - 1)
         spline.bezier_points.add(numPoints)
         spline.bezier_points.foreach_set("co", vertList)
         for point in spline.bezier_points:

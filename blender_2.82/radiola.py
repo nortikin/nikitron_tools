@@ -16,6 +16,10 @@ import bpy
 # import time
 # import subprocess as sp
 import aud
+import json
+import requests as rq
+
+
 
 class OP_radiola(bpy.types.Operator):
     '''Radiola'''
@@ -42,10 +46,7 @@ class OP_radiola(bpy.types.Operator):
                 context.window_manager.radiola_dev.play(aud.Sound(url))
                 context.window_manager.radiola_ind = self.item_play
             except:
-                if context.window_manager.radiola_url:
-                    self.report({'ERROR'}, f'Radiola cannot read source: {url}')
-                else:
-                    self.report({'ERROR'}, f'Radiola cannot read source:\nnumber {self.item_play+1}\n{names[self.item_play]} \n{url}')
+                self.report({'ERROR'}, f'Radiola cannot read source: {url}')
         else:
             context.window_manager.radiola_dev.stopAll()
             if self.stop:
@@ -55,10 +56,18 @@ class OP_radiola(bpy.types.Operator):
         return {'FINISHED'}
 
     def dolist(self,urls,names):
-        for u,n in zip(urls,names):
+        # dic={}
+        jsons = 'https://espradio.ru/stream_list.json'
+        gotten = rq.get(jsons).text.splitlines()
+        jsonic = [json.loads(lines) for lines in gotten]
+        for i in jsonic: #[:3772]: limit 3771 items in PropertyGroup
             bpy.context.scene.rp_playlist.add()
-            bpy.context.scene.rp_playlist[-1].url = u
-            bpy.context.scene.rp_playlist[-1].name = n
+            bpy.context.scene.rp_playlist[-1].url = i['url']
+            bpy.context.scene.rp_playlist[-1].name = i['name']
+        filetext = rq.get(jsons).text
+        with open('radios','w') as f:
+            for line in filetext:
+                f.write(line)
 
 
 class OBJECT_PT_radiola_panel(bpy.types.Panel):
@@ -94,6 +103,8 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             col.label(text='Your URL is:',icon='WORLD_DATA')
             col.label(text=context.window_manager.radiola_url)
         else:
+            col.label(text='List too large',icon='WORLD_DATA')
+            col.label(text='limit is 3771 items')
             for p in playlist_print:
                 i+=1
                 if i == (context.window_manager.radiola_ind+1):
@@ -154,12 +165,11 @@ names = [   'Вести',
             'Говорит Москва',
     ]
 
-def dolist(urls,names):
-    # dic={}
-    for u,n in zip(urls,names):
-        bpy.context.scene.rp_playlist.add()
-        bpy.context.scene.rp_playlist[-1].url = u
-        bpy.context.scene.rp_playlist[-1].name = n
+#def dolist(urls,names):
+#    for u,n in zip(urls,names):
+#        bpy.context.scene.rp_playlist.add()
+#        bpy.context.scene.rp_playlist[-1].url = u
+#        bpy.context.scene.rp_playlist[-1].name = n
 
 def register():
     try:
