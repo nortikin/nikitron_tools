@@ -37,10 +37,11 @@ class OP_radiola(bpy.types.Operator):
                 context.window_manager.radiola_dev.stopAll()
                 context.window_manager.radiola_ind = -1
                 return {'FINISHED'}
-            if not len(context.scene.rp_playlist):
-                self.dolist(urls,names)
             context.window_manager.radiola_clear = False
             context.window_manager.radiola_dev.stopAll()
+            if not len(context.scene.rp_playlist):
+                self.dolist(urls,names)
+                return {'FINISHED'}
             if context.window_manager.radiola_url:
                 url = context.window_manager.radiola_url
             else:
@@ -100,6 +101,7 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         i=0
         col = layout.column(align=True)
         col.scale_y = 0.8
+        col.ui_units_x = 100
         rurl = context.window_manager.radiola_url
         if rurl:
             col.label(text='Your URL is:',icon='WORLD_DATA')
