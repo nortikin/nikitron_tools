@@ -32,11 +32,14 @@ class OP_radiola(bpy.types.Operator):
 
     def execute(self, context):
 
-
         if self.play:
+            if self.stop:
+                context.window_manager.radiola_dev.stopAll()
+                context.window_manager.radiola_ind = -1
+                return {'FINISHED'}
             if not len(context.scene.rp_playlist):
                 self.dolist(urls,names)
-                context.window_manager.radiola_clear = False
+            context.window_manager.radiola_clear = False
             context.window_manager.radiola_dev.stopAll()
             if context.window_manager.radiola_url:
                 url = context.window_manager.radiola_url
@@ -47,12 +50,10 @@ class OP_radiola(bpy.types.Operator):
                 context.window_manager.radiola_ind = self.item_play
             except:
                 self.report({'ERROR'}, f'Radiola cannot read source: {url}')
-        else:
+        elif self.stop:
             context.window_manager.radiola_dev.stopAll()
-            if self.stop:
-                context.scene.rp_playlist.clear()
-                context.window_manager.radiola_clear = True
-                context.window_manager.radiola_dev.stopAll()
+            #context.scene.rp_playlist.clear()
+            context.window_manager.radiola_clear = True
         return {'FINISHED'}
 
     def dolist(self,urls,names):
@@ -64,10 +65,10 @@ class OP_radiola(bpy.types.Operator):
             bpy.context.scene.rp_playlist.add()
             bpy.context.scene.rp_playlist[-1].url = i['url']
             bpy.context.scene.rp_playlist[-1].name = i['name']
-        filetext = rq.get(jsons).text
-        with open('radios','w') as f:
-            for line in filetext:
-                f.write(line)
+        #filetext = rq.get(jsons).text
+        #with open('radios','w') as f:
+        #    for line in filetext:
+        #        f.write(line)
 
 
 class OBJECT_PT_radiola_panel(bpy.types.Panel):
@@ -94,6 +95,7 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         else:
             b.play = False
             b.stop = True
+            
         playlist_print = [a.name for a in context.scene.rp_playlist]
         i=0
         col = layout.column(align=True)
@@ -111,10 +113,12 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
                     a = col.operator('sound.radiola', text='> '+str(i)+' | '+str(p))
                     a.item_play=i-1
                     a.play=True
+                    a.stop=True
                 else:
                     a = col.operator("sound.radiola", text='    '+str(i)+' | '+str(p))
                     a.item_play=i-1
                     a.play=True
+                    a.stop=False
 
 class RP_Playlist(bpy.types.PropertyGroup):
     url : bpy.props.StringProperty()
