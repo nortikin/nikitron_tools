@@ -18,6 +18,8 @@ import bpy
 import aud
 import json
 import requests as rq
+import pathlib
+import os
 
 
 
@@ -58,18 +60,40 @@ class OP_radiola(bpy.types.Operator):
         return {'FINISHED'}
 
     def dolist(self,urls,names):
-        # dic={}
-        jsons = 'https://espradio.ru/stream_list.json'
-        gotten = rq.get(jsons).text.splitlines()
-        jsonic = [json.loads(lines) for lines in gotten]
-        for i in jsonic: #[:3772]: limit 3771 items in PropertyGroup
+        # проверка файла в настрйоках
+        # если файл есть, прост очитаем его
+        # если нет файла, то грузим из Сети и сохраняем
+        datafiles = os.path.join(bpy.utils.user_resource('DATAFILES', path='radiola', create=True))
+        contains = os.listdir(datafiles)
+        #fr = open(stations,'r')
+        #frt = fr.read()
+        #fr.close()
+        if 'stations' in contains:
+            print('RADIOLA: file already there')
+            stations = os.path.join(datafiles, 'stations')
+            with open(stations,'r') as fw:
+                gotten = fw.read().splitlines()
+                #print(gotten[0])
+                jsonic = [json.loads(lines) for lines in gotten]
+            print('RADIOLA: file aten')
+        else:
+            stations = os.path.join(datafiles, 'stations')
+            jsons = 'https://espradio.ru/stream_list.json'
+            gottenfile = rq.get(jsons)
+            gotten = gottenfile.text.splitlines()
+            print('RADIOLA: Downloaded file')
+            jsonic = [json.loads(lines) for lines in gotten]
+            with open(stations,'wb') as fw:
+                fw.write(gottenfile.content)
+            print('RADIOLA: locally placed')
+
+        for i in jsonic:
             bpy.context.scene.rp_playlist.add()
-            bpy.context.scene.rp_playlist[-1].url = i['url']
-            bpy.context.scene.rp_playlist[-1].name = i['name']
-        #filetext = rq.get(jsons).text
-        #with open('radios','w') as f:
-        #    for line in filetext:
-        #        f.write(line)
+            bpy.context.scene.rp_playlist[-1].url = i["url"]
+            bpy.context.scene.rp_playlist[-1].name = i["name"]
+            #bpy.context.scene.rp_playlist[-1].url = eval(i)["url"]
+            #bpy.context.scene.rp_playlist[-1].name = eval(i)["name"]
+
 
 
 class OBJECT_PT_radiola_panel(bpy.types.Panel):
@@ -107,8 +131,8 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             col.label(text='Your URL is:',icon='WORLD_DATA')
             col.label(text=context.window_manager.radiola_url)
         else:
-            col.label(text='List too large',icon='WORLD_DATA')
-            col.label(text='limit is 3771 items')
+            col.label(text='Stations are here',icon='WORLD_DATA')
+            col.label(text='click and enjoy:')
             for p in playlist_print:
                 i+=1
                 if i == (context.window_manager.radiola_ind+1):
