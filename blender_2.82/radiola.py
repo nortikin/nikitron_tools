@@ -81,7 +81,7 @@ class OP_radiola(bpy.types.Operator):
             print('RADIOLA: file aten')
         else:
             stations = os.path.join(datafiles, 'stations')
-            jsons = 'https://espradio.ru/stream_list.json'
+            jsons = 'https://raw.githubusercontent.com/nortikin/nikitron_tools/master/blender_2.82/stations'
             gottenfile = rq.get(jsons)
             gotten = gottenfile.text.splitlines()
             print('RADIOLA: Downloaded file')
