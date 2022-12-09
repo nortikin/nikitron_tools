@@ -119,7 +119,7 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         rname = context.window_manager.radiola_name
 
         col = layout.column(align=True)
-        col.prop(context.window_manager, 'radiola_url')
+        #col.prop(context.window_manager, 'radiola_url')
         col.prop_search(wm, "radiola_name", sce, "rp_playlist")
         col = layout.column(align=True)
         col.scale_y = 1.2
