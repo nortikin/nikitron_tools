@@ -502,8 +502,10 @@ class VIEW3D_PT_Musicplayer(bpy.types.Panel):
                     i+=1
                     row = col.row(align=True)
                     if i == (context.window_manager.mp_index+1):
+                        row.alert=True
                         row.operator("sound.play", text='> '+str(i)+' | '+str(p)).item_play=str([True, i-1])
                     else:
+                        row.alert=False
                         row.operator("sound.play", text='    '+str(i)+' | '+str(p)).item_play=str([True, i-1])
                     delco = row.operator('sound.delcompos', text='', icon='X')
                     delco.item_delete = i-1
