@@ -136,11 +136,13 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             for p in playlist_print:
                 i+=1
                 if i == (context.window_manager.radiola_ind+1):
+                    col.alert=True
                     a = col.operator('sound.radiola', text='> '+str(i)+' | '+str(p))
                     a.item_play=i-1
                     a.play=True
                     a.stop=True
                 else:
+                    col.alert=False
                     a = col.operator("sound.radiola", text='    '+str(i)+' | '+str(p))
                     a.item_play=i-1
                     a.play=True
