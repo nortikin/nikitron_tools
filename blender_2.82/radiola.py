@@ -123,12 +123,14 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         col.prop_search(wm, "radiola_name", sce, "rp_playlist")
         col = layout.column(align=True)
         col.scale_y = 1.2
-        b = col.operator('sound.radiola',text='B U T T O N')
+        colba = col.column(align=True)
         if context.window_manager.radiola_clear:
+            b = colba.operator('sound.radiola',text='B U T T O N')
             b.play = True
             b.stop = False
         elif rname:
             #print('RADIOLA url:',rname,context.scene.rp_playlist[rname].url)
+            b = colba.operator('sound.radiola',text='B U T T O N')
             context.window_manager.radiola_url = context.scene.rp_playlist[rname].url
             b.item_play = context.scene.rp_playlist[rname].ind
             if context.scene.rp_playlist[rname].ind == (context.window_manager.radiola_ind+1):
@@ -138,9 +140,11 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
                 b.play = True
                 b.stop = False
         else:
+            colba.alert = True
+            b = colba.operator('sound.radiola',text='B U T T O N')
             b.play = False
             b.stop = True
-            
+
         playlist_print = [a.name for a in context.scene.rp_playlist]
         i=0
         col = layout.column(align=True)
@@ -167,18 +171,18 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             if i == (context.window_manager.radiola_ind+1):
                 col1.alert = True
                 if columnscount<11:
-                    a = col1.operator('sound.radiola', text='> '+str(i)+' | '+str(p))
+                    a = col1.operator('sound.radiola', text='> '+str(i)+' | '+str(p), emboss=False)
                 else:
-                    a = col1.operator('sound.radiola', text='> '+str(i))
+                    a = col1.operator('sound.radiola', text='> '+str(i), emboss=False)
                 a.item_play=i-1
                 a.play=True
                 a.stop=True
             else:
                 col1.alert = False
                 if columnscount<4:
-                    a = col1.operator("sound.radiola", text='    '+str(i)+' | '+str(p))
+                    a = col1.operator("sound.radiola", text='    '+str(i)+' | '+str(p), emboss=False)
                 else:
-                    a = col1.operator("sound.radiola", text='    '+str(i))
+                    a = col1.operator("sound.radiola", text='    '+str(i), emboss=False)
                 a.item_play=i-1
                 a.play=True
                 a.stop=False
