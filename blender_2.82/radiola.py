@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Radiola",
     "author": "nikitron",
-    "version": (0, 1, 4),
+    "version": (0, 9, 0),
     "blender": (3, 4, 0),
     "location": "View3D > Tool Shelf > SV > Radiola",
     "description": "Playing the radio (also files) using aud blender lib",

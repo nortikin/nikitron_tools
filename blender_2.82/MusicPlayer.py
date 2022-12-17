@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Music Player",
     "author": "edddy <edddy74@live.fr> + nikitron a little",
-    "version": (1, 0, 0),
+    "version": (1, 0, 1),
     "blender": (3, 20, 0),
     "location": "View3D > Tool Shelf > Music Player",
     "description": "A Little Music Player for Blender",

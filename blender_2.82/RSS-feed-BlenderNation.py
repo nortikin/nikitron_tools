@@ -1,8 +1,8 @@
 # nikitron.cc.ua ordered for this. Much thanks to Nikolay Fomichev https://vk.com/pythal
 bl_info = {
     "name": "RSS",
-    "version": (0, 2, 0),
-    "blender": (2, 80, 0), 
+    "version": (0, 7, 5),
+    "blender": (3, 10, 0), 
     "category": "World",
     "author": "Nikolay Fomichev",
     "location": "World",
@@ -31,7 +31,7 @@ def getRss(adress):
     print(tree)
     return tree    
 
-class _PT_RssPanel(bpy.types.Panel):
+class RSS_PT_RssPanel(bpy.types.Panel):
     ''' Read feed '''
     bl_label = "RSS"
     bl_space_type = 'PROPERTIES'
@@ -94,12 +94,12 @@ class reloadRSS(bpy.types.Operator):
               
 # registering and menu integration
 def register():
-    bpy.utils.register_class(_PT_RssPanel)
+    bpy.utils.register_class(RSS_PT_RssPanel)
     bpy.utils.register_class(reloadRSS)
  
 # unregistering and removing menus
 def unregister():
-    bpy.utils.unregister_class(_PT_RssPanel)
+    bpy.utils.unregister_class(RSS_PT_RssPanel)
     bpy.utils.unregister_class(reloadRSS)
  
 if __name__ == "__main__":
