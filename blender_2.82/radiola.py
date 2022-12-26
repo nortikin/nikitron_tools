@@ -165,27 +165,45 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         col.prop(context.window_manager, 'radiola_cols',text='Columns count')
         i = 0
         columnscount = context.window_manager.radiola_cols
-        col1 = col.column_flow(columns=columnscount, align=True)
-        for p in playlist_print:
-            i+=1
-            if i == (context.window_manager.radiola_ind+1):
-                col1.alert = True
-                if columnscount<11:
+        if columnscount==0 and context.window_manager.radiola_ind:
+            col1 = col.column_flow(columns=3, align=True)
+            ran = range(context.window_manager.radiola_ind-19,context.window_manager.radiola_ind+23,1)
+            for i in ran:
+                p = playlist_print[i]
+                if i == (context.window_manager.radiola_ind+1):
+                    col1.alert = True
                     a = col1.operator('sound.radiola', text='> '+str(i)+' | '+str(p), emboss=False)
+                    a.item_play=i-1
+                    a.play=True
+                    a.stop=True
                 else:
-                    a = col1.operator('sound.radiola', text='> '+str(i), emboss=False)
-                a.item_play=i-1
-                a.play=True
-                a.stop=True
-            else:
-                col1.alert = False
-                if columnscount<4:
+                    col1.alert = False
                     a = col1.operator("sound.radiola", text='    '+str(i)+' | '+str(p), emboss=False)
+                    a.item_play=i-1
+                    a.play=True
+                    a.stop=False
+        else:
+            col1 = col.column_flow(columns=columnscount, align=True)
+            for p in playlist_print:
+                i+=1
+                if i == (context.window_manager.radiola_ind+1):
+                    col1.alert = True
+                    if columnscount<11:
+                        a = col1.operator('sound.radiola', text='> '+str(i)+' | '+str(p), emboss=False)
+                    else:
+                        a = col1.operator('sound.radiola', text='> '+str(i), emboss=False)
+                    a.item_play=i-1
+                    a.play=True
+                    a.stop=True
                 else:
-                    a = col1.operator("sound.radiola", text='    '+str(i), emboss=False)
-                a.item_play=i-1
-                a.play=True
-                a.stop=False
+                    col1.alert = False
+                    if columnscount<4:
+                        a = col1.operator("sound.radiola", text='    '+str(i)+' | '+str(p), emboss=False)
+                    else:
+                        a = col1.operator("sound.radiola", text='    '+str(i), emboss=False)
+                    a.item_play=i-1
+                    a.play=True
+                    a.stop=False
 
 
 class RP_Playlist(bpy.types.PropertyGroup):
@@ -202,12 +220,12 @@ def register():
         pass
     bpy.utils.register_class(RP_Playlist)
     bpy.types.Scene.rp_playlist =           bpy.props.CollectionProperty(type=RP_Playlist)
-    bpy.types.WindowManager.radiola_clear = bpy.props.BoolProperty(default=False)
-    bpy.types.WindowManager.radiola =       bpy.props.IntProperty()
-    bpy.types.WindowManager.radiola_ind =   bpy.props.IntProperty()
-    bpy.types.WindowManager.radiola_cols =  bpy.props.IntProperty(min=1,max=10,default=1,description='N of columns')
-    bpy.types.WindowManager.radiola_url =   bpy.props.StringProperty()
-    bpy.types.WindowManager.radiola_name =   bpy.props.StringProperty()
+    bpy.types.WindowManager.radiola_clear = bpy.props.BoolProperty(default=False,description='Flag that means clear playback')
+    bpy.types.WindowManager.radiola =       bpy.props.IntProperty(description='player')
+    bpy.types.WindowManager.radiola_ind =   bpy.props.IntProperty(description='Current radio index')
+    bpy.types.WindowManager.radiola_cols =  bpy.props.IntProperty(min=0,max=10,default=2,description='N of columns')
+    bpy.types.WindowManager.radiola_url =   bpy.props.StringProperty(description='Current redio url')
+    bpy.types.WindowManager.radiola_name =   bpy.props.StringProperty(description='Current redio name')
     bpy.types.WindowManager.radiola_dev =   aud.Device()
     
     bpy.utils.register_class(OP_radiola)
