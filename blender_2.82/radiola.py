@@ -30,6 +30,7 @@ class OP_radiola(bpy.types.Operator):
 
     play : bpy.props.BoolProperty(name='play',default=True)
     stop : bpy.props.BoolProperty(name='stop',default=False)
+    shift : bpy.props.BoolProperty(name='shift',default=False)
     item_play : bpy.props.IntProperty(name='composition',default=0)
 
     def execute(self, context):
@@ -53,11 +54,13 @@ class OP_radiola(bpy.types.Operator):
             try:
                 context.window_manager.radiola_dev.play(aud.Sound(url))
                 context.window_manager.radiola_ind = self.item_play
-                print('Radiols:',self.item_play)
-                print('Radiols:',url)
-                print('Radiols:',context.scene.rp_playlist[self.item_play].name)
+                print('RADIOLA:',self.item_play)
+                print('RADIOLA:',url)
+                print('RADIOLA:',context.scene.rp_playlist[self.item_play].name)
+                if self.shift:
+                    context.window_manager.radiola_shift = 0
             except:
-                self.report({'ERROR'}, f'Radiola cannot read source: {url}')
+                self.report({'ERROR'}, f'RADIOLA cannot read source: {url}')
         elif self.stop:
             context.window_manager.radiola_dev.stopAll()
             context.window_manager.radiola_clear = True
@@ -115,11 +118,11 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         layout = self.layout
         sce = context.scene
         wm = context.window_manager
-        rurl = context.window_manager.radiola_url
-        rname = context.window_manager.radiola_name
+        rurl = wm.radiola_url
+        rname = wm.radiola_name
 
         col = layout.column(align=True)
-        #col.prop(context.window_manager, 'radiola_url')
+        #col.prop(context.window_manager, 'rurl')
         col.prop_search(wm, "radiola_name", sce, "rp_playlist")
         col = layout.column(align=True)
         col.scale_y = 1.2
@@ -129,11 +132,11 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             b.play = True
             b.stop = False
         elif rname:
-            #print('RADIOLA url:',rname,context.scene.rp_playlist[rname].url)
+            #print('RADIOLA url:',rname,sce.rp_playlist[rname].url)
             b = colba.operator('sound.radiola',text='B U T T O N')
-            context.window_manager.radiola_url = context.scene.rp_playlist[rname].url
-            b.item_play = context.scene.rp_playlist[rname].ind
-            if context.scene.rp_playlist[rname].ind == (context.window_manager.radiola_ind+1):
+            rurl = sce.rp_playlist[rname].url
+            b.item_play = sce.rp_playlist[rname].ind
+            if sce.rp_playlist[rname].ind == (wm.radiola_ind+1):
                 b.play = False
                 b.stop = True
             else:
@@ -145,32 +148,61 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             b.play = False
             b.stop = True
 
-        playlist_print = [a.name for a in context.scene.rp_playlist]
+        playlist_print = [a.name for a in sce.rp_playlist]
         i=0
         col = layout.column(align=True)
         col.scale_y = 0.8
         col.ui_units_x = 100
-        i = context.window_manager.radiola_ind+1
-        p = playlist_print[context.window_manager.radiola_ind]
+        i = wm.radiola_ind+1
+        p = playlist_print[wm.radiola_ind]
+        plength = len(playlist_print)
         #if rurl:
         #    col.label(text='Your URL is:{0}'.format(rurl),icon='WORLD_DATA')
-        #    col.label(text=context.window_manager.radiola_url)
+        #    col.label(text=rurl)
         #if rname:
-        #    print('RADIOLA url:',rname,context.scene.rp_playlist[rname].url)
-        #    context.window_manager.radiola_url = context.scene.rp_playlist[rname].url
+        #    print('RADIOLA url:',rname,sce.rp_playlist[rname].url)
+        #    rurl = sce.rp_playlist[rname].url
         #else:
         col.label(text='Radio list taken from espradio.ru',icon='WORLD_DATA')
         col.label(text='{0} {1}'.format(str(i), str(p)))
-        col.label(text='{0}'.format(str(context.scene.rp_playlist[i-1].url)))
-        col.prop(context.window_manager, 'radiola_cols',text='Columns count')
+        col.label(text='{0}'.format(str(sce.rp_playlist[i-1].url)))
+        col.prop(wm, 'radiola_cols',text='Columns count')
         i = 0
-        columnscount = context.window_manager.radiola_cols
-        if columnscount==0 and context.window_manager.radiola_ind:
+        columnscount = wm.radiola_cols
+        if columnscount == -1:
+            col.label(text='')
+            col.label(text='        Thank you for using radiola. Try Sverchok node geometry addon with extra possibilities:')
+            ro = col.row(align=True)
+            ro.label(text='')
+            ro.operator('wm.url_open', text='Get Sverchok', icon='URL').url =\
+                        'https://github.com/nortikin/sverchok'
+            col.label(text='')
+            col.label(text='        H E L P')
+            col.label(text='')
+            col.label(text='        Columns count define:')
+            col.label(text='-1. that help screen')
+            col.label(text=' 0. Shorten playlist with 41 stations around current playing. You can scroll in length of 20 times on both sides')
+            col.label(text=' 1...3. Numbers and names representation of radio stations')
+            col.label(text=' 4...10. Only numbers in columns')
+            col.label(text='')
+            col.label(text='        B U T T O N')
+            col.label(text=' 1. Initially stops all songs. Than downloads playlist from github and place it in local datafiles directory')
+            col.label(text=' 2. Next time at start it loads local playlist')
+            col.label(text=' 3. If name found - it will stop playing and second press will start station playback')
+        elif columnscount==0 and wm.radiola_ind:
             col1 = col.column_flow(columns=3, align=True)
-            ran = range(context.window_manager.radiola_ind-19,context.window_manager.radiola_ind+23,1)
+            if (wm.radiola_ind < 20*14 and wm.radiola_shift < 0):
+                wm.radiola_shift = max(wm.radiola_shift, -int(wm.radiola_ind/22))
+            elif (wm.radiola_ind > plength-20*14 and wm.radiola_shift > 0):
+                wm.radiola_shift = min(wm.radiola_shift, int((plength-wm.radiola_ind)/14))
+
+            ran = range(wm.radiola_ind-19+ \
+                    wm.radiola_shift*14, \
+                    wm.radiola_ind+23+ \
+                    wm.radiola_shift*14,1)
             for i in ran:
                 p = playlist_print[i]
-                if i == (context.window_manager.radiola_ind+1):
+                if i == (wm.radiola_ind+1):
                     col1.alert = True
                     a = col1.operator('sound.radiola', text='> '+str(i)+' | '+str(p), emboss=False)
                     a.item_play=i-1
@@ -182,11 +214,13 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
                     a.item_play=i-1
                     a.play=True
                     a.stop=False
+                    a.shift=True
+            col.prop(wm, 'radiola_shift', text='')
         else:
             col1 = col.column_flow(columns=columnscount, align=True)
             for p in playlist_print:
                 i+=1
-                if i == (context.window_manager.radiola_ind+1):
+                if i == (wm.radiola_ind+1):
                     col1.alert = True
                     if columnscount<11:
                         a = col1.operator('sound.radiola', text='> '+str(i)+' | '+str(p), emboss=False)
@@ -223,7 +257,8 @@ def register():
     bpy.types.WindowManager.radiola_clear = bpy.props.BoolProperty(default=False,description='Flag that means clear playback')
     bpy.types.WindowManager.radiola =       bpy.props.IntProperty(description='player')
     bpy.types.WindowManager.radiola_ind =   bpy.props.IntProperty(description='Current radio index')
-    bpy.types.WindowManager.radiola_cols =  bpy.props.IntProperty(min=0,max=10,default=2,description='N of columns')
+    bpy.types.WindowManager.radiola_cols =  bpy.props.IntProperty(min=-1,max=10,default=-1,description='N of columns')
+    bpy.types.WindowManager.radiola_shift =  bpy.props.IntProperty(min=-20,max=20,default=0,description='Shift of list')
     bpy.types.WindowManager.radiola_url =   bpy.props.StringProperty(description='Current redio url')
     bpy.types.WindowManager.radiola_name =   bpy.props.StringProperty(description='Current redio name')
     bpy.types.WindowManager.radiola_dev =   aud.Device()
@@ -238,6 +273,7 @@ def unregister():
     del bpy.types.WindowManager.radiola
     del bpy.types.WindowManager.radiola_clear
     del bpy.types.WindowManager.radiola_cols
+    del bpy.types.WindowManager.radiola_shift
     del bpy.types.WindowManager.radiola_dev
     del bpy.types.WindowManager.radiola_url
     del bpy.types.WindowManager.radiola_name
