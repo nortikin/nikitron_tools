@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Radiola",
     "author": "nikitron",
-    "version": (0, 9, 0),
+    "version": (0, 9, 5),
     "blender": (3, 4, 0),
     "location": "View3D > Tool Shelf > SV > Radiola",
     "description": "Playing the radio (also files) using aud blender lib",
@@ -191,15 +191,12 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             col.label(text=' 3. If name found - it will stop playing and second press will start station playback')
         elif columnscount==0 and wm.radiola_ind:
             col1 = col.column_flow(columns=3, align=True)
-            if (wm.radiola_ind < 20*14 and wm.radiola_shift < 0):
-                wm.radiola_shift = max(wm.radiola_shift, -int(wm.radiola_ind/22))
-            elif (wm.radiola_ind > plength-20*14 and wm.radiola_shift > 0):
-                wm.radiola_shift = min(wm.radiola_shift, int((plength-wm.radiola_ind)/14))
-
-            ran = range(wm.radiola_ind-19+ \
-                    wm.radiola_shift*14, \
-                    wm.radiola_ind+23+ \
-                    wm.radiola_shift*14,1)
+            wm.radiola_shift = max(wm.radiola_shift, -int(wm.radiola_ind/14))
+            wm.radiola_shift = min(wm.radiola_shift, int((plength-wm.radiola_ind)/14))
+            ran = range(max(wm.radiola_ind-19+ \
+                    wm.radiola_shift*14,0), \
+                    min(wm.radiola_ind+23+ \
+                    wm.radiola_shift*14,plength),1)
             for i in ran:
                 p = playlist_print[i]
                 if i == (wm.radiola_ind+1):
@@ -258,7 +255,7 @@ def register():
     bpy.types.WindowManager.radiola =       bpy.props.IntProperty(description='player')
     bpy.types.WindowManager.radiola_ind =   bpy.props.IntProperty(description='Current radio index')
     bpy.types.WindowManager.radiola_cols =  bpy.props.IntProperty(min=-1,max=10,default=-1,description='N of columns')
-    bpy.types.WindowManager.radiola_shift =  bpy.props.IntProperty(min=-20,max=20,default=0,description='Shift of list')
+    bpy.types.WindowManager.radiola_shift =  bpy.props.IntProperty(min=-600,max=600,default=0,description='Shift of list')
     bpy.types.WindowManager.radiola_url =   bpy.props.StringProperty(description='Current redio url')
     bpy.types.WindowManager.radiola_name =   bpy.props.StringProperty(description='Current redio name')
     bpy.types.WindowManager.radiola_dev =   aud.Device()
