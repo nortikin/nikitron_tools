@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Radiola",
     "author": "nikitron",
-    "version": (0, 9, 5),
+    "version": (0, 9, 0),
     "blender": (3, 4, 0),
     "location": "View3D > Tool Shelf > SV > Radiola",
     "description": "Playing the radio (also files) using aud blender lib",
@@ -199,16 +199,16 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
                     wm.radiola_shift*14,plength),1)
             for i in ran:
                 p = playlist_print[i]
-                if i == (wm.radiola_ind+1):
+                if i == (wm.radiola_ind):
                     col1.alert = True
-                    a = col1.operator('sound.radiola', text='> '+str(i)+' | '+str(p), emboss=False)
-                    a.item_play=i-1
+                    a = col1.operator('sound.radiola', text='> '+str(i+1)+' | '+str(p), emboss=False)
+                    a.item_play=i
                     a.play=True
                     a.stop=True
                 else:
                     col1.alert = False
-                    a = col1.operator("sound.radiola", text='    '+str(i)+' | '+str(p), emboss=False)
-                    a.item_play=i-1
+                    a = col1.operator("sound.radiola", text='    '+str(i+1)+' | '+str(p), emboss=False)
+                    a.item_play=i
                     a.play=True
                     a.stop=False
                     a.shift=True
