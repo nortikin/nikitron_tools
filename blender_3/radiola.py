@@ -236,10 +236,10 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             co = col.column(align=True)
             if wm.radiola_recing:
                 co.alert=True
-                a = co.operator("sound.radiola_record", text='Record that radio', icon='REC', emboss=True)
+                a = co.operator("sound.radiola_record", text='Recording that radio', icon='RADIOBUT_ON', emboss=True)
             else:
                 co.alert=False
-                a = col.operator("sound.radiola_record", text='Recording that radio', icon='RADIOBUT_ON', emboss=True)
+                a = col.operator("sound.radiola_record", text='Record that radio', icon='REC', emboss=True)
             datafiles = os.path.join(bpy.utils.user_resource('DATAFILES', path='radiola', create=True))
             col.operator('wm.url_open', text='Listen for recordings', icon='WINDOW').url = datafiles
         elif columnscount == -1:
