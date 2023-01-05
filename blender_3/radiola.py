@@ -16,15 +16,74 @@ import json
 import requests as rq
 import pathlib
 import os
+from threading import Thread, Event#, Queue
+import time
+
 # import os
 # import signal
 # import time
 # import subprocess as sp
 
 
+class DownloadThread(Thread):
+    """
+    Пример многопоточной загрузки файлов из интернета
+    """
+
+    def __init__(self, context, url, name, event):
+        """Инициализация потока"""
+        Thread.__init__(self)
+        self.context = context
+        self.url = url
+        self.name = name
+        self.event = event
+
+    def run(self):
+        """Запуск потока"""
+        r = rq.get(self.url, stream=True)
+        datafiles = os.path.join(bpy.utils.user_resource('DATAFILES', path='radiola', create=True))
+        date = time.ctime().replace(' ','').replace(':','.')[3:]
+        with open(os.path.join(datafiles,date+self.name+'.mp3'), 'wb') as f:
+            try:
+                for block in r.iter_content(1024):
+                    f.write(block)
+                    if self.context.window_manager.radiola_recing == False:
+                        print('RADIOLA finished downloading')
+                        break
+            except KeyboardInterrupt:
+                pass
+
+        msg = "RADIOLA downloading: %s %s!" % (self.name, self.url)
+        print(msg)
+
+
+class OP_radiola_record(bpy.types.Operator):
+    '''Radiola record'''
+    bl_idname = "sound.radiola_record"
+    bl_label = "record radio"
+
+    def execute(self, context):
+        if context.scene.rp_playlist[context.window_manager.radiola_ind].url:
+            if not context.window_manager.radiola_recing:
+                event = Event() # нахрен оказалось не надо
+                context.window_manager.radiola_recing = True
+                #queue = Queue()
+                Download = DownloadThread(context=context, \
+                                    url=context.scene.rp_playlist[context.window_manager.radiola_ind].url,\
+                                    name=context.scene.rp_playlist[context.window_manager.radiola_ind].name, \
+                                    event=event)
+                Download.start()
+                print(f'RADIOLA: downloading {Download}')
+            else:
+                context.window_manager.radiola_recing = False
+            return {'FINISHED'}
+        else:
+            self.report({'ERROR'}, 'RADIOLA: There is no url')
+            return {'FINISHED'}
+
 
 class OP_radiola(bpy.types.Operator):
-    '''Radiola'''
+    '''Radiola play'''
     bl_idname = "sound.radiola"
     bl_label = "play radio"
 
@@ -85,7 +144,7 @@ class OP_radiola(bpy.types.Operator):
         else:
             stations = os.path.join(datafiles, 'stations')
             #jsons = 'https://espradio.ru/stream_list.json'
-            jsons = 'https://raw.githubusercontent.com/nortikin/nikitron_tools/master/blender_2.82/stations'
+            jsons = 'https://raw.githubusercontent.com/nortikin/nikitron_tools/master/blender_3/stations'
             gottenfile = rq.get(jsons)
             gotten = gottenfile.text.splitlines()
             print('RADIOLA: Downloaded file')
@@ -121,6 +180,15 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         rurl = wm.radiola_url
         rname = wm.radiola_name
 
+        def getname(col,rurl):
+            f = rq.get(rurl)
+            for i, line in enumerate(f.text.splitlines()):
+                if line.startswith('icy-name') or i > 20: break
+                if i > 20: print('failed to find station name')
+                else:
+                    out = 'composition', line.replace('icy-name:', '')
+                    col.label(text='Radio list taken from espradio.ru',icon='WORLD_DATA')
+
         col = layout.column(align=True)
         #col.prop(context.window_manager, 'rurl')
         col.prop_search(wm, "radiola_name", sce, "rp_playlist")
@@ -154,42 +222,63 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         col.scale_y = 0.8
         col.ui_units_x = 100
         i = wm.radiola_ind+1
-        p = playlist_print[wm.radiola_ind]
-        plength = len(playlist_print)
-        #if rurl:
-        #    col.label(text='Your URL is:{0}'.format(rurl),icon='WORLD_DATA')
-        #    col.label(text=rurl)
-        #if rname:
-        #    print('RADIOLA url:',rname,sce.rp_playlist[rname].url)
-        #    rurl = sce.rp_playlist[rname].url
-        #else:
-        col.label(text='Radio list taken from espradio.ru',icon='WORLD_DATA')
-        col.label(text='{0} {1}'.format(str(i), str(p)))
-        col.label(text='{0}'.format(str(sce.rp_playlist[i-1].url)))
-        col.prop(wm, 'radiola_cols',text='Columns count')
+        if playlist_print:
+            p = playlist_print[wm.radiola_ind]
+            plength = len(playlist_print)
+            col.label(text='Radio list taken from espradio.ru',icon='WORLD_DATA')
+            col.label(text='{0} {1}'.format(str(i), str(p)))
+            col.label(text='{0}'.format(str(sce.rp_playlist[i-1].url)))
+
         i = 0
         columnscount = wm.radiola_cols
-        if columnscount == -1:
-            col.label(text='')
-            col.label(text='        Thank you for using radiola. Try Sverchok node geometry addon with extra possibilities:')
-            ro = col.row(align=True)
-            ro.label(text='')
-            ro.operator('wm.url_open', text='Get Sverchok', icon='URL').url =\
+        if columnscount == -2:
+            col.prop(wm, 'radiola_cols',text='R E C O R D    S T U D I O')
+            co = col.column(align=True)
+            if wm.radiola_recing:
+                co.alert=True
+                a = co.operator("sound.radiola_record", text='Record that radio', icon='REC', emboss=True)
+            else:
+                co.alert=False
+                a = col.operator("sound.radiola_record", text='Recording that radio', icon='RADIOBUT_ON', emboss=True)
+            datafiles = os.path.join(bpy.utils.user_resource('DATAFILES', path='radiola', create=True))
+            col.operator('wm.url_open', text='Listen for recordings', icon='WINDOW').url = datafiles
+        elif columnscount == -1:
+            col.prop(wm, 'radiola_cols',text='H E L P')
+            row1 = col.row(align = True)
+            col2 = row1.column(align=True)
+            col2.label(text='')
+            col2.label(text='        MENUes (by numbers):')
+            col2.label(text='-2          Recording studio')
+            col2.label(text='-1          Current help screen')
+            col2.label(text=' 0          Playlist w/scrolling')
+            col2.label(text=' 1...3    Long playlist w/names')
+            col2.label(text=' 4...10  Long playlist w/o/names')
+            col2.label(text='')
+            col2.label(text='        Try Sverchok node addon:')
+            col2.operator('wm.url_open', text='GET Sverchok', icon='URL').url =\
                         'https://github.com/nortikin/sverchok'
+            col2.label(text='        Try other misc addons:')
+            col2.operator('wm.url_open', text='GET miscellaneous addons', icon='VIEW_PAN').url =\
+                        'https://github.com/nortikin/nikitron_tools'
+            col3 = row1.column(align=True)
+            col3.label(text='')
+            col3.label(text='        B U T T O N')
+            col3.label(text=' 1. Initially stops all songs.')
+            col3.label(text=' 2. Than downloads playlist from github')
+            col3.label(text=' 3. Next time at start it loads local playlist')
+            col3.label(text=' 4. Play current url')
+            col3.label(text=' 5. Stop playback')
+            col3.label(text='')
+            col3.label(text=' Support:')
+            col3.operator('wm.url_open', text='GET Support', icon='QUESTION').url =\
+                        'https://t.me/sverchok_3d'
+            col3.label(text=' Also we have Music player, RSSreader')
+            col3.label(text=' Toolset for volume, materials scv etc.')
             col.label(text='')
-            col.label(text='        H E L P')
-            col.label(text='')
-            col.label(text='        Columns count define:')
-            col.label(text='-1. that help screen')
-            col.label(text=' 0. Shorten playlist with 41 stations around current playing. You can scroll in length of 20 times on both sides')
-            col.label(text=' 1...3. Numbers and names representation of radio stations')
-            col.label(text=' 4...10. Only numbers in columns')
-            col.label(text='')
-            col.label(text='        B U T T O N')
-            col.label(text=' 1. Initially stops all songs. Than downloads playlist from github and place it in local datafiles directory')
-            col.label(text=' 2. Next time at start it loads local playlist')
-            col.label(text=' 3. If name found - it will stop playing and second press will start station playback')
-        elif columnscount==0 and wm.radiola_ind:
+            col.label(text='* - To add favorites use Q menu (RMB on quiet radio - add to Q)')
+            col.label(text='       To call back stations - simply Q on view area!')
+        elif columnscount==0: # and wm.radiola_ind:
+            col.prop(wm, 'radiola_cols',text='P L A Y L I S T')
             col1 = col.column_flow(columns=3, align=True)
             wm.radiola_shift = max(wm.radiola_shift, -int(wm.radiola_ind/14))
             wm.radiola_shift = min(wm.radiola_shift, int((plength-wm.radiola_ind)/14))
@@ -214,6 +303,7 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
                     a.shift=True
             col.prop(wm, 'radiola_shift', text='')
         else:
+            col.prop(wm, 'radiola_cols',text='P L A Y L I S T    U G L Y')
             col1 = col.column_flow(columns=columnscount, align=True)
             for p in playlist_print:
                 i+=1
@@ -237,6 +327,7 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
                     a.stop=False
 
 
+
 class RP_Playlist(bpy.types.PropertyGroup):
     ind : bpy.props.IntProperty()
     url : bpy.props.StringProperty()
@@ -254,17 +345,20 @@ def register():
     bpy.types.WindowManager.radiola_clear = bpy.props.BoolProperty(default=False,description='Flag that means clear playback')
     bpy.types.WindowManager.radiola =       bpy.props.IntProperty(description='player')
     bpy.types.WindowManager.radiola_ind =   bpy.props.IntProperty(description='Current radio index')
-    bpy.types.WindowManager.radiola_cols =  bpy.props.IntProperty(min=-1,max=10,default=-1,description='N of columns')
+    bpy.types.WindowManager.radiola_cols =  bpy.props.IntProperty(min=-2,max=10,default=-1,description='N of columns')
     bpy.types.WindowManager.radiola_shift =  bpy.props.IntProperty(min=-600,max=600,default=0,description='Shift of list')
     bpy.types.WindowManager.radiola_url =   bpy.props.StringProperty(description='Current redio url')
     bpy.types.WindowManager.radiola_name =   bpy.props.StringProperty(description='Current redio name')
+    bpy.types.WindowManager.radiola_recing =   bpy.props.BoolProperty(description='Recording now')
     bpy.types.WindowManager.radiola_dev =   aud.Device()
     
     bpy.utils.register_class(OP_radiola)
+    bpy.utils.register_class(OP_radiola_record)
     bpy.utils.register_class(OBJECT_PT_radiola_panel)
 
 def unregister():
     bpy.utils.unregister_class(OBJECT_PT_radiola_panel)
+    bpy.utils.unregister_class(OP_radiola_record)
     bpy.utils.unregister_class(OP_radiola)
     del bpy.types.WindowManager.radiola_ind
     del bpy.types.WindowManager.radiola
@@ -274,6 +368,7 @@ def unregister():
     del bpy.types.WindowManager.radiola_dev
     del bpy.types.WindowManager.radiola_url
     del bpy.types.WindowManager.radiola_name
+    del bpy.types.WindowManager.radiola_recing
     del bpy.types.Scene.rp_playlist
 
 
