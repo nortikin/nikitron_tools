@@ -42,8 +42,9 @@ class DownloadThread(Thread):
         """Запуск потока"""
         r = rq.get(self.url, stream=True)
         datafiles = os.path.join(bpy.utils.user_resource('DATAFILES', path='radiola', create=True))
-        date = time.ctime().replace(' ','').replace(':','.')[3:]
-        with open(os.path.join(datafiles,date+self.name+'.mp3'), 'wb') as f:
+        tm = time.localtime() # tm_year=2023, tm_mon=1, tm_mday=8, tm_hour=21, tm_min=47, tm_sec=38
+        date = '.'.join([str(tm.tm_year),str(tm.tm_mon),str(tm.tm_mday),'.',str(tm.tm_hour),str(tm.tm_min),str(tm.tm_sec)])
+        with open(os.path.join(datafiles,date+'_'+self.name+'.mp3'), 'wb') as f:
             try:
                 for block in r.iter_content(1024):
                     f.write(block)
@@ -244,9 +245,9 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             col.operator('wm.url_open', text='Listen for recordings', icon='WINDOW').url = datafiles
         elif columnscount == -1:
             col.prop(wm, 'radiola_cols',text='H E L P')
-            row1 = col.row(align = True)
+            box = col.box()
+            row1 = box.row(align = True)
             col2 = row1.column(align=True)
-            col2.label(text='')
             col2.label(text='        MENUes (by numbers):')
             col2.label(text='-2          Recording studio')
             col2.label(text='-1          Current help screen')
@@ -261,7 +262,6 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             col2.operator('wm.url_open', text='GET miscellaneous addons', icon='VIEW_PAN').url =\
                         'https://github.com/nortikin/nikitron_tools'
             col3 = row1.column(align=True)
-            col3.label(text='')
             col3.label(text='        B U T T O N')
             col3.label(text=' 1. Initially stops all songs.')
             col3.label(text=' 2. Than downloads playlist from github')
@@ -274,9 +274,9 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
                         'https://t.me/sverchok_3d'
             col3.label(text=' Also we have Music player, RSSreader')
             col3.label(text=' Toolset for volume, materials scv etc.')
-            col.label(text='')
-            col.label(text='* - To add favorites use Q menu (RMB on quiet radio - add to Q)')
-            col.label(text='       To call back stations - simply Q on view area!')
+            box.label(text='* - To add favorites use Q menu (RMB on quiet radio - add to Q)')
+            box.label(text='       To call back stations - simply Q on view area!')
+            box.label(text='')
         elif columnscount==0: # and wm.radiola_ind:
             col.prop(wm, 'radiola_cols',text='P L A Y L I S T')
             col1 = col.column_flow(columns=3, align=True)
