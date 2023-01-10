@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Radiola",
     "author": "nikitron",
-    "version": (0, 9, 0),
+    "version": (0, 9, 5),
     "blender": (3, 4, 0),
     "location": "View3D > Tool Shelf > SV > Radiola",
     "description": "Playing the radio (also files) using aud blender lib",
@@ -252,8 +252,8 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
             col2.label(text='-2          Recording studio')
             col2.label(text='-1          Current help screen')
             col2.label(text=' 0          Playlist w/scrolling')
-            col2.label(text=' 1...3    Long playlist w/names')
-            col2.label(text=' 4...10  Long playlist w/o/names')
+            col2.label(text='')# 1...3    Long playlist w/names')
+            col2.label(text='')# 4...10  Long playlist w/o/names')
             col2.label(text='')
             col2.label(text='        Try Sverchok node addon:')
             col2.operator('wm.url_open', text='GET Sverchok', icon='URL').url =\
@@ -302,6 +302,7 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
                     a.stop=False
                     a.shift=True
             col.prop(wm, 'radiola_shift', text='')
+        """
         else:
             col.prop(wm, 'radiola_cols',text='P L A Y L I S T    U G L Y')
             col1 = col.column_flow(columns=columnscount, align=True)
@@ -325,6 +326,7 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
                     a.item_play=i-1
                     a.play=True
                     a.stop=False
+        """
 
 
 
@@ -345,7 +347,7 @@ def register():
     bpy.types.WindowManager.radiola_clear = bpy.props.BoolProperty(default=False,description='Flag that means clear playback')
     bpy.types.WindowManager.radiola =       bpy.props.IntProperty(description='player')
     bpy.types.WindowManager.radiola_ind =   bpy.props.IntProperty(description='Current radio index')
-    bpy.types.WindowManager.radiola_cols =  bpy.props.IntProperty(min=-2,max=10,default=-1,description='N of columns')
+    bpy.types.WindowManager.radiola_cols =  bpy.props.IntProperty(min=-2,max=0,default=-1,description='N of columns')
     bpy.types.WindowManager.radiola_shift =  bpy.props.IntProperty(min=-600,max=600,default=0,description='Shift of list')
     bpy.types.WindowManager.radiola_url =   bpy.props.StringProperty(description='Current redio url')
     bpy.types.WindowManager.radiola_name =   bpy.props.StringProperty(description='Current redio name')
