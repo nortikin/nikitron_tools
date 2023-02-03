@@ -1,4 +1,4 @@
-# nikitron.cc.ua ordered for this. Much thanks to Nikolay Fomichev https://vk.com/pythal
+# nikitron ordered for this. Much thanks to Nikolay Fomichev https://vk.com/pythal
 bl_info = {
     "name": "RSS",
     "version": (0, 7, 5),
@@ -89,7 +89,7 @@ class reloadRSS(bpy.types.Operator):
     bl_description = "Reload"
  
     def invoke(self, context, event):
-        bpy.types.RssPanel.tree = getRss(context.window_manager.RSSadress)      
+        bpy.types.RSS_PT_RssPanel.tree = getRss(context.window_manager.RSSadress)
         return{"FINISHED"}
               
 # registering and menu integration
