@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Radiola",
     "author": "nikitron",
-    "version": (0, 9, 5),
+    "version": (0, 9, 6),
     "blender": (3, 4, 0),
     "location": "View3D > Tool Shelf > SV > Radiola",
     "description": "Playing the radio (also files) using aud blender lib",
@@ -71,7 +71,7 @@ class OP_radiola_record(bpy.types.Operator):
                 #queue = Queue()
                 Download = DownloadThread(context=context, \
                                     url=context.scene.rp_playlist[context.window_manager.radiola_ind].url,\
-                                    name=context.scene.rp_playlist[context.window_manager.radiola_ind].name, \
+                                    name=context.scene.rp_playlist[context.window_manager.radiola_ind].name.replace('/',''), \
                                     event=event)
                 Download.start()
                 print(f'RADIOLA: downloading {Download}')
