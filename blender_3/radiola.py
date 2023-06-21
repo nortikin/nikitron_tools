@@ -24,6 +24,11 @@ import time
 # import time
 # import subprocess as sp
 
+def volume_up(self, context):
+    try:
+        context.window_manager.radiola_dev.volume = context.window_manager.radiola_volume
+    except:
+        pass
 
 class DownloadThread(Thread):
     """
@@ -166,7 +171,7 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
     bl_idname = 'OBJECT_PT_radiola_panel'
-    bl_label = "Radiola"
+    bl_label = f"Radiola_{bl_info['version']}"
     bl_options = {'DEFAULT_CLOSED'}
     bl_category = 'SV'
 
@@ -226,9 +231,11 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         if playlist_print:
             p = playlist_print[wm.radiola_ind]
             plength = len(playlist_print)
-            col.label(text='Radio list taken from espradio.ru',icon='WORLD_DATA')
-            col.label(text='{0} {1}'.format(str(i), str(p)))
-            col.label(text='{0}'.format(str(sce.rp_playlist[i-1].url)))
+            coldescr = col.column_flow(columns=2, align=True)
+            coldescr.prop(wm, "radiola_volume", slider=True)
+            coldescr.label(text='Radio list taken from espradio.ru',icon='WORLD_DATA')
+            coldescr.label(text='{0} {1}'.format(str(i), str(p)))
+            coldescr.label(text='{0}'.format(str(sce.rp_playlist[i-1].url)))
 
         i = 0
         columnscount = wm.radiola_cols
@@ -361,6 +368,7 @@ def register():
     bpy.types.WindowManager.radiola_name =   bpy.props.StringProperty(description='Current redio name')
     bpy.types.WindowManager.radiola_recing =   bpy.props.BoolProperty(description='Recording now')
     bpy.types.WindowManager.radiola_dev =   aud.Device()
+    bpy.types.WindowManager.radiola_volume =  bpy.props.FloatProperty(min=0.0,max=1.0,default=1.0,description='volume',update=volume_up)
     
     bpy.utils.register_class(OP_radiola)
     bpy.utils.register_class(OP_radiola_record)
