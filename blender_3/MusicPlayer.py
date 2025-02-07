@@ -1,8 +1,8 @@
 bl_info = {
     "name": "Music Player",
     "author": "edddy <edddy74@live.fr> + nikitron a little",
-    "version": (1, 0, 1),
-    "blender": (3, 20, 0),
+    "version": (1, 0, 2),
+    "blender": (4, 10, 0),
     "location": "View3D > Tool Shelf > Music Player",
     "description": "A Little Music Player for Blender",
     "warning": "",
@@ -218,7 +218,7 @@ class MP_ImportSIC(bpy.types.Operator):
     bl_label = "Import sound"
 
     filename_ext = ".mp3"
-    filter_glob : StringProperty(default="*.mp3;*.ogg;*.wav;*.avi;*.mp4;*.wma", options={'HIDDEN'})
+    filter_glob : StringProperty(default="*.mp3;*.ogg;*.wav;*.avi;*.mp4;*.wma;*.m4a", options={'HIDDEN'})
     filepath : StringProperty(subtype="FILE_PATH")
     filename : StringProperty()
     files : CollectionProperty(name="File Path",type=bpy.types.OperatorFileListElement)
