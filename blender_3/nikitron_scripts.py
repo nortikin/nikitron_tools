@@ -20,8 +20,8 @@
 
 bl_info = {
     "name": "Nikitron tools",
-    "version": (3, 5, 0),
-    "blender": (3, 10, 0),  
+    "version": (3, 6, 0),
+    "blender": (4, 2, 0),  
     "category": "Object",
     "author": "Nikita Gorodetskiy",
     "location": "object",
@@ -60,7 +60,7 @@ my_str_classes = [
                 'hook', 'maxvers', 'Mesh_section', 'toolsetNT',
                 'NTTextMeshWeld', 'areaseps', 'areacoma',
                 'volume', 'NTManifestGenerator', 'NTbezierOrdering',
-                'NTduplicat', 'NTScaleFit', 'Volums'
+                'NTduplicat', 'NTScaleFit', 'Volums','AssignMaterial'
                 ]
                 
 my_var_names = [] # extend with veriables names
@@ -80,7 +80,7 @@ ru_dict = [
                 'Крюк', 'МаксВер', 'СЕТКА', 'ИНСТРУМЕНТЫ НТ',
                 'ТЕКСТ+СЕТКА', 'Разделитель', 'Точка',
                 'Объём', 'МаниФест', 'Безье выпрямить', 
-                'Дубликаты', 'МасшВОбъём', 'Единицы'
+                'Дубликаты', 'МасшВОбъём', 'Единицы','Присвоить'
                 ]
                 
 en_dict = [
@@ -96,7 +96,7 @@ en_dict = [
                 'Hook', 'MaxVers', 'MESH', 'TOOLSET NT',
                 'TEXT+MESH', 'Separator', 'Coma',
                 'Volume', 'ManiFest', 'Good bezier', 
-                'Duplicats', 'Scale2Vol', 'Units'
+                'Duplicats', 'Scale2Vol', 'Units','Assign'
                 ]
 
 area_seps = [(';',';',';'),('    ','tab','    '),(',',',',','),(' ','space',' ')]
@@ -130,6 +130,11 @@ bpy.types.Scene.NS_vertices_separator = IntProperty(
 bpy.types.Scene.nt_clean_layout_used = BoolProperty(
     name="clean_layout_used",
     description="remove even if layout has one user (not fake user)",
+    default = False)
+
+bpy.types.Scene.nt_assign_material = BoolProperty(
+    name="assign_material",
+    description="assign material when changing material mode",
     default = False)
 
 bpy.types.Scene.nt_main_panel = BoolProperty(
@@ -1078,7 +1083,10 @@ class MaterialToObjectAll (bpy.types.Operator):
         for o in obj:
             materials = bpy.data.objects[o.name].material_slots
             for m in materials:
+                mat = m.material
                 m.link = mode
+                if context.scene.nt_assign_material == True:
+                    m.material = mat
                 print('материал "'+str(m.name)+'", объект "'+o.name+'", режим материала: '+mode)
         return {'FINISHED'}
     
@@ -1094,7 +1102,10 @@ class MaterialToDataAll (bpy.types.Operator):
         for o in obj:
             materials = bpy.data.objects[o.name].material_slots
             for m in materials:
+                mat = m.material
                 m.link = mode
+                if context.scene.nt_assign_material == True:
+                    m.material = mat
                 print('материал "'+str(m.name)+'", объект "'+o.name+'", режим материала: '+mode)
         return {'FINISHED'}
 
@@ -1612,6 +1623,7 @@ class NT_PT_NikitronPanel(bpy.types.Panel):
             row.operator("object.nt_cliffordattractors",icon="OUTLINER_OB_CURVE", text=sv_lang['CliffordAttractors'])
             row = col.row(align=True)
             row.operator("object.nt_materials_to_object",icon="MATERIAL_DATA", text=sv_lang['MaterialToObjectAll'])
+            row.prop(bpy.context.scene, "nt_assign_material", text=sv_lang['AssignMaterial'])
             row.operator("object.nt_materials_to_data",icon="MATERIAL_DATA", text=sv_lang['MaterialToDataAll'])
                 
             row = col.row(align=True)
