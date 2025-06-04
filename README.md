@@ -130,4 +130,5 @@ ______________
 ### poweroff    
   __WIP__    
     RIP - attempt to poweroff at the end    
-
+### mosaic
+  __Игра в мозаику, тыкайте и выигрывайте__
