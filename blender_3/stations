@@ -1,508 +1,1608 @@
 {"name":"Example","url":"Example"}
-{"name": "104FM", "url": "http://65.109.81.84:7125/stream/1/"}
-{"name": "Pop Lounge Cafe", "url": "https://streamssl.chilltrax.com:80/stream/1/"}
-{"name": "Awesome 80s - Magic Oldies", "url": "http://thassos.cdnstream.com:8018/stream/1/"}
-{"name": "Jazz Club Bandstand - 1930s 1940s Big Band and Swing", "url": "http://51.255.235.165:5094/stream/1/"}
-{"name": "Future Pressure Radio", "url": "https://uk3.internet-radio.com/proxy/futurepressureradio?mp=/;"}
-{"name": "Rock City Radio", "url": "http://www.hosting-serv.com:9100/stream/1/"}
-{"name": "1000 Jazzhits", "url": "http://149.56.38.21:8000/stream/1/"}
-{"name": "Chill Out Zone", "url": "https://cast.magicstreams.gr:9125/stream/1/"}
-{"name": "Joint Radio Blues Rock", "url": "http://158.69.227.214:8113/stream/1/"}
-{"name": "Matt Johnson Radio", "url": "https://us2.internet-radio.com/proxy/mattjohnsonradio?mp=/stream;"}
-{"name": "100060er", "url": "http://mediaserv33.live-streams.nl:8052/live"}
-{"name": "Radio Bella", "url": "http://192.99.170.8:5096/stream/1/"}
-{"name": "K-Dave", "url": "https://us3.internet-radio.com/proxy/kdave?mp=/live"}
-{"name": "Portobello Radio", "url": "https://uk1.internet-radio.com/proxy/portobelloradio?mp=/live"}
-{"name": "Frits 365 Music", "url": "http://88.198.69.145:8782/;"}
-{"name": "ZOMP Radio - Underground House and Vocal", "url": "https://uk5.internet-radio.com/proxy/zomp?mp=/stream;"}
-{"name": "RL Radio Livorno", "url": "http://stream.db962.nl:8030/stream/1/"}
-{"name": "RavesRocksRadio", "url": "https://us3.internet-radio.com/proxy/raverocksradio?mp=/stream;"}
-{"name": "1000 Dance", "url": "https://1000dance.stream.laut.fm/1000dance"}
-{"name": "Radiodigitalia Ricordi", "url": "https://a8.asurahosting.com:8090/stream/1/"}
-{"name": "KVKVI - Classic Hits  60's, 70's, 80's, 90's", "url": "http://167.86.86.4:8000/stream/1/"}
-{"name": "XRDS.fm", "url": "https://us1.internet-radio.com/proxy/xrds?mp=/stream;"}
-{"name": "Napoli Lounge", "url": "http://88.99.171.20:8020/stream/1/"}
-{"name": "Just Easy", "url": "https://just-easy.stream.laut.fm/just-easy"}
-{"name": "This is my server name", "url": "https://us4.internet-radio.com/proxy/steven?mp=/live"}
-{"name": "70s 80s Mix Radio", "url": "http://51.159.194.90:8160/stream/1/"}
-{"name": "Radio Cherwell", "url": "https://uk6.internet-radio.com/proxy/cherwell?mp=/stream;"}
-{"name": "RADIO 1 MANELE ROMANIA - wWw.RadioUnuManele.CoM HOSTAT de HostClean.Ro", "url": "http://51.89.148.171:8022/stream/1/"}
-{"name": "Kawedeoldies Radio", "url": "https://intamixx.no-ip.com:8002/stream/2/"}
-{"name": "HitRadio DE", "url": "http://69.30.218.190:28010/stream/1/"}
-{"name": "Hope Radio Ireland", "url": "https://ladiesfirst.stream.laut.fm/ladiesfirst"}
-{"name": "Shangrla Radio: Shangrla Radio", "url": "http://s2.voscast.com:12136/stream/1/"}
-{"name": "Nurse FM", "url": "https://159.203.109.41:8000/stream/1/"}
-{"name": "SOLID GOLD RADIO IRELAND", "url": "http://67.212.238.178:7005/;"}
-{"name": "Ritzy RADIO", "url": "http://46.105.126.68:9362/stream/1/"}
-{"name": "Radio Power Station", "url": "http://69.30.218.190:31608/stream/1/"}
-{"name": "Classically", "url": "http://streams.crooze.fm:8016/stream/1/"}
-{"name": "Swingtime", "url": "http://i.streams.ovh:9504/stream/1/"}
-{"name": "Forever 80 Pop", "url": "http://thassos.cdnstream.com:5205/stream"}
-{"name": "Pure Pop Radio", "url": "https://cheetah.streemlion.com:4000/stream/1/"}
-{"name": "sensuelle radio", "url": "http://194.88.105.64:8192/stream/1/"}
-{"name": "Davide of MIMIC", "url": "http://89.40.72.71:8000/stream/1/"}
-{"name": "BOLT XFM", "url": "http://media.webradiolife.com:8000/live"}
-{"name": "Italy Classical Radio", "url": "http://116.202.241.212:8010/stream/1/"}
-{"name": "Ritzy RADIO", "url": "http://192.111.140.11:8524/stream/1/"}
-{"name": "RADIO.IPIP.CZ: Radio excaliber", "url": "http://stream18.shoutcastsolutions.com:8324/stream/1/"}
-{"name": "Stumble In The Dark Radio", "url": "http://96.31.83.86:8003/stream/1/"}
-{"name": "HitRadio DE", "url": "https://hitradiode.stream.laut.fm/hitradiode"}
-{"name": "Radio Superstar Classics", "url": "http://107.170.166.187:8000/stream/1/"}
-{"name": "The Groove", "url": "https://uk7.internet-radio.com/proxy/simonyates44?mp=/stream;"}
-{"name": "Web Radio Freestyle And Remixes", "url": "http://192.99.170.8:8000/stream/1/"}
-{"name": "Radio Mare Imperiale News", "url": "http://62.149.196.16:8089/stream/1/"}
-{"name": "131 Rock Radio", "url": "http://162.144.106.6:8569/stream/1/"}
-{"name": "Moorish Radio", "url": "http://radio.hearme.fm:9640/stream"}
-{"name": "Italia 1", "url": "https://italia1.stream.laut.fm/italia1"}
-{"name": "Ghana Music Radio", "url": "http://199.101.98.82:8080/stream/1/"}
-{"name": "Paris Dance Classics", "url": "http://65.108.124.70:7284/stream/1/"}
-{"name": "", "url": "http://stream.trance.ie:8000/mobile"}
-{"name": "Atlantica Live", "url": "https://blueswave.radio:8000/stream/1/"}
-{"name": "Electricity Web", "url": "http://178.32.146.184:5248/;"}
-{"name": "Gongas Rádio", "url": "http://159.69.76.173:3200/stream/1/"}
-{"name": "DZB DANCE - Welcome and tune in to the best & most recent Dance & House from around the globe. (The Netherlands)", "url": "http://theqradio.servemp3.com:8000/QRadio"}
-{"name": "PulseEDM DANCE Music Radio", "url": "https://88.198.175.30:5550/stream/1/"}
-{"name": "Rock City Radio", "url": "https://stream2.svrdedicado.org:7284/stream/1/"}
-{"name": "Radio AMC plus", "url": "http://149.56.157.81:8758/stream/1/"}
-{"name": "Easy Hits Florida HD", "url": "https://deutschrock.stream.laut.fm/deutschrock"}
-{"name": "", "url": "http://51.255.8.139:8064/stream/1/"}
-{"name": "Flash Radio", "url": "http://46.105.120.165:13258/stream/1/"}
-{"name": "YardHype Radio", "url": "http://janus.shoutca.st:8233/stream/1/"}
-{"name": "Rsmusic", "url": "https://playing.dance:8000/stream/1/"}
-{"name": "Moon-Radio", "url": "http://188.138.251.192:8002/stream/1/"}
-{"name": "Rock Radioo", "url": "http://142.4.215.64:8184/stream/1/"}
-{"name": "PHEVER: www.phever.ie. | Live DJS 7 Days | 24x7 Dance Music", "url": "https://uk1.internet-radio.com/proxy/phever?mp=/live"}
-{"name": "Mixx 21", "url": "http://31.14.40.21:8564/stream/1/"}
-{"name": "Ritzy RADIO", "url": "https://s18.myradiostream.com:9676/stream/1/"}
-{"name": "Radio TOP80 [top80.pl Italo Disco]", "url": "http://s1.slotex.pl:7424/stream/1/"}
-{"name": "Power 95 Bermuda", "url": "https://us3.internet-radio.com/proxy/power95?mp=/live"}
-{"name": "OM Radio 2", "url": "http://radio.hearme.fm:9190/stream"}
-{"name": "Unspecified name", "url": "https://uk2.internet-radio.com/proxy/ragefm?mp=/live"}
-{"name": "Magic 80s Florida", "url": "https://shoutcast-new.cdnstream.com:443/stream/117/"}
-{"name": "MoveDaHouse", "url": "https://uk7.internet-radio.com/proxy/movedahouse?mp=/stream;"}
-{"name": "24/7 Drums.ro - Drum&Bass Online Radio Station", "url": "http://198.178.123.5:9120/stream/1/"}
-{"name": "Stumble In The Dark Radio", "url": "http://cc6.beheerstream.com:8037/live_autodj"}
-{"name": "Studio Dance", "url": "http://5.9.65.9:8240/stream/1/"}
-{"name": "MOI Web Radio", "url": "https://moonradio.stream.laut.fm/moonradio"}
-{"name": "BeRock Radio", "url": "https://myhitradio24.stream.laut.fm/myhitradio24"}
-{"name": "Radio Bella", "url": "http://5.2.184.92:3390/stream/1/"}
-{"name": "Atlantica Live", "url": "http://185.156.96.217:10024/stream/1/"}
-{"name": "dB962 │ On Air Everywhere", "url": "http://212.96.160.160:8006/;"}
-{"name": "Radio Sada e Hurriyat Jammu and Kashmir", "url": "http://s2.stationplaylist.com:7012/listen.mp3"}
-{"name": "DB9Radio", "url": "http://91.121.134.23:8420/stream/1/"}
-{"name": "Halloween Hit-Radio", "url": "http://carina.streamerr.co:8072/stream"}
-{"name": "Event FM", "url": "https://uk6.internet-radio.com/proxy/eventfm?mp=/stream;"}
-{"name": "", "url": "https://c2.prostream365.com:8000/live"}
-{"name": "Best Love", "url": "http://c2.auracast.net:8097/stream/1/"}
-{"name": "Wike World Radio", "url": "https://us2.internet-radio.com/proxy/wikeworldradio?mp=/stream;"}
-{"name": "Prog Frog", "url": "http://192.95.39.65:5255/stream/1/"}
-{"name": "Muzicmasters Radio", "url": "https://us3.internet-radio.com/proxy/muzicmasters?mp=/stream;"}
-{"name": "Pop Non-Stop", "url": "http://173.208.177.90:13410/stream/1/"}
-{"name": "1000 Countryhits", "url": "http://89.40.72.71:8000/stream/1/"}
-{"name": "1000 Rockhits", "url": "http://85.195.72.226:18576/stream/1/"}
-{"name": "Repubblic Rock Radio", "url": "http://s2.stationplaylist.com:7058/listen.aac"}
-{"name": "Jc Radio", "url": "http://office.radio-zoom.de:80/192k.mp3"}
-{"name": "Majestic Jukebox Radio #HIGH QUALITY SOUND-ATTENTION NEWS: LISTEN IN HD SOUND on the website", "url": "https://uk3.internet-radio.com/proxy/majesticjukebox?mp=/live"}
-{"name": "Sprockytown", "url": "https://radio.wanderingsheep.net/listen/that_70s_station/70s"}
-{"name": "Hitradiooldies", "url": "http://51.178.80.75:8100/stream/1/"}
-{"name": "Radio FM Dance", "url": "http://leswebradios.fr:8002/stream/1/"}
-{"name": "RadioPitesteanuRomania populara petrecere manele etno dance", "url": "https://happy.radiocaroline319.nl:8319/stream/1/"}
-{"name": "Radio West Middlesex", "url": "https://uk6.internet-radio.com/proxy/radiowestmiddlesex?mp=/stream;"}
-{"name": "Punk Radio Underground", "url": "http://cast2.my-control-panel.com:8026/autodj"}
-{"name": "Radio Shadow Deep Tracks", "url": "https://rock.radiomonster.fm:443/ultra"}
-{"name": "ARK Radio (arkradio@gmail.com)", "url": "http://s8.myradiostream.com:8460/stream/1/"}
-{"name": "JPHiP Radio", "url": "http://s2.stationplaylist.com:7094/listen.aac"}
-{"name": "Radio Power Station", "url": "http://92.48.87.11:8036/stream/1/"}
-{"name": "Ambient Radio .org - Deeply Beautiful Chillout Music - A Heavenly World of Sound", "url": "https://uk2.internet-radio.com/proxy/ambientradio?mp=/stream;"}
-{"name": "24/7 Punx N Rock", "url": "http://thassos.cdnstream.com:5479/autodj"}
-{"name": "HD Radio - The Party Mix", "url": "http://sc.apple-fm.net:9020/;"}
-{"name": "Wiphopbeatz", "url": "https://wiphopbeatz.stream.laut.fm/wiphopbeatz"}
-{"name": "Rock Radioo", "url": "http://radio.hearme.fm:8240/stream"}
-{"name": "Countrychristmas", "url": "http://67.212.238.178:7103/stream/1/"}
-{"name": "131 Retro Radio", "url": "https://uk5.internet-radio.com/proxy/simplyoldies?mp=/stream;"}
-{"name": "Dein LieblingsRadio", "url": "https://deinlieblingsradio.stream.laut.fm/deinlieblingsradio"}
-{"name": "Feelgoodradio.net", "url": "http://108.59.9.147:8071/stream/1/"}
-{"name": "PARTY VIBE RADIO : DRUM & BASS", "url": "http://www.partyviberadio.com:8004/stream/1/"}
-{"name": "Forever 90", "url": "https://1000rockhits.stream.laut.fm/1000rockhits"}
-{"name": "1000 Radiohits", "url": "http://icecast.wjefradio.com:8000/stream"}
-{"name": "Radio Mega-HiT Romania", "url": "http://s2.audiostream.hu:8083/roxy_320k"}
-{"name": "Radioteam 2000", "url": "http://178.32.146.187:8090/stream/1/"}
-{"name": "ABC Music", "url": "http://eu8.fastcast4u.com:24653/stream/1/"}
-{"name": "A MISSISSIPPI BLUES", "url": "http://s10.voscast.com:9942/stream/1/"}
-{"name": "Maximusrock FM", "url": "http://s3.myradiostream.com:4202/stream/1/"}
-{"name": "1000 Goldschlager", "url": "https://evergreens.radiomonster.fm:443/ultra"}
-{"name": "Voyager Radio", "url": "http://178.32.4.127:9040/stream/1/"}
-{"name": "The Musical Box Radio", "url": "http://46.20.4.2:8025/stream/1/"}
-{"name": "", "url": "http://cast4.my-control-panel.com:7291/autodj"}
-{"name": "ELF Radio (World)", "url": "http://5.39.82.157:8054/stream/1/"}
-{"name": "Radio Noise Romania", "url": "http://176.31.98.109:8838/stream/1/"}
-{"name": "Polymer Radio (Music supplied by the \"Free Music Archive\")", "url": "https://uk5.internet-radio.com/proxy/polymerradio?mp=/stream;"}
-{"name": "Forever Rock", "url": "https://radiodigitalia-ricordi.stream.laut.fm/radiodigitalia-ricordi"}
-{"name": "Cafe Klaus Radio", "url": "https://us4.internet-radio.com/proxy/virtualklaus?mp=/live"}
-{"name": "Zeilsteen Radio", "url": "http://solid24.streamupsolutions.com:8010/stream/1/"}
-{"name": "Allsortsdigital Hits Radio", "url": "https://uk1.internet-radio.com/proxy/smoother?mp=/stream;"}
-{"name": "1000 Oldies", "url": "http://158.69.114.190:8024/stream/1/"}
-{"name": "ABC Relax New", "url": "https://cast1.torontocast.com:4490/stream/1/"}
-{"name": "Box UK Radio danceradiouk", "url": "https://uk7.internet-radio.com/proxy/boxradiouk?mp=/live"}
-{"name": "MAXIMUM RETRO", "url": "http://136.243.79.109:1190/stream/1/"}
-{"name": "Central", "url": "http://192.99.4.210:3236/stream/1/"}
-{"name": "RadioFilipinoUSA.com - Love songs and more !", "url": "http://64.95.243.43:8020/stream/1/"}
-{"name": "CanCheers", "url": "https://us3.internet-radio.com/proxy/cancheers?mp=/stream;"}
-{"name": "Radio Am Bad 2", "url": "http://zapstream.nl:80/stream/3/"}
-{"name": "Repubblic Rock Radio", "url": "http://s1.rocknowradio.ro:8000/airtime_128"}
-{"name": "Maximusrock FM", "url": "http://radio.hearme.fm:9200/stream"}
-{"name": "DIMENSIONE RELAX", "url": "https://cast.magicstreams.gr:9125/stream/1/"}
-{"name": "Radio PCM", "url": "http://noasrv.caster.fm:10054/kznqfm"}
-{"name": "Moorish Radio", "url": "http://radio.hearme.fm:9980/stream"}
-{"name": "NonStopOldies", "url": "https://evergreens.radiomonster.fm:443/ultra"}
-{"name": "1000 Smoothhits", "url": "http://80.251.40.4:8089/stream/1/"}
-{"name": "ARK Radio (arkradio@gmail.com)", "url": "http://radio.hearme.fm:8640/stream"}
-{"name": "Cleansing Country", "url": "http://67.212.238.178:7099/stream/1/"}
-{"name": "Operating Generating", "url": "http://radio.hearme.fm:9200/stream"}
-{"name": "Bar Legend Radio", "url": "http://nr8.newradio.it:9562/stream/1/"}
-{"name": "Myhitradio 24", "url": "http://live.radiopopular.ro:8888/stream/1/"}
-{"name": "MAXIMUM DANCE", "url": "http://radio.hearme.fm:9850/stream"}
-{"name": "NORTHEND RADIO", "url": "http://212.96.160.160:8098/;"}
-{"name": "DNB STATION", "url": "http://149.56.175.167:5319/stream/1/"}
-{"name": "1000 Hiphop", "url": "http://albireo.shoutca.st:8771/stream/1/"}
-{"name": "Jamm FM Radio Costa del Sol", "url": "http://74.91.125.187:8082/stream/1/"}
-{"name": "Moon-Radio", "url": "http://192.111.140.11:8149/stream/1/"}
-{"name": "Radio Grup Studio Krnov", "url": "http://178.32.146.187:5268/stream/1/"}
-{"name": "lovezone247", "url": "https://a6.asurahosting.com:7930/stream/1/"}
-{"name": "Sensimedia Stream", "url": "http://192.95.39.65:5607/stream/1/"}
-{"name": "Radio Te Amo Mama Hilda", "url": "https://uk2.internet-radio.com/proxy/radioteamomamahilda?mp=/stream;"}
-{"name": "Livezwei", "url": "http://178.32.137.180:8665/stream/1/"}
-{"name": "Forever Rock", "url": "http://server9.emitironline.com:10923/stream"}
-{"name": "Rock Rádio Lágrima Psicodélica", "url": "http://radio.hearme.fm:8070/stream"}
-{"name": "MEGATON CAFE RADIO", "url": "https://us2.internet-radio.com/proxy/megatoncafe?mp=/stream;"}
-{"name": "Uk Vibes Live", "url": "https://uk7.internet-radio.com/proxy/ukvibes?mp=/stream;"}
-{"name": "Radio Power Station", "url": "http://radio.hearme.fm:8132/stream"}
-{"name": "Radio Victoria nonstop", "url": "https://abcmusic.stream.laut.fm/abcmusic"}
-{"name": "131 Rock Radio", "url": "https://165.227.53.102:8000/stream/1/"}
-{"name": "Rsmusic 2", "url": "http://195.154.217.103:8516/stream/1/"}
-{"name": "Joint Radio Reggae", "url": "http://listen.senemultimedia.net:8090/stream/1/"}
-{"name": "Italy Music", "url": "http://185.156.96.217:10026/stream/1/"}
-{"name": "RDMIX ITALIAN VINTAGE 70 80 90", "url": "http://54.37.84.199:8002/stream/1/"}
-{"name": "", "url": "http://67.212.238.178:7099/stream/1/"}
-{"name": "http://www.stopbeefinrad io.com", "url": "http://149.56.157.81:8752/stream/1/"}
-{"name": "Trap", "url": "http://192.99.4.210:3274/stream/1/"}
-{"name": "dB962 │ On Air Everywhere", "url": "http://radio.drums.ro:8000/;"}
-{"name": "Intamixx 80s 90s Radio UK", "url": "http://162.144.106.6:8118/stream/1/"}
-{"name": "Jc Radio", "url": "http://151.80.56.90:8090/bbc_radio_one_dance.aac"}
-{"name": "Depiratenfamilie.nl , we wensen u veel luisterplezier", "url": "http://94.23.159.187:9974/stream/1/"}
-{"name": "Vibe Country", "url": "http://138.201.234.215:10238/stream/1/"}
-{"name": "RADIO.IPIP.CZ: Radio excaliber", "url": "http://airspectrum.cdnstream1.com:8118/1650_256"}
-{"name": "David", "url": "https://uk1.internet-radio.com/proxy/freetradezone?mp=/stream;"}
-{"name": "Dance Attack FM - The Best EDM", "url": "https://uk4.internet-radio.com/proxy/danceattackfm?mp=/stream;"}
-{"name": "Deutschrock", "url": "http://192.111.140.11:8516/stream/1/"}
-{"name": "Real World Sounds", "url": "https://uk5.internet-radio.com/proxy/realworldsounds?mp=/stream;"}
-{"name": "-=PoWeR=-", "url": "http://94.23.57.5:9003/stream/1/"}
-{"name": "Hitradiooldies", "url": "http://www.streamvortex.com:10230/stream/1/"}
-{"name": "Danceclub Radio", "url": "http://5.39.82.219:11428/stream/1/"}
-{"name": "SunriseFm London", "url": "http://142.44.159.230:7084/stream/1/"}
-{"name": "Radio Bella", "url": "http://94.23.159.187:9978/stream/1/"}
-{"name": "Joint Radio Blues Rock", "url": "http://209.236.126.18:8002/;"}
-{"name": "Forever 80", "url": "http://pulseedm.cdnstream1.com:8124/1373_128"}
-{"name": "Riviera Lounge Radio", "url": "http://163.172.77.142:8261/stream/1/"}
-{"name": "WHAT?! Radio", "url": "http://149.56.157.81:8740/stream/1/"}
-{"name": "Radio Am Bad 2", "url": "http://radio.hearme.fm:8590/stream"}
-{"name": "PlayMusic FM Romania", "url": "http://s03.diazol.hu:35160/live"}
-{"name": "PARTY VIBE RADIO : DANCEHALL", "url": "http://www.partyviberadio.com:8000/stream/3/"}
-{"name": "WabiSabi radio", "url": "https://mars.streamerr.co:8222/stream/1/"}
-{"name": "Tuga FM", "url": "http://s9.citrus3.com:8040/stream"}
-{"name": "Intamixx 80s 90s Radio UK", "url": "http://nebula.shoutca.st:8616/stream/1/"}
-{"name": "KNR Radio", "url": "http://player.reggaeneracija.me:8000/autodj"}
-{"name": "Radio Fucking Metal", "url": "http://radio.hearme.fm:8250/stream"}
-{"name": "Oye sonidero radio", "url": "http://s24.myradiostream.com:14984/stream/1/"}
-{"name": "Cleansing 80's", "url": "http://209.126.119.28:8016/stream/1/"}
-{"name": "Radio Spettacolo", "url": "http://dombradio.mooo.com:8000/live.mp3"}
-{"name": "Dein LieblingsRadio", "url": "http://94.23.30.114:8037/stream/1/"}
-{"name": "NonStopOldies", "url": "http://s8.myradiostream.com:58238/stream/1/"}
-{"name": "EmpfricFM", "url": "https://s5.radio.co/sad8130c0b/listen"}
-{"name": "Jah Music Mansion", "url": "https://a2.asurahosting.com:6920/stream/1/"}
-{"name": "Voyager Radio", "url": "http://s2.stationplaylist.com:9000/gaiafm.aac"}
-{"name": "Soul Rhythms Radio UK", "url": "http://109.170.8.130:80/;"}
-{"name": "Planet 90", "url": "http://51.255.235.165:5040/stream/1/"}
-{"name": "Dakar Musique", "url": "http://68.168.101.146:8714/stream/1/"}
-{"name": "Joy Radio", "url": "https://uk5.internet-radio.com/proxy/joyradio?mp=/stream;"}
-{"name": "Radio Tempore", "url": "http://95.110.186.253:9005/stream/1/"}
-{"name": "Suite Jazz Radio", "url": "http://s2.stationplaylist.com:9460/guerrilla"}
-{"name": "RADIO ESTILO LEBLON", "url": "https://us4.internet-radio.com/proxy/radioestiloleblon?mp=/stream;"}
-{"name": "Radio Monique Gold 8963", "url": "http://149.56.185.82:8076/stream/1/"}
-{"name": "VIBE FM", "url": "https://uk2.internet-radio.com/proxy/vibefm?mp=/live"}
-{"name": "Freizeit Radio", "url": "http://s48.myradiostream.com:11844/stream/1/"}
-{"name": "", "url": "https://100070er.stream.laut.fm/100070er"}
-{"name": "Livezwei", "url": "http://213.202.241.199:9530/stream/1/"}
-{"name": "Radio Newmarket", "url": "https://radiopowerstation.stream.laut.fm/radiopowerstation"}
-{"name": "Logical Asylum Radio", "url": "https://radio.lacapanna.eu/listen/lacapanna/radio.mp3"}
-{"name": "Easy Hits Florida Ultra", "url": "https://repubblicrockradio.stream.laut.fm/repubblicrockradio"}
-{"name": "Konflict Radio", "url": "https://uk3.internet-radio.com/proxy/konflictradio?mp=/live"}
-{"name": "SOFTNEZEE", "url": "http://213.202.241.199:9348/stream/1/"}
-{"name": "ExbassFM Radio", "url": "http://162.144.106.6:8125/stream/1/"}
-{"name": "Buzzfm Nottinghams Dance Trance Radio", "url": "https://uk4.internet-radio.com/proxy/buzzfm?mp=/stream;"}
-{"name": "radiobtr", "url": "http://94.23.30.114:8033/stream/1/"}
-{"name": "All Country Radio", "url": "https://uk3.internet-radio.com/proxy/allcountryradio?mp=/live"}
-{"name": "HD Radio - The Party Mix", "url": "http://178.32.146.184:5412/;"}
-{"name": "The Hit Man Radio", "url": "https://uk2.internet-radio.com/proxy/thehitmanradio?mp=/stream;"}
-{"name": "Spirit Country Radio", "url": "https://us2.internet-radio.com/proxy/jbrashier?mp=/stream;"}
-{"name": "Big Blue Swing.com-64Kbit: Playing music for  Lindy Hop,  Charleston,  Balboa,  Swing, and  Blues", "url": "http://i4.streams.ovh:8352/stream/1/"}
-{"name": "Numanme", "url": "https://chilloutzone.stream.laut.fm/chilloutzone"}
-{"name": "Hit Radio Classics", "url": "http://178.32.107.151:5068/stream/1/"}
-{"name": "RDMIX LOVE SONGS", "url": "http://192.111.140.11:8520/stream/1/"}
-{"name": "Easy Radio Ireland", "url": "http://listen.radiorel.ax:8083/play"}
-{"name": "Electro Vibez", "url": "https://streaming.radio.co/s92f890821/listen"}
-{"name": "Moon-Radio", "url": "http://radio.hearme.fm:9170/stream"}
-{"name": "100% ACID JAZZ", "url": "http://94.23.85.189:8000/stream/1/"}
-{"name": "Stumble In The Dark Radio", "url": "https://radio.alloldieschannel.com/listen/all_oldies_channel/mobile"}
-{"name": "Voyager Radio", "url": "http://nebula.shoutca.st:9300/stream/1/"}
-{"name": "Radio Summernight", "url": "http://192.111.140.11:8323/stream/1/"}
-{"name": "Shangrla Radio: Shangrla Radio", "url": "http://46.105.125.110:14754/stream/1/"}
-{"name": "Aegean Lounge Radio", "url": "http://54.36.89.71:8742/stream/1/"}
-{"name": "Ritus", "url": "http://212.96.160.160:8018/;"}
-{"name": "Atlantica Live", "url": "http://173.208.177.90:9322/stream/1/"}
-{"name": "Made in 80", "url": "http://178.33.135.244:2802/stream/1/"}
-{"name": "ABC Relax New", "url": "http://solid24.streamupsolutions.com:8010/stream/1/"}
-{"name": "Livezwei", "url": "http://204.12.193.98:8393/stream/1/"}
-{"name": "Moon Mission Recordings, Tokyo Deep and Electronic", "url": "https://uk5.internet-radio.com/proxy/mmr?mp=/stream;"}
-{"name": "Brown Noise Radio", "url": "https://uk1.internet-radio.com/proxy/brownnoise?mp=/stream;"}
-{"name": "Myhitradio 24", "url": "http://s4.viastreaming.net:8100/stream/1/"}
-{"name": "New Zealand Country Music Radio", "url": "https://myhitradio24.stream.laut.fm/myhitradio24"}
-{"name": "Radiogrupstudiokrnov", "url": "http://radio.hearme.fm:8650/stream"}
-{"name": "Radio Retro 1940s 1950s", "url": "https://uk3.internet-radio.com/proxy/radioretro?mp=/live"}
-{"name": "Hit List Radio - Tulsa", "url": "https://us1.internet-radio.com/proxy/thehitlist?mp=/stream;"}
-{"name": "Luga Radio Dance radiostation", "url": "http://radio.hearme.fm:9710/stream"}
-{"name": "Zero Radio", "url": "https://uk7.internet-radio.com/proxy/0radio?mp=/live"}
-{"name": "Radio Nova Mix", "url": "https://www.tuneintoradio1.com/listen/classic_hits_89_all_80s/192k.mp3"}
-{"name": "Belters", "url": "https://uk2.internet-radio.com/proxy/belters?mp=/live"}
-{"name": "Jc Radio", "url": "http://radio.hearme.fm:9900/stream"}
-{"name": "Pemuda Pancasila FM", "url": "http://67.212.238.178:7146/stream/1/"}
-{"name": "ChroniX | AGGRESSION®", "url": "http://173.208.177.90:9322/stream/1/"}
-{"name": "Frits 365 Music", "url": "http://94.249.236.186:9768/live"}
-{"name": "Ladies First", "url": "http://icecast.thedumpradio.com:80/listen_mp3"}
-{"name": "Rádio Music CZ", "url": "http://178.159.3.22:18006/stream/1/"}
-{"name": "Pure Pop Radio", "url": "http://stream.soundcasting.eu:80/WDON-MFM-192.mp3"}
-{"name": "Freizeit Radio", "url": "http://64.150.176.42:8086/stream/1/"}
-{"name": "Radio Grup Studio Krnov", "url": "http://67.212.238.178:7099/stream/1/"}
-{"name": "Sensimedia Dancehall Radio", "url": "http://radio.jointil.net:9998/stream/1/"}
-{"name": "Hit Radio Classics", "url": "http://nebula.shoutca.st:8616/stream/1/"}
-{"name": "mayRADIO", "url": "http://caster05.streampakket.com:8267/stream/1/"}
-{"name": "420SMOKERADIO", "url": "http://65.109.81.84:7244/stream/1/"}
-{"name": "Radio Am Bad 2", "url": "http://163.172.77.142:8348/stream/1/"}
-{"name": "RDG Music (Classics Only)", "url": "http://65.109.81.84:7000/stream/1/"}
-{"name": "Smooth Jazz Florida Worldwide", "url": "http://64.95.243.43:8002/stream/1/"}
-{"name": "The Hawk FM", "url": "http://nradio.net:8080/jrock"}
-{"name": "Rádio Music CZ", "url": "http://81.169.198.233:80/stream/1/"}
-{"name": "Jc Radio", "url": "https://jcradio.stream.laut.fm/jcradio"}
-{"name": "Radio Grup Studio Krnov", "url": "http://194.88.105.64:8830/stream/1/"}
-{"name": "1000 70er", "url": "http://5.135.154.69:11590/stream/1/"}
-{"name": "Power Station Italy", "url": "https://powerstationitaly.stream.laut.fm/powerstationitaly"}
-{"name": "Sprockytown", "url": "https://radio.athensnoise.rocks/listen/athensnoise.rocks/radio.mp3"}
-{"name": "IDM X", "url": "https://tophits.radiomonster.fm:443/ultra"}
-{"name": "VKNET Radio Station 2", "url": "http://52.24.52.72:9002/stream/1/"}
-{"name": "Easy Hits Radio", "url": "http://64.235.54.14:8020/;"}
-{"name": "ENERGY FM - classic dance and the best new music", "url": "http://broadcast.shoutstream.co.uk:8006/stream/1/"}
-{"name": "Electro Vibez", "url": "https://a11.asurahosting.com/listen/bloghaus_archive/radio.mp3"}
-{"name": "Gin and Juice Global Radio", "url": "http://162.220.58.242:8012/stream/1/"}
-{"name": "Radio UNO Digital", "url": "http://216.158.229.94:8000/stream/1/"}
-{"name": "Radio Grup Studio Krnov", "url": "http://login.webinternetradio.com:1060/stream/1/"}
-{"name": "242 Radio (from Scotland)", "url": "https://uk7.internet-radio.com/proxy/242radio?mp=/stream;"}
-{"name": "SLRadio Texas", "url": "https://us1.internet-radio.com/proxy/slradio?mp=/stream;"}
-{"name": "Blueprint Tony Culture", "url": "https://online.jamminvibezradio.com/listen/reggae/stream.low"}
-{"name": "sensuelle radio", "url": "http://radio10.pro-fhi.net:9169/stream/1/"}
-{"name": "Rádio Music CZ", "url": "https://popnonstop.stream.laut.fm/popnonstop"}
-{"name": "Tay Bridges Radio - https://www.taybridgesra dio.org/", "url": "http://62.210.24.124:8606/stream/1/"}
-{"name": "Radio Caroline 319 8319", "url": "http://5.39.82.157:8016/stream/1/"}
-{"name": "", "url": "https://a11.asurahosting.com/listen/bloghaus_archive/radio.mp3"}
-{"name": "PiratenRadio.nl - 24/7 de Beste PiratenHits vanuit Twente", "url": "http://46.105.111.94:8064/;"}
-{"name": "Metro Dance Radio HD - Metro Dance One", "url": "https://de1.internet-radio.com/proxy/ingemarradio?mp=/live"}
-{"name": "Rock Melodic Radio - AOR MELODIC ROCK HARD ROCK", "url": "http://142.44.136.201:5044/stream/1/"}
-{"name": "Shangrla Radio: Shangrla Radio", "url": "http://160.75.86.29:8082/;"}
-{"name": "1000 Goldies", "url": "http://mscp3.live-streams.nl:8070/radio"}
-{"name": "Ritzy RADIO", "url": "http://dc1.serverse.com:7294/stream/1/"}
-{"name": "Radio UNO Digital", "url": "http://194.88.105.64:8830/stream/1/"}
-{"name": "Poptastic Radio", "url": "http://s2.stationplaylist.com:7172/listen.aac"}
-{"name": "Easy Hits Florida Ultra", "url": "http://192.99.83.149:8026/;"}
-{"name": "Radio Sassuolo", "url": "http://162.244.80.106:11185/stream/1/"}
-{"name": "PARTY VIBE RADIO : RAP  +  HIP HOP  +  TRAP  +  DUBSTEP", "url": "http://www.partyviberadio.com:8016/stream/2/"}
-{"name": "PARTY VIBE RADIO :  JAZZ", "url": "http://www.partyviberadio.com:8020/stream/1/"}
-{"name": "KAZA FM radio - Pride Party music from 80's to now !", "url": "http://server-24.stream-server.nl:8326/stream/1/"}
-{"name": "mETaLmuSicRaDio", "url": "https://radio.metalmusic.net:443/stream/2/"}
-{"name": "Italia 1", "url": "http://176.31.118.194:19092/stream/1/"}
-{"name": "Chill Out Zone", "url": "http://149.56.234.138:8021/stream/1/"}
-{"name": "Repubblic Rock Radio", "url": "http://173.208.177.90:9322/stream/1/"}
-{"name": "", "url": "http://91.121.78.191:8369/stream/1/"}
-{"name": "RDG Music (Classics Only)", "url": "http://s2.stationplaylist.com:9440/listen.aac"}
-{"name": "Ambiesphere", "url": "https://uk5.internet-radio.com/proxy/ambiesphere?mp=/stream;"}
-{"name": "Choice Urban Radio", "url": "http://cmvs.uncool.club:2121/vinyl-stacks"}
-{"name": "KVKVI - Classic Hits  60's, 70's, 80's, 90's", "url": "https://stream.kixfm.co.nz:8178/stream"}
-{"name": "ILOVEMUSIC-Radio", "url": "http://185.243.52.116:8000/live"}
-{"name": "Pretty Dope Xperience™", "url": "https://streamer.radio.co/scfb5749d1/listen"}
-{"name": "Radio Italo4you", "url": "http://158.69.114.190:8024/stream/1/"}
-{"name": "YES Radio", "url": "http://94.249.254.11:9050/stream/1/"}
-{"name": "Riddim1 Radio", "url": "https://us2.internet-radio.com/proxy/riddim1radio?mp=/stream;"}
-{"name": "1000 Countryhits", "url": "https://kathy.torontocast.com:2800/stream/1/"}
-{"name": "Radio Thiossane", "url": "https://tugafm.stream.laut.fm/tugafm"}
-{"name": "Antenna Web", "url": "http://91.121.38.100:8000/stream/1/"}
-{"name": "Radio Lampsi Laiko Internet Radio", "url": "http://195.114.19.178:8012/stream/1/"}
-{"name": "Level-1 Radio", "url": "https://uk2.internet-radio.com/proxy/level1?mp=/live"}
-{"name": "1000 Melodien", "url": "http://162.252.85.85:9808/stream/1/"}
-{"name": "Hot FM UK (hotfmuk)", "url": "http://cafe80s.eu:8000/mobile.aac"}
-{"name": "Classic Rock Florida Music Radio", "url": "http://144.217.158.59:5000/stream/1/"}
-{"name": "4U Classic Rock", "url": "http://rosetta.shoutca.st:8393/stream/1/"}
-{"name": "Derby Sound", "url": "https://uk7.internet-radio.com/proxy/in2derbyradio?mp=/stream;"}
-{"name": "Pop Lounge Cafe", "url": "http://fr1.streamhosting.ch:80/lounge128.mp3"}
-{"name": "Motoforpeace Radio", "url": "http://176.31.111.65:14050/stream/1/"}
-{"name": "Freebird Radio \"All Country-Rock!\"", "url": "http://s3.myradiostream.com:4202/stream/1/"}
-{"name": "Serenade Radio UK", "url": "http://199.233.234.34:25373/stream/1/"}
-{"name": "", "url": "http://srv2.streaming-ingenierie.fr:8164/stream/1/"}
-{"name": "Realmuzic.net", "url": "http://curiosity.shoutca.st:6085/autodj"}
-{"name": "LHR Fresh dance Music", "url": "http://s2.stationplaylist.com:7064/listen2.mp3"}
-{"name": "Radio Mare Imperiale News", "url": "http://s1.slotex.pl:7488/stream/1/"}
-{"name": "GDRADIO.NET - Streaming Grateful Dead and More!", "url": "https://i8.streams.ovh:18075/stream/1/"}
-{"name": "Ritus", "url": "http://136.243.79.109:1060/stream/1/"}
-{"name": "Radio AMC", "url": "http://52.24.52.72:9030/stream/1/"}
-{"name": "Radio Dancefloor 90s", "url": "http://streaming.radiodancefloor.it:443/stream/1/"}
-{"name": "Melodies Web Radio Athens", "url": "http://94.23.85.189:7870/stream/1/"}
-{"name": "EtherealRadio.com", "url": "https://us4.internet-radio.com/proxy/etherealradio?mp=/live"}
-{"name": "GDRADIO.NET - Streaming Grateful Dead and More!", "url": "http://fm.ycp.edu:8000/stream/1/"}
-{"name": "Dopetrackz Radio", "url": "https://panel.radiocast.net/listen/mix97fm/hd1.mp3"}
-{"name": "Awesome 80s - Magic Oldies", "url": "http://airspectrum.cdnstream1.com:8030/1607_192"}
-{"name": "Jc Radio", "url": "http://airspectrum.cdnstream1.com:8120/1651_128"}
-{"name": "Klas Radio", "url": "http://perseus.shoutca.st:10212/stream/1/"}
-{"name": "MAXIMUM RETRO", "url": "http://mediacp.audiostreamen.nl:8160/stream"}
-{"name": "Death.FM - A Brutal & Beautiful Blend of Black, Death, Doom, Goth, & Gore w/Requests", "url": "https://kathy.torontocast.com:2800/stream/1/"}
-{"name": "Ladies First", "url": "https://listen.ultimatedanceradio.com/listen/ultimate_dance_radio/radio.mp3"}
-{"name": "ZAP! FM - Low Quality", "url": "http://192.111.140.11:8008/stream/1/"}
-{"name": "Best Dance Radio", "url": "http://195.56.193.129:8120/stream/1/"}
-{"name": "Red FM", "url": "http://thassos.cdnstream.com:5033/live"}
-{"name": "Dance UK Radio danceradiouk aac+", "url": "https://uk2.internet-radio.com/proxy/danceuk?mp=/stream;"}
-{"name": "RadioFilipinoUSA.com - Love songs and more !", "url": "http://216.55.141.189:8653/stream/1/"}
-{"name": "Quantum Fields", "url": "http://52.24.52.72:9018/stream/1/"}
-{"name": "Magic 80s Florida", "url": "http://145.239.26.146:7050/stream/1/"}
-{"name": "Shout FM", "url": "http://52.24.52.72:9006/stream/1/"}
-{"name": "SMOOTH JAZZ DELUXE", "url": "https://1000smoothhits.stream.laut.fm/1000smoothhits"}
-{"name": "Eye Of Destiny Radio", "url": "https://uk6.internet-radio.com/proxy/djvine1980?mp=/stream;"}
-{"name": "80ssoundtracks", "url": "https://uk5.internet-radio.com/proxy/80ssoundtracks?mp=/stream;"}
-{"name": "DDM Radio Ireland", "url": "http://live.radioprob.ro:8888/stream/1/"}
-{"name": "Hydra Rise  - Radio", "url": "http://radio.hearme.fm:9200/stream"}
-{"name": "nonlocal Radio", "url": "http://radio.hearme.fm:8740/stream"}
-{"name": "Radio Select Romania", "url": "http://89.39.189.72:8000/stream/1/"}
-{"name": "Beach Paradise Radio", "url": "http://radio.hearme.fm:8060/stream"}
-{"name": "HD Radio - The Party Mix", "url": "http://46.4.40.246:8031/live"}
-{"name": "SmoothJazz.Miami", "url": "https://everestcast.onlineradiostation.co:2110/stream/1/"}
-{"name": "Radio-Endstation - Dein Skinhead Radio für Oi! Punk und Ska", "url": "http://162.252.85.85:9826/stream/1/"}
-{"name": "Sound of Pluto", "url": "http://s6.onweb.gr:8020/stream/1/"}
-{"name": "Rock Rádio Lágrima Psicodélica", "url": "https://s05.w3bserver.com:25381/stream/1/"}
-{"name": "NORTHEND RADIO", "url": "https://az11.yesstreaming.net/listen/ptbo_northend_radio/radio.mp3"}
-{"name": "Rádio Music CZ", "url": "http://cast6.asurahosting.com:7219/stream"}
-{"name": "PARTY VIBE RADIO :  COUNTRY", "url": "http://www.partyviberadio.com:8020/stream/3/"}
-{"name": "Stumble In The Dark Radio", "url": "http://nr3.newradio.it:8100/stream"}
-{"name": "Radio Carpi", "url": "http://caster04.streampakket.com:8090/stream"}
-{"name": "Punk Radio Underground", "url": "http://ice23.securenetsystems.net:80/CLASSX"}
-{"name": "DnBRadio.com", "url": "http://162.252.85.85:9808/stream/1/"}
-{"name": "JPHiP Radio", "url": "http://s1.rocknowradio.ro:8000/airtime_128"}
-{"name": "Intamixx 80s 90s Radio UK", "url": "https://a8.asurahosting.com:6700/stream/1/"}
-{"name": "B4B DISCO FUNK [HD]", "url": "http://195.56.193.129:8100/stream/1/"}
-{"name": "Pink Noise Radio", "url": "https://uk1.internet-radio.com/proxy/pinknoise?mp=/stream;"}
-{"name": "BluesWave Radio", "url": "http://manager7.streamradio.fr:1050/stream/1/"}
-{"name": "The Kawartha Time Machine", "url": "http://caster04.streampakket.com:8047/stream"}
-{"name": "RadioBloodstream.com", "url": "https://uk1.internet-radio.com/proxy/bloodstream?mp=/live"}
-{"name": "Radio Manele Romania wWw.FMRadioManele.Ro", "url": "http://a.fmradiomanele.ro:8054/stream/1/"}
-{"name": "Love Smooth Jazz", "url": "http://radio.hearme.fm:8680/stream"}
-{"name": "PARTY VIBE RADIO : AMBIENT", "url": "http://www.partyviberadio.com:8056/stream/1/"}
-{"name": "Station Italy", "url": "https://foreverrock.stream.laut.fm/foreverrock"}
-{"name": "NATURE RADIO SLEEP", "url": "https://az1.mediacp.eu:443/listen/natureradiosleep/stream/1/"}
-{"name": "Heartbeat FM", "url": "http://fr1.streamhosting.ch:80/lounge128.mp3"}
-{"name": "BeatZ Radio", "url": "http://31.132.6.142:4044/stream/1/"}
-{"name": "Radio XXL", "url": "https://livezwei.stream.laut.fm/livezwei"}
-{"name": "SunriseFm London", "url": "http://149.202.22.75:8066/stream/1/"}
-{"name": "Ghana Music Radio", "url": "http://149.56.175.167:5479/stream/1/"}
-{"name": "Noise FM - EDM Radio", "url": "http://173.249.25.221:8000/stream/1/"}
-{"name": "1000 90er", "url": "http://playmusicfm.no-ip.biz:9000/stream/1/"}
-{"name": "Realmuzic.net", "url": "http://radios.topymedia.com:8052/stream/1/"}
-{"name": "Skylark Stream", "url": "http://199.233.234.34:25373/stream/1/"}
-{"name": "Bassjunkees.com - Drum & Bass, Oldskool, Jungle & Dubstep 24/7 - Once Locked Addicted for Life!", "url": "http://192.111.140.11:8018/stream/1/"}
-{"name": "Flash Radio", "url": "http://s1.rocknowradio.ro:8000/airtime_128"}
-{"name": "Atlantica Soleil", "url": "http://213.202.241.199:8031/stream/1/"}
-{"name": "Real Wealth Real Estate Stream", "url": "http://radio.hearme.fm:8076/stream"}
-{"name": "", "url": "http://s8.voscast.com:9128/stream/1/"}
-{"name": "Babe Radio Stream", "url": "http://cmk-gard:8000/gold.mp3"}
-{"name": "Red FM", "url": "http://94.23.23.97:7928/;"}
-{"name": "Big Blue Swing.com-64Kbit: Playing music for  Lindy Hop,  Charleston,  Balboa,  Swing, and  Blues", "url": "http://144.217.158.59:5120/stream/1/"}
-{"name": "Livezwei", "url": "https://livezwei.stream.laut.fm/livezwei"}
-{"name": "MAXIMUM DANCE 90's", "url": "http://91.200.41.23:8000/stream/1/"}
-{"name": "novaclassicrock.nl", "url": "http://51.75.170.46:6191/stream/1/"}
-{"name": "Riviera Lounge Radio", "url": "https://riviera-lounge-radio.stream.laut.fm/riviera-lounge-radio"}
-{"name": "", "url": "http://myradio.kicks-ass.net:8000/radio.mp3"}
-{"name": "PARTY VIBE RADIO :  BLUES", "url": "http://www.partyviberadio.com:8020/stream/2/"}
-{"name": "Soul Rhythms Radio UK", "url": "http://192.99.41.102:5304/stream/1/"}
-{"name": "1000 70er", "url": "http://87.118.86.46:8888/stream/1/"}
-{"name": "XRadio", "url": "http://s7.everestcast.com:8191/stream/1/"}
-{"name": "KVKVI - Classic Hits  60's, 70's, 80's, 90's", "url": "http://195.22.100.60:8492/stream/1/"}
-{"name": "HBC Radio", "url": "http://208.85.242.52:8162/;"}
-{"name": "ChroniX | AGGRESSION®", "url": "http://s1.rocknowradio.ro:8000/airtime_128"}
-{"name": "Feelgoodradio.net", "url": "http://kreuzbergswiss.spcast.eu:8120/stream"}
-{"name": "Phoenix Country Radio", "url": "https://uk3.internet-radio.com/proxy/phoenixcr?mp=/live"}
-{"name": "BEST OLDIES RADIO", "url": "http://mediaserv38.live-streams.nl:8025/stream1"}
-{"name": "131 Rock Radio", "url": "http://s7.voscast.com:10666/stream/1/"}
-{"name": "1000 Oldies", "url": "https://1000oldies.stream.laut.fm/1000oldies"}
-{"name": "Logical Asylum Radio", "url": "http://52.24.52.72:9022/stream/1/"}
-{"name": "Tipaul Radio", "url": "http://65.109.81.84:7117/stream/1/"}
-{"name": "Livezwei", "url": "http://s3.myradiostream.com:4202/stream/1/"}
-{"name": "This is my server name", "url": "https://uk6.internet-radio.com/proxy/steveburton?mp=/live"}
-{"name": "Undertow Radio (Music supplied by the \"Free Music Archive\")", "url": "https://uk5.internet-radio.com/proxy/undertowradio?mp=/stream;"}
-{"name": "", "url": "https://s1.slotex.pl:7604/stream/1/"}
-{"name": "Esvive Radio", "url": "https://uk2.internet-radio.com/proxy/esvive?mp=/stream;"}
-{"name": "Bulldogs Radio", "url": "http://sr7.inmystream.it:8009/stream.mp3"}
-{"name": "1000 Smoothhits", "url": "http://149.56.155.73:8052/stream/1/"}
-{"name": "", "url": "https://a4.asurahosting.com:443/listen/positive_radio/stream/1/"}
-{"name": "Maximusrock FM", "url": "http://192.211.51.158:5268/stream/1/"}
-{"name": "Werbelin", "url": "http://199.180.75.2:9383/stream/1/"}
-{"name": "Halloween Hit-Radio", "url": "http://1.uicl.co.kr:8000/;"}
-{"name": "1000 Goldies", "url": "http://91.121.78.191:8565/stream/1/"}
-{"name": "Punk Radio Underground", "url": "http://66.70.249.70:5315/stream/1/"}
-{"name": "TopBlues", "url": "https://us3.internet-radio.com/proxy/topblues?mp=/stream;"}
-{"name": "ATLWEBRADIO THE WORLDS BEST INTERNET RADIOATL WEB RADIO WAWR-db", "url": "http://54.39.247.236:2180/stream/1/"}
-{"name": "Bar Legend Radio", "url": "http://s2.stationplaylist.com:9460/guerrilla"}
-{"name": "Rock Rádio Lágrima Psicodélica", "url": "http://74.50.122.103:9810/stream/1/"}
-{"name": "Radio Radio Network - Marbella v2", "url": "http://192.211.51.158:5014/stream/1/"}
-{"name": "111 ATHENS RADIO", "url": "http://s1.rocknowradio.ro:8000/airtime_128"}
-{"name": "1000 Melodien", "url": "http://199.233.234.34:25418/stream/1/"}
-{"name": "RADIO ELETTRICA", "url": "http://192.111.140.11:8512/stream/1/"}
-{"name": "The Seagull - Feel Good Variety", "url": "https://us5.internet-radio.com/proxy/sunny105?mp=/stream;"}
-{"name": "Legend Squirrell Radio", "url": "http://67.212.238.178:7099/stream/1/"}
-{"name": "Feelgoodradio.net", "url": "http://radio.hearme.fm:8890/stream"}
-{"name": "99,4 SunshineFM", "url": "https://dance.radiomonster.fm:443/ultra"}
-{"name": "Radio Alex FM", "url": "http://91.121.104.139:8080/;"}
-{"name": "Rtvsellingen", "url": "http://s6.voscast.com:8002/stream"}
-{"name": "Cleansing 70's", "url": "http://thassos.cdnstream.com:8012/stream/1/"}
-{"name": "Radiogrupstudiokrnov", "url": "http://s2.voscast.com:9170/stream/1/"}
-{"name": "PARTY VIBE RADIO : REGGAE", "url": "http://www.partyviberadio.com:8000/stream/1/"}
-{"name": "Today Dance Radio", "url": "http://159.69.76.173:3001/stream/1/"}
-{"name": "Dilemaradio Stream", "url": "http://192.99.41.102:5036/stream/1/"}
-{"name": "Repubblic Rock Radio", "url": "https://central.stream.laut.fm/central"}
-{"name": "Shangrla Radio: Shangrla Radio", "url": "http://192.111.140.6:8021/stream/1/"}
-{"name": "Brum Radio - Birmingham", "url": "https://uk3.internet-radio.com/proxy/brumradio?mp=/live"}
-{"name": "KVKVI - Classic Hits  60's, 70's, 80's, 90's", "url": "http://94.23.66.155:8116/stream/1/"}
-{"name": "Forever 70", "url": "http://live.radiobandit.ro:8000/stream/1/"}
-{"name": "DJMIX.CA", "url": "http://radiodance.streamingmedia.it:8007/audio.aac"}
-{"name": "RADIO ALTERNATIF FM 98.1 MHZ JAKARTA", "url": "http://149.56.234.138:8004/stream/1/"}
-{"name": "VIBRAZIONI ROCK RADIO", "url": "http://s34.myradiostream.com:15948/stream/1/"}
-{"name": "Magic 80s Florida", "url": "http://192.111.140.11:8508/stream/1/"}
-{"name": "Ladies First", "url": "http://86.82.212.23:11014/stream/1/"}
-{"name": "Gongas Rádio", "url": "http://192.111.140.11:8281/stream/1/"}
-{"name": "Crossroads Country Radio Zutphen", "url": "https://1000countryhits.stream.laut.fm/1000countryhits"}
-{"name": "Classichits 106", "url": "http://206.190.130.180:8091/;"}
-{"name": "104FM", "url": "http://149.56.38.21:9462/stream/1/"}
-{"name": "ANDYS 80S - The Rarest New Wave 80s Music - Make  REQUESTS at  ANDYS80S.com - Stream Live 24-7 - NewWaveZone.com - The 80s Channel - NO COMMERCIALS - NO TALK - Just Rare 80s Music!", "url": "http://199.233.234.34:25418/stream/1/"}
-{"name": "mayCLASSIC", "url": "http://queens11369v.softether.net:30016/digitalmix128"}
+{"name": "Default Stream", "url": "http://74.50.122.103:8032/stream/1/"}
+{"name": "FreeSHOUTCAST AutoDJ", "url": "http://178.32.107.151:3171/stream/1/"}
+{"name": "Ocean Sounds", "url": "http://radio.hearme.fm:8162/stream"}
+{"name": "Nautic Radio - Next Movement Radio - hip hop,turntablism,undergro und hip hop", "url": "http://83.137.145.141:14230/;"}
 {"name": "1940s Radio Station", "url": "https://uk3.internet-radio.com/proxy/1940sradio?mp=/live"}
-{"name": "EmpfricFM", "url": "http://149.56.157.81:8379/stream/1/"}
-{"name": "Lite RADIO", "url": "http://4534.cloudrad.io:8284/stream/1/"}
-{"name": "Sensimedia Bass Radio", "url": "https://radio.bbz.ru/listen/bbz/192.mp3"}
-{"name": "ZAP! FM - Low Quality", "url": "http://176.31.98.109:13908/stream/1/"}
-{"name": "HitRadio DE", "url": "http://i9.streams.ovh:19108/stream/1/"}
-{"name": "RDG Music (Classics Only)", "url": "http://radio.hearme.fm:9900/stream"}
+{"name": "NATURE RADIO SLEEP", "url": "https://az1.mediacp.eu:443/listen/natureradiosleep/stream/1/"}
+{"name": "SGU-Radio", "url": "https://159.203.109.41:8000/stream/1/"}
+{"name": "C2L Radio", "url": "http://srv2.streaming-ingenierie.fr:8164/stream/1/"}
+{"name": "ChicaRegia Radio", "url": "http://206.190.130.180:8091/;"}
+{"name": "Nautic Radio - Beats 'n Breaks", "url": "http://83.137.145.141:14280/;"}
+{"name": "Freebird Radio \"All Country-Rock!\"", "url": "http://freebird.ddns.net:8050/stream/1/"}
+{"name": "** Niche Nation Radio **", "url": "http://149.56.157.81:8806/stream/1/"}
+{"name": "InPulz Dein Stadtradio für Freiberg", "url": "https://88.198.175.30:5550/stream/1/"}
+{"name": "Tripping Tree Radio", "url": "http://s7.voscast.com:10156/stream"}
+{"name": "Best Love", "url": "http://c2.auracast.net:8097/stream/1/"}
+{"name": "BEST SMOOTH JAZZ  - UK (LONDON) HOST ROD LUCAS", "url": "http://64.95.243.43:8002/stream/1/"}
+{"name": "Phoenix Country Radio", "url": "https://uk3.internet-radio.com/proxy/phoenixcr?mp=/live"}
+{"name": "Progzilla (Rickenbacker)", "url": "https://listen.progzilla.com/listen/progzilla/radio.mp3"}
+{"name": "Rock Melodic Radio - AOR MELODIC ROCK HARD ROCK", "url": "http://live.rockmelodic-radio.com:8124/stream/1/"}
+{"name": "fress fm radio", "url": "http://162.244.80.106:11185/stream/1/"}
+{"name": "The Groove", "url": "https://uk7.internet-radio.com/proxy/simonyates44?mp=/stream;"}
+{"name": "Real Country KHTC", "url": "http://s2.stationplaylist.com:7034/listen.mp3"}
+{"name": "Purerock.fm", "url": "http://s8.myradiostream.com:8460/stream/1/"}
+{"name": "Rádio Circuito Mix", "url": "http://162.220.58.242:8012/stream/1/"}
+{"name": "ExbassFM Radio", "url": "https://a9.asurahosting.com:7770/stream/1/"}
+{"name": "Myhitradio 24", "url": "https://myhitradio24.stream.laut.fm/myhitradio24"}
+{"name": "The Loft", "url": "http://192.95.18.39:5123/stream/1/"}
+{"name": "Tay Bridges Radio", "url": "http://solid2.streamupsolutions.com:11142/stream/1/"}
+{"name": "Loungemain Jazz Chill Funk", "url": "http://185.238.128.191:8000/stream/1/"}
+{"name": "Dreamscapes", "url": "http://radio.hearme.fm:8910/stream"}
+{"name": "TOP 7 RADIO Stream", "url": "http://163.172.77.142:8348/stream/1/"}
+{"name": "RADIO ELETTRICA", "url": "http://nr8.newradio.it:9562/stream/1/"}
+{"name": "Radio Star Country 981kHz", "url": "http://178.32.146.184:5412/;"}
+{"name": "Voyager Radio", "url": "http://nebula.shoutca.st:9300/stream/1/"}
+{"name": "DZB DANCE", "url": "http://caster05.streampakket.com:8267/stream/1/"}
+{"name": "PARTY VIBE RADIO :  COUNTRY", "url": "http://www.partyviberadio.com:8020/stream/3/"}
+{"name": "RADIO SILVIE FAVES", "url": "http://67.212.238.178:7078/stream/1/"}
+{"name": "Salsa", "url": "http://radio.hearme.fm:8086/stream"}
+{"name": "Intamixx 80s 90s Radio UK", "url": "https://intamixx.no-ip.com:8002/stream/2/"}
+{"name": "80s Hits", "url": "http://radio.hearme.fm:8860/stream"}
+{"name": "Svobodnoe FM - Svobodnoe Media: HiQ", "url": "http://stream.svobodnoe.media:8000/freemp3"}
+{"name": "Relaxing Classical", "url": "http://radio.hearme.fm:8174/stream"}
+{"name": "dj luicar fusagasuga colombia", "url": "http://209.126.119.28:8027/stream/1/"}
+{"name": "Gaia FM New Zealand", "url": "http://149.56.38.21:8000/stream/1/"}
+{"name": "A MISSISSIPPI BLUES", "url": "https://cast1.torontocast.com:4450/stream/1/"}
+{"name": "Akro Radio - www.akroradio.com French TopHits Webradio", "url": "http://163.172.202.219:10020/stream/1/"}
+{"name": "SteelCage Rock Radio", "url": "http://198.27.66.225:8096/stream/1/"}
+{"name": "CWRCradio.net 30+flirtn4fun", "url": "https://198.7.62.157:8117/stream/1/"}
+{"name": "Streekradio Alkmaar", "url": "http://213.202.241.199:9078/stream/1/"}
+{"name": "We Love Music-Radio", "url": "http://85.195.88.149:16116/stream/1/"}
+{"name": "PARTY VIBE RADIO :  JAZZ", "url": "http://www.partyviberadio.com:8020/stream/1/"}
+{"name": "Fusion Lounge", "url": "http://radio.hearme.fm:9660/stream"}
+{"name": "DooshFM", "url": "http://65.109.87.119:7050/stream/1/"}
+{"name": "Radio Radio Network - Marbella v2", "url": "http://94.23.85.189:8000/stream/1/"}
+{"name": "Dance Attack FM - The Best EDM", "url": "https://uk4.internet-radio.com/proxy/danceattackfm?mp=/stream;"}
+{"name": "stream", "url": "http://192.99.170.8:5586/stream/1/"}
+{"name": "ClassicalRadio (MRG.fm)", "url": "http://62.149.196.16:8010/stream/1/"}
+{"name": "Noname station", "url": "http://84.22.96.125:8030/stream/1/"}
+{"name": "De Piraten Gigant", "url": "http://server-06.stream-server.nl:8402/stream/1/"}
+{"name": "PROSALON DISTRIBUCIONES SAS Stream", "url": "http://51.15.160.78:8368/stream/1/"}
+{"name": "95.7 The Wolf", "url": "http://149.56.234.138:8173/stream/1/"}
+{"name": "SONGCAST RADIO - Rap & Hip Hop", "url": "http://52.24.52.72:9028/stream/1/"}
+{"name": "BluesWave Radio", "url": "https://blueswave.radio:8000/stream/1/"}
+{"name": "ELF Radio (Moscow)", "url": "http://aac.elfradio.ru:8010/aac"}
+{"name": "interesARTE radio", "url": "http://198.7.59.28:10083/stream/1/"}
+{"name": "Luga Radio Dance radiostation", "url": "http://91.200.41.23:8000/stream/1/"}
+{"name": "Metal Rock Radio", "url": "https://kathy.torontocast.com:2800/stream/1/"}
+{"name": "Stereo 102", "url": "http://s36.myradiostream.com:21862/stream"}
+{"name": "Ecos de Ruminahui FM", "url": "http://176.31.248.14:13430/stream/1/"}
+{"name": "XRewind", "url": "http://92.48.87.11:8058/stream/1/"}
+{"name": "RADIO K1W1 107.3 FM", "url": "http://s2.stationplaylist.com:7128/listen.aac"}
+{"name": "", "url": "http://cassini.shoutca.st:9007/stream/1/"}
+{"name": "Heat Wave Radio Pacific", "url": "http://192.111.140.11:8240/stream/1/"}
+{"name": "Best Dance Radio", "url": "https://c3.auracast.net:443/listen/1_radio_dance/stream/1/"}
+{"name": "Music Palace Radio", "url": "http://94.23.23.97:4508/stream/1/"}
+{"name": "Deep Space One", "url": "http://69.30.218.190:29662/stream/1/"}
+{"name": "1000 Goldies", "url": "https://1000goldies.stream.laut.fm/1000goldies"}
+{"name": "CLASSY NetRadio Indonesia", "url": "http://sukmben.radiogentara.com:8000/classyBA-HD"}
+{"name": "A-Z Country", "url": "http://164.132.158.45:8010/stream/1/"}
+{"name": "Wiphopbeatz", "url": "https://wiphopbeatz.stream.laut.fm/wiphopbeatz"}
+{"name": "Reggae do Brasil", "url": "http://199.101.98.82:8080/stream/1/"}
+{"name": "Free Radio RI", "url": "http://149.56.155.73:8020/stream/1/"}
+{"name": "RAD10", "url": "http://91.121.38.100:8240/stream/1/"}
+{"name": "Best Country Mix", "url": "http://www.Country-Radio.eu:8044/56.mp3"}
+{"name": "Boomer 104", "url": "http://s47.myradiostream.com:14578/listen"}
+{"name": "Halloween Hit-Radio", "url": "https://halloween-hit-radio.stream.laut.fm/halloween-hit-radio"}
+{"name": "Deep Focus", "url": "http://radio.hearme.fm:8138/stream"}
+{"name": "DnBRadio.com", "url": "http://source.dnbradio.com:8000/stream/1/"}
+{"name": "Big Shot Radio", "url": "http://149.56.157.81:8677/stream/1/"}
+{"name": "Zero Radio", "url": "https://uk7.internet-radio.com/proxy/0radio?mp=/live"}
+{"name": "XRDS.fm", "url": "https://us1.internet-radio.com/proxy/xrds?mp=/stream;"}
+{"name": "Blues Rock", "url": "http://radio.hearme.fm:8280/stream"}
+{"name": "BCC Blues Rock Radio", "url": "http://94.23.57.5:9132/stream/1/"}
+{"name": "WWDJR.net", "url": "http://142.44.136.201:5379/stream/1/"}
+{"name": "Electro Vibez", "url": "https://s4.radio.co/s88641f2f9/listen"}
+{"name": "Music Factory | Athens | Greece", "url": "https://i4.streams.ovh:9000/stream/1/"}
+{"name": "Atlantica Live", "url": "http://radios.topymedia.com:8052/stream/1/"}
+{"name": "UltraMagnetic Streams", "url": "https://chourmovs.ddnsfree.com/listen/kill_hop_radio/radio128.mp3"}
+{"name": "1000 Radiohits", "url": "https://1000radiohits.stream.laut.fm/1000radiohits"}
+{"name": "Classical Solo Piano", "url": "http://radio.hearme.fm:9140/stream"}
+{"name": "Metaradio", "url": "http://play.metaradio.ru:80/mradio.192"}
+{"name": "Techno", "url": "http://radio.hearme.fm:8070/stream"}
+{"name": "1000 70er", "url": "https://100070er.stream.laut.fm/100070er"}
+{"name": "SONGCAST RADIO - Variety Mix 4", "url": "http://52.24.52.72:9006/stream/1/"}
+{"name": "Web Radio", "url": "http://199.233.234.34:8852/stream/1/"}
+{"name": "The Hawk FM", "url": "http://65.108.98.93:8509/stream/1/"}
+{"name": "Radio Avivamiento en Espanol", "url": "http://199.180.75.2:9029/;"}
+{"name": "Classical Piano Trios", "url": "http://radio.hearme.fm:8026/stream"}
+{"name": "Metro Dance Radio HD - Metro Dance One", "url": "https://de1.internet-radio.com/proxy/ingemarradio?mp=/live"}
+{"name": "RadioZapliN", "url": "http://www.radiozaplin.com:8000/stream/1/"}
+{"name": "Noname station", "url": "http://198.27.127.246:5189/stream/1/"}
+{"name": "Rewound Radio", "url": "http://71.125.37.66:6500/stream/1/"}
+{"name": "Riddim1 Radio", "url": "https://us2.internet-radio.com/proxy/riddim1radio?mp=/stream;"}
+{"name": "Atmospheric Dreams", "url": "http://radio.hearme.fm:8126/stream"}
+{"name": "Radio Qu�bec-Country", "url": "http://play.quebec-country.com:80/"}
+{"name": "Roundandsound.nl", "url": "https://85.214.196.175:80/stream/1/"}
+{"name": "Planet Radio", "url": "http://142.44.136.201:5475/stream/1/"}
+{"name": "dinamo.fm legacy", "url": "http://mp3.dinamo.fm/;"}
+{"name": "The Dump (AAC)", "url": "http://icecast.thedumpradio.com:80/listen_aac"}
+{"name": "Undertow Radio", "url": "https://uk5.internet-radio.com/proxy/undertowradio?mp=/stream;"}
+{"name": "Motoforpeace Radio", "url": "https://motoforpeaceradio.stream.laut.fm/motoforpeaceradio"}
+{"name": "1000 Smoothhits", "url": "https://1000smoothhits.stream.laut.fm/1000smoothhits"}
+{"name": "Chicago Reggae Channel", "url": "http://192.99.8.192:2944/stream/1/"}
+{"name": "Country Rage Radio Stream", "url": "http://198.50.238.178:5168/stream/1/"}
+{"name": "242RADIO.com", "url": "http://5.63.151.52:7194/stream/1/"}
+{"name": "Radio METEOR - SI", "url": "https://az13.yesstreaming.net/listen/meteor/live"}
+{"name": "Radio Forever 80's", "url": "http://207.180.234.221:8761/stream/1/"}
+{"name": "Radio Dancefloor 90s", "url": "http://streaming.radiodancefloor.it:443/stream/1/"}
+{"name": "TrendFM Den Haag", "url": "http://trendfm.live-streams.nl:8030/mobiel"}
+{"name": "Neo-Classical by Spectrum FM", "url": "http://51.255.235.165:5224/stream/1/"}
+{"name": "DNB STATION", "url": "http://dnbstation.com:8005/listen.mp3"}
+{"name": "Hot FM UK (hotfmuk)", "url": "http://chandra.shoutca.st:8009/stream/1/"}
+{"name": "Sound of Pluto", "url": "http://cast.magicstreams.gr:9037/stream/1/"}
+{"name": "Top Trend Radio 101", "url": "http://149.56.157.81:8693/stream/1/"}
+{"name": "MOUNTAIN COUNTRY 107.9", "url": "http://178.159.3.22:8138/stream/1/"}
+{"name": "Noname station", "url": "http://192.99.170.8:5646/stream/1/"}
+{"name": "Chilltrax - The World's Chillout Channel", "url": "https://streamssl.chilltrax.com:80/stream/1/"}
+{"name": "Down Home Roundup", "url": "http://davidgmedia.us:8000/radio.mp3"}
+{"name": "Smooth Vocals", "url": "http://radio.hearme.fm:8820/stream"}
+{"name": "Downtempo Lounge", "url": "http://radio.hearme.fm:8044/stream"}
+{"name": "Lite RADIO", "url": "https://shoutcast-new.cdnstream.com:443/stream/118/"}
+{"name": "Guerrilla Radio", "url": "http://s2.stationplaylist.com:9460/guerrilla"}
+{"name": "Synthetic FM The New Italo generation sound", "url": "http://stream.syntheticfm.com:8030/stream"}
+{"name": "COOL 1053 Carolina Beach and Oldies Radio", "url": "http://192.111.140.11:8173/stream/1/"}
+{"name": "Globus Guld Country", "url": "http://185.156.96.217:10038/stream/1/"}
+{"name": "Philly Jersey Kewl 98", "url": "http://176.31.244.83:12684/stream/1/"}
+{"name": "Momingmy radio", "url": "http://momingmy.tk:8880/music.ogg"}
+{"name": "Tempo FM", "url": "http://31.193.142.7:8040/stream/1/"}
+{"name": "KOOL OLDIES RADIO", "url": "http://192.111.140.11:8548/stream/1/"}
+{"name": "Livezwei", "url": "https://livezwei.stream.laut.fm/livezwei"}
+{"name": "ZOMP Radio - Underground House and Vocal", "url": "https://uk5.internet-radio.com/proxy/zomp?mp=/stream;"}
+{"name": "Harmony Beautiful Music", "url": "http://173.208.177.90:13410/stream/1/"}
+{"name": "Val ik echt in slaap...", "url": "http://158.69.227.214:8021/stream/1/"}
+{"name": "Forever 90", "url": "https://forever90.stream.laut.fm/forever90"}
+{"name": "Ràdio_Tortosa", "url": "http://5.39.89.17:5960/stream/1/"}
+{"name": "Solid Gold Fox Oldies", "url": "http://176.31.118.194:26094/stream/1/"}
+{"name": "SkagaFM", "url": "http://185.156.96.217:10010/stream/1/"}
+{"name": "Haydn", "url": "http://radio.hearme.fm:8116/stream"}
+{"name": "PlayMusic FM Romania", "url": "http://playmusicfm.no-ip.biz:9000/stream/1/"}
+{"name": "Power 95.1 The Hammer Station", "url": "http://136.243.79.109:1190/stream/1/"}
+{"name": "Planet 90", "url": "https://planet90.beheerstream.nl:8010/stream/1/"}
+{"name": "FireWorksRadio.com", "url": "http://149.56.157.81:5052/stream/1/"}
+{"name": "KTRQ 102.3", "url": "http://thassos.cdnstream.com:5205/stream"}
+{"name": "The Vault", "url": "http://192.99.83.149:8026/;"}
+{"name": "The Jazz Den", "url": "http://199.180.75.2:9209/;"}
+{"name": "XBOM Radio", "url": "http://cast6.asurahosting.com:7219/stream"}
+{"name": "1000 Indie", "url": "https://1000indie.stream.laut.fm/1000indie"}
+{"name": "Smooth Jazz", "url": "http://radio.hearme.fm:8190/stream"}
+{"name": "HardRadio", "url": "http://1673.cloudrad.io:8068/live"}
+{"name": "Bach", "url": "http://radio.hearme.fm:9040/stream"}
+{"name": "Radio RSN", "url": "http://radiorsn.stream.laut.fm/radiorsn"}
+{"name": "Non-stop Geheime zender en Piratenmuziek", "url": "http://mediacp.audiostreamen.nl:8160/stream"}
+{"name": "Radio Sassuolo", "url": "https://radiosassuolo.stream.laut.fm/radiosassuolo"}
+{"name": "RADIO CLASICA", "url": "http://74.91.125.187:8082/stream/1/"}
+{"name": "Legends 98-9 and 95.-9", "url": "http://sh.fl-us.audio-stream.com:8003/live"}
+{"name": "20th Century Classical Music", "url": "http://radio.hearme.fm:8150/stream"}
+{"name": "80s Metal", "url": "http://radio.hearme.fm:9200/stream"}
+{"name": "PureClassix", "url": "http://mscp4.live-streams.nl:8140/opus.ogg"}
+{"name": "Hit Music Network 80s", "url": "http://178.159.3.22:18004/stream/1/"}
+{"name": "Backwater Country", "url": "http://176.31.118.194:6262/stream/1/"}
+{"name": "Lonely Oak radio", "url": "http://23.254.184.242:8082/stream/1/"}
+{"name": "Operating Generating", "url": "https://operating-generating.stream.laut.fm/operating-generating"}
+{"name": "KBAB - Killer Beats and Bars", "url": "http://192.111.140.11:8520/stream/1/"}
+{"name": "ITU Radio Rock", "url": "http://160.75.86.29:8088/stream/1/"}
+{"name": "Allsortsdigital Hits Radio", "url": "https://uk1.internet-radio.com/proxy/smoother?mp=/stream;"}
+{"name": "GP45s", "url": "http://198.100.145.185:8772/stream/1/"}
+{"name": "MAXIMUM DANCE 90's", "url": "https://playing.dance:8010/stream/1/"}
+{"name": "Noname station", "url": "http://37.152.8.61:9000/stream/1/"}
+{"name": "Eisradio", "url": "https://stream.eisradio.de/listen/eisradio/radio.mp3"}
+{"name": "Lounge", "url": "http://radio.hearme.fm:8440/stream"}
+{"name": "Doowopcafe Radio - DJ SHIRLEY DOOWOP HEAVEN", "url": "http://cp2.digi-stream.com:9094/stream/1/"}
+{"name": "VIBRAZIONI ROCK RADIO", "url": "http://maggie.torontocast.com:8036/stream/1/"}
+{"name": "Mix Rock Metal Radio", "url": "http://s3.myradiostream.com:4202/stream/1/"}
+{"name": "RadioBemowoFM", "url": "http://s26.myradiostream.com:21040/stream"}
+{"name": "Dopetrackz Radio", "url": "https://s2.radio.co/sd1af91049/listen"}
+{"name": "Classical Baroque", "url": "http://radio.hearme.fm:8010/stream"}
+{"name": "RADIO ITALIA CANARIE", "url": "http://31.132.6.142:4044/stream/1/"}
+{"name": "IndieXL High Quality stream", "url": "http://server-23.stream-server.nl:8438/stream/1/"}
+{"name": "KONG Monster Rock - RDSN.net", "url": "http://184.95.62.170:9786/stream/1/"}
+{"name": "classical CROOZE ", "url": "http://streams.crooze.fm:8016/stream/1/"}
+{"name": "Park Radio", "url": "http://s32.myradiostream.com:18756/stream/1/"}
+{"name": "Metal Devastation Radio", "url": "http://192.211.51.158:5251/;"}
+{"name": "Central", "url": "https://central.stream.laut.fm/central"}
+{"name": "242 Radio (from Scotland)", "url": "https://uk7.internet-radio.com/proxy/242radio?mp=/stream;"}
+{"name": "Blaque Diamondz Radio", "url": "http://149.56.157.81:8758/stream/1/"}
+{"name": "Barrio Radio Show", "url": "http://69.30.243.166:8462/stream/1/"}
+{"name": "Info", "url": "http://66.70.249.70:5315/stream/1/"}
+{"name": "SONGCAST RADIO - Hard Rock & Metal", "url": "http://52.24.52.72:9034/stream/1/"}
+{"name": "Radio Bella", "url": "https://ssl.asculta.live:8318/stream/1/"}
+{"name": "Forest Radio", "url": "https://c2.prostream365.com:8000/live"}
+{"name": "Christian Smooth Jazz", "url": "http://radio.wanderingsheep.net:8021/christianjazz"}
+{"name": "Chillout Essentials on MixLive.ie", "url": "http://2.58.194.54:8840/stream/1/"}
+{"name": "Radio FM Dance", "url": "https://sonic.streamingchilenos.com:8138/stream/1/"}
+{"name": "Funky-Jazzmusic", "url": "http://funky-jazzmusic.kaspermusic.nl:8000/live"}
+{"name": "NATILIVERADIO.COM", "url": "http://149.56.157.81:8812/stream/1/"}
+{"name": "Se", "url": "http://52.7.57.94:8010/stream/1/"}
+{"name": "Noname station", "url": "http://116.202.241.212:7007/stream/1/"}
+{"name": "FZO MP3 stream", "url": "http://stream.fzo.nu:80/studio.mp3"}
+{"name": "MICHIGAN COUNTRY CLASSIC RADIO", "url": "https://199.115.115.71:8274/stream/1/"}
+{"name": "Noname station", "url": "http://s1.slotex.pl:7780/stream/1/"}
+{"name": "RADIO Rock SV", "url": "http://94.23.23.97:4870/stream/1/"}
+{"name": "GalaXXy", "url": "http://51.255.235.165:5536/stream/1/"}
+{"name": "PHEVER", "url": "https://uk1.internet-radio.com/proxy/phever?mp=/live"}
+{"name": "Yesterday 106.5 FM Phuket", "url": "http://103.246.18.8:4122/stream/1/"}
+{"name": "Just Easy", "url": "https://just-easy.stream.laut.fm/just-easy"}
+{"name": "SMOOTH JAZZ DELUXE", "url": "https://cast1.torontocast.com:4490/stream/1/"}
+{"name": "Yesterday FM", "url": "http://178.159.3.22:8129/stream"}
+{"name": "DomBRadiO - Online-Dombrad - AutoDJ", "url": "http://dombradio.mooo.com:8000/live.mp3"}
+{"name": "SONGCAST RADIO - Variety Mix 3", "url": "http://52.24.52.72:9004/stream/1/"}
+{"name": "Parani Gee Radio", "url": "http://151.80.42.191:8288/stream/1/"}
+{"name": "Noname station", "url": "https://myradiopanel.com:1040/stream/1/"}
+{"name": "My Station name", "url": "http://68.168.101.146:8714/stream/1/"}
+{"name": "GOLD INSTRUMENTAL", "url": "http://199.233.234.34:25373/stream/1/"}
+{"name": "RadioTGinen", "url": "http://zafemradio.com:9984/;"}
+{"name": "Jack and Jill Radio 128", "url": "http://162.244.80.21:9086/stream/1/"}
+{"name": "Radio Retro 1940s 1950s", "url": "https://uk3.internet-radio.com/proxy/radioretro?mp=/live"}
+{"name": "Radio Waterlu", "url": "http://85.214.135.131:8004/stream/1/"}
+{"name": "Rock Rádio Lágrima Psicodélica", "url": "https://s05.w3bserver.com:25381/stream/1/"}
+{"name": "Spectrum Chillout", "url": "http://51.255.235.165:5024/stream/1/"}
+{"name": "Forever 80 Pop", "url": "https://forever80-pop.stream.laut.fm/forever80-pop"}
+{"name": "Radio Kero Rock", "url": "https://stm1.painelwshost.com.br:7012/stream/1/"}
+{"name": "WJIM", "url": "http://lynx.prostreaming.net:8030/stream"}
+{"name": "Cevheri Tasavvuf Musikisi Radyosu", "url": "http://85.195.88.149:11190/stream/1/"}
+{"name": "THE REAL UNDERGROUND RADIO", "url": "http://54.39.247.236:2180/stream/1/"}
+{"name": "40SOUL.com", "url": "http://67.212.238.178:7090/stream/1/"}
+{"name": "The Hood!", "url": "http://108.59.9.147:8048/stream/1/"}
+{"name": "RadioU Fusion: Hip Hop", "url": "http://67.212.238.178:7142/stream/1/"}
+{"name": "MusicArtclub Thessaloniki Athens Greece", "url": "http://178.32.146.187:8090/stream/1/"}
+{"name": "Classic EuroDance", "url": "http://radio.hearme.fm:9710/stream"}
+{"name": "Pera Campus radio", "url": "http://95.154.242.114:8016/;"}
+{"name": "Event FM", "url": "https://uk6.internet-radio.com/proxy/eventfm?mp=/stream;"}
+{"name": "1000 Rockhits", "url": "https://1000rockhits.stream.laut.fm/1000rockhits"}
+{"name": "BluesRadio (MRG.fm)", "url": "http://62.149.196.16:8188/stream/1/"}
+{"name": "New Life Radio - Радіо Нове Життя", "url": "http://nlradio.stream:8000/nlradio_ua-low.aac"}
+{"name": "Ijsselstreek Radio", "url": "http://mediaserv38.live-streams.nl:8029/low"}
+{"name": "Magic 80s Florida", "url": "http://airspectrum.cdnstream1.com:8018/1606_192"}
+{"name": ".:: XFM Dance | Non Stop Dance ::.", "url": "http://live1.radioseven.ro:7480/;"}
+{"name": "http://www.stopbeefinrad io.com", "url": "http://149.56.157.81:8752/stream/1/"}
+{"name": "Radio Sinfonia Online (CHILE)", "url": "http://5.9.65.9:8240/stream/1/"}
+{"name": "PLANET FLANNEL RADIO", "url": "http://192.111.140.11:8532/stream/1/"}
+{"name": "", "url": "https://mars.streamerr.co:8222/stream/1/"}
+{"name": "Twilight Radio | Сумеречное Радио", "url": "http://twilightradio.online:8000/radio"}
+{"name": "Radio PCM", "url": "https://radiopcm.stream.laut.fm/radiopcm"}
+{"name": "JamFest", "url": "http://62.146.229.54:8042/stream/1/"}
+{"name": "BOLT XFM", "url": "http://s9.myradiostream.com:46608/stream/1/"}
+{"name": "Retro Hits", "url": "http://149.56.185.82:8038/stream/1/"}
+{"name": "Radio Bandit", "url": "http://live.radiobandit.ro:8000/stream/1/"}
+{"name": "Australias 24/7 Big Country Radio ", "url": "http://46.105.125.110:13656/stream/1/"}
+{"name": "Radio TOP80 [top80.pl Italo Disco]", "url": "http://radio.top80.pl:9940/;"}
+{"name": "EtherealRadio.com", "url": "https://us4.internet-radio.com/proxy/etherealradio?mp=/live"}
+{"name": "Eternal Radio", "url": "http://79.98.108.170:8217/stream/1/"}
+{"name": "Klas Radio", "url": "http://178.32.4.127:9040/stream/1/"}
+{"name": "Unspecified name", "url": "http://onionunlimited.com:8000/stream"}
+{"name": "JR.FM Rock", "url": "http://s2.stationplaylist.com:7036/listen.mp3"}
+{"name": "Vid 90", "url": "http://s3.voscast.com:7720/stream/1/"}
+{"name": "Radio Stand By The Vintage Style", "url": "http://188.165.206.81:9010/stream/1/"}
+{"name": "La Fiesta I.M.", "url": "http://s7.voscast.com:9928/stream"}
+{"name": "Countrychristmas", "url": "https://countrychristmas.stream.laut.fm/countrychristmas"}
+{"name": "Cafe Klaus Radio", "url": "https://us4.internet-radio.com/proxy/virtualklaus?mp=/live"}
+{"name": "UltraFan", "url": "http://45.144.66.54:8000/64aac+"}
+{"name": "KICK FM RADIO", "url": "http://cast3.my-control-panel.com:7240/live"}
+{"name": "ZAP! FM - High quality", "url": "https://zapstream.nl:80/stream/1/"}
+{"name": "Bebop", "url": "http://radio.hearme.fm:9880/stream"}
+{"name": "Joy Radio", "url": "https://uk5.internet-radio.com/proxy/joyradio?mp=/stream;"}
+{"name": "Mix Radio One", "url": "http://149.56.157.81:8800/stream/1/"}
+{"name": "Non-stop met DJ Bobbie voor Shadow Radio", "url": "http://cc6.beheerstream.com:8037/live_autodj"}
+{"name": "JazzCafe-Audiophile", "url": "https://radio.wanderingsheep.net:8059/jazzcafe320"}
+{"name": "RePlayScape", "url": "http://195.176.247.12:9064/stream/1/"}
+{"name": "Bar Legend Radio", "url": "http://solid24.streamupsolutions.com:8010/stream/1/"}
+{"name": "Moonlight Sonata Radio", "url": "http://88.198.69.145:8782/;"}
+{"name": "ROCK HARD RADIO - USA", "url": "http://192.111.140.11:8443/stream/1/"}
+{"name": "RadioSuperoldie MEDIUM", "url": "http://87.118.86.46:8877/stream/1/"}
+{"name": "Retro FM - Albany, GA", "url": "http://s34.myradiostream.com:15948/stream/1/"}
+{"name": "Roi FM", "url": "https://roi-fm.stream.laut.fm/roi-fm"}
+{"name": "Realmuzic.net", "url": "https://everestcast.onlineradiostation.co:2110/stream/1/"}
+{"name": "Stony Radio", "url": "http://carina.streamerr.co:8072/stream"}
+{"name": "Radio HostingMania.rs", "url": "http://193.243.169.34:8000/;"}
+{"name": "Energy 100fm", "url": "http://s2.stationplaylist.com:7094/listen.aac"}
+{"name": "JR.FM GuestMix", "url": "http://s2.stationplaylist.com:7106/listen.mp3"}
+{"name": "Culture Failure", "url": "http://209.63.239.148:8000/stream/1/"}
+{"name": "RADIO.IPIP.CZ: ----->Rockové_Radio_CZ[- ----", "url": "http://212.96.160.160:8076/;"}
+{"name": "AEDE Electrodance Stream", "url": "http://204.12.193.98:8495/stream/1/"}
+{"name": "Bass Station DnB on MixLive.ie", "url": "http://2.58.194.54:8846/stream/1/"}
+{"name": "SONGCAST RADIO - Alternative", "url": "http://52.24.52.72:9010/stream/1/"}
+{"name": "Forever 70", "url": "https://forever70.stream.laut.fm/forever70"}
+{"name": "Amsterdam Funk Channel", "url": "http://213.202.241.199:9292/stream/1/"}
+{"name": "Piano Works", "url": "http://radio.hearme.fm:8238/stream"}
+{"name": "angrybabyarm.com", "url": "https://cast.angrybabyarm.com/listen/angrybabyarm/stream"}
+{"name": "Organlive.com", "url": "http://play2.organlive.com:7000/stream/1/"}
+{"name": "Radio Plus Espagne", "url": "http://94.23.27.6:8242/stream/1/"}
+{"name": "Mega Marathon Mix", "url": "http://149.56.157.81:8379/stream/1/"}
+{"name": "X-Ray FM", "url": "http://159.69.76.173:3200/stream/1/"}
+{"name": "Radioparty.pl", "url": "http://s1.radioparty.pl:8000/stream"}
+{"name": "AubyMix - Votre webradio Aubygeoise !", "url": "http://stream.aubymix.fr:8000/mp3"}
+{"name": "DigitalMix by djSpinnerCee NYCbx v2 48kbps", "url": "http://queens11369v.softether.net:30016/djspinnercee48"}
+{"name": "DDM Radio Ireland", "url": "http://93.107.98.107:8000/;"}
+{"name": "Backyard Radio", "url": "http://s2.stationplaylist.com:8180/"}
+{"name": "Radio AMC plus", "url": "https://stm9.painelcast.com:7762/stream/1/"}
+{"name": "ROCK HARD RADIO CLASSICS", "url": "http://192.111.140.11:8516/stream/1/"}
+{"name": "Radio Fucking Metal", "url": "https://radio-fucking-metal.stream.laut.fm/radio-fucking-metal"}
+{"name": "Symphonies", "url": "http://radio.hearme.fm:9150/stream"}
+{"name": "70's Classics", "url": "http://192.111.140.11:8008/stream/1/"}
+{"name": "BARS RADIO", "url": "http://88.99.171.20:8020/stream/1/"}
+{"name": "beeClassics", "url": "http://stream.beeradio.nl:80/classics"}
+{"name": "Box Radio", "url": "http://195.154.217.103:8325/stream/1/"}
+{"name": "Psyndora Chillout", "url": "https://cast.magicstreams.gr:9125/stream/1/"}
+{"name": "DNB STATION", "url": "http://dnbstation.com:8000/;"}
+{"name": "104FM", "url": "http://104fm.ca:8008/;"}
+{"name": "MOI Web Radio", "url": "http://everestcast.streams.ovh:1560/stream/1/"}
+{"name": "[ vinyl stacks ]", "url": "http://cmvs.uncool.club:2121/vinyl-stacks"}
+{"name": "Pop Punk Radio", "url": "http://cast5.my-control-panel.com:8432/stream/1/"}
+{"name": "Best Oldies", "url": "http://213.32.121.34:8010/stream/1/"}
+{"name": "Radio 182 Midden-Holland", "url": "http://81.23.235.131:8182/stream/1/"}
+{"name": "TheLight Worship", "url": "http://27.131.74.8:8168/stream/1/"}
+{"name": "Flash Radio", "url": "https://flashradio.stream.laut.fm/flashradio"}
+{"name": "BlastFM Rock Radio", "url": "https://165.227.53.102:8000/stream/1/"}
+{"name": "Operas", "url": "http://radio.hearme.fm:8228/stream"}
+{"name": "Tuga FM", "url": "https://tugafm.stream.laut.fm/tugafm"}
+{"name": "RadioPitesteanuRomania", "url": "https://radio.sonicpanel.ro:8220/stream/1/"}
+{"name": "RadioSkyMusic Jazz", "url": "http://eu.publicssl.net:7006/live"}
+{"name": "100% ACID JAZZ", "url": "https://mpc1.mediacp.eu:8356/stream/1/"}
+{"name": "WFP", "url": "http://5.135.154.66:35366/stream/1/"}
+{"name": "/stream", "url": "http://51.255.235.165:5220/stream/1/"}
+{"name": "J-Rock Radio jrock.pro", "url": "http://nradio.net:8080/jrock"}
+{"name": "WHAT?! Island", "url": "http://162.144.106.6:8111/stream/1/"}
+{"name": "Radio Sada e Hurriyat Jammu and Kashmir", "url": "http://eu8.fastcast4u.com:24625/stream/1/"}
+{"name": "Radio Summernight", "url": "https://radiosummernight.stream.laut.fm/radiosummernight"}
+{"name": "WBLX-DB Black Label Experience Radio", "url": "http://74.50.86.195:4080/stream/1/"}
+{"name": "Metal Express Radio", "url": "http://5.135.154.69:11590/stream/1/"}
+{"name": "iCon Country", "url": "http://192.111.140.11:8281/stream/1/"}
+{"name": "Ichtys Radio", "url": "http://85.195.88.149:10870/stream/1/"}
+{"name": "Sprockytown", "url": "https://sprockytown.stream.laut.fm/sprockytown"}
+{"name": "Oldies", "url": "http://radio.hearme.fm:8970/stream"}
+{"name": "CLASSIC HITS anni 70 80 90", "url": "http://classichitsradio.streamingmedia.it:8017/play"}
+{"name": "WHAT?! Radio", "url": "http://162.144.106.6:9119/stream/1/"}
+{"name": "Smooth Jazz Florida", "url": "http://airspectrum.cdnstream1.com:8126/1043_192"}
+{"name": "scotpub", "url": "http://176.31.118.194:10164/stream/1/"}
+{"name": "RustRadio", "url": "http://listen.rustradio.co.uk:8000/stream"}
+{"name": "Brew 102 FM Santa Barbara", "url": "http://162.244.80.106:8105/;"}
+{"name": "Gdynia Radio", "url": "http://51.255.8.139:8064/stream/1/"}
+{"name": "kaleidoskop.rocks", "url": "http://138.201.234.215:10988/stream/1/"}
+{"name": "CLASSIC ROCK HARD RADIO", "url": "http://192.111.140.11:8512/stream/1/"}
+{"name": "1000 Hiphop", "url": "https://1000hiphop.stream.laut.fm/1000hiphop"}
+{"name": "MADPAD", "url": "http://35.155.54.70:80/stream/1/"}
+{"name": "Dave Koz Radio Show", "url": "http://radio.hearme.fm:9640/stream"}
+{"name": "Rebirth Classics", "url": "http://78.129.228.187:8016/stream/1/"}
+{"name": "MEGATON CAFE RADIO", "url": "https://us2.internet-radio.com/proxy/megatoncafe?mp=/stream;"}
+{"name": "Real Wealth Real Estate Stream", "url": "https://cast4.asurahosting.com:443/proxy/realweal/stream/1/"}
+{"name": "The Pain Dealers Radio", "url": "http://77.37.180.90:7777/;"}
+{"name": "Hfr 1", "url": "https://hfr1.stream.laut.fm/hfr1"}
+{"name": "Relaxing Piano", "url": "http://radio.hearme.fm:8182/stream"}
+{"name": "Easy Hits Florida HD", "url": "http://airspectrum.cdnstream1.com:8116/1649_192"}
+{"name": "106.6 FM", "url": "http://198.178.123.5:9432/stream/1/"}
+{"name": "Deutschrock", "url": "https://deutschrock.stream.laut.fm/deutschrock"}
+{"name": "WFPN Radio Norwich CT", "url": "http://5.39.89.17:9672/stream/1/"}
+{"name": "Female Funk Radio", "url": "http://149.56.157.81:5046/stream/1/"}
+{"name": "The Joint", "url": "http://66.70.249.70:5756/stream/1/"}
+{"name": "NonStopOldies", "url": "https://shoutcast-new.cdnstream.com:443/stream/117/"}
+{"name": "70/80 Hits HQ", "url": "http://nr2.newradio.it:8003/stream"}
+{"name": "RADIO SMILE", "url": "http://46.105.120.165:13258/stream/1/"}
+{"name": "Country 97.3", "url": "http://thassos.cdnstream.com:5180/live"}
+{"name": "Kurn Urban Network", "url": "http://149.56.157.81:8794/stream/1/"}
+{"name": "Rock Now Radio", "url": "http://s1.rocknowradio.ro:8000/airtime_128"}
+{"name": "GRIZZ  RADIO Stream", "url": "http://67.212.238.178:7103/stream/1/"}
+{"name": "A-Z 70s", "url": "http://164.132.158.45:8020/stream/1/"}
+{"name": "Quantum Fields", "url": "https://quantumfields.stream:9762/stream/1/"}
+{"name": "South Florida Smooth Jazz", "url": "http://airspectrum.cdnstream1.com:8060/1612_192"}
+{"name": "Clarus Retro", "url": "http://162.244.80.106:11381/stream/1/"}
+{"name": "The Big 80s Station", "url": "http://158.69.114.190:8024/stream/1/"}
+{"name": "ITU Radio Jazz/Blues", "url": "http://160.75.86.29:8082/;"}
+{"name": "", "url": "https://a4.asurahosting.com:443/listen/positive_radio/stream/1/"}
+{"name": "Sanctuary Radio's Dark Electro Channel", "url": "http://192.111.140.6:9772/stream/1/"}
+{"name": "-= Maya Clars =- Indie 2025", "url": "http://136.243.209.197:8000/radio"}
+{"name": "N/A", "url": "http://192.111.140.6:8021/stream/1/"}
+{"name": "Radio Spettacolo", "url": "https://radio.mediacp.eu:8112/stream/1/"}
+{"name": "Baroque Period", "url": "http://radio.hearme.fm:8008/stream"}
+{"name": "RBS GOLD", "url": "http://caster04.streampakket.com:8090/stream"}
+{"name": "Dance Hits", "url": "http://radio.hearme.fm:8900/stream"}
+{"name": "ZAP! FM - Low Quality", "url": "http://zapstream.nl:80/stream/3/"}
+{"name": "Jah Music Mansion", "url": "http://192.99.41.102:5304/stream/1/"}
+{"name": "1000 Dance", "url": "https://1000dance.stream.laut.fm/1000dance"}
+{"name": "Romantica Latina", "url": "http://radio.hearme.fm:8084/stream"}
+{"name": "Rhythm and Blues, Southern Soul", "url": "http://198.178.123.5:10646/stream/1/"}
+{"name": "Peters Plattenthek", "url": "http://85.195.72.226:22688/stream/1/"}
+{"name": "BDPST ROCK LQ", "url": "http://s2.audiostream.hu:8081/bdpstrock_96k"}
+{"name": "RADIO.IPIP.CZ: bLd Home Radio", "url": "http://212.96.160.160:8006/;"}
+{"name": "Radio Deejay HR", "url": "http://live.radiodeejay.hr:7002/stream/1/"}
+{"name": "Chaaawaaa", "url": "http://91.121.78.191:8080/stream/1/"}
+{"name": "BlastFM Country Music Radio", "url": "https://178.62.105.57:8000/stream/1/"}
+{"name": "SLRadio Texas", "url": "https://us1.internet-radio.com/proxy/slradio?mp=/stream;"}
+{"name": "Noise FM - EDM Radio", "url": "http://play.sas-media.ru:8000/play_256"}
+{"name": "Radio Visoko 92,3", "url": "http://188.40.62.20:8080/stream/1/"}
+{"name": "RADIO.IPIP.CZ: radioEnErGyE3e", "url": "http://212.96.160.160:8072/;"}
+{"name": "1000 Countryhits", "url": "https://1000countryhits.stream.laut.fm/1000countryhits"}
+{"name": "WOW FM Pop 80s", "url": "http://149.202.22.75:9106/stream/1/"}
+{"name": "WHYL Carlisle, PA", "url": "http://50.78.91.214:8804/stream/1/"}
+{"name": "Spin100", "url": "http://149.56.157.81:8824/stream/1/"}
+{"name": "Basspistol Radio", "url": "https://radio.basspistol.com/listen/basspistol/radio.mp3"}
+{"name": "24-7 Rock 'n' Roll", "url": "http://31.132.6.142:4266/stream/1/"}
+{"name": "(null)", "url": "http://play-radio0.jump.bg:8028/autodj"}
+{"name": "", "url": "http://mpc1.mediacp.eu:8014/stream/1/"}
+{"name": "HD Radio - The Party Mix", "url": "http://rosetta.shoutca.st:8393/stream/1/"}
+{"name": "Moonlight Meditations by WorldFusionRadio.com", "url": "http://51.255.235.165:5456/stream/1/"}
+{"name": "Clarus Country", "url": "http://162.244.80.106:11568/stream/1/"}
+{"name": "80ssoundtracks", "url": "https://uk5.internet-radio.com/proxy/80ssoundtracks?mp=/stream;"}
+{"name": "Love Smooth Jazz", "url": "http://airspectrum.cdnstream1.com:8102/1283_192"}
+{"name": "Mondello Radio (MRG.fm)", "url": "http://62.149.196.16:8000/stream/1/"}
+{"name": "Europoort Radio", "url": "http://149.202.22.75:8246/;"}
+{"name": "00s Country", "url": "http://radio.hearme.fm:9950/stream"}
+{"name": "Cafe de Paris", "url": "http://radio.hearme.fm:8880/stream"}
+{"name": "Ambient", "url": "http://radio.hearme.fm:8124/stream"}
+{"name": "Radioteam 2000", "url": "https://radioteam2000.stream.laut.fm/radioteam2000"}
+{"name": "Oystermouth Radio", "url": "http://46.105.124.120:8280/stream/1/"}
+{"name": "BigNoise - music from Siberia", "url": "http://radio.bignoise.club:8000/nonstop"}
+{"name": "Radio Mare Imperiale News", "url": "http://radio.rmin.co.uk:8000/stream/3/"}
+{"name": "EZ Hits Radio", "url": "http://airspectrum.cdnstream1.com:8122/1652_128"}
+{"name": "Adictivo Radio", "url": "http://46.105.120.165:9504/stream/1/"}
+{"name": "MPM rádió", "url": "http://s01.diazol.hu:10060/stream.aac"}
+{"name": "Radio Demerstad", "url": "http://91.208.211.27:8012/;"}
+{"name": "CruisenOldies/WPMJ/Thera py For Todays World", "url": "http://s3.voscast.com:9122/stream/1/"}
+{"name": "Mixx102/Earth96Fm", "url": "http://31.14.40.21:5990/;"}
+{"name": "Amadeus Vivo", "url": "http://18.220.84.192:8484/stream/1/"}
+{"name": "Crystal Radio Stream", "url": "http://65.108.124.70:7208/stream/1/"}
+{"name": "Sinatra Style", "url": "http://radio.hearme.fm:8790/stream"}
+{"name": "GardaricaFM Golds", "url": "http://cmk-gard:8000/gold.mp3"}
+{"name": "Saurosoft Radio", "url": "http://nr11.newradio.it:9373/autodj"}
+{"name": "Det Rigtige Faaborg", "url": "http://185.156.96.217:10022/stream/1/"}
+{"name": "New Zealand Country Music Radio", "url": "https://usa10.fastcast4u.com:6010/stream/1/"}
+{"name": "LautFM Eisradio", "url": "https://eisradio.stream.laut.fm/eisradio"}
+{"name": "CKNA-MF 104,1MHz", "url": "http://s46.myradiostream.com:11524/stream"}
+{"name": "NRG Online Radio", "url": "http://51.222.42.9:1740/stream/1/"}
+{"name": "RadioWoM (World Of Music)", "url": "http://51.255.8.139:9120/stream/1/"}
+{"name": "RW Entertainment Radio", "url": "http://s9.citrus3.com:8040/stream"}
+{"name": "Wike World Radio", "url": "https://us2.internet-radio.com/proxy/wikeworldradio?mp=/stream;"}
+{"name": "Stumble In The Dark Radio", "url": "https://a2.asurahosting.com:6920/stream/1/"}
+{"name": "Generation Dance Radio (64 Kbps)", "url": "https://generationdance.lu/listen/gdr/mobile"}
+{"name": "Radio Kompas", "url": "http://mediaserv33.live-streams.nl:8052/live"}
+{"name": "Triple Connect", "url": "http://198.27.66.225:9086/stream/1/"}
+{"name": "Real World Sounds", "url": "https://uk5.internet-radio.com/proxy/realworldsounds?mp=/stream;"}
+{"name": "Tchaikovsky", "url": "http://radio.hearme.fm:9160/stream"}
+{"name": "SIYS Radio", "url": "http://108.59.11.81:8040/;"}
+{"name": "1000 Melodien", "url": "https://1000melodien.stream.laut.fm/1000melodien"}
+{"name": "Bass Jazz", "url": "http://radio.hearme.fm:8660/stream"}
+{"name": "Canal ROCK (supermusic)", "url": "http://104.131.234.229:8024/stream/1/"}
+{"name": "UNIMMA FM", "url": "http://45.64.97.82:8048/stream/1/"}
+{"name": "BoothPimps Radio", "url": "http://149.56.175.167:5479/stream/1/"}
+{"name": "Coffee Jazz", "url": "http://radio.hearme.fm:8200/stream"}
+{"name": "Mixx 21", "url": "https://mixx21.stream.laut.fm/mixx21"}
+{"name": "Radio Grup Studio Krnov", "url": "http://eu8.fastcast4u.com:24653/stream/1/"}
+{"name": "Downtempo Lounge", "url": "http://radio.hearme.fm:8142/stream"}
+{"name": "R_sound - We Can Do Everything!", "url": "http://radio.rsound.cyou:8080/stream.mp3"}
+{"name": "KIX FM", "url": "https://stream.kixfm.co.nz:8178/stream"}
+{"name": "Pemuda Pancasila FM", "url": "https://radio.pemudapancasila.or.id:443/listen/pp_media/stream/1/"}
+{"name": "POWER MAXX", "url": "http://eu.publicssl.net:7016/stream"}
+{"name": "BlastFM Ltd HD Internet Radio Station", "url": "https://45.33.5.23:8000/stream/1/"}
+{"name": "Radio Boom Boom", "url": "https://listen.radioboomboom.com/listen/rbb/radio.mp3"}
+{"name": "Studio Dance", "url": "https://studiodance.stream.laut.fm/studiodance"}
+{"name": "Starlite Soft & Brite", "url": "http://149.56.234.138:8021/stream/1/"}
+{"name": "70s 80s DiscoFunk ModernSoul Boogie", "url": "http://dreamradioclassic.radiolebowski.com:8019/play"}
+{"name": "70s Great Hits", "url": "http://176.31.248.14:35508/stream/1/"}
+{"name": "POWER*927 the Mediumwaves are BACK*to*LIFE", "url": "http://91.121.104.139:1602/;"}
+{"name": "This is my server name", "url": "http://94.76.216.200:8004/stream/1/"}
+{"name": "ILOVEMUSIC-Radio", "url": "http://sr10.inmystream.it:8166/stream/1/"}
+{"name": "Bassjunkees.com", "url": "http://213.186.56.95:8128/;"}
+{"name": "Radio-Endstation", "url": "http://funkturm.radio-endstation.de:8000/stream/1/"}
+{"name": "Kavango Stereo Stream", "url": "http://67.212.238.178:7099/stream/1/"}
+{"name": "JPS Radio", "url": "http://37.59.40.90:15354/stream/1/"}
+{"name": "VINCY INTERNET RADIO 2", "url": "http://192.95.18.39:5768/stream/1/"}
+{"name": "Pink Noise Radio", "url": "https://uk1.internet-radio.com/proxy/pinknoise?mp=/stream;"}
+{"name": "Freies Radio Wiesental (...anderes Hören!)", "url": "http://88.99.63.244:8000/stream/1/"}
+{"name": "ROCKLT", "url": "http://cast2.my-control-panel.com:8026/autodj"}
+{"name": "#80s DigitalMix by djSpinnerCee NYCbx [v2] #dance #house #rap #mixtape #vinyl #latin", "url": "http://queens11369v.softether.net:30016/digitalmix128"}
+{"name": "The Time Machine - Classic Hits", "url": "http://192.211.51.158:5426/stream/1/"}
+{"name": "Southern Xsposure Radio", "url": "http://192.99.4.210:3274/stream/1/"}
+{"name": "Radiodigitalia Ricordi", "url": "https://radiodigitalia-ricordi.stream.laut.fm/radiodigitalia-ricordi"}
+{"name": "ARIZSANTA FM STEREO", "url": "http://163.172.77.142:8261/stream/1/"}
+{"name": "Real Hardstyle Radio", "url": "http://server-23.stream-server.nl:8326/stream/1/"}
+{"name": "Drone Radio (MRG.fm)", "url": "http://62.149.196.16:8070/stream/1/"}
+{"name": "RBI 2", "url": "http://85.195.72.226:18578/stream/1/"}
+{"name": "Radio Il Discobolo - Museo Virtuale del Disco", "url": "http://178.32.137.180:8555/stream/1/"}
+{"name": "Norsk Country Radio", "url": "http://s6.voscast.com:10258/stream/1/"}
+{"name": "Radio Pro-B Romania", "url": "http://live.radioprob.ro:8888/stream/1/"}
+{"name": "Classical Relaxation", "url": "http://radio.hearme.fm:8180/stream"}
+{"name": "Radio Italo4you", "url": "http://91.232.4.20:8000/stream/1/"}
+{"name": "Good Rock Radio", "url": "https://stream.goodrockradio.com:8000/stream/1/"}
+{"name": "Floyd Server (Rock Ballad...From 09/25/05)", "url": "http://1.uicl.co.kr:8000/;"}
+{"name": "Hawaiian Pacific Radio", "url": "http://192.111.140.11:8018/stream/1/"}
+{"name": "La Grosse Radio Metal ", "url": "http://hd.lagrosseradio.info:8000/lagrosseradio-metal-024.mp3"}
+{"name": "Music&Wine - The Wine on the Radio", "url": "http://5.63.151.52:7236/stream/1/"}
+{"name": "Serenade Radio UK", "url": "http://4534.cloudrad.io:8284/stream/1/"}
+{"name": "Very Vest of Handel", "url": "http://radio.hearme.fm:9590/stream"}
+{"name": "Radio Dance Music", "url": "http://188.165.206.81:8130/stream/1/"}
+{"name": "Classic Hits 89: All '80s", "url": "https://www.tuneintoradio1.com/listen/classic_hits_89_all_80s/192k.mp3"}
+{"name": "RADIO.IPIP.CZ: Studio Grensstad", "url": "http://212.96.160.160:8024/;"}
+{"name": "HBR1 - Dream Factory", "url": "http://radio.hbr1.com:19800/ambient.aac"}
+{"name": "RADIO MAENDELEO", "url": "http://cast.az-streamingserver.com:8525/live"}
+{"name": "99,4 SunshineFM", "url": "http://195.56.193.129:8100/stream/1/"}
+{"name": "SKIF", "url": "http://178.172.150.248:2530/stream/1/"}
+{"name": "..:: RADiO LuDNiCA ::", "url": "http://192.111.140.6:8222/stream/1/"}
+{"name": "Rude fm.com", "url": "http://78.129.228.187:8034/;"}
+{"name": "BlogHaus Radio", "url": "https://a9.asurahosting.com/listen/bloghaus_radio/radio.mp3"}
+{"name": "Konflict Radio", "url": "https://uk3.internet-radio.com/proxy/konflictradio?mp=/live"}
+{"name": "", "url": "http://www.streamvortex.com:10230/stream/1/"}
+{"name": "DELTA RADIO NIJMEGEN - MUZIEK ZONDER FLAUWEKUL", "url": "http://77.168.71.111:9005/stream/1/"}
+{"name": "Columbia AM 1485", "url": "http://213.202.241.199:8031/stream/1/"}
+{"name": "Oude Piratenhits", "url": "http://server-11.stream-server.nl:8528/stream/1/"}
+{"name": "marmusicnl", "url": "http://178.32.146.187:5268/stream/1/"}
+{"name": "Crossroads La Grange", "url": "http://s2.stationplaylist.com:7076/listen.mp3"}
+{"name": "Shamanic Music", "url": "http://radio.hearme.fm:8186/stream"}
+{"name": "Radio Te Amo Mama Hilda", "url": "https://uk2.internet-radio.com/proxy/radioteamomamahilda?mp=/stream;"}
+{"name": "Saxophone Jazz", "url": "http://radio.hearme.fm:9630/stream"}
+{"name": "ISEKOI Radio | Non-Stop Ambient", "url": "https://public.isekoi-radio.com/listen/ambient/ambientradio.flac"}
+{"name": "Box UK Radio danceradiouk", "url": "https://uk7.internet-radio.com/proxy/boxradiouk?mp=/live"}
+{"name": "A1Lounge", "url": "http://radio.a1lounge.com:80/radio"}
+{"name": "KC Pet Project Radio Classic Rock", "url": "http://thassos.cdnstream.com:5033/live"}
+{"name": "Country", "url": "http://radio.hearme.fm:8890/stream"}
+{"name": "RadiJohan", "url": "http://69.30.214.54:13740/stream/1/"}
+{"name": "60sRadio (MRG.fm)", "url": "http://62.149.196.16:8020/stream/1/"}
+{"name": "ChuckBerryRadio Stream", "url": "http://51.15.160.78:8500/stream/1/"}
+{"name": "LAROCKAFORTE", "url": "http://radiomusic.newradio.it:80/rockaforte"}
+{"name": "STENCH RADIO \"The Only Station That Matters!.....\" Est 2010", "url": "http://184.154.145.114:8032/stream/1/"}
+{"name": "Pop Non-Stop", "url": "https://popnonstop.stream.laut.fm/popnonstop"}
+{"name": "RADIO.dance 90s Dance Music", "url": "http://radiodance.streamingmedia.it:8007/audio.aac"}
+{"name": "Smooth Jazz Florida Worldwide", "url": "http://144.217.158.59:5120/stream/1/"}
+{"name": "Rock Ballads", "url": "http://radio.hearme.fm:8620/stream"}
+{"name": "The Hit Man Radio", "url": "https://uk2.internet-radio.com/proxy/thehitmanradio?mp=/stream;"}
+{"name": "Radio Nowej Generacji", "url": "http://s1.slotex.pl:7488/stream/1/"}
+{"name": "Atmospheric Breaks", "url": "http://radio.hearme.fm:9800/stream"}
+{"name": "Cafe Nashville", "url": "http://64.150.176.42:8186/stream/1/"}
+{"name": "Unified Arts Radio", "url": "http://176.31.98.109:13908/stream/1/"}
+{"name": "Radio7", "url": "http://nr9.newradio.it:9002/stream"}
+{"name": "WRMI LEGENDS", "url": "http://64.235.54.14:8020/;"}
+{"name": "Pure Classix Radio", "url": "http://server5.radio-streams.net:8001/live"}
+{"name": "WHAT?! Foreplay", "url": "http://162.144.106.6:8222/stream/1/"}
+{"name": "RadioSouvenirsFM Canada  Que De La Musique!!", "url": "http://178.159.3.22:8227/;"}
+{"name": "SONGCAST RADIO - Variety Mix 2", "url": "http://52.24.52.72:9002/stream/1/"}
+{"name": "Back To The 80s Radio", "url": "http://149.56.185.82:8135/;"}
+{"name": "Rela America Independent Radio Station", "url": "http://176.31.111.65:15508/stream/1/"}
+{"name": "RMNradio - Music, Fun and more", "url": "http://84.19.184.27:443/;"}
+{"name": "Freizeit", "url": "https://freizeit.stream.laut.fm/freizeit"}
+{"name": "GrooveChill Radio", "url": "http://c22.radioboss.fm:8808/autodj"}
+{"name": "Parisotto Stream", "url": "http://64.150.176.42:8174/stream/1/"}
+{"name": "BBZ RADIO", "url": "https://radio.bbz.ru/listen/bbz/192.mp3"}
+{"name": "RADIO ESTILO LEBLON", "url": "https://us4.internet-radio.com/proxy/radioestiloleblon?mp=/stream;"}
+{"name": "", "url": "http://equinox.shoutca.st:8017/stream/1/"}
+{"name": "RockNet Radio", "url": "http://94.23.23.97:31836/stream/1/"}
+{"name": "", "url": "http://ophanim.net:7130/stream/1/"}
+{"name": "Doomnation Radio", "url": "http://s2.voscast.com:11122/stream"}
+{"name": "Grander Media", "url": "http://s2.stationplaylist.com:7066/listen.mp3"}
+{"name": "Radio Aeroport Timisoara", "url": "http://89.39.189.23:8000/stream/1/"}
+{"name": "Radio UNO Digital", "url": "http://server-uk1.radioseninternet.net:8000/stream/1/"}
+{"name": "All Country Radio", "url": "https://uk3.internet-radio.com/proxy/allcountryradio?mp=/live"}
+{"name": "University Of Oregon - KWAX", "url": "http://streaming.kwax.com:8000/stream/1/"}
+{"name": "CINEMIX", "url": "http://209.9.238.4:6022/;"}
+{"name": "\"Globe Radio\"", "url": "http://play-radio0.jump.bg:8062/autodj"}
+{"name": "MetalRock.FM", "url": "https://kathy.torontocast.com:2820/stream/1/"}
+{"name": "Progressieve Rock", "url": "http://progressieverock.nl:8080/luisteren"}
+{"name": "RoxxiessRadio", "url": "http://198.100.145.185:8024/stream/1/"}
+{"name": "FM Kortrijk", "url": "http://51.178.80.75:8100/stream/1/"}
+{"name": "RockU.FM", "url": "http://136.243.79.109:3280/stream/1/"}
+{"name": "TROS FM Belgium", "url": "http://46.105.126.68:9362/stream/1/"}
+{"name": "Sensimedia Bass Radio", "url": "http://janus.shoutca.st:8229/stream/1/"}
+{"name": "Radio West Middlesex", "url": "https://uk6.internet-radio.com/proxy/radiowestmiddlesex?mp=/stream;"}
+{"name": "CAPITAL FM", "url": "http://178.32.137.180:8689/stream/1/"}
+{"name": "Urban Expressions Los Angeles", "url": "http://162.244.80.106:8868/;"}
+{"name": "80s 90s Romantics", "url": "http://204.12.238.138:12906/stream/1/"}
+{"name": "Young Radio", "url": "http://178.32.138.88:8050/stream/1/"}
+{"name": "Cello", "url": "http://radio.hearme.fm:9180/stream"}
+{"name": "Dutch Delite DnB radio", "url": "http://radio.dutchdelite.nl:8000/dnb"}
+{"name": "RadioFilipinoUSA.com - Love songs and more !", "url": "http://162.252.85.85:9808/stream/1/"}
+{"name": "Radio Stereo Sound", "url": "http://162.244.80.30:8043/stream/1/"}
+{"name": "E.FM Radio", "url": "http://199.180.75.2:9409/stream/1/"}
+{"name": "Valtonen Stream", "url": "http://163.172.198.16:8210/stream/1/"}
+{"name": "RadioProgram", "url": "http://136.243.79.109:2190/stream/1/"}
+{"name": "MAXIMUS Pop", "url": "http://62.210.24.124:8606/stream/1/"}
+{"name": "FM Cien Villa Carlos Paz", "url": "http://198.50.18.69:8000/stream/1/"}
+{"name": "Stone Radio", "url": "http://178.32.146.184:5248/;"}
+{"name": "PARTY VIBE RADIO : RAP  +  HIP HOP  +  TRAP  +  DUBSTEP", "url": "http://www.partyviberadio.com:8016/stream/2/"}
+{"name": "Radio Lampsi Laiko Internet Radio", "url": "https://i6.streams.ovh:16078/stream/1/"}
+{"name": "Vibe Country", "url": "http://74.208.24.77:9090/stream/1/"}
+{"name": "ReadyFM", "url": "http://65.108.198.245:7034/stream/1/"}
+{"name": "Mozart", "url": "http://radio.hearme.fm:8320/stream"}
+{"name": "Radio Dereos", "url": "http://78.46.60.7:8010/stream/1/"}
+{"name": "Nature", "url": "http://radio.hearme.fm:8156/stream"}
+{"name": "SONGCAST RADIO - Electronica", "url": "http://52.24.52.72:9016/stream/1/"}
+{"name": "Dark HaVeN Radio", "url": "http://136.243.79.109:1060/stream/1/"}
+{"name": "Dance UK Radio danceradiouk", "url": "http://51.89.148.171:8022/stream/1/"}
+{"name": "Moon-Radio", "url": "https://moonradio.stream.laut.fm/moonradio"}
+{"name": "ChroniX | AGGRESSION®", "url": "http://192.95.18.39:5784/stream/1/"}
+{"name": "mETaLmuSicRaDio", "url": "https://radio.metalmusic.net:443/stream/2/"}
+{"name": "Classica FM 106.9 - Santa Cruz de la Sierra, Bolivia", "url": "http://176.9.151.69:8000/stream/1/"}
+{"name": "ChroniX | GRIT®", "url": "http://167.114.11.79:6332/stream/1/"}
+{"name": "Dein LieblingsRadio", "url": "https://deinlieblingsradio.stream.laut.fm/deinlieblingsradio"}
+{"name": "RADIO POPIZZ  (Pop-Hits)", "url": "http://94.23.66.155:8116/stream/1/"}
+{"name": "Prog Metal", "url": "http://radio.hearme.fm:9240/stream"}
+{"name": "Tranquility n Healing", "url": "http://radio.hearme.fm:8206/stream"}
+{"name": "Wicked Rock Radio", "url": "http://65.21.202.84:8029/stream/1/"}
+{"name": "RadioU: Battery", "url": "http://67.212.238.178:7150/stream/1/"}
+{"name": "Freight Linah Radio", "url": "http://66.70.249.70:5224/stream/1/"}
+{"name": "PARTY VIBE RADIO : REGGAE", "url": "http://www.partyviberadio.com:8000/stream/1/"}
+{"name": "Oeste FM 94,5", "url": "http://177.125.243.124:8000/stream/1/"}
+{"name": "Radio Victoria - Esbjerg", "url": "http://185.156.96.217:10014/stream/1/"}
+{"name": "X-Move", "url": "http://5.39.82.219:11428/stream/1/"}
+{"name": "House", "url": "http://radio.hearme.fm:8060/stream"}
+{"name": "BriskFM - Only the Freshest Music", "url": "http://s6.voscast.com:8002/stream"}
+{"name": "100% Radio-Zoom.de", "url": "http://office.radio-zoom.de:80/192k.mp3"}
+{"name": "VCR Live Hi-Fi | Venice Classic Radio Italia", "url": "http://116.202.241.212:8020/stream/1/"}
+{"name": "Swisssh", "url": "http://149.56.234.138:8004/stream/1/"}
+{"name": "RasCastRadio - AutoDJ", "url": "http://209.208.78.199:9004/stream/1/"}
+{"name": "RadioMonster.FM - Rock", "url": "https://rock.radiomonster.fm:443/ultra"}
+{"name": "Pure Pop Radio", "url": "https://cheetah.streemlion.com:4000/stream/1/"}
+{"name": "Ok Plus", "url": "http://87.116.152.185:8000/stream/1/"}
+{"name": "AmbientRadio (MRG.fm)", "url": "http://62.149.196.16:8888/stream/1/"}
+{"name": "OneShot Radio", "url": "http://buraglio.it:8000/oneshot"}
+{"name": "KABL Music", "url": "http://s2.stationplaylist.com:7104/listen.aac"}
+{"name": "BlazingStarRadio", "url": "http://50.116.51.130:5001/stream/1/"}
+{"name": "Blueprint Tony Culture", "url": "http://5.135.154.69:11784/stream/1/"}
+{"name": "EarthSong Meditation Radio", "url": "http://cast3.my-control-panel.com:7017/autodj"}
+{"name": "2000s Pop Music", "url": "http://radio.hearme.fm:8040/stream"}
+{"name": "Boystown Live Dance Radio", "url": "http://142.44.159.230:7084/stream/1/"}
+{"name": "100.7 The Raven", "url": "http://91.121.78.191:8565/stream/1/"}
+{"name": "Insane Realm Radio - IRR", "url": "http://136.243.79.109:2680/stream/1/"}
+{"name": "Smooth Jazz Florida HD with Waves of Smooth Music", "url": "http://176.9.43.216:8278/stream/1/"}
+{"name": "24/7 Dance", "url": "http://178.33.37.39:8010/stream/1/"}
+{"name": "Volnadavida Radio", "url": "http://transmiss.ion.ovh/listen/volnadavida/radio.mp3"}
+{"name": "2LT", "url": "http://139.99.136.15:5069/stream/1/"}
+{"name": "El Tunel Radio Online Stream", "url": "http://163.172.198.16:8014/stream/1/"}
+{"name": "Braingell", "url": "http://c2.radioboss.fm:8674/live"}
+{"name": "SHOOK RADIO 104.4", "url": "http://s1.onweb.gr:8812/stream/1/"}
+{"name": "McQsJazz.com", "url": "http://68.168.101.146:8756/stream/1/"}
+{"name": "Country Road 58", "url": "http://138.201.234.215:10238/stream/1/"}
+{"name": "Brum Radio - Birmingham", "url": "https://uk3.internet-radio.com/proxy/brumradio?mp=/live"}
+{"name": "Progulus - Online Progressive Rock Radio", "url": "http://149.56.234.138:8063/stream/1/"}
+{"name": "Smooth Jazz Smooth Wave", "url": "http://airspectrum.cdnstream1.com:8068/1613_128"}
+{"name": "Acoustic Vocal Chillout", "url": "http://radio.hearme.fm:8122/stream"}
+{"name": "Relaxing Ambient Piano", "url": "http://radio.hearme.fm:8990/stream"}
+{"name": "Disco Classic Radio", "url": "http://54.36.89.71:8742/stream/1/"}
+{"name": "Radio Rouge FM 99.3", "url": "http://sc2.streamingpulse.com:8038/stream/1/"}
+{"name": "Gravityradiox.com", "url": "http://192.99.170.8:8000/stream/1/"}
+{"name": "1000 Oldies", "url": "https://1000oldies.stream.laut.fm/1000oldies"}
+{"name": "(MBStudio)", "url": "http://31.132.6.142:4051/stream/1/"}
+{"name": "Radio AMC", "url": "https://stm16.painelcast.com:6728/stream/1/"}
+{"name": "SONGCAST RADIO - Hip Hop & Rap", "url": "http://52.24.52.72:9030/stream/1/"}
+{"name": "Bru Zane Classical Radio Italy", "url": "http://116.202.241.212:7001/stream/1/"}
+{"name": "radio online fusagasuga colombia", "url": "http://209.126.119.28:8016/stream/1/"}
+{"name": "Pop Lounge Cafe", "url": "https://poploungecafe.stream.laut.fm/poploungecafe"}
+{"name": "Magic FM Club 80s - Your Source For All Things Club 80s!", "url": "http://149.56.185.82:8014/stream/1/"}
+{"name": "Noname station", "url": "http://5.63.151.52:7064/stream/1/"}
+{"name": "Roxy R�di�", "url": "http://s2.audiostream.hu:8083/roxy_320k"}
+{"name": "Radio Fury Fusion", "url": "https://radyo.turcloud.com.tr/listen/radio_fury_fusion/radio.mp3"}
+{"name": "FM LA BOCA", "url": "http://s24.myradiostream.com:14984/stream/1/"}
+{"name": "1000 Jazzhits", "url": "https://1000jazzhits.stream.laut.fm/1000jazzhits"}
+{"name": "RAY`S CLUB DRED", "url": "http://54.39.247.236:3040/stream/1/"}
+{"name": "radiorsj.be - 100% Commercial Free", "url": "http://54.36.89.71:8621/stream/1/"}
+{"name": "WPTR Radio", "url": "http://69.30.243.166:15784/stream/1/"}
+{"name": "R80", "url": "https://r80.lunabroadcasting.net:80/stream/1/"}
+{"name": "Radio Ritam", "url": "http://5.135.154.66:28676/;"}
+{"name": "SmoothJazz.com.pl", "url": "http://bcast.vigormultimedia.com:8888/sjcompl192aac"}
+{"name": "Clarus Promotions Stream", "url": "http://162.244.80.106:11458/stream/1/"}
+{"name": "The HotBox FM", "url": "http://s2.stationplaylist.com:7170/listen.mp3"}
+{"name": "Radio Caroline 319 8319", "url": "https://happy.radiocaroline319.nl:8319/stream/1/"}
+{"name": "Vocal Chillout", "url": "http://radio.hearme.fm:8208/stream"}
+{"name": "VCR Auditorium | Venice Classic Radio Italia", "url": "http://vcr1gra.ondastreaming.eu:80/stream1"}
+{"name": "Poptastic Radio", "url": "http://s7.everestcast.com:8191/stream/1/"}
+{"name": "stream", "url": "http://198.245.61.188:8060/stream/1/"}
+{"name": "Radio Monique Gold 8963", "url": "https://happy.radiomonique.nl:8963/stream/1/"}
+{"name": "28Radio - Black Metal", "url": "https://streaming.28radio.cc/listen/28radio-blackmetal/blackmetal.mp3"}
+{"name": "Hit Music 80's", "url": "http://178.159.3.22:18000/stream/1/"}
+{"name": "Choice Urban Radio", "url": "http://stream11.shoutcastsolutions.com:8660/stream/1/"}
+{"name": "Patriot Old Time Radio", "url": "http://s2.voscast.com:9170/stream/1/"}
+{"name": "80s Rock Hits", "url": "http://radio.hearme.fm:9900/stream"}
+{"name": "987 The Heat", "url": "http://149.56.157.81:8189/stream/1/"}
+{"name": "DB9Radio", "url": "http://eu6.fastcast4u.com:5195/stream/1/"}
+{"name": "This is my server name", "url": "https://us4.internet-radio.com/proxy/steven?mp=/live"}
+{"name": "CLASSY NetRadio", "url": "https://sukmben.radiogentara.com/listen/classy_netradio_indonesia/classyUHD"}
+{"name": "Serzo Stream", "url": "http://65.108.124.70:7284/stream/1/"}
+{"name": "YardHype Radio", "url": "https://carina.streamerr.co:8008/stream/1/"}
+{"name": "Seeburg 1000 Background Music", "url": "http://67.212.238.178:7007/stream/1/"}
+{"name": "Bossa Nova", "url": "http://radio.hearme.fm:8210/stream"}
+{"name": "Dubstep24h", "url": "https://stream.24dubstep.pl/listen/dubstep24h/live"}
+{"name": "WQVR-1", "url": "http://s2.stationplaylist.com:7172/listen.aac"}
+{"name": "Hit Radio Classics", "url": "http://nebula.shoutca.st:8616/stream/1/"}
+{"name": "Mix97FM", "url": "https://panel.radiocast.net/listen/mix97fm/hd1.mp3"}
+{"name": "Nauagos Kanenas", "url": "http://radio.streamings.gr:8064/autodj"}
+{"name": "DWG Radio Arabic", "url": "http://85.195.72.226:26012/stream/1/"}
+{"name": "Radio Am Bad 2", "url": "https://radio-am-bad-2.stream.laut.fm/radio-am-bad-2"}
+{"name": "JAZZRADIOdc.com", "url": "http://149.56.38.21:8330/;"}
+{"name": "FastCast4u", "url": "http://192.99.4.210:3006/;"}
+{"name": "Radio NordSea2 International/Radio Caroline International.", "url": "http://54.36.89.71:8174/;"}
+{"name": "Sensimedia Dancehall Radio", "url": "http://janus.shoutca.st:8233/stream/1/"}
+{"name": "My70sRadio", "url": "http://149.56.175.167:5132/stream/1/"}
+{"name": "Retro80sRadio", "url": "http://158.69.227.214:8113/stream/1/"}
+{"name": "GEETHAVAANI MAIN STREAM", "url": "http://149.56.234.138:8037/stream/1/"}
+{"name": "YES Radio", "url": "http://sr2.inmystream.info:8082/stream/1/"}
+{"name": "OM Radio", "url": "http://188.138.251.192:8002/stream/1/"}
+{"name": "Noname station", "url": "http://167.114.11.79:6616/stream/1/"}
+{"name": "92.9 FM WDUP", "url": "http://s2.voscast.com:9760/stream"}
+{"name": "Different Drumz Drum & Bass Radio", "url": "http://andromeda.shoutca.st:8031/stream/1/"}
+{"name": "Ambient Radio .org", "url": "https://uk2.internet-radio.com/proxy/ambientradio?mp=/stream;"}
+{"name": "Philly Gold Radio", "url": "http://94.23.159.187:9974/stream/1/"}
+{"name": "Retro Mix Radio", "url": "http://stream.retromixradio.co.uk:8000/radio192"}
+{"name": "Yacht Rock", "url": "http://radio.hearme.fm:8650/stream"}
+{"name": "Unspecified name", "url": "http://sr7.inmystream.it:8009/stream.mp3"}
+{"name": "90s Rock", "url": "http://radio.hearme.fm:8510/stream"}
+{"name": "Radio Fantasy Rotterdam", "url": "http://213.202.241.199:8024/stream/1/"}
+{"name": "NixxFM - JOUW NUMMER 1 HITRADIO", "url": "http://81.169.198.233:80/stream/1/"}
+{"name": "Cool Jazz", "url": "http://radio.hearme.fm:8680/stream"}
+{"name": "Unicorn Garden Radio", "url": "http://88.198.69.145:9018/;"}
+{"name": "THE VIBE - DANCEFLOOR RADIO", "url": "http://example.com:8046/autodj"}
+{"name": "77.7 Resonite FM", "url": "https://radio.toastertech.net/listen/resonitefm/radio.mp3"}
+{"name": "Streaming by Securenet Systems Cirrus(R)", "url": "http://ice23.securenetsystems.net:80/CLASSX"}
+{"name": "Moorish Radio", "url": "https://s3.radio.co/sd8b7325ab/listen"}
+{"name": "Radio Relax Ue", "url": "http://curiosity.shoutca.st:6085/autodj"}
+{"name": "radiobtr", "url": "http://cp11.serverse.com:7056/stream/1/"}
+{"name": "Paris Dance Classics", "url": "http://eu1.fastcast4u.com:21900/stream/1/"}
+{"name": "Soft Rock", "url": "http://radio.hearme.fm:8630/stream"}
+{"name": "BadRock Hard & Heavy", "url": "http://play-radio0.jump.bg:8049/live"}
+{"name": "Juke Joint", "url": "http://46.105.125.110:10476/stream/1/"}
+{"name": "Jazz Channel", "url": "http://192.99.8.192:3238/stream/1/"}
+{"name": "Extra AM", "url": "http://caster04.streampakket.com:8047/stream"}
+{"name": "Megarock Radio - All Request Rock", "url": "http://stream1.megarockradio.net:8000/stream"}
+{"name": "Radio Victoria nonstop", "url": "https://a8.asurahosting.com:6700/stream/1/"}
+{"name": "Radio Thiossane", "url": "http://listen.senemultimedia.net:8110/stream/1/"}
+{"name": "Indie Alternative Radio Live", "url": "http://radio1.440music.com:8000/autodj"}
+{"name": "KWHF 95.9", "url": "http://thassos.cdnstream.com:5241/stream"}
+{"name": "Belters", "url": "https://uk2.internet-radio.com/proxy/belters?mp=/live"}
+{"name": "131 Retro Radio", "url": "https://uk5.internet-radio.com/proxy/simplyoldies?mp=/stream;"}
+{"name": "Hydra Rise  - Radio", "url": "https://a7.asurahosting.com:6720/stream/1/"}
+{"name": "Vivaldi", "url": "http://radio.hearme.fm:8310/stream"}
+{"name": "Head FM.net - Underground House", "url": "http://5.63.151.52:7212/stream/1/"}
+{"name": "DetaRadio", "url": "http://detaelis.streamingtvradios.com:10878/autodj"}
+{"name": "realcountry1420", "url": "http://149.56.183.178:8046/stream/1/"}
+{"name": "Dangerous D Radio", "url": "http://s9.voscast.com:9572/live"}
+{"name": "WabiSabi radio", "url": "https://s4.radio.co/sd1a7a0223/listen"}
+{"name": "Dakar Musique", "url": "http://listen.senemultimedia.net:8090/stream/1/"}
+{"name": "Napoli Lounge", "url": "http://162.244.80.106:11620/stream/1/"}
+{"name": "The Foundry", "url": "http://199.180.75.2:9257/;"}
+{"name": "Organ Works", "url": "http://radio.hearme.fm:8234/stream"}
+{"name": "Ideaal FM", "url": "http://server-27.stream-server.nl:8564/stream/1/"}
+{"name": "Gypsy Jazz", "url": "http://radio.hearme.fm:9670/stream"}
+{"name": "Classic Metal", "url": "http://radio.hearme.fm:8530/stream"}
+{"name": "Radio-Beatle", "url": "http://192.99.8.192:3208/stream/1/"}
+{"name": "SONGCAST RADIO - Reggae/Island", "url": "http://52.24.52.72:9022/stream/1/"}
+{"name": "ClubMix Radio Romania", "url": "http://live.radioclubmix.ro:9999/stream/1/"}
+{"name": "WINDY CITY ROCK RADIO", "url": "http://54.39.247.236:5890/stream/1/"}
+{"name": "Tantroniq SETA Radio", "url": "http://tantroniqradio.is-found.org:8000/tantroniq"}
+{"name": "80s Hitradio Amsterdam", "url": "http://46.105.120.165:7728/stream/1/"}
+{"name": "Jazz Blues", "url": "http://radio.hearme.fm:9430/stream"}
+{"name": "Cliff Richard Radio", "url": "http://s5.voscast.com:9018/stream/1/"}
+{"name": "Joe Harnett Radio", "url": "http://s2.stationplaylist.com:7012/listen.mp3"}
+{"name": "Web Radio Freestyle And Remixes", "url": "http://stm12.srvstm.com:9934/stream/1/"}
+{"name": "Noname station", "url": "http://149.56.155.73:8052/stream/1/"}
+{"name": "The Source: Smooth Jazz Radio - KJAC.DB", "url": "http://149.56.183.178:8020/stream/1/"}
+{"name": "Swing Jazz", "url": "http://radio.hearme.fm:9520/stream"}
+{"name": "eglisededieumontdesion", "url": "http://198.178.123.17:10982/stream/1/"}
+{"name": "Flower Power Radio", "url": "http://49.12.129.103:7016/stream/1/"}
+{"name": "WCAT Carlisle, PA", "url": "http://50.78.91.214:8000/stream/1/"}
+{"name": "Italia 1", "url": "https://italia1.stream.laut.fm/italia1"}
+{"name": "The Generator FM", "url": "http://176.31.98.109:14268/stream/1/"}
+{"name": "Radio Free Amsterdam 24/7", "url": "http://s2.voscast.com:12578/stream"}
+{"name": "WLTB-DB (Lite 99)", "url": "http://216.126.196.154:4106/stream/1/"}
+{"name": "Greatest Hits Non-Stop", "url": "http://s8.myradiostream.com:58238/stream/1/"}
+{"name": "RavesRocksRadio", "url": "https://us3.internet-radio.com/proxy/raverocksradio?mp=/stream;"}
+{"name": "Baby Ace Radio - Reggae and Dancehall 24/7!", "url": "http://s3.voscast.com:10564/stream/1/"}
+{"name": "MetalRadio LIVE", "url": "http://cast1.my-control-panel.com:8065/autodj"}
+{"name": "SOFTNEZEE", "url": "http://135.148.34.128:9041/stream/1/"}
+{"name": "BDEJamz Radio", "url": "http://149.56.157.81:5036/stream/1/"}
+{"name": "RAM FM Eighties Hit Radio", "url": "http://69.30.214.78:8018/stream/1/"}
+{"name": "Qfm Jazz", "url": "http://51.255.235.165:5092/stream/1/"}
+{"name": "radio Cumbernauld", "url": "http://139.162.195.238:8000/stream/1/"}
+{"name": "dB962 │ On Air Everywhere", "url": "http://stream.db962.nl:8030/stream/1/"}
+{"name": "Eye Of Destiny Radio", "url": "https://uk6.internet-radio.com/proxy/djvine1980?mp=/stream;"}
+{"name": "80s Alt n New Waven", "url": "http://radio.hearme.fm:9910/stream"}
+{"name": "HOT96", "url": "http://5.135.158.214:16012/stream/1/"}
+{"name": "Millenium Fm", "url": "http://milleniumfm.dyndns.org:40000/stream"}
+{"name": "Radio Mix JCV", "url": "http://199.233.234.34:25270/stream/1/"}
+{"name": "Mellow Jazz", "url": "http://radio.hearme.fm:8720/stream"}
+{"name": "DnB&EDM", "url": "https://edmdnb.com:448/listen/dnb_edm/radio.mp3"}
+{"name": "MB RADIO", "url": "http://94.23.66.155:8056/stream/1/"}
+{"name": "LaCapanna", "url": "https://radio.lacapanna.eu/listen/lacapanna/radio.mp3"}
+{"name": "Jack and Jill Radio 32", "url": "http://162.244.80.21:9484/;"}
+{"name": "24-7 Dreamboats & Petticoats", "url": "http://31.132.6.142:4231/stream/1/"}
+{"name": "alien rocks radio", "url": "http://s7.voscast.com:10666/stream/1/"}
+{"name": "DiscoParty.pl - Disco Polo", "url": "http://145.239.26.146:7432/stream/1/"}
+{"name": "WVYC-FM", "url": "http://fm.ycp.edu:8000/stream/1/"}
+{"name": "Radio Play Emotions - Music for work and relax", "url": "http://5.39.82.157:8054/stream/1/"}
+{"name": "BDPST ROCK Hi-Fi", "url": "http://s2.audiostream.hu:8091/bdpstrock_FLAC"}
+{"name": "A.D.M. Hardstyle Radio", "url": "http://kathy.torontocast.com:2990/stream/1/"}
+{"name": "Station Italy", "url": "https://stationitaly.stream.laut.fm/stationitaly"}
+{"name": "Ambient Lounge on MixLive.ie", "url": "http://2.58.194.54:8834/stream/1/"}
+{"name": "Ritus", "url": "https://ritus.stream.laut.fm/ritus"}
+{"name": "The Bull FM88 Charters Towers", "url": "http://s2.stationplaylist.com:7084/listen.mp3"}
+{"name": "Tjks Radio", "url": "http://142.44.136.201:5485/stream/1/"}
+{"name": "Classichits 106", "url": "https://classichits106.stream.laut.fm/classichits106"}
+{"name": "70s Hits", "url": "http://radio.hearme.fm:8700/stream"}
+{"name": "00s Rock", "url": "http://radio.hearme.fm:8130/stream"}
+{"name": "Rsmusic", "url": "https://rsmusic.stream.laut.fm/rsmusic"}
+{"name": "Lifetrain Station", "url": "http://localhost:8009/live"}
+{"name": "Concertos", "url": "http://radio.hearme.fm:8002/stream"}
+{"name": "MODERN ROCK HARD RADIO", "url": "http://192.111.140.11:8528/stream/1/"}
+{"name": "Y 107.1", "url": "http://thassos.cdnstream.com:5095/stream"}
+{"name": "LOVE RADIO - LOVE.radio", "url": "http://loveradio.streamingmedia.it:8004/play"}
+{"name": "Radio-Tube Drum and Bass", "url": "http://91.232.4.33:7022/stream/1/"}
+{"name": "Calvary Pentecostal Radio", "url": "http://37.59.37.139:13922/stream/1/"}
+{"name": "1001 The Heat", "url": "http://149.56.157.81:8569/stream/1/"}
+{"name": "BlogHaus Archive", "url": "https://a11.asurahosting.com/listen/bloghaus_archive/radio.mp3"}
+{"name": "RadioMonster.FM - 2000's", "url": "https://2000s.radiomonster.fm:443/ultra"}
+{"name": "www.snapbackfm.co.uk", "url": "http://91.121.78.191:8369/stream/1/"}
+{"name": "Very Best of Hip Hop", "url": "http://radio.hearme.fm:9220/stream"}
+{"name": "KilRock", "url": "http://mediaserv30.live-streams.nl:8013/high"}
+{"name": "laytprod", "url": "http://151.80.42.191:8252/stream/1/"}
+{"name": "XS80s", "url": "http://176.31.98.109:12508/stream/1/"}
+{"name": "90s Dance", "url": "http://radio.hearme.fm:9850/stream"}
+{"name": "Club Dubstep", "url": "http://radio.hearme.fm:8032/stream"}
+{"name": "IDM X", "url": "http://sr2.inmystream.info:8032/stream/2/"}
+{"name": "Radio ViaMontenapoleone", "url": "http://178.32.107.151:5068/stream/1/"}
+{"name": "Classical Period", "url": "http://radio.hearme.fm:9110/stream"}
+{"name": "Frequence Dance Radio", "url": "http://94.23.57.5:9003/stream/1/"}
+{"name": "POWER SLAM RADIO", "url": "http://149.56.175.167:5240/stream/1/"}
+{"name": "Rock Radioo", "url": "https://a10.asurahosting.com:7570/stream/1/"}
+{"name": "RRN Marbella", "url": "http://94.23.85.189:7870/stream/1/"}
+{"name": "Symphonic Metal", "url": "http://radio.hearme.fm:8640/stream"}
+{"name": "Zero Beat Zone (MRG.fm)", "url": "http://62.149.196.16:8800/stream/1/"}
+{"name": "New Age", "url": "http://radio.hearme.fm:8158/stream"}
+{"name": "Planet Hip Hop (MRG.fm)", "url": "http://62.149.196.16:8100/stream/1/"}
+{"name": "melodie fm", "url": "http://94.23.27.6:8268/stream/1/"}
+{"name": "Babe Radio Stream", "url": "http://149.56.175.167:5252/stream/1/"}
+{"name": "Chillstep", "url": "http://radio.hearme.fm:9750/stream"}
+{"name": "NWTEAM WebRadio", "url": "http://185.105.4.100:8034/;"}
+{"name": "StationX", "url": "http://blitzkrieger.asuscomm.com:8000/stream"}
+{"name": "Rock Steddy Radio", "url": "http://149.56.157.81:8818/stream/1/"}
+{"name": "Piano Jazz", "url": "http://radio.hearme.fm:8770/stream"}
+{"name": "Romantic Period", "url": "http://radio.hearme.fm:8078/stream"}
+{"name": "Radio Perma", "url": "http://198.7.59.28:8033/;"}
+{"name": "Hitradiotom", "url": "https://hitradiotom.stream.laut.fm/hitradiotom"}
+{"name": "Cleansing Country", "url": "http://thassos.cdnstream.com:8048/stream/1/"}
+{"name": "Space Dreams", "url": "http://radio.hearme.fm:8194/stream"}
+{"name": "WIOO Carlisle, PA", "url": "http://50.78.91.214:8800/stream/1/"}
+{"name": "WHAT?! Jazz", "url": "http://162.144.106.6:8008/stream/1/"}
+{"name": "Radioachterhoek.nl", "url": "https://81.169.129.247:80/stream/1/"}
+{"name": "70sRadio (MRG.fm)", "url": "http://62.149.196.16:8030/stream/1/"}
+{"name": "Radio Crisami Romania", "url": "http://crisami.zapto.org:8130/stream/1/"}
+{"name": "SOLID GOLD RADIO IRELAND", "url": "http://live.rcast.net:8776/stream/1/"}
+{"name": "Alpin FM", "url": "http://46.105.125.110:14754/stream/1/"}
+{"name": "Radio Song", "url": "http://213.239.205.210:8148/stream/1/"}
+{"name": "Punk Rock Demonstration", "url": "http://199.87.239.197:8000/stream/1/"}
+{"name": "Radio Horyzont", "url": "http://s1.slotex.pl:7328/stream/1/"}
+{"name": "HOTRADIO Classics", "url": "http://81.169.237.24:8192/stream/1/"}
+{"name": "Noname station", "url": "http://178.33.135.244:2802/stream/1/"}
+{"name": "AlienWare", "url": "http://46.28.2.24:9308/stream/1/"}
+{"name": "M-80'S RADIO", "url": "http://192.111.140.11:8524/stream/1/"}
+{"name": "24/7 Punx N Rock", "url": "https://s3.radio.co/s12013bb20/listen"}
+{"name": "93.2 Swadesh FM  Powered by: HamroPatro", "url": "http://216.55.141.189:8653/stream/1/"}
+{"name": "HAWKS NEST", "url": "http://198.178.123.20:8714/stream/1/"}
+{"name": "Blue Lake Public Radio", "url": "http://wblv.streamguys1.com:80/live"}
+{"name": "Classic Rock Florida Music Radio", "url": "http://144.217.158.59:5000/stream/1/"}
+{"name": "RadioBrent", "url": "http://192.111.140.6:9765/stream/1/"}
+{"name": "...Radio Iubire - www.radioiubire.ro", "url": "http://89.39.189.24:7070/stream/1/"}
+{"name": "Classic Hard Rock", "url": "http://radio.hearme.fm:8250/stream"}
+{"name": "PARTY VIBE RADIO : DANCEHALL", "url": "http://www.partyviberadio.com:8000/stream/3/"}
+{"name": "Kawedeoldies Radio", "url": "https://kawedeoldiesradio.stream.laut.fm/kawedeoldiesradio"}
+{"name": "HitRadio DE", "url": "https://hitradiode.stream.laut.fm/hitradiode"}
+{"name": "C-Dance RETRO", "url": "http://198.100.145.187:18304/stream/1/"}
+{"name": "Radio Seabreeze 1098 & 1395 AM", "url": "http://mediaserv38.live-streams.nl:8025/stream1"}
+{"name": "Hitradiooldies", "url": "https://hitradiooldies.stream.laut.fm/hitradiooldies"}
+{"name": "XRadio", "url": "http://xradio.zone:9420/stream/1/"}
+{"name": "nonlocal Radio", "url": "https://s5.radio.co/se71e6d3c8/listen"}
+{"name": "Merseyland Alternative Radio", "url": "http://94.249.236.186:9768/live"}
+{"name": "KNR Radio", "url": "http://usa4.fastcast4u.com:5372/stream/1/"}
+{"name": "Radio Cherwell", "url": "https://uk6.internet-radio.com/proxy/cherwell?mp=/stream;"}
+{"name": "Majestic Jukebox Radio", "url": "https://uk3.internet-radio.com/proxy/majesticjukebox?mp=/live"}
+{"name": "RadioMonster.FM - Dance", "url": "https://dance.radiomonster.fm:443/ultra"}
+{"name": "Zeilsteen Radio", "url": "http://live4.zeilsteen.com:80/stream/1/"}
+{"name": "rockXradio : Canada's Internet Radio Station", "url": "http://158.69.227.214:8000/stream/1/"}
+{"name": "EarthSong Experimental", "url": "http://cast3.my-control-panel.com:7084/autodj"}
+{"name": "Rockaway Radio", "url": "http://192.99.170.8:5096/stream/1/"}
+{"name": "Danceclub Radio", "url": "https://danceclubradio.stream.laut.fm/danceclubradio"}
+{"name": "Hitzfm 97,8 Sommenbygd", "url": "http://s2.stationplaylist.com:7098/listen.mp3"}
+{"name": "Fibwiradio", "url": "http://stream.fibwi.com:9000/stream"}
+{"name": "Radio Sevtopolis", "url": "http://79.98.108.170:8068/stream/1/"}
+{"name": "Latin Jazz", "url": "http://radio.hearme.fm:9350/stream"}
+{"name": "ITU Radio Rock", "url": "http://160.75.86.29:8086/;"}
+{"name": "Noname station", "url": "http://philae.shoutca.st:9019/stream/1/"}
+{"name": "19th Green Pub & Grill", "url": "http://192.111.140.11:8000/stream/1/"}
+{"name": "Classic Hits Global", "url": "http://login.webinternetradio.com:1060/stream/1/"}
+{"name": "M-Pressive Radio!", "url": "http://158.69.114.190:8008/;"}
+{"name": "Box UK Radio danceradiouk", "url": "http://51.75.170.46:6191/stream/1/"}
+{"name": "Brahms", "url": "http://radio.hearme.fm:9060/stream"}
+{"name": "Energy365radio - AutoDJ", "url": "http://209.208.78.199:8070/stream/1/"}
+{"name": "Noname station", "url": "http://5.135.154.69:8054/stream/1/"}
+{"name": "Beach Paradise Radio", "url": "http://s28.myradiostream.com:28054/stream/1/"}
+{"name": "Ritzy RADIO", "url": "https://s18.myradiostream.com:9676/stream/1/"}
+{"name": "ABC Music", "url": "https://abcmusic.stream.laut.fm/abcmusic"}
+{"name": "90s Alternative", "url": "http://radio.hearme.fm:8490/stream"}
+{"name": "Groove95", "url": "http://mediaserv68.live-streams.nl:8053/autodj"}
+{"name": "Heavy Metal", "url": "http://radio.hearme.fm:8260/stream"}
+{"name": "Radio Osttirol", "url": "http://85.195.88.149:28768/stream/1/"}
+{"name": "lovezone247", "url": "http://91.121.134.23:8420/stream/1/"}
+{"name": "CloudCY Rock", "url": "http://radio.cloudcy.org:8000/rock"}
+{"name": "Energy FM - Old School Classics", "url": "http://162.244.80.106:8024/stream/1/"}
+{"name": "Extra Gold", "url": "http://194.88.105.64:8080/stream/1/"}
+{"name": "DRUM AND BASS LOUNGE - [www.drumandbasslounge.c om]", "url": "http://198.15.94.34:8012/stream/1/"}
+{"name": "JMediaFM HD Internet Radio Station", "url": "https://159.203.75.214:8000/stream/1/"}
+{"name": "(((- Ibero Leon Radio -)))", "url": "http://192.100.195.109:8083/;"}
+{"name": "WGOL AM 920, Russellville AL", "url": "http://65.19.173.132:6568/;"}
+{"name": "Choice FM Reggae", "url": "http://79.143.187.96:8096/stream/1/"}
+{"name": "MaxLaRadio", "url": "http://213.186.61.62:9420/;"}
+{"name": "fab45s.com", "url": "http://67.212.238.178:7005/;"}
+{"name": "Radio Boost", "url": "http://149.202.22.75:8066/stream/1/"}
+{"name": "That 70s Station", "url": "https://radio.wanderingsheep.net/listen/that_70s_station/70s"}
+{"name": "All Time Hits Radio", "url": "http://149.56.175.167:5248/stream/1/"}
+{"name": "Brown Noise Radio", "url": "https://uk1.internet-radio.com/proxy/brownnoise?mp=/stream;"}
+{"name": "Tucson Estates Community Radio 90.1 FM", "url": "http://5.135.154.91:7448/stream/1/"}
+{"name": "Dancefloor 365 Radio", "url": "http://radio.dancefloor365.com:8000/stream/1/"}
+{"name": "DS4U Radio", "url": "http://radio.ds4u.com:8000/ds4u"}
+{"name": "PROG.FM", "url": "http://stream.prog.fm:9178/stream/1/"}
+{"name": "147KXOA", "url": "http://91.121.78.191:8088/stream/1/"}
+{"name": "Rockdisco", "url": "https://rockdisco.stream.laut.fm/rockdisco"}
+{"name": "80splanet", "url": "http://23.92.61.227:8888/stream/1/"}
+{"name": "mayCLASSIC", "url": "http://162.248.100.65:8010/stream/1/"}
+{"name": "Perfect Sunsets", "url": "http://radio.hearme.fm:8166/stream"}
+{"name": "Unnamed Server", "url": "http://200.23.125.55:8000/stream/1/"}
+{"name": "RadioMonster.FM - Evergreens", "url": "https://evergreens.radiomonster.fm:443/ultra"}
+{"name": "RadioLDN - Radio London - UK", "url": "http://195.154.217.103:8516/stream/1/"}
+{"name": "Postaway Radio", "url": "https://kathy.torontocast.com:2950/stream/1/"}
+{"name": "Power Metal", "url": "http://radio.hearme.fm:8600/stream"}
+{"name": "TLBN1 URBAN", "url": "http://54.39.247.236:1990/stream/1/"}
+{"name": "Kiss FM Country", "url": "http://149.56.185.82:8147/;"}
+{"name": "Dance UK Radio danceradiouk aac+", "url": "https://uk2.internet-radio.com/proxy/danceuk?mp=/stream;"}
+{"name": "RADIOO.CZ: Black Hornet Radio", "url": "http://212.96.160.160:8212/;"}
+{"name": "Radio Alex FM", "url": "https://radioalexfm.stream.laut.fm/radioalexfm"}
+{"name": "Ambiesphere", "url": "https://uk5.internet-radio.com/proxy/ambiesphere?mp=/stream;"}
+{"name": "SuperQ104", "url": "http://176.31.118.39:3676/stream/1/"}
+{"name": "Mister Stuff Webradio", "url": "http://82.64.4.42:8000/stream/1/"}
+{"name": "This is my server name", "url": "https://uk6.internet-radio.com/proxy/steveburton?mp=/live"}
+{"name": "101.5 KZNQ FM", "url": "http://noasrv.caster.fm:10054/kznqfm"}
+{"name": "*My Jazzy Blue", "url": "http://184.95.47.178:9888/stream/1/"}
+{"name": "Cello Works", "url": "http://radio.hearme.fm:9070/stream"}
+{"name": "Reggaewave Radio", "url": "http://host.podzone.org:8040/reggaewave"}
+{"name": "1000 Goldschlager", "url": "https://1000goldschlager.stream.laut.fm/1000goldschlager"}
+{"name": "Italy Music", "url": "https://italymusic.stream.laut.fm/italymusic"}
+{"name": "Salvame Radio", "url": "http://66.70.249.70:5028/stream/1/"}
+{"name": "Radio Mega-HiT Romania", "url": "http://live.radiomegahit.eu:8080/stream/1/"}
+{"name": "Noname station", "url": "http://108.59.9.147:8071/stream/1/"}
+{"name": "Urban Radio 1", "url": "http://149.56.157.81:8740/stream/1/"}
+{"name": "Power Music Radio (the music collection)", "url": "http://194.88.105.64:8830/stream/1/"}
+{"name": "Spectrum Beats", "url": "http://51.255.235.165:5040/stream/1/"}
+{"name": "El Gouna Radio", "url": "http://82.201.132.237:8000/stream/1/"}
+{"name": "BIG HAIR RADIO", "url": "http://192.111.140.11:8508/stream/1/"}
+{"name": "ENERGY FM - classic dance and the best new music", "url": "http://176.31.98.109:8838/stream/1/"}
+{"name": "Modern Rock", "url": "http://radio.hearme.fm:8580/stream"}
+{"name": "KZLX", "url": "http://198.209.246.173:8000/;"}
+{"name": "70s 80s DiscoFunk ModernSoul Boogie", "url": "http://my.streamingmedia.it/listen/discofunk/play"}
+{"name": "Jamadio", "url": "http://s6.voscast.com:7864/stream"}
+{"name": "", "url": "https://r1.comcities.com:443/proxy/emogddug/stream/1/"}
+{"name": "97 Lite FM Internet Radio", "url": "http://192.111.140.6:9609/stream/1/"}
+{"name": "CURRAMBERA STEREO", "url": "http://163.172.77.142:8618/stream/1/"}
+{"name": "Rtvsellingen", "url": "https://rtvsellingen.stream.laut.fm/rtvsellingen"}
+{"name": "Hit List Radio - Tulsa", "url": "https://us1.internet-radio.com/proxy/thehitlist?mp=/stream;"}
+{"name": "Atmospheric Sounds Radio", "url": "http://65.109.81.84:7000/stream/1/"}
+{"name": "Radio Koege", "url": "http://185.156.96.217:10026/stream/1/"}
+{"name": "Modern Vocal Jazz", "url": "http://radio.hearme.fm:8220/stream"}
+{"name": "Rock On The Rise Radio", "url": "http://199.180.75.2:9383/stream/1/"}
+{"name": "Radio Rouge FM 99.3 Best Soft Music Radio Station", "url": "http://sc2.streamingpulse.com:8012/;"}
+{"name": "VKNET Radio Station 2", "url": "http://radio2.vknet.se:7000/stream/1/"}
+{"name": "Sparks FM", "url": "http://janus.shoutca.st:8038/autodj"}
+{"name": "Sensimedia Stream", "url": "http://albireo.shoutca.st:8771/stream/1/"}
+{"name": "RADIO CLASSICA", "url": "http://94.23.27.6:8280/stream/1/"}
+{"name": "Apple-FM: Apple-FM", "url": "http://sc.apple-fm.net:9020/;"}
+{"name": "Castle Blakk Radio", "url": "http://142.44.136.201:5107/stream/1/"}
+{"name": "NR7", "url": "http://nr7.newradio.it:9350/stream"}
+{"name": "Radio Danz - the world's pure dance channel!", "url": "https://streamssl.radiodanz.com:80/stream/1/"}
+{"name": "I.R.O.", "url": "http://159.69.76.173:3001/stream/1/"}
+{"name": "Studiovoice", "url": "http://5.39.89.17:10360/stream/1/"}
+{"name": "Alternative Rock", "url": "http://radio.hearme.fm:8520/stream"}
+{"name": "Frits 365 Music", "url": "https://frits365music.stream.laut.fm/frits365music"}
+{"name": "KSHP-DB", "url": "http://94.23.23.97:7178/stream/1/"}
+{"name": "BAVARIAN RADIO", "url": "http://64.95.243.43:8026/stream/1/"}
+{"name": "Harpsichord Works", "url": "http://radio.hearme.fm:8022/stream"}
+{"name": "Dean Hodgson's 24-7 Radio 1", "url": "http://192.99.6.159:2215/stream/1/"}
+{"name": "Derby Sound", "url": "https://uk7.internet-radio.com/proxy/in2derbyradio?mp=/stream;"}
+{"name": "Modern Big Band", "url": "http://radio.hearme.fm:9620/stream"}
+{"name": "Razors Edge Radio", "url": "http://149.56.157.81:8433/stream/1/"}
+{"name": "SLS - The complete dance chart site 1", "url": "http://217.21.199.146:9040/stream/1/"}
+{"name": "Heartbeat FM", "url": "https://cast5.magicstreams.gr:8010/stream/1/"}
+{"name": "RadioBOSS Stream", "url": "http://66.70.249.70:5071/stream/1/"}
+{"name": "XerosRadio", "url": "https://stream.streamxerosradio.duckdns.org/xerosradio"}
+{"name": "MAXIMUM RETRO", "url": "https://playing.dance:8020/stream/1/"}
+{"name": "GEMZ Radio", "url": "http://158.69.227.214:8088/stream/1/"}
+{"name": "Smooth Soul", "url": "https://radio.wanderingsheep.net:8010/smoothsoul"}
+{"name": "Ballets", "url": "http://radio.hearme.fm:8006/stream"}
+{"name": "TrendFM Den Haag", "url": "http://trendfm.live-streams.nl:8030/main"}
+{"name": "RADIOPEPITO 2025 // CONNECTION STATUS: www.twitter.com/radiopep", "url": "http://192.99.4.210:3236/stream/1/"}
+{"name": "Rock City Radio", "url": "http://vip2.fastcast4u.com:5144/stream/1/"}
+{"name": "80s Rock", "url": "http://radio.hearme.fm:8480/stream"}
+{"name": "Phatz Radio", "url": "http://lynx.prostreaming.net:8039/autodj"}
+{"name": "RADIO NIVEL LA FRECUENCIA CORRECTA", "url": "http://204.12.193.98:8125/stream/1/"}
+{"name": "ECHOES.gr NetRadio - Thessaloniki - Greece", "url": "http://85.17.75.143:80/;"}
+{"name": "Intense Radio - We love Dance #HQ# FLAC", "url": "http://secure.live-streams.nl:80/flac.ogg"}
+{"name": "B4B DISCO FUNK [HD]", "url": "https://eu10.fastcast4u.com:8120/stream/1/"}
+{"name": "Bon F.M. 102.7", "url": "http://162.244.80.21:6482/stream/1/"}
+{"name": "Moon Mission Recordings, Tokyo Deep and Electronic", "url": "https://uk5.internet-radio.com/proxy/mmr?mp=/stream;"}
+{"name": "Birdhill Radio Irish Live From Ireland", "url": "http://5.79.74.155:8000/stream/1/"}
+{"name": "LISTEN2US RADIO", "url": "http://192.99.41.102:5324/stream/1/"}
+{"name": "80s  Super Dance floor", "url": "http://5.135.154.66:33604/stream/1/"}
+{"name": "My Radio Stream", "url": "http://s34.myradiostream.com:14686/stream"}
+{"name": "J 106 Supreme Team", "url": "http://149.56.157.81:8848/stream/1/"}
+{"name": "Radio Live Vercelli 70/80/90", "url": "http://5.39.89.17:14690/stream/1/"}
+{"name": "Blackwood FM", "url": "http://server-24.stream-server.nl:8326/stream/1/"}
+{"name": "Radio Ostrowiec", "url": "http://145.239.26.146:7050/stream/1/"}
+{"name": "Buzzfm Nottinghams Dance Trance Radio", "url": "https://uk4.internet-radio.com/proxy/buzzfm?mp=/stream;"}
+{"name": "Easy Hits Radio", "url": "http://airspectrum.cdnstream1.com:8120/1651_128"}
+{"name": "Noname station", "url": "http://s1.slotex.pl:7390/stream/1/"}
+{"name": "BBC Radio 1 Dance", "url": "http://151.80.56.90:8090/bbc_radio_one_dance.aac"}
+{"name": "ABC Relax New", "url": "http://manager7.streamradio.fr:1050/stream/1/"}
+{"name": "Dark Edge Radio", "url": "http://5.35.214.196:8000/stream/1/"}
+{"name": "Radio Carpi", "url": "https://radiocarpi.stream.laut.fm/radiocarpi"}
+{"name": "Bulldogs Radio", "url": "https://bulldogsradio.radioca.st:443/stream/1/"}
+{"name": "The Musical Box Radio", "url": "http://albireo.shoutca.st:9740/stream/1/"}
+{"name": "BCB-HIPHOP-", "url": "http://149.56.157.81:5000/stream/1/"}
+{"name": "YouRadio.nl", "url": "https://streaming.youradio.nl/listen/youradio/stream"}
+{"name": "RadioStream.Top", "url": "http://radiostream.top:8123/radio"}
+{"name": "99WNRR", "url": "http://142.44.136.201:5446/stream/1/"}
+{"name": "Smooth Jazz - Radio Chrzescijanin", "url": "http://51.255.8.139:9760/stream/1/"}
+{"name": "Attitude Rock", "url": "http://cast4.my-control-panel.com:7016/stream"}
+{"name": "SunriseFm London", "url": "http://broadcast.shoutstream.co.uk:8006/stream/1/"}
+{"name": "Nautic Radio - Zwarte Hemel show - Hiphop,Rap,Punk,Rock n Roll,Metal,Ska,Oi", "url": "http://83.137.145.141:14220/;"}
+{"name": "OkoloJazza", "url": "http://109.170.8.130:80/;"}
+{"name": "Radio Andrychow", "url": "http://s1.slotex.pl:7424/stream/1/"}
+{"name": "Radio 60 70 80 - Italy - Italia - www.607080.it", "url": "http://77.241.4.100:8005/;"}
+{"name": "RADIO.IPIP.CZ: Radio Excaliber", "url": "http://212.96.160.160:8096/;"}
+{"name": "Radio Manele Romania wWw.FMRadioManele.Ro", "url": "http://a.fmradiomanele.ro:8054/stream/1/"}
+{"name": "Club Radio PR", "url": "http://64.150.176.42:8030/stream/1/"}
+{"name": "", "url": "http://hyades.shoutca.st:8551/stream/1/"}
+{"name": "Jc Radio", "url": "https://jcradio.stream.laut.fm/jcradio"}
+{"name": "Prog Rock and Metal (PRM)", "url": "http://149.56.234.138:8025/stream/1/"}
+{"name": "Sonora Classic Rock (Hard & Metal)", "url": "http://46.105.122.141:6664/stream/1/"}
+{"name": "Radio44", "url": "http://eu.publicssl.net:7020/"}
+{"name": "CoSTa's Ambient Radio", "url": "https://pc.costa-server.info.pl:11020/listen/costas_ambient_radio/radio.mp3"}
+{"name": "Offshore Music Radio", "url": "http://71.127.174.26:8000/stream/2/"}
+{"name": "Riviera Lounge Radio", "url": "https://riviera-lounge-radio.stream.laut.fm/riviera-lounge-radio"}
+{"name": "Fun45s", "url": "http://67.212.238.178:7086/stream/1/"}
+{"name": "Retrohits Good Times and Great Oldies", "url": "http://149.56.183.178:8300/stream/1/"}
+{"name": "SONGCAST RADIO - Ambient", "url": "http://52.24.52.72:9018/stream/1/"}
+{"name": "ORS Global Radio", "url": "http://65.108.124.70:7259/stream/1/"}
+{"name": "GOLD WEB RADIO", "url": "http://199.233.234.34:25418/stream/1/"}
+{"name": "Mixed Signals America", "url": "http://65.109.81.84:7117/stream/1/"}
+{"name": "RadioU Fusion: EDM", "url": "http://67.212.238.178:7146/stream/1/"}
+{"name": "CSW Radio Networks Mexico", "url": "http://162.243.173.18:8057/stream/1/"}
+{"name": "Bide&Musique - variete alternative francophone 60-70-80", "url": "http://137.74.198.170:9200/stream/1/"}
+{"name": "De Jukebox", "url": "http://69.197.169.178:14472/stream/1/"}
+{"name": "canardwc webradio", "url": "http://82.65.107.217:8000/vorbis"}
+{"name": "Pretty Dope Xperience™", "url": "https://streamer.radio.co/scfb5749d1/listen"}
+{"name": "Metal Live Radio", "url": "http://51.255.8.139:8738/stream/1/"}
+{"name": "PARTY VIBE RADIO : DRUM & BASS", "url": "http://www.partyviberadio.com:8004/stream/1/"}
+{"name": "Radio Amadeus en Vivo", "url": "http://3.223.187.189:8005/stream/1/"}
+{"name": "JazzRadio (MRG.fm)", "url": "http://62.149.196.16:8040/stream/1/"}
+{"name": "Noname station", "url": "http://213.202.241.199:9530/stream/1/"}
+{"name": "Real Strong Radio", "url": "http://158.69.114.190:8028/stream/1/"}
+{"name": "Joint Radio Blues Rock", "url": "http://radio.jointil.net:9992/stream/1/"}
+{"name": "ICCRadio", "url": "http://51.15.160.78:8813/stream/1/"}
+{"name": "Polymer Radio", "url": "https://uk5.internet-radio.com/proxy/polymerradio?mp=/stream;"}
+{"name": "🎶 Radio Picados 🇨🇱 - ¡La música nunca se detiene!", "url": "https://stream.picados.beer/radio/live"}
+{"name": "305BLAZE.COM", "url": "http://s2.voscast.com:12030/https.www.305blaze.com"}
+{"name": "RADIO MEGA DANCE", "url": "http://188.134.10.11:8000/;"}
+{"name": "Shangrla Radio: Shangrla Radio", "url": "http://stream18.shoutcastsolutions.com:8324/stream/1/"}
+{"name": "Solid Gold Gem AM", "url": "http://149.202.22.75:8130/stream/1/"}
+{"name": "4Drive Jazz", "url": "http://136.243.79.109:2590/stream/1/"}
+{"name": "definite retro", "url": "http://82.77.138.91:8559/stream/1/"}
+{"name": "METAL ROCK RADIO Stream", "url": "http://138.201.80.147:2170/stream/1/"}
+{"name": "Reggaeneracija", "url": "http://player.reggaeneracija.me:8000/autodj"}
+{"name": "BRU ZANE Classical Radio", "url": "http://5.196.98.236:80/stream/1/"}
+{"name": "YungNFresh", "url": "http://192.95.39.65:5553/stream/1/"}
+{"name": "Spicy soul sounds for your Ears by Dub Lubin Radio", "url": "http://192.99.167.171:100/stream/1/"}
+{"name": "Smooth Jazz With Limo G", "url": "http://65.108.198.245:7126/stream/1/"}
+{"name": "We On Underground", "url": "http://149.56.157.81:8776/stream/1/"}
+{"name": "Reggae Radio RastaMusic.com - 808 Live Reggaecast", "url": "http://205.234.238.42:808/;"}
+{"name": "family99.5", "url": "http://176.31.118.194:10064/stream/1/"}
+{"name": "Esvive Radio", "url": "https://uk2.internet-radio.com/proxy/esvive?mp=/stream;"}
+{"name": "nightline radio", "url": "http://radio.nightline-radio.de:8000/stream/1/"}
+{"name": "Smooth Jazz New York City", "url": "http://airspectrum.cdnstream1.com:8078/1614_192"}
+{"name": "MAXX RADIO", "url": "https://maxxradio.co.uk/listen/maxx_radio/radio.mp3"}
+{"name": "VirDiKo Radio", "url": "http://149.56.157.81:8575/stream/1/"}
+{"name": "Rebel Radio", "url": "http://67.212.238.178:7039/stream/1/"}
+{"name": "RockinRadio: The Wall of Sound", "url": "http://144.217.203.226:8076/;"}
+{"name": "RADIO.IPIP.CZ: Classic Rock Radio", "url": "http://212.96.160.160:8018/;"}
+{"name": "WCSB 89.3 FM", "url": "http://40.71.172.49:8294/stream/1/"}
+{"name": "Coming Soon", "url": "http://lynx.prostreaming.net:8139/autodj"}
+{"name": "Trap", "url": "https://trap.stream.laut.fm/trap"}
+{"name": "JM-ROCK-RADIO", "url": "http://85.195.72.226:11076/stream/1/"}
+{"name": "Theartist", "url": "https://theartist.stream.laut.fm/theartist"}
+{"name": "100% Pure Waiheke", "url": "http://s27.myradiostream.com:17342/stream"}
+{"name": "Radiogrupstudiokrnov", "url": "https://radiogrupstudiokrnov.stream.laut.fm/radiogrupstudiokrnov"}
+{"name": "Fantasy Italo Radio", "url": "http://italo.live-streams.nl:80/fantasy"}
+{"name": "ART OF MUSIC • Web Radio", "url": "http://46.105.111.94:8024/stream/1/"}
+{"name": "Radio Onda Libera", "url": "http://212.7.194.63:9064/stream/1/"}
+{"name": "All Oldies Channel", "url": "https://radio.alloldieschannel.com/listen/all_oldies_channel/mobile"}
+{"name": "Super CFL Radio-Chicago", "url": "http://192.111.140.11:8323/stream/1/"}
+{"name": "KJR Main", "url": "http://162.244.80.131:8024/;"}
+{"name": "1980s.FM - Awesome hits", "url": "http://209.9.229.214:80/;"}
+{"name": "Tipaul Radio", "url": "http://usa10.fastcast4u.com:6870/stream/1/"}
+{"name": "WWFM The Classical Network", "url": "http://wwfm.streamguys1.com:80/live"}
+{"name": "...::: Radio Popular Romania :::... ", "url": "http://live.radiopopular.ro:8888/stream/1/"}
+{"name": "Pop Rock", "url": "http://radio.hearme.fm:8590/stream"}
+{"name": "BBsound2", "url": "http://85.125.193.49:9000/stream/1/"}
+{"name": "MyRadio.Kicks-Ass.net", "url": "http://myradio.kicks-ass.net:8000/radio.mp3"}
+{"name": "420SMOKERADIO", "url": "https://s5.radio.co/se57703173/listen"}
+{"name": "Chill Out Zone", "url": "https://chilloutzone.stream.laut.fm/chilloutzone"}
+{"name": "Radio Domeldo Live", "url": "http://185.105.4.53:3000/stream/1/"}
+{"name": "radio green tao world", "url": "http://206.190.130.182:8176/stream/1/"}
+{"name": "MaX FM", "url": "http://46.20.4.2:8025/stream/1/"}
+{"name": "RADIO 1 MANELE ROMANIA - wWw.RadioUnuManele.CoM", "url": "http://radio1manele.no-ip.org:8000/stream/1/"}
+{"name": "Roots Reggae Hub", "url": "http://192.99.170.8:5684/stream/1/"}
+{"name": "Portobello Radio", "url": "https://uk1.internet-radio.com/proxy/portobelloradio?mp=/live"}
+{"name": "TJ's House Of Country Music", "url": "http://192.211.51.158:5084/stream/1/"}
+{"name": "My Radio Stream", "url": "http://176.31.244.83:45354/stream/1/"}
+{"name": "Confiance", "url": "http://54.39.247.236:3070/stream/1/"}
+{"name": "KVKVI - Classic Hits  60's, 70's, 80's, 90's", "url": "http://dc1.serverse.com:7294/stream/1/"}
+{"name": "SONGCAST RADIO - Country", "url": "http://52.24.52.72:9014/stream/1/"}
+{"name": "70s 80s DiscoFunk ModernSoul Boogie", "url": "http://7080discofunk.streamingmedia.it:8020/play"}
+{"name": "God's Word In Music", "url": "http://198.7.59.28:8041/stream/1/"}
+{"name": "Athensnoise.rocks", "url": "https://radio.athensnoise.rocks/listen/athensnoise.rocks/radio.mp3"}
+{"name": "Handcrafted Radio", "url": "http://142.44.136.201:5044/stream/1/"}
+{"name": "stream", "url": "http://62.210.24.124:8888/stream/1/"}
+{"name": "The Holy Family Ministry Internet Radio Station", "url": "http://198.178.123.8:10100/stream/1/"}
+{"name": "Chicago Youth Radio WCYR", "url": "http://198.178.123.20:9582/stream/1/"}
+{"name": "JRR fallback", "url": "http://nradio.net:8080/falljrock"}
+{"name": "RadioSuperoldie HIGH", "url": "http://87.118.86.46:8888/stream/1/"}
+{"name": "RadioBloodstream.com", "url": "https://uk1.internet-radio.com/proxy/bloodstream?mp=/live"}
+{"name": "90s Hits", "url": "http://radio.hearme.fm:9840/stream"}
+{"name": "Radio-hoerBar", "url": "https://stream.radio-hoerbar.de/listen/radio-hoerbar/mainstream"}
+{"name": "ICon Radio", "url": "http://host.podzone.org:8120/iconradio"}
+{"name": "Radio PASSAZH", "url": "http://s2.cdnradio.ru:80/hd"}
+{"name": "Gongas Rádio", "url": "https://a6.asurahosting.com:7930/stream/1/"}
+{"name": "Classic Rock", "url": "http://radio.hearme.fm:8270/stream"}
+{"name": "Beethoven", "url": "http://radio.hearme.fm:9050/stream"}
+{"name": "RA Rock", "url": "http://live.rarock.com:8000/stream"}
+{"name": "Apple Digital DJs Radio", "url": "http://149.56.157.81:5076/stream/1/"}
+{"name": "Hustle Boy DJ Radio!", "url": "http://149.56.157.81:8764/stream/1/"}
+{"name": "Hitradio Polska", "url": "http://51.255.8.139:9090/stream/1/"}
+{"name": "Greased Lightning", "url": "http://88.198.69.145:8084/;"}
+{"name": "Repubblic Rock Radio", "url": "https://repubblicrockradio.stream.laut.fm/repubblicrockradio"}
+{"name": "88.1 FM KPJM - The Bridge", "url": "http://74.50.122.103:9810/stream/1/"}
+{"name": "sensuelle radio", "url": "http://radio10.pro-fhi.net:9169/stream/1/"}
+{"name": "00s RnB", "url": "http://radio.hearme.fm:9980/stream"}
+{"name": "TrancePulse Dublin", "url": "http://stream.trance.ie:8000/mobile"}
+{"name": "Hope Radio Ireland", "url": "http://65.108.124.70:7366/stream/1/"}
+{"name": "** Cold Cash Radio **", "url": "http://149.56.157.81:8782/stream/1/"}
+{"name": "psyradio * fm - chillout", "url": "http://komplex2.psyradio.org:8020/stream/1/"}
+{"name": "Made in 80", "url": "http://leswebradios.fr:8002/stream/1/"}
+{"name": "RADIO STUDIO DANCE ROMA", "url": "http://178.32.140.82:9630/stream/1/"}
+{"name": "The Seagull - Feel Good Variety", "url": "https://us5.internet-radio.com/proxy/sunny105?mp=/stream;"}
+{"name": "Power Station Italy", "url": "https://powerstationitaly.stream.laut.fm/powerstationitaly"}
+{"name": "That 70s Station", "url": "http://149.56.185.82:8137/;"}
+{"name": "20th Century Soundtrack", "url": "http://158.69.114.190:8061/stream/1/"}
+{"name": "", "url": "http://equinox.shoutca.st:9878/stream/1/"}
+{"name": "Hard Rock", "url": "http://radio.hearme.fm:8550/stream"}
+{"name": "Radio Forever 80's", "url": "http://207.180.234.221:8000/stream"}
+{"name": "Radio Power Station", "url": "https://radiopowerstation.stream.laut.fm/radiopowerstation"}
+{"name": "Matt Johnson Radio", "url": "https://us2.internet-radio.com/proxy/mattjohnsonradio?mp=/stream;"}
+{"name": "David", "url": "https://uk1.internet-radio.com/proxy/freetradezone?mp=/stream;"}
+{"name": "The Dump", "url": "http://icecast.thedumpradio.com:80/listen_mp3"}
+{"name": "VIBE FM", "url": "https://uk2.internet-radio.com/proxy/vibefm?mp=/live"}
+{"name": "Onda Brava Radio Stream", "url": "http://65.109.81.84:7221/stream/1/"}
+{"name": "Radio Kampus 97,1 FM", "url": "http://193.0.98.66:8005/stream/1/"}
+{"name": "BeRock Radio", "url": "http://solid55.streamupsolutions.com:30013/stream/1/"}
+{"name": "Joint Radio Reggae", "url": "http://radio.jointil.net:9998/stream/1/"}
+{"name": "Reggae Classics Mix", "url": "https://online.jamminvibezradio.com/listen/reggae/stream.low"}
+{"name": "Muhammad`s Temple # 12", "url": "http://s6.voscast.com:9912/stream"}
+{"name": "Rollradio", "url": "http://5.39.82.219:17744/stream/1/"}
+{"name": "WILD RADIO - Greece - www.wildradio.gr", "url": "http://94.23.30.114:8037/stream/1/"}
+{"name": "KTL-Oldieradio", "url": "http://85.195.72.226:24844/stream/1/"}
+{"name": "The Big 88", "url": "http://98.28.27.192:8000/stream/1/"}
+{"name": "Afro Jazz", "url": "http://radio.hearme.fm:8090/stream"}
+{"name": "Dazzle FM Radio", "url": "http://s48.myradiostream.com:10658/stream"}
+{"name": "Unspecified name", "url": "https://uk2.internet-radio.com/proxy/ragefm?mp=/live"}
+{"name": "Gammagioiosa Golden Hits", "url": "http://95.110.186.253:9005/stream/1/"}
+{"name": "90s Country", "url": "http://radio.hearme.fm:9860/stream"}
+{"name": "RADIO.IPIP.CZ: Radio Excaliber", "url": "http://212.96.160.160:8098/;"}
+{"name": "Radio Paratiritis", "url": "http://s6.onweb.gr:8020/stream/1/"}
+{"name": "Geoff FM", "url": "http://82.65.128.140:9000/stream/1/"}
+{"name": "Studio + Rete Riviera", "url": "http://ice.studiopiu.net:8443/rimini.aac"}
+{"name": "24/7 Drums.ro - Drum&Bass Online Radio Station", "url": "http://radio.drums.ro:8000/;"}
+{"name": "Level-1 Radio", "url": "https://uk2.internet-radio.com/proxy/level1?mp=/live"}
+{"name": "MM2", "url": "https://azuracast.eradioweb.com/listen/mm2/radio.mp3"}
+{"name": "Radio Centraal Den Haag The Netherlands", "url": "http://mediaserv30.live-streams.nl:8015/tunein/centraal"}
+{"name": "târgul - radio", "url": "https://a8.asurahosting.com/listen/targul_radio/radio.mp3"}
+{"name": "Old School Funk and Soul", "url": "http://radio.hearme.fm:8076/stream"}
+{"name": "Golden Grooves Radio Network", "url": "http://178.32.146.184:5080/stream/1/"}
+{"name": "The Strictly Rockers Reggae Show", "url": "https://supersoul.site/listen/the_strictly_rockers_reggae_show/SRRS128kbps"}
+{"name": "Howling Rock Radio", "url": "http://65.21.202.84:8018/stream/1/"}
+{"name": "Radio Rekord Radom", "url": "http://stream2.nadaje.com:8108/stream/1/"}
+{"name": "Adagios", "url": "http://radio.hearme.fm:9030/stream"}
+{"name": "Maximusrock FM", "url": "https://maximusrockfm.stream.laut.fm/maximusrockfm"}
+{"name": "Reggae Fusion", "url": "http://radio.hearme.fm:9290/stream"}
+{"name": "Radio Roman FM", "url": "http://82.208.131.85:8000/stream/1/"}
+{"name": "Overtures", "url": "http://radio.hearme.fm:8236/stream"}
+{"name": "Radio hits - Sweden", "url": "http://31.14.40.21:8564/stream/1/"}
+{"name": "EmpfricFM", "url": "https://s5.radio.co/sad8130c0b/listen"}
+{"name": "Noname station", "url": "http://46.105.120.165:10234/stream/1/"}
+{"name": "** KWWK-DB **", "url": "http://149.56.157.81:8637/stream/1/"}
+{"name": "Country Gospel Radio", "url": "http://66.70.249.70:5060/stream/1/"}
+{"name": "Punk Around", "url": "http://punkaround.top:8000/stream"}
+{"name": "Classical Harp", "url": "http://radio.hearme.fm:9250/stream"}
+{"name": "Love n Relaxation", "url": "http://radio.hearme.fm:8146/stream"}
+{"name": "Aegean Lounge Radio", "url": "http://91.121.78.191:8469/stream/1/"}
+{"name": "MoveDaHouse", "url": "https://uk7.internet-radio.com/proxy/movedahouse?mp=/stream;"}
+{"name": "Radio Moments (EU)", "url": "http://eu.radio-moments.ru:7359/type"}
+{"name": "Radio New Country", "url": "http://94.23.67.172:9475/stream/1/"}
+{"name": "MB MUSIC RADIO ROMANIA", "url": "http://37.59.40.90:16150/stream/1/"}
+{"name": "HIPHOP RADIOZONE", "url": "http://149.56.175.167:5638/stream/1/"}
+{"name": "Shout FM", "url": "https://shoutfm.stream.laut.fm/shout_fm"}
+{"name": "Jamm FM Radio Costa del Sol", "url": "http://stream.jammfmradio.com:8075/stream/1/"}
+{"name": "Nu Metal", "url": "http://radio.hearme.fm:8570/stream"}
+{"name": "Radio Ferrymead 1413AM", "url": "http://s2.stationplaylist.com:9440/listen.aac"}
+{"name": "SerrebiRadio", "url": "https://radio.serrebiradio.com/listen/serrebiradio/SerrebiRadioHD"}
+{"name": "Classical Guitar Works", "url": "http://radio.hearme.fm:8120/stream"}
+{"name": "Reggae Nostalgia Internet Radio", "url": "http://69.30.243.166:10968/stream/1/"}
+{"name": "Easy Hits Florida Ultra", "url": "http://airspectrum.cdnstream1.com:8118/1650_256"}
+{"name": "Spectrum Reggae", "url": "http://51.255.235.165:5132/stream/1/"}
+{"name": "Bassline", "url": "http://radio.hearme.fm:9810/stream"}
+{"name": "xxxRock.fm", "url": "http://65.109.81.84:7084/stream/1/"}
+{"name": "SONGCAST RADIO - Blues", "url": "http://52.24.52.72:9012/stream/1/"}
+{"name": "Radio Nova Mix", "url": "https://radio.novamix.ro:8042/stream/1/"}
+{"name": "RADIO.IPIP.CZ: Radio CABLE", "url": "http://212.96.160.160:8088/;"}
+{"name": "K107 FM", "url": "http://37.59.37.139:9020/stream/1/"}
+{"name": "ALLEN BANKZ RADIO", "url": "http://149.56.175.167:5870/stream/1/"}
+{"name": "Classically", "url": "http://thassos.cdnstream.com:8054/stream/1/"}
+{"name": "VCR Auditorium Hi-Fi | Venice Classic Radio Italia", "url": "http://116.202.241.212:8010/stream/1/"}
+{"name": "Vinilo FM Bizkaia", "url": "http://server9.emitironline.com:10923/stream"}
+{"name": "SONGCAST RADIO - Pop Music", "url": "http://52.24.52.72:9036/stream/1/"}
+{"name": "RLO RADIO", "url": "http://94.23.27.6:8286/stream/1/"}
+{"name": "Jazz Ballads", "url": "http://radio.hearme.fm:8690/stream"}
+{"name": "Power 95 Bermuda", "url": "https://us3.internet-radio.com/proxy/power95?mp=/live"}
+{"name": "gsa Stream", "url": "http://cast4.my-control-panel.com:7291/autodj"}
+{"name": "Yaadlinks Radio UK", "url": "http://176.31.111.65:14050/stream/1/"}
+{"name": "knaradioweb", "url": "http://195.114.19.178:8012/stream/1/"}
+{"name": "Chillout Dreams", "url": "http://radio.hearme.fm:8134/stream"}
+{"name": "Dilemaradio Stream", "url": "http://opportunity.shoutca.st:8150/stream/1/"}
+{"name": "Bad Rock Radio", "url": "http://s4.viastreaming.net:8100/stream/1/"}
+{"name": "FixelyStation", "url": "http://79.143.187.96:8016/stream/1/"}
+{"name": "Feelgoodradio.net", "url": "http://s11.ssl-stream.com:8022/stream/1/"}
+{"name": "dumafm", "url": "http://198.178.123.8:10076/stream/1/"}
+{"name": "Easy FM Aruba", "url": "http://96.31.83.86:8134/stream/1/"}
+{"name": "Orbita Radio Online", "url": "http://31.132.6.142:4304/stream/1/"}
+{"name": "WOW FM Dance 90s", "url": "http://149.202.22.75:9148/;"}
+{"name": "CvsRadio1 - Reggae Radio", "url": "http://s8.voscast.com:9128/stream/1/"}
+{"name": "Liquid Country Radio", "url": "http://65.109.81.84:7091/stream/1/"}
+{"name": "PRODJ Radio", "url": "http://173.249.25.221:8000/stream/1/"}
+{"name": "Country Axe Radio", "url": "http://s2.stationplaylist.com:7148/listen.aac"}
+{"name": "Farfallina Radio", "url": "http://65.108.124.70:7222/stream/1/"}
+{"name": "** Hot 107 Jamz**", "url": "http://149.56.157.81:8788/stream/1/"}
+{"name": "Italy Classical Radio", "url": "http://philae.shoutca.st:8204/stream/1/"}
+{"name": "Radio Lobo 102.1", "url": "http://5.135.154.66:34608/stream/1/"}
+{"name": "This is my server name", "url": "http://192.95.39.65:5255/stream/1/"}
+{"name": "Jazz Hop", "url": "http://radio.hearme.fm:9650/stream"}
+{"name": "Radio Crucero", "url": "http://192.99.41.102:5423/stream/1/"}
+{"name": "Smooth Bossa Nova", "url": "http://radio.hearme.fm:8800/stream"}
+{"name": "American Cowboy Radio", "url": "http://sh.fl-us.audio-stream.com:8002/live"}
+{"name": "Noname station", "url": "http://88.99.169.208:8500/stream/1/"}
+{"name": "Made Sounds Media Radio", "url": "http://149.56.157.81:8842/stream/1/"}
+{"name": "BIG 102.5 HD2 CKIT-DB", "url": "http://162.244.80.106:11339/stream/1/"}
+{"name": "Remix Radio Philippines - Powered by www.amfmph.com", "url": "http://209.126.124.126:8063/stream/1/"}
+{"name": "Popwelle. Das Musikradio", "url": "http://popwelle.spcast.eu:8120/stream"}
+{"name": "GDRADIO.NET - Streaming Grateful Dead and More!", "url": "http://208.85.242.52:8162/;"}
+{"name": "Oldies Radio 104", "url": "http://176.31.248.14:15696/stream/1/"}
+{"name": "Chillout", "url": "http://radio.hearme.fm:8132/stream"}
+{"name": "South Coast Radio Oldies", "url": "http://37.59.37.173:40794/stream/1/"}
+{"name": "Radio Gamma-Gioiosa", "url": "http://95.110.186.253:9015/stream/1/"}
+{"name": "RDG Music (Classics Only)", "url": "http://bluford.torontocast.com:8070/stream/1/"}
+{"name": "Crossroads Country Radio Zutphen", "url": "http://server-11.stream-server.nl:8518/stream/1/"}
+{"name": "PIMG RADIO FRANCE", "url": "http://www.hosting-serv.com:9100/stream/1/"}
+{"name": "Pure Hits FRESH [HD-AAC]", "url": "https://listen10.as.amplifystreaming.com/listen/pure_hits_fresh/fresh_128.mp3"}
+{"name": "OperaRadio (MRG.fm)", "url": "http://62.149.196.16:8110/stream/1/"}
+{"name": "Hoex Radio Stream", "url": "http://213.202.241.199:9336/stream/1/"}
+{"name": "ARK Radio (arkradio@gmail.com)", "url": "http://osegc.org:8002/stream/1/"}
+{"name": "Youventus Rádió Hi-Fi", "url": "http://s2.audiostream.hu:8090/juventus_FLAC"}
+{"name": "JR.FM Dance", "url": "http://s2.stationplaylist.com:7102/listen.aac"}
+{"name": "EDM Fest", "url": "http://radio.hearme.fm:8046/stream"}
+{"name": "DJMIX.CA", "url": "http://ca7.rcast.net:8022/stream/1/"}
+{"name": "Breaks", "url": "http://radio.hearme.fm:9740/stream"}
+{"name": "BEST OLDIES RADIO", "url": "https://a8.asurahosting.com:8090/stream/1/"}
+{"name": "RBI Radio", "url": "http://85.195.72.226:18576/stream/1/"}
+{"name": "NLRadio R13", "url": "http://c20.radioboss.fm:8694/autodj"}
+{"name": "Real Country", "url": "http://68.168.101.146:8580/;"}
+{"name": "Asterisk Radio", "url": "http://162.252.85.85:9826/stream/1/"}
+{"name": "** Fat Boy Radio **", "url": "http://149.56.157.81:5024/stream/1/"}
+{"name": "ANKARA UNİ RADYOSU", "url": "http://80.251.40.4:8089/stream/1/"}
+{"name": "VIPradio One at the 90s", "url": "http://149.56.175.167:5100/stream/1/"}
+{"name": "Vocal New Age", "url": "http://radio.hearme.fm:8108/stream"}
+{"name": "radio day night", "url": "http://epsilon.shoutca.st:8026/stream/1/"}
+{"name": "Loker Musik Indonesia", "url": "https://stream.lokermusik.com/listen/lokermusik/lokermusik"}
+{"name": "KAZA FM radio - Pride Party music from 80's to now !", "url": "http://perseus.shoutca.st:10212/stream/1/"}
+{"name": "Radio Superstar Classics", "url": "http://95.216.112.183:8000/stream/2/"}
+{"name": "Memories", "url": "http://213.202.241.199:9348/stream/1/"}
+{"name": "Mellow Piano Jazz", "url": "http://radio.hearme.fm:8730/stream"}
+{"name": "KWYN AM 1400", "url": "http://thassos.cdnstream.com:5213/live"}
+{"name": "DJ CD Indian Radio", "url": "http://s7.voscast.com:10844/stream/1/"}
+{"name": "Noname station", "url": "http://198.7.59.28:8078/stream/1/"}
+{"name": "Study Music", "url": "http://radio.hearme.fm:8198/stream"}
+{"name": "Deep Progressive House", "url": "http://radio.hearme.fm:8420/stream"}
+{"name": "Atlantica Soleil", "url": "http://radios.topymedia.com:8054/stream/1/"}
+{"name": "anotherplanet.fm ambient chillout radio", "url": "http://188.227.57.91:8000/stream/1/"}
+{"name": "RADIO LOBO 831", "url": "http://198.178.123.5:9696/stream/1/"}
+{"name": "Death.FM - A Brutal & Beautiful Blend of Black, Death, Doom, Goth, & Gore w/Requests", "url": "http://209.9.229.211:80/;"}
+{"name": "GeGar Muzik FM", "url": "http://167.114.131.90:5316/stream/1/"}
+{"name": "Magic FM Montreal", "url": "http://s7.yesstreaming.net:8024/stream"}
+{"name": "Nurse FM", "url": "https://nursefm.stream.laut.fm/nursefm"}
+{"name": "Yellowstone Valley Radio", "url": "http://65.109.87.119:7080/stream/1/"}
+{"name": "Jukebox - Nonstop Music", "url": "http://kreuzbergswiss.spcast.eu:8120/stream"}
+{"name": "SONGCAST RADIO - Jazz", "url": "http://52.24.52.72:9020/stream/1/"}
+{"name": "Radio 1 The Heat", "url": "http://149.56.157.81:8704/stream/1/"}
+{"name": "Rsmusic 2", "url": "https://rsmusic2.stream.laut.fm/rsmusic2"}
+{"name": "PARTY VIBE RADIO : AMBIENT", "url": "http://www.partyviberadio.com:8056/stream/1/"}
+{"name": "Intense Radio - We love Dance", "url": "http://secure.live-streams.nl:80/live"}
+{"name": "Bentonville Radio KOBV-LP", "url": "http://s2.stationplaylist.com:7058/listen.aac"}
+{"name": "Handel", "url": "http://radio.hearme.fm:8560/stream"}
+{"name": "Oldies Radio 99", "url": "http://192.111.140.6:9727/stream/1/"}
+{"name": "Forever Rock", "url": "https://foreverrock.stream.laut.fm/foreverrock"}
+{"name": "RHRU - ROCK HARD RADIO Unplugged", "url": "http://192.111.140.11:8540/stream/1/"}
+{"name": "Ladies First", "url": "https://ladiesfirst.stream.laut.fm/ladiesfirst"}
+{"name": "Rockradio1.com", "url": "http://144.217.77.176:8000/stream/1/"}
+{"name": "Radio Tempore", "url": "https://radio-tempore.stream.laut.fm/radio-tempore"}
+{"name": "WDONs MFM - @ wdon.org 192kbit", "url": "http://stream.soundcasting.eu:80/WDON-MFM-192.mp3"}
+{"name": "Rage FM", "url": "http://92.48.87.11:8002/stream/1/"}
+{"name": "Suite Jazz Radio", "url": "http://jenny.torontocast.com:8004/stream/1/"}
+{"name": "RADIONET+", "url": "http://91.121.38.100:8000/stream/1/"}
+{"name": "Swingtime", "url": "https://swingtime.stream.laut.fm/swingtime"}
+{"name": "Hit Music Network 80s", "url": "http://178.159.3.22:18010/stream/1/"}
+{"name": "BayShore Radio Network", "url": "http://149.56.157.81:8830/stream/1/"}
+{"name": "Delta Radio Dinxperlo", "url": "http://86.82.212.23:11014/stream/1/"}
+{"name": "WHAT?! Joy", "url": "http://162.144.106.6:8569/stream/1/"}
+{"name": "192 Radio Nederland", "url": "http://194.88.105.64:8192/stream/1/"}
+{"name": "PulseEDM DANCE Music Radio", "url": "http://pulseedm.cdnstream1.com:8124/1373_128"}
+{"name": "Relaxing Radio 365", "url": "http://s10.voscast.com:9574/stream"}
+{"name": "RADIO SHOW", "url": "http://46.105.111.94:8064/;"}
+{"name": "SONGCAST RADIO - R&B/Soul", "url": "http://52.24.52.72:9038/stream/1/"}
+{"name": "Skylab Radio", "url": "http://92.48.87.11:8036/stream/1/"}
+{"name": "The English Connection Media", "url": "http://69.30.218.190:19108/stream/1/"}
+{"name": "RasCast Radio - AutoDJ", "url": "http://209.208.78.199:9000/stream/1/"}
+{"name": "Be Moor Radio", "url": "http://91.121.134.23:8164/stream/1/"}
+{"name": "100060er", "url": "https://100060er.stream.laut.fm/100060er"}
+{"name": "Ghana Music Radio", "url": "https://streaming.radio.co/s92f890821/listen"}
+{"name": "NR8", "url": "http://nr8.newradio.it:9574/stream"}
+{"name": "Radio Londra Italia", "url": "http://79.143.187.96:8000/stream/1/"}
+{"name": "Freizeit Radio", "url": "https://freizeitradio.stream.laut.fm/freizeitradio"}
+{"name": "Hit Music 70's", "url": "http://178.159.3.22:18006/stream/1/"}
+{"name": "Radio Digife", "url": "http://185.124.45.13:8000/stream/1/"}
+{"name": "Orchestral Works", "url": "http://radio.hearme.fm:8232/stream"}
+{"name": "RAY`S BLUES CAFE", "url": "http://54.39.247.236:4900/stream/1/"}
+{"name": "EAJ Radio", "url": "https://cast1.prosandoval.com/listen/eaj_radio/radio.mp3"}
+{"name": "TopBlues", "url": "https://us3.internet-radio.com/proxy/topblues?mp=/stream;"}
+{"name": "Lazy B Radio", "url": "http://37.59.47.192:8428/stream/1/"}
+{"name": "Infniity", "url": "http://91.121.38.100:8310/stream/1/"}
+{"name": "Lofos student radio | Lesvos | University of the Aegean", "url": "http://radio.syros.aegean.gr:8000/lofosradio.mp3"}
+{"name": "PrismaTeam", "url": "http://server-28.stream-server.nl:8404/stream/1/"}
+{"name": "70s 80s Mix Radio", "url": "http://51.159.194.90:8160/stream/1/"}
+{"name": "PiratenRadio.nl - 24/7 de Beste PiratenHits vanuit Twente", "url": "http://www.radiozilvervos.com:8200/stream/1/"}
+{"name": "Radio Shadow Deep Tracks", "url": "http://162.244.80.131:8020/stream/1/"}
+{"name": "Submit Promo on MixLive.ie", "url": "http://2.58.194.54:8882/stream/1/"}
+{"name": "WENX - We Next Radio", "url": "http://s3.voscast.com:9924/stream"}
+{"name": "Forever 80", "url": "https://forever80.stream.laut.fm/forever80"}
+{"name": "Radio Kolobrzeg", "url": "http://194.24.244.11:8000/stream/1/"}
+{"name": "BeatZ Radio", "url": "https://s5.radio.co/s63077b772/listen"}
+{"name": "robboranxradio", "url": "http://37.59.47.192:8572/stream/1/"}
+{"name": "Tibetan Music", "url": "http://radio.hearme.fm:8202/stream"}
+{"name": "Antenna Web", "url": "https://mars.streamerr.co:8066/stream/1/"}
+{"name": "The Kawartha Time Machine", "url": "http://159.203.33.25:8009/stream/1/"}
+{"name": "RADIO.IPIP.CZ: Hair Rock", "url": "http://212.96.160.160:8074/;"}
+{"name": "ATLWEBRADIO THE WORLDS BEST INTERNET RADIOATL WEB RADIO WAWR-db", "url": "http://192.99.4.210:3664/;"}
+{"name": "RetroMusic San Justo(SF)", "url": "http://178.32.146.184:5938/;"}
+{"name": "This is my server name", "url": "http://5.9.65.9:8044/;"}
+{"name": "WLIR.FM", "url": "http://192.211.51.158:5268/stream/1/"}
+{"name": "RadioMonster.FM - Tophits", "url": "https://tophits.radiomonster.fm:443/ultra"}
+{"name": "103 Radio", "url": "http://streaming.103radio.fr:80/128"}
+{"name": "CUBE RADIO", "url": "http://94.23.67.172:9283/stream/1/"}
+{"name": "ReggaeCity Radio", "url": "http://s9.voscast.com:7728/stream"}
+{"name": "KBRS 106.9", "url": "http://198.178.123.20:10788/stream/1/"}
+{"name": "JR.FM Pop Dance", "url": "http://s2.stationplaylist.com:7064/listen2.mp3"}
+{"name": "Urban Expressions Bakersfield", "url": "http://162.244.80.106:8125/;"}
+{"name": "MAXIMUM DANCE", "url": "https://playing.dance:8000/stream/1/"}
+{"name": "Sunshine Dance Mix", "url": "http://195.56.193.129:8120/stream/1/"}
+{"name": "Punk Radio Underground", "url": "https://s1.slotex.pl:7604/stream/1/"}
+{"name": "Big Blue Swing.com-64Kbit", "url": "http://209.236.126.18:8002/;"}
+{"name": "La Grosse Radio Reggae", "url": "http://hd.lagrosseradio.info:8000/lagrosseradio-reggae-192.mp3"}
+{"name": "Melodies Web Radio Athens", "url": "http://i.streams.ovh:9504/stream/1/"}
+{"name": "OndaJazz", "url": "http://s3.mediastreaming.it:7190/stream/1/"}
+{"name": "ELF Radio (World)", "url": "https://mp3.elfradio.ru:443/stream/1/"}
+{"name": "Chainsaw Mafia", "url": "http://66.70.249.70:5954/stream/1/"}
+{"name": "Dance Wave!", "url": "http://stream.dancewave.online:8080/dance.flac.ogg"}
+{"name": "Radio Pallieter Lier", "url": "http://5.135.154.69:14494/stream/1/"}
+{"name": "WHWR", "url": "http://192.111.140.11:8244/stream/1/"}
+{"name": "80sRadio (MRG.fm)", "url": "http://62.149.196.16:8089/stream/1/"}
+{"name": "674FM (HQ)", "url": "http://stream1.674.fm:80/stream"}
+{"name": "Bravo Fm Narodni::S.Palanka", "url": "http://195.252.68.166:8036/;"}
+{"name": "OrangePi Radio", "url": "http://stream.orangepi.media:8000/stream.mp3"}
+{"name": "Mercury Radio", "url": "http://149.202.22.75:9024/;"}
+{"name": "Chopin", "url": "http://radio.hearme.fm:9090/stream"}
+{"name": "Muzicmasters Radio", "url": "https://us3.internet-radio.com/proxy/muzicmasters?mp=/stream;"}
+{"name": "Bithang Yoo Radio", "url": "http://s03.diazol.hu:35160/live"}
+{"name": "SGR SMOOTH GROOVING - UK", "url": "http://64.95.243.43:8020/stream/1/"}
+{"name": "Rádio Music CZ", "url": "https://mpc1.mediacp.eu:8410/stream/1/"}
+{"name": "24/7 80s Power", "url": "http://164.132.158.45:8050/stream/1/"}
+{"name": "Radio XXL", "url": "http://radio.ascultatare.ro:8032/stream/1/"}
+{"name": "LOUNGE-RADIO.COM - swiss made", "url": "http://fr1.streamhosting.ch:80/lounge128.mp3"}
+{"name": "Jazz Sakura - asia DREAM radio", "url": "https://kathy.torontocast.com:3330/stream/1/"}
+{"name": "cooljamzradio.net", "url": "http://46.105.124.120:8016/stream/1/"}
+{"name": "Country 96.7 - KOKR FM", "url": "http://thassos.cdnstream.com:5122/live"}
+{"name": "RL Radio Livorno", "url": "http://radio.rmin.co.uk:8000/stream/2/"}
+{"name": "Cleansing 80's", "url": "http://thassos.cdnstream.com:8018/stream/1/"}
+{"name": "Focus FM Regional", "url": "http://89.40.72.71:8000/stream/1/"}
+{"name": "Soul Rhythms Radio UK", "url": "https://a7.asurahosting.com:8230/stream/1/"}
+{"name": "Guerrilla Radio", "url": "http://149.56.38.21:9462/stream/1/"}
+{"name": "RDMIX ITALIAN VINTAGE 70 80 90", "url": "http://maggie.torontocast.com:8018/stream/1/"}
+{"name": "Noname station", "url": "http://178.32.107.151:5178/stream/1/"}
+{"name": "Jazz Cafe", "url": "https://radio.wanderingsheep.net:8000/jazzcafe"}
+{"name": "A-Z 80s", "url": "http://164.132.158.45:8000/stream/1/"}
+{"name": "MonsterHitMusic", "url": "http://194.88.105.64:8392/stream/1/"}
+{"name": "EXPONENTE RADIO", "url": "http://46.4.40.246:8031/live"}
+{"name": "Radio Free Americana Stream", "url": "http://thassos.cdnstream.com:5479/autodj"}
+{"name": "J99 JAMS", "url": "http://149.56.175.167:5319/stream/1/"}
+{"name": "Radio T Ginen", "url": "http://zafemradio.com:9990/;"}
+{"name": "Uturn Radio: Drum and Bass Music", "url": "http://listen.uturnradio.com:80/drum_and_bass_64"}
+{"name": "no name", "url": "http://media.webradiolife.com:8000/live"}
+{"name": "RADIO.IPIP.CZ: Radio excaliber", "url": "http://sc.ipip.cz:8100/;"}
+{"name": "Radio Maria Italia", "url": "http://54.37.84.199:8002/stream/1/"}
+{"name": "BarakaFM", "url": "http://94.23.23.97:5788/stream/1/"}
+{"name": "Chamber Works", "url": "http://radio.hearme.fm:9080/stream"}
+{"name": "KSENYXTIS MITILINI", "url": "http://95.154.242.114:8080/;"}
+{"name": "Uk Vibes Live", "url": "https://uk7.internet-radio.com/proxy/ukvibes?mp=/stream;"}
+{"name": "RADIO OCTOPUS", "url": "http://178.32.137.180:8665/stream/1/"}
+{"name": "PARTY VIBE RADIO :  BLUES", "url": "http://www.partyviberadio.com:8020/stream/2/"}
+{"name": "Country GOLD 93", "url": "http://72.13.81.34:9484/;"}
+{"name": "KHNY HONEY 103", "url": "http://162.144.106.6:8125/stream/1/"}
+{"name": "FAB4RADIO", "url": "http://64.150.176.42:8086/stream/1/"}
+{"name": "Mezkla FM 104.7", "url": "http://198.7.59.28:8104/;"}
+{"name": "Meditation", "url": "http://radio.hearme.fm:8148/stream"}
+{"name": "Velvet 96.8", "url": "http://s10.voscast.com:9942/stream/1/"}
+{"name": "Radio Free JMT", "url": "http://s2.stationplaylist.com:8300/"}
+{"name": "131 Rock Radio", "url": "http://s48.myradiostream.com:13652/stream/1/"}
+{"name": "RockRadioStation", "url": "https://i8.streams.ovh:18075/stream/1/"}
+{"name": "Melodie FM", "url": "http://188.165.35.60:8008/stream/1/"}
+{"name": "Mellow Smooth Jazz", "url": "http://radio.hearme.fm:8740/stream"}
+{"name": "Qfm Jazz", "url": "http://51.255.235.165:5094/stream/1/"}
+{"name": "RadioBOSS Stream", "url": "http://mscp3.live-streams.nl:8070/radio"}
+{"name": "RDMIX LOVE SONGS", "url": "http://maggie.torontocast.com:8022/stream/1/"}
+{"name": "100 Hip Hop and RNB FM", "url": "http://192.99.41.102:5036/stream/1/"}
+{"name": "ANDYS 80S - The Rarest New Wave 80s Music", "url": "http://209.9.238.4:9844/;"}
+{"name": "Smooth Jazz - Tampa Bay", "url": "http://airspectrum.cdnstream1.com:8110/1617_128"}
+{"name": "Spectrum Country", "url": "http://51.255.235.165:5184/stream/1/"}
+{"name": "KJOE-AM 48K", "url": "http://kjoe.jklmno.org:8000/kjoe-am.mp3"}
+{"name": "00s Dance", "url": "http://radio.hearme.fm:9960/stream"}
+{"name": "RockRadio (MRG.fm)", "url": "http://62.149.196.16:8080/stream/1/"}
+{"name": "Pravilnoe-radio", "url": "http://78.41.94.37:8332/stream/1/"}
+{"name": "ClubRadio.cz", "url": "http://212.96.160.160:7994/;"}
+{"name": "CanCheers", "url": "https://us3.internet-radio.com/proxy/cancheers?mp=/stream;"}
+{"name": "Love Smooth Jazz", "url": "http://radio.hearme.fm:9680/stream"}
+{"name": "1000 90er", "url": "https://100090er.stream.laut.fm/100090er"}
+{"name": "RADIAMO Web Radio", "url": "http://46.105.111.94:8022/stream/1/"}
+{"name": "Spirit Country Radio", "url": "https://us2.internet-radio.com/proxy/jbrashier?mp=/stream;"}
+{"name": "Beat Addictz Radio", "url": "http://149.56.157.81:5030/stream/1/"}
+{"name": "Easy Classical", "url": "http://radio.hearme.fm:8330/stream"}
+{"name": "103.7 Da Beat", "url": "http://46.105.122.141:8742/stream/1/"}
+{"name": "WHAT?! Island", "url": "http://162.144.106.6:8118/stream/1/"}
+{"name": "radio Free Fm Uk", "url": "https://r23.freefm.uk/listen/live/radio.ogg"}
+{"name": "Radio Select Romania", "url": "http://89.39.189.72:8000/stream/1/"}
+{"name": "Radio Power FM (Web)", "url": "http://91.121.104.139:8080/;"}
+{"name": "Voice of the Remnant", "url": "http://s5.voscast.com:9144/stream"}
+{"name": "Smooth Jazz Oasis", "url": "http://airspectrum.cdnstream1.com:8072/1282_192"}
+{"name": "RADIO MI PIACI", "url": "http://94.23.67.172:9182/stream/1/"}
+{"name": "Rhythm FM", "url": "http://s4.nexuscast.com:8050/rhythmfm"}
+{"name": "LUFM | #sololatuamusica", "url": "http://178.32.107.151:5262/stream/1/"}
+{"name": "DWG Radio Ceský", "url": "http://85.195.72.226:26010/stream/1/"}
+{"name": "Oye sonidero radio", "url": "http://192.99.4.210:3844/stream/1/"}
+{"name": "Southern Sound", "url": "http://s40.myradiostream.com:21546/stream"}
+{"name": "Flute Works", "url": "http://radio.hearme.fm:8014/stream"}
+{"name": "70s Rock", "url": "http://radio.hearme.fm:8240/stream"}
+{"name": "FunkaGroove", "url": "http://94.23.57.5:9063/stream/1/"}
+{"name": "JPHiP Radio", "url": "http://radio.jphip.com:8800/;"}
+{"name": "guyette2469", "url": "http://198.178.123.17:10090/stream/1/"}
+{"name": "KISN-FM OLDIES RADIO", "url": "http://69.197.169.178:33622/stream/1/"}
+{"name": "WVST-91.3FM", "url": "http://185.105.4.53:9186/stream/1/"}
+{"name": "Blues Radio", "url": "http://i4.streams.ovh:8352/stream/1/"}
+{"name": "Freedom Rock Radio", "url": "http://173.208.177.90:9322/stream/1/"}
+{"name": "Radio Dreams Dance Hits Adrenaline", "url": "http://5.2.184.92:3390/stream/1/"}
+{"name": "Late Night Jazz", "url": "http://radio.hearme.fm:8710/stream"}
+{"name": "FastCast4u.com AutoDJ", "url": "http://192.95.39.65:5607/stream/1/"}
+{"name": "Radio Newmarket", "url": "http://remotedm.dexaudio.com.au:8000/stream/1/"}
+{"name": "60s Rock", "url": "http://radio.hearme.fm:8230/stream"}
+{"name": "Radio in Puglia", "url": "http://46.105.126.68:5626/stream/1/"}
+{"name": "Radio Bildtstar", "url": "http://radio-bildtstar.nl:8080/live"}
+{"name": "Wind 100", "url": "http://192.99.41.102:5092/stream/1/"}
+{"name": "Radio CDN", "url": "http://s48.myradiostream.com:11844/stream/1/"}
+{"name": "Radio-80", "url": "http://91.232.4.33:9305/stream/1/"}
+{"name": "River FM 87.6 - Hawkesbury's Hot Country", "url": "http://112.213.39.48:80/stream/1/"}
+{"name": "98 ROCK BRASIL", "url": "http://199.101.98.82:16614/stream/1/"}
+{"name": "96.9 The Oasis - The World's Smooth Jazz Place", "url": "http://192.211.51.158:5014/stream/1/"}
+{"name": "The Q Radio", "url": "http://theqradio.servemp3.com:8000/QRadio"}
+{"name": "Asylum of Echoes Radio", "url": "http://198.27.66.225:8960/stream/1/"}
+{"name": "Wolfbytes", "url": "https://wbserver.oit.ncsu.edu:9000/stream/1/"}
+{"name": "1 Oldies Paradise", "url": "http://107.170.166.187:8000/stream/1/"}
+{"name": "Latinlove", "url": "https://latinlove.stream.laut.fm/latinlove"}
+{"name": "VELUWE CENTRAAL THEMAKANAAL", "url": "http://213.202.241.199:8340/stream/1/"}
+{"name": "Depiratenfamilie.nl , we wensen u veel luisterplezier", "url": "http://195.22.100.60:8492/stream/1/"}
+{"name": "Fresh1radios.com Stream", "url": "http://54.39.19.215:8140/stream/1/"}
+{"name": "Boss Boss Radio", "url": "http://198.178.123.17:8502/stream/1/"}
+{"name": "Progressive", "url": "http://radio.hearme.fm:8460/stream"}
+{"name": "** Commish Radio **", "url": "http://149.56.175.167:5668/stream/1/"}
+{"name": "Radio Mela", "url": "http://5.39.82.157:8016/stream/1/"}
+{"name": "Der Oldie Sender 80s", "url": "http://94.23.23.97:4452/stream/1/"}
+{"name": "RadioBolivarianaVirtual FM", "url": "http://131.0.136.54:7630/stream/1/"}
+{"name": "Radio Dijaspora: Club Mix", "url": "http://94.249.254.11:9050/stream/1/"}
+{"name": "MrmetalGod Radio", "url": "http://78.129.228.187:8080/stream/1/"}
+{"name": "LinuxRadio.Tools V2402", "url": "http://progressieverock.nl:8080/annet"}
+{"name": "radio Free Fm Uk", "url": "http://stream.freefm.uk:8020/radio.ogg"}
+{"name": "WRCE Radio", "url": "http://91.121.77.158:8312/stream/1/"}
+{"name": "WDBF-lpFM", "url": "http://69.30.218.190:28010/stream/1/"}
+{"name": "IrishRadio.org", "url": "http://198.100.145.185:8866/stream/1/"}
+{"name": "Smooth Ambient", "url": "http://radio.hearme.fm:9190/stream"}
+{"name": "SONGCAST RADIO - Variety Mix 1", "url": "http://52.24.52.72:9000/stream/1/"}
+{"name": "Awesome 80s - Magic Oldies", "url": "http://airspectrum.cdnstream1.com:8030/1607_192"}
+{"name": "Ambient Chillout", "url": "http://radio.hearme.fm:9170/stream"}
+{"name": "All Stars Radio", "url": "https://stream.allstarsradio.net/listen/all_stars_radio/radio.mp3"}
+{"name": "FreshRock Internet Radio Station", "url": "http://stream.freshrock.net:8000/128.ogg"}
+{"name": "Elvis And Company", "url": "http://94.23.159.187:9978/stream/1/"}
+{"name": "novaclassicrock.nl", "url": "http://93.190.137.196:8427/;"}
+{"name": "K31.Studio", "url": "http://65.108.124.70:7200/stream/1/"}
+{"name": "DGT ROCK - www.dgtrockfm.tk", "url": "http://94.23.30.114:8047/stream/1/"}
+{"name": "RadioSuperoldie LOW", "url": "http://87.118.86.46:8866/stream/1/"}
+{"name": "Legend Squirrell Radio", "url": "http://s12.myradiostream.com:17534/stream/1/"}
+{"name": "RADIO RELAX Italia", "url": "http://listen.radiorel.ax:8083/play"}
+{"name": "Radio Swinoujscie", "url": "http://185.243.52.116:8000/live"}
+{"name": "Skylark Stream", "url": "https://uk2.internet-radio.com/proxy/skylarkfm?mp=/live"}
+{"name": "1 Gold (25 years of great music '64-'89)", "url": "http://37.59.41.148:8238/stream/1/"}
+{"name": "ejecutivosRADIO", "url": "http://163.172.77.142:8411/stream/1/"}
+{"name": "Piano Trios", "url": "http://radio.hearme.fm:8780/stream"}
+{"name": "Radio Kemonia", "url": "http://167.86.86.4:8000/stream/1/"}
+{"name": "Rock-@-Friday", "url": "http://178.162.131.122:9000/stream/1/"}
+{"name": "Easy Listening", "url": "http://radio.hearme.fm:8920/stream"}
+{"name": "jamminoldies101", "url": "http://204.12.238.138:13240/stream/1/"}
+{"name": "Cocktail Jazz", "url": "http://radio.hearme.fm:8670/stream"}
+{"name": "Chill Hop", "url": "http://radio.hearme.fm:9230/stream"}
+{"name": "Road & Radio", "url": "http://s2.stationplaylist.com:7126/listen.aac"}
+{"name": "FamilyGH", "url": "http://5.135.154.69:8516/stream/1/"}
+{"name": "K-Dave", "url": "https://us3.internet-radio.com/proxy/kdave?mp=/live"}
+{"name": "MAXIMUM 70's RADIO (The MAXX)", "url": "http://192.111.140.11:8221/stream/1/"}
+{"name": "21st Century", "url": "http://radio.hearme.fm:9010/stream"}
+{"name": "Cleansing 70's", "url": "http://thassos.cdnstream.com:8012/stream/1/"}
+{"name": "KXDJ 98.3", "url": "http://96.31.83.94:8168/stream/1/"}
+{"name": "RADIO ALTERNATIF FM 98.1 MHZ JAKARTA", "url": "https://void.idserverhost.com:8016/stream/1/"}
+{"name": "Japanisu - J-Music & Beyond", "url": "https://live.insidefm.cl/listen/japanisu/uradio.mp3"}
+{"name": "My Kool FM", "url": "http://149.56.185.82:8076/stream/1/"}
+{"name": "Jazz Club Bandstand - 1930s 1940s Big Band and Swing", "url": "https://cast1.torontocast.com:2060/stream/1/"}
+{"name": "Classic Rock Florida", "url": "http://airspectrum.cdnstream1.com:8138/1139_64"}
+{"name": "WHIP Radio", "url": "http://192.111.140.11:8612/stream/1/"}
+{"name": "Easy Radio Ireland", "url": "https://easyradio.radioca.st:443/stream/1/"}
+{"name": "-=PoWeR=-", "url": "http://cast1.asurahosting.com:8527/stream/1/"}
+{"name": "Shakedown Radio", "url": "http://65.109.81.84:7244/stream/1/"}
+{"name": "KMP3 Cumberland Classics", "url": "http://5.135.154.72:13002/stream/1/"}
+{"name": "Krushnation Media Stream", "url": "http://s2.yesstreaming.net:7183/autodj"}
+{"name": "Classic Jazz", "url": "http://radio.hearme.fm:9700/stream"}
+{"name": "Today Dance Radio", "url": "http://protostar.shoutca.st:8390/stream/1/"}
+{"name": "FastCast4u.com AutoDJ", "url": "http://149.56.175.167:5172/stream/1/"}
+{"name": "DIMENSIONE RELAX", "url": "https://az1.mediacp.eu:443/listen/radiodimensionerelax/stream/1/"}
+{"name": "Hexx 9", "url": "http://46.105.124.120:8604/stream/1/"}
+{"name": "Future Pressure Radio", "url": "https://uk3.internet-radio.com/proxy/futurepressureradio?mp=/;"}
+{"name": "Smooth Groove Radio \"The Vibe\"", "url": "http://192.95.18.39:5224/stream/1/"}
+{"name": "SONGCAST RADIO - Variety Mix 5", "url": "http://52.24.52.72:9008/stream/1/"}
+{"name": "Davide of MIMIC", "url": "http://streaming04.liveboxstream.uk:8018/stream/1/"}
+{"name": "Noordzee Gold Backup", "url": "http://stream.noordzee105.be:8000/dbd3"}
+{"name": "Classical Violin", "url": "http://radio.hearme.fm:9210/stream"}
+{"name": "Vettrioli Oli", "url": "http://s2.voscast.com:12136/stream/1/"}
+{"name": "AStream", "url": "http://astream.enia.net:9000/astream"}
+{"name": "Prog Frog", "url": "http://eagle.streemlion.com:4040/stream/1/"}
+{"name": "Radio Oest FM95", "url": "http://185.156.96.217:10024/stream/1/"}
+{"name": "Numanme", "url": "https://numanme.stream.laut.fm/numanme"}
+{"name": "URBAN RADIO", "url": "http://nr3.newradio.it:8100/stream"}
+{"name": "Relaxing Flute", "url": "http://radio.hearme.fm:8176/stream"}
+{"name": "Popwelle Wörthersee", "url": "http://popwellezwei.spcast.eu:8120/stream"}
+{"name": "BIG CACTUS CLASSIC ROCK ! BCC-Rock !", "url": "http://94.23.57.5:9134/stream/1/"}
+{"name": "BLUE RADIO - Greece - www.blueradio.gr", "url": "http://94.23.30.114:8033/stream/1/"}
+{"name": "4U Classic Rock", "url": "http://217.114.200.100:80/;"}
+{"name": "111 ATHENS RADIO", "url": "https://cast.magicstreams.gr:9059/stream/1/"}
+{"name": "mayRADIO", "url": "https://stream.mayradio.net:8000/stream/1/"}
 {"name":"Читаем Евангелие (синод.)","url":"https://radio.azbyka.ru/evangelie"}
 {"name":"Читаем Евангелие (цся)","url":"https://radio.azbyka.ru/chitaem-evangelie-csya"}
 {"name":"Читаем Евангелие (синод. муз.)","url":"https://radio.azbyka.ru/chitaem-evangelie-sinod-muz"}
@@ -567,7 +1667,7 @@
 {"name":"Радио Гамаюн","url":"https://gamaun.online:8025/radio"}
 {"name":"tirlim.online","url":"http://live.regress78.com:8000/tirlimlive"}
 {"name":"Детский Хит - Children Russian Federation Russian","url":"https://deti.amgradio.ru/Deti"}
-{"name":"Русское Радио - Детский Канал - Children Russian Federation Russian","url":"https://rr-detskijkanal.hostingradio.ru/detskijkanal96.aacp"}
+{"name":"Русское Радио - Детский Канал","url":"https://rr-detskijkanal.hostingradio.ru/detskijkanal96.aacp"}
 {"name":"Positively Sleep Baby","url":"https://streaming.positivity.radio/pr/sleepbaby/icecast.audio"}
 {"name":"Positively Sleep Kids","url":"https://streaming.positivity.radio/pr/sleepkids/icecast.audio"}
 {"name":"NewRadio KIDS","url":"http://91.226.107.45:8000/kids"}
