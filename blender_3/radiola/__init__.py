@@ -44,13 +44,7 @@ def get_image_path():
     im.save(path)
     return path
 
-plugin_icons = previews.new()
 
-plugin_icons.load(
-    name='radiola.png',
-    path=get_image_path(),
-    path_type='IMAGE'
-)
 
 def volume_up(self, context):
     try:
@@ -213,6 +207,7 @@ class OBJECT_PT_radiola_panel(bpy.types.Panel):
         wm = context.window_manager
         rurl = wm.radiola_url
         rname = wm.radiola_name
+        plugin_icons = icontec['radiola']
 
         def getname(col,rurl):
             f = rq.get(rurl)
@@ -381,8 +376,17 @@ class RP_Playlist(bpy.types.PropertyGroup):
     url : bpy.props.StringProperty()
     name : bpy.props.StringProperty()
 
+icontec = {}
 
 def register():
+    plugin_icons = previews.new()
+
+    plugin_icons.load(
+        'radiola.png',
+        get_image_path(),
+        'IMAGE'
+    )
+    icontec['radiola'] = plugin_icons
     try:
         if 'rp_playlist' in bpy.context.scene:
             bpy.context.scene.rp_playlist.clear()
@@ -419,6 +423,8 @@ def unregister():
     del bpy.types.WindowManager.radiola_name
     del bpy.types.WindowManager.radiola_recing
     del bpy.types.Scene.rp_playlist
+    for plugin_icons in icontec:
+        bpy.utils.previews.remove(plugin_icons)
 
 
 if __name__ == '__main__':
